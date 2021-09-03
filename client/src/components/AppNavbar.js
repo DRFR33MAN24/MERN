@@ -8,7 +8,12 @@ import {
   NavItem,
   NavLink,
   Container,
-  Flex
+  Row,
+  Col,
+  UncontrolledDropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -16,6 +21,7 @@ import RegisterModal from "./auth/RegisterModal";
 import LoginModal from "./auth/LoginModal";
 import Logout from "./auth/Logout";
 import { stat } from "fs";
+import { DEFAULT_MIN_VERSION } from "tls";
 class AppNavbar extends Component {
   state = {
     isOpen: false
@@ -52,26 +58,49 @@ class AppNavbar extends Component {
       </Fragment>
     );
     const authLinks = (
-      <Fragment>
-        <NavItem>
-          <Logout />
-        </NavItem>
+      <Fragment >
+        <UncontrolledDropdown nav inNavbar>
+          <DropdownToggle nav caret>
+            Options
+          </DropdownToggle>
+          <DropdownMenu right>
+
+            <DropdownItem>
+              Profile
+            </DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem>
+              Logout
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
       </Fragment>
     );
     return (
       <div>
-        <Navbar color="dark" dark expand="sm" className="mb-5">
-          <Container>
-            <NavbarBrand href="/">Shopping List</NavbarBrand>
-            <Nav className="ml-auto pr-2">{isAuthenticated && userInfo}</Nav>
+        <Navbar color="dark" dark expand="xs" className="mb-5 ">
 
-            <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav className="mr-auto" navbar>
-                {isAuthenticated ? authLinks : guestLinks}
-              </Nav>
-            </Collapse>
+
+          <Container>
+            <Container>
+              <NavbarBrand href="/" className='mx-auto'>Shopping List</NavbarBrand>
+            </Container>
+            <Container>
+              <Nav className='mx-auto'>{isAuthenticated && userInfo}</Nav>
+            </Container>
+            <Container>
+              <div className='mx-auto'>
+                <NavbarToggler onClick={this.toggle} />
+                <Collapse isOpen={this.state.isOpen} navbar>
+                  <Nav navbar>
+                    {isAuthenticated ? authLinks : guestLinks}
+                  </Nav>
+                </Collapse>
+              </div>
+            </Container>
           </Container>
+
+
         </Navbar>
       </div>
     );
