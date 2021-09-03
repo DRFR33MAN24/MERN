@@ -7,7 +7,8 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Container
+  Container,
+  Flex
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -35,11 +36,9 @@ class AppNavbar extends Component {
 
     const userInfo = (
       <Fragment>
-        <div class="container">
-          <span className="navbar-text mx-auto">
-            <strong>{user ? `${user.name} 18.2 $ ` : ""}</strong>
-          </span>
-        </div>
+        <span className="navbar-text text-success ">
+          <strong>{user ? `18.2 $ ` : ""}</strong>
+        </span>
       </Fragment>
     );
     const guestLinks = (
@@ -64,12 +63,11 @@ class AppNavbar extends Component {
         <Navbar color="dark" dark expand="sm" className="mb-5">
           <Container>
             <NavbarBrand href="/">Shopping List</NavbarBrand>
-
-            {isAuthenticated && userInfo}
+            <Nav className="ml-auto pr-2">{isAuthenticated && userInfo}</Nav>
 
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav className="ml-auto" navbar>
+              <Nav className="mr-auto" navbar>
                 {isAuthenticated ? authLinks : guestLinks}
               </Nav>
             </Collapse>
