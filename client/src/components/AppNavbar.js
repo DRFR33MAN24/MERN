@@ -32,19 +32,16 @@ class AppNavbar extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    const authLinks = (
+
+    const userInfo = (
       <Fragment>
-        <NavItem>
-          <span className="navbar-text mr-3">
-            <strong>{user ? `Welcome ${user.name}` : ""}</strong>
+        <div class="container">
+          <span className="navbar-text mx-auto">
+            <strong>{user ? `${user.name} 18.2 $ ` : ""}</strong>
           </span>
-        </NavItem>
-        <NavItem>
-          <Logout />
-        </NavItem>
+        </div>
       </Fragment>
     );
-
     const guestLinks = (
       <Fragment>
         <NavItem>
@@ -55,11 +52,21 @@ class AppNavbar extends Component {
         </NavItem>
       </Fragment>
     );
+    const authLinks = (
+      <Fragment>
+        <NavItem>
+          <Logout />
+        </NavItem>
+      </Fragment>
+    );
     return (
       <div>
         <Navbar color="dark" dark expand="sm" className="mb-5">
           <Container>
             <NavbarBrand href="/">Shopping List</NavbarBrand>
+
+            {isAuthenticated && userInfo}
+
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
