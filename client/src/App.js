@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { loadUser } from "./actions/authAction";
 import { Component } from "react";
+
 class App extends Component {
   componentDidMount() {
     store.dispatch(loadUser());
@@ -18,8 +19,8 @@ class App extends Component {
         <div className="App">
           <AppNavbar />
           <Container>
-            <ItemModal />
-            <ShoppingList />
+            {/* <ItemModal />
+            <ShoppingList /> */}
           </Container>
         </div>
       </Provider>

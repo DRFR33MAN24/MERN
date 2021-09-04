@@ -22,6 +22,10 @@ import LoginModal from "./auth/LoginModal";
 import Logout from "./auth/Logout";
 import { stat } from "fs";
 import { DEFAULT_MIN_VERSION } from "tls";
+import { logout } from "../actions/authAction";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import LoginPage from "./auth/LoginPage";
+import RegisterPage from "./auth/RegisterPage";
 class AppNavbar extends Component {
   state = {
     isOpen: false
@@ -50,59 +54,71 @@ class AppNavbar extends Component {
     const guestLinks = (
       <Fragment>
         <NavItem>
-          <RegisterModal />
+          {/* <RegisterModal /> */}
+          <Link to="/Register">
+            <NavLink href="/Register">Register</NavLink>
+          </Link>
         </NavItem>
         <NavItem>
-          <LoginModal />
+          {/* <LoginModal /> */}
+          <Link to="/Login">
+            <NavLink href="/Login">Login</NavLink>
+          </Link>
         </NavItem>
       </Fragment>
     );
     const authLinks = (
-      <Fragment >
+      <Fragment>
         <UncontrolledDropdown nav inNavbar>
           <DropdownToggle nav caret>
             Options
           </DropdownToggle>
           <DropdownMenu right>
-
-            <DropdownItem>
-              Profile
-            </DropdownItem>
+            <DropdownItem>Profile</DropdownItem>
             <DropdownItem divider />
             <DropdownItem>
-              Logout
+              <Logout />
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Fragment>
     );
     return (
-      <div>
-        <Navbar color="dark" dark expand="xs" className="mb-5 ">
-
-
-          <Container>
+      <Router>
+        <div>
+          <Navbar color="dark" dark expand="xs" className="mb-5 ">
             <Container>
-              <NavbarBrand href="/" className='mx-auto'>Shopping List</NavbarBrand>
+              <Container>
+                <NavbarBrand href="/" className="mx-auto">
+                  <div>
+                    <img class="mr-3" src="../../img/brand.png" alt=""></img>
+                  </div>
+                </NavbarBrand>
+              </Container>
+              <Container>
+                <Nav className="mx-auto">{isAuthenticated && userInfo}</Nav>
+              </Container>
+              <Container>
+                <div className="mx-auto">
+                  <NavbarToggler onClick={this.toggle} />
+                  <Collapse isOpen={this.state.isOpen} navbar>
+                    <Nav navbar>{isAuthenticated ? authLinks : guestLinks}</Nav>
+                  </Collapse>
+                </div>
+              </Container>
             </Container>
-            <Container>
-              <Nav className='mx-auto'>{isAuthenticated && userInfo}</Nav>
-            </Container>
-            <Container>
-              <div className='mx-auto'>
-                <NavbarToggler onClick={this.toggle} />
-                <Collapse isOpen={this.state.isOpen} navbar>
-                  <Nav navbar>
-                    {isAuthenticated ? authLinks : guestLinks}
-                  </Nav>
-                </Collapse>
-              </div>
-            </Container>
-          </Container>
+          </Navbar>
+        </div>
 
-
-        </Navbar>
-      </div>
+        <Switch>
+          <Route path="/Login">
+            <LoginPage />
+          </Route>
+          <Route path="/Register">
+            <RegisterPage />
+          </Route>
+        </Switch>
+      </Router>
     );
   }
 }
