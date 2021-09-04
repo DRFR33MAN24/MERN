@@ -26,6 +26,7 @@ import { logout } from "../actions/authAction";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LoginPage from "./auth/LoginPage";
 import RegisterPage from "./auth/RegisterPage";
+import DashboardPage from "./DashboardPage";
 class AppNavbar extends Component {
   state = {
     isOpen: false
@@ -117,6 +118,9 @@ class AppNavbar extends Component {
           <Route path="/Register">
             <RegisterPage />
           </Route>
+          <Route path="/Dashboard">
+            <DashboardPage />
+          </Route>
         </Switch>
       </Router>
     );
@@ -124,7 +128,7 @@ class AppNavbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state
 });
 
 export default connect(mapStateToProps, null)(AppNavbar);
