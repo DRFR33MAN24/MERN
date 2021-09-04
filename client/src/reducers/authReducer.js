@@ -12,7 +12,7 @@ import { tr } from "date-fns/locale";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  isAuthenticated: null,
+  isAuthenticated: false,
   isLoading: false,
   user: null
 };

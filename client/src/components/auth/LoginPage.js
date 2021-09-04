@@ -32,15 +32,19 @@ class LoginPage extends Component {
     login: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   };
-  componentDidMount() {
+  componentDidMount(prevProps) {
     const { error, isAuthenticated } = this.props;
-    if (isAuthenticated) {
-      console.log("authenticated");
-      this.setState({ isAuth: true });
-    }
+
+    // if (isAuthenticated) {
+    //   console.log("authenticated mount");
+    //   this.setState({ isAuth: true });
+    // }
   }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const { error, isAuthenticated } = this.props;
+    console.log("isAuthenticated:", isAuthenticated);
+    console.log("login did update", this.state.isAuth);
+    console.log("login did update prev", prevState.isAuth);
     if (error !== prevProps.error) {
       // Check for register error
       if (error.id === "LOGIN_FAIL") {
@@ -51,13 +55,16 @@ class LoginPage extends Component {
 
       // If authenticated close modal
       // If authenicated go to dashboard
-
-      if (isAuthenticated) {
-        console.log("authenticated");
-        this.setState({ isAuth: true });
-      }
+    }
+    if (prevState.isAuth !== isAuthenticated) {
+      console.log("authenticated mount", isAuthenticated);
+      this.setState({ isAuth: isAuthenticated });
     }
   }
+
+  toggle = () => {
+    this.setState({ isAuth: true });
+  };
 
   onChange = e => {
     this.setState({
@@ -79,7 +86,9 @@ class LoginPage extends Component {
     this.props.login(user);
   };
   render() {
-    const dashboard = <Redirect to="/Dashboard" />;
+    console.log("login render", this.state.isAuth);
+
+    const dashboard = <Redirect exact to="/Dashboard" />;
     if (this.state.isAuth) {
       return dashboard;
     }

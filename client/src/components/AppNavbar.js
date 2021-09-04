@@ -113,13 +113,16 @@ class AppNavbar extends Component {
         </div>
 
         <Switch>
-          <Route path="/Login">
+          <Route exact path="/Login">
             <LoginPage />
           </Route>
-          <Route path="/Register">
+          <Route exact path="/">
+            <LoginPage />
+          </Route>
+          <Route exact path="/Register">
             <RegisterPage />
           </Route>
-          <Route path="/Dashboard">
+          <Route exact path="/Dashboard">
             <DashboardPage />
           </Route>
         </Switch>
@@ -129,7 +132,7 @@ class AppNavbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticatedauth,
+  isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user
 });
 
