@@ -33,7 +33,8 @@ class AppNavbar extends Component {
   };
 
   static propTypes = {
-    auth: PropTypes.object.isRequired
+    isAuthenticated: PropTypes.bool,
+    user: PropTypes.object
   };
 
   toggle = () => {
@@ -43,8 +44,8 @@ class AppNavbar extends Component {
   };
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
-
+    const { isAuthenticated, user } = this.props;
+    console.log(isAuthenticated);
     const userInfo = (
       <Fragment>
         <span className="navbar-text text-success ">
@@ -56,13 +57,13 @@ class AppNavbar extends Component {
       <Fragment>
         <NavItem>
           {/* <RegisterModal /> */}
-          <Link to="/Register">
+          <Link exact to="/Register">
             <NavLink href="/Register">Register</NavLink>
           </Link>
         </NavItem>
         <NavItem>
           {/* <LoginModal /> */}
-          <Link to="/Login">
+          <Link exact to="/Login">
             <NavLink href="/Login">Login</NavLink>
           </Link>
         </NavItem>
@@ -128,7 +129,8 @@ class AppNavbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state
+  isAuthenticated: state.auth.isAuthenticatedauth,
+  user: state.auth.user
 });
 
 export default connect(mapStateToProps, null)(AppNavbar);

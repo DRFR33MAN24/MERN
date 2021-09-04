@@ -33,6 +33,14 @@ class RegisterPage extends Component {
     clearErrors: PropTypes.func.isRequired
   };
 
+  componentDidMount() {
+    const { error, isAuthenticated } = this.props;
+    if (isAuthenticated) {
+      console.log("authenticated");
+      this.setState({ isAuth: true });
+    }
+  }
+
   componentDidUpdate(prevProps) {
     console.log("com did update");
     const { error, isAuthenticated } = this.props;
