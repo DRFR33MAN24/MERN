@@ -12,8 +12,8 @@ import {
 export default class LoginPage extends Component {
   render() {
     return (
-      <Container className="p-5 w-50">
-        <Card className="p-5">
+      <Container className=" mx-auto justify-content-center">
+        <Card className="p-2">
           <Form>
             <FormGroup>
               <Label for="exampleEmail">Email</Label>
