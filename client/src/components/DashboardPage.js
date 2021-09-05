@@ -61,7 +61,7 @@ class DashboardPage extends Component {
 
   render() {
     console.log("dashboard render", this.state.isAuth);
-    const login = <Redirect to="/Login" />;
+    const login = <Redirect exact to="/Login" />;
     if (!this.state.isAuth) {
       return login;
     }

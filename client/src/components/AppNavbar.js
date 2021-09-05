@@ -125,6 +125,9 @@ class AppNavbar extends Component {
           <Route exact path="/Dashboard">
             <DashboardPage />
           </Route>
+          <Route path="/NotFound">
+            <h1>NotFound</h1>
+          </Route>
         </Switch>
       </Router>
     );
