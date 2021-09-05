@@ -78,9 +78,7 @@ class AppNavbar extends Component {
           <DropdownMenu right>
             <DropdownItem>Profile</DropdownItem>
             <DropdownItem divider />
-            <DropdownItem>
-              <Logout />
-            </DropdownItem>
+            <Logout />
           </DropdownMenu>
         </UncontrolledDropdown>
       </Fragment>
