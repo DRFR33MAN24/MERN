@@ -28,9 +28,15 @@ app.use(express.json());
 //   })
 //   .done();
 
-db.authenticate().then(() => {
-  console.log("Authenticated");
-});
+db.authenticate()
+  .then(() => {
+    console.log("Authenticated");
+    db.sync();
+    console.log("All models were synchronized successfully.");
+  })
+  .catch(err => {
+    console.log("Unable to connect", err);
+  });
 
 app.use("/api/items", require("./routes/api/items"));
 app.use("/api/users", require("./routes/api/users"));
