@@ -28,7 +28,7 @@ router.post("/", (req, res) => {
     //   email,
     //   password
     // });
-    const newUser = new User.build({
+    const newUser = User.build({
       name: `${name}`,
       email: `${email}`,
       password: `${password}`

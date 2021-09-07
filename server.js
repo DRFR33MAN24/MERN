@@ -20,13 +20,14 @@ app.use(express.json());
 db.authenticate()
   .then(() => {
     console.log("Authenticated");
-    db.close();
+    db.sync();
+    //db.close();
   })
   .catch(err => {
     console.log("Unable to connect", err);
   });
 
-app.use("/api/items", require("./routes/api/items"));
+//app.use("/api/items", require("./routes/api/items"));
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 

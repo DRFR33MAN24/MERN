@@ -11,6 +11,7 @@ const User = db.define(
       allowNull: false
       // allowNull defaults to true
     },
+
     email: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 
-module.exports = new Sequelize("coinguru", "phpmyadmin", "coin-123", {
-  host: "localhost",
+module.exports = new Sequelize("msm123msm", "msm1994", "blackmesa", {
+  host: "db4free.net",
   dialect: "mysql"
 });
