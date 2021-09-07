@@ -17,16 +17,20 @@ app.use(express.json());
 //   .then(() => console.log("MongoDB Connected"))
 //   .catch(err => console.log(err));
 
-db.authenticate()
-  .then(function() {
-    console.log("CONNECTED! ");
-    db.sync();
-    console.log("All models were synchronized successfully.");
-  })
-  .catch(function(err) {
-    console.log("SOMETHING DONE GOOFED");
-  })
-  .done();
+// db.authenticate()
+//   .then(function() {
+//     console.log("CONNECTED! ");
+//     db.sync();
+//     console.log("All models were synchronized successfully.");
+//   })
+//   .catch(function(err) {
+//     console.log("SOMETHING DONE GOOFED");
+//   })
+//   .done();
+
+db.authenticate().then(() => {
+  console.log("Authenticated");
+});
 
 app.use("/api/items", require("./routes/api/items"));
 app.use("/api/users", require("./routes/api/users"));
