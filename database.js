@@ -1,6 +1,6 @@
-const { sequelize } = require('sequelize');
+const { Sequelize } = require("sequelize");
 
-module.exports = sequelize = new Sequelize('coinguru', 'phpmyadmin', 'coin-123', {
-    host: 'localhost',
-    dialect: 'mysql'
+module.exports = new Sequelize("coinguru", "phpmyadmin", "coin-123", {
+  host: "localhost",
+  dialect: "mysql"
 });

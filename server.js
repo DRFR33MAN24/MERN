@@ -1,35 +1,32 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const db = require('database');
 const config = require("config");
 const path = require("path");
-const database = require("./database");
+const db = require("./database");
 
 const app = express();
 
 app.use(express.json());
 
 // DB Config
-const db = config.get("mongoURI");
+// const db = config.get("mongoURI");
 
 //connect to mongodb
-mongoose
-  .connect(db)
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+// mongoose
+//   .connect(db)
+//   .then(() => console.log("MongoDB Connected"))
+//   .catch(err => console.log(err));
 
-
-
-
-try {
-  await db.authenticate();
-  console.log('Connection has been established successfully.');
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
-}
-
-await db.sync();
-console.log("All models were synchronized successfully.");
+db.authenticate()
+  .then(function() {
+    console.log("CONNECTED! ");
+    db.sync();
+    console.log("All models were synchronized successfully.");
+  })
+  .catch(function(err) {
+    console.log("SOMETHING DONE GOOFED");
+  })
+  .done();
 
 app.use("/api/items", require("./routes/api/items"));
 app.use("/api/users", require("./routes/api/users"));

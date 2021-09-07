@@ -1,35 +1,39 @@
-const db = require('./../database');
-const { DataTypes } = require('sequelize');
-const User = db.define('User', {
-  // Model attributes are defined here
+const db = require("./../database");
+const { DataTypes } = require("sequelize");
 
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
-    // allowNull defaults to true
+const User = db.define(
+  "User",
+  {
+    // Model attributes are defined here
+
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+      // allowNull defaults to true
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+      // allowNull defaults to true
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+      // allowNull defaults to true
+    },
+    register_date: {
+      type: DataTypes.DATE,
+      defaultValue: Date.now
+      // allowNull defaults to true
+    }
   },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true
-    // allowNull defaults to true
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false
-    // allowNull defaults to true
-  },
-  register_date: {
-    type: DataTypes.DATE,
-    defaultValue: Date.now
-    // allowNull defaults to true
+  {
+    // Other model options go here
   }
-}, {
-  // Other model options go here
-});
+);
 
-
-
+module.exports = User;
 
 // const mongoose = require("mongoose");
 // const schema = mongoose.Schema;
