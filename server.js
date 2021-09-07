@@ -33,6 +33,7 @@ db.authenticate()
     console.log("Authenticated");
     db.sync();
     console.log("All models were synchronized successfully.");
+    db.close();
   })
   .catch(err => {
     console.log("Unable to connect", err);
