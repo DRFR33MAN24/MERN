@@ -83,7 +83,8 @@ router.get("/user", auth, (req, res) => {
     where: {
       id: req.user.id
     },
-    attributes: ["password"]
+    attributes: ["password"],
+    raw: true
   }).then(user => res.json(user));
 
   // User.findById(req.user.id)

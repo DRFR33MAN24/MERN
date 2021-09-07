@@ -18,15 +18,20 @@ router.post("/", (req, res) => {
   }
 
   // Check for exitsting user
-  User.findOne({ email }).then(user => {
+  User.findOne({ where: { email: `${email}` } }).then(user => {
     if (user) {
       return res.status(400).json({ msg: "User alerady exists." });
     }
 
-    const newUser = new User({
-      name,
-      email,
-      password
+    // const newUser = new User({
+    //   name,
+    //   email,
+    //   password
+    // });
+    const newUser = new User.build({
+      name: `${name}`,
+      email: `${email}`,
+      password: `${password}`
     });
 
     // Create salt and hash
