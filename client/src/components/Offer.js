@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import {
   Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
   Container,
   Card,
-  Alert
+  CardImg,
+  CardBody,
+  CardText,
+  CardSubtitle,
+  CardTitle
 } from "reactstrap";
+
 export default class Offer extends Component {
   //   constructor(props) {
   //     super(props);

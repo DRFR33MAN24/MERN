@@ -68,7 +68,6 @@ class DashboardPage extends Component {
   };
 
   render() {
-    isAuthenticated = this.props.isAuthenticated;
     console.log("dashboard render", this.state.isAuth);
     const login = <Redirect exact to="/Login" />;
     if (!this.state.isAuth) {
@@ -78,7 +77,7 @@ class DashboardPage extends Component {
       <Container className="mx-auto justify-content-center">
         {offers.map(({ title, description, link, amount }) => (
           <div>
-            {isAuthenticated ? (
+            {this.props.isAuthenticated ? (
               <Offer
                 title={title}
                 description={description}
