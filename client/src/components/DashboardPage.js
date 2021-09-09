@@ -10,11 +10,13 @@ import {
   Card,
   Alert
 } from "reactstrap";
+import Offer from "./Offer";
 import { Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../actions/authAction";
+import { Timestamp } from "bson";
 
 class DashboardPage extends Component {
   state = {
@@ -22,8 +24,14 @@ class DashboardPage extends Component {
   };
 
   static propTypes = {
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    getOffers: PropTypes.func,
+    offers: PropTypes.object
   };
+
+  componentDidMount() {
+    this.props.getOffers();
+  }
 
   componentWillMount() {
     const { isAuthenticated } = this.props;
@@ -60,6 +68,7 @@ class DashboardPage extends Component {
   };
 
   render() {
+    isAuthenticated = this.props.isAuthenticated;
     console.log("dashboard render", this.state.isAuth);
     const login = <Redirect exact to="/Login" />;
     if (!this.state.isAuth) {
@@ -67,9 +76,21 @@ class DashboardPage extends Component {
     }
     return (
       <Container className="mx-auto justify-content-center">
-        <Card className="p-2">
-          <h1 className="text-center">Welcome</h1>
-        </Card>
+        {offers.map(({ title, description, link, amount }) => (
+          <div>
+            {isAuthenticated ? (
+              <Offer
+                title={title}
+                description={description}
+                link={link}
+                amount={amount}
+              >
+                &times;
+              </Offer>
+            ) : null}
+            )}
+          </div>
+        ))}
       </Container>
     );
   }
