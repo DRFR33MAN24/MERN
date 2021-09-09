@@ -30,6 +30,7 @@ class DashboardPage extends Component {
   };
 
   componentDidMount() {
+    console.log("dashboard DidMount is Auth", this.props.isAuthenticated);
     this.props.getOffers();
   }
 
@@ -69,13 +70,15 @@ class DashboardPage extends Component {
 
   render() {
     const { offers } = this.props.offers;
-    console.log("dashboard render", this.state.isAuth);
+    //console.log(offers);
+    console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
     if (!this.state.isAuth) {
       return login;
     }
     return (
-      <Container className="mx-auto justify-content-center">
+      <Container className="d-flex flex-wrap ">
+
         {offers.map(({ title, description, link, amount }) => (
           <div>
             {this.props.isAuthenticated ? (
@@ -84,13 +87,9 @@ class DashboardPage extends Component {
                 description={description}
                 link={link}
                 amount={amount}
-              >
-                &times;
-              </Offer>
-            ) : null}
-            )}
-          </div>
-        ))}
+              />) : null}
+
+          </div>))}
       </Container>
     );
   }

@@ -29,3 +29,4 @@ const Offer = db.define(
     // Other model options go here
   }
 );
+module.exports = Offer;

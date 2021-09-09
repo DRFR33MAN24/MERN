@@ -8,8 +8,8 @@ const Offer = require("../../models/Offer");
 // @desc Get All Items
 // @acces Public
 router.get("/", auth, (req, res) => {
-  Offer.find()
-  .then(offer => res.json(offer));
+  Offer.findAll()
+    .then(offer => res.json(offer));
 });
 
 module.exports = router;

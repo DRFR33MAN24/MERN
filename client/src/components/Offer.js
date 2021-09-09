@@ -22,7 +22,7 @@ export default class Offer extends Component {
   //   }
   render() {
     return (
-      <div>
+      <div className='m-1'>
         <Card>
           <CardImg
             top
