@@ -3,7 +3,7 @@ import { GET_OFFERS, OFFERS_LOADING } from "./types";
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 
-export const getItems = () => dispatch => {
+export const getOffers = () => dispatch => {
   dispatch(setOffersLoading());
   axios
     .get("/api/offers")

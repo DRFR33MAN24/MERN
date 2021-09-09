@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import Offer from "./Offer";
 import { Redirect } from "react-router-dom";
-
+import { getOffers } from "../actions/offerAction";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../actions/authAction";
@@ -68,7 +68,7 @@ class DashboardPage extends Component {
   };
 
   render() {
-    const { offers } = this.props.getOffers();
+    const { offers } = this.props.offers;
     console.log("dashboard render", this.state.isAuth);
     const login = <Redirect exact to="/Login" />;
     if (!this.state.isAuth) {
@@ -97,7 +97,8 @@ class DashboardPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  offers: state.offer
 });
 
-export default connect(mapStateToProps, null)(DashboardPage);
+export default connect(mapStateToProps, { getOffers })(DashboardPage);
