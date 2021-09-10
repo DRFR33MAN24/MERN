@@ -20,6 +20,22 @@ const Offer = db.define(
       type: DataTypes.STRING
       // allowNull defaults to true
     },
+    category: {
+      type: DataTypes.STRING
+      // allowNull defaults to true
+    },
+    conversion: {
+      type: DataTypes.STRING
+      // allowNull defaults to true
+    },
+    mobile_app: {
+      type: DataTypes.STRING
+      // allowNull defaults to true
+    },
+    img: {
+      type: DataTypes.STRING
+      // allowNull defaults to true
+    },
     amount: {
       type: DataTypes.INTEGER
       // allowNull defaults to true

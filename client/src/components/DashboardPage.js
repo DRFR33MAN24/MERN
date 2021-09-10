@@ -78,8 +78,7 @@ class DashboardPage extends Component {
     }
     return (
       <Container className="d-flex flex-wrap ">
-
-        {offers.map(({ title, description, link, amount }) => (
+        {offers.map(({ title, description, link, amount, img, conversion }) => (
           <div>
             {this.props.isAuthenticated ? (
               <Offer
@@ -87,9 +86,12 @@ class DashboardPage extends Component {
                 description={description}
                 link={link}
                 amount={amount}
-              />) : null}
-
-          </div>))}
+                img={img}
+                conversion={conversion}
+              />
+            ) : null}
+          </div>
+        ))}
       </Container>
     );
   }

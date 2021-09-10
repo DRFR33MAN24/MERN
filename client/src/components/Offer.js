@@ -22,21 +22,18 @@ export default class Offer extends Component {
   //   }
   render() {
     return (
-      <div className='m-1'>
+      <div className="m-1">
         <Card>
-          <CardImg
-            top
-            width="100%"
-            src="/assets/318x180.svg"
-            alt="Card image cap"
-          />
+          <CardImg top width="100%" src={this.props.img} alt="Card image cap" />
           <CardBody>
             <CardTitle tag="h5">{this.props.title}</CardTitle>
             <CardSubtitle tag="h6" className="mb-2 text-muted">
-              {this.props.amount}
+              {this.props.conversion}
             </CardSubtitle>
-            <CardText>{this.props.description}</CardText>
-            <Button>Join</Button>
+            <CardText className="text-truncate">
+              <div>{this.props.description}</div>
+            </CardText>
+            <Button className="btn btn-lg w-100">{this.props.amount}</Button>
           </CardBody>
         </Card>
       </div>

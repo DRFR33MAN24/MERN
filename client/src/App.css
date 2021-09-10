@@ -18,3 +18,7 @@
   opacity: 0.01;
   transition: opacity 1000ms ease-in;
 }
+
+.my-card-text {
+  overflow-wrap: break-word;
+}
