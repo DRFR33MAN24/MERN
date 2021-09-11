@@ -3,14 +3,21 @@ const router = express.Router();
 //const auth = require("../../middleware/auth");
 //postback Model
 const Postback = require("../../models/Postback");
+const User = require("../../models/User");
 
 // @route GET api/items
 // @desc Get All Items
 // @acces Public
 router.post("/", (req, res) => {
-  const newItem = new Postback({ name: req.body.name });
+  
 
-  newItem.save().then(item => res.json(item));
+    const amount = 1;
+
+    // Update user 
+    User.update({balance:balance+amount}
+        {where:{id:subid}})
+        .then(()=> console.log("user balance updated ${balance+amount}"))
+        .catch(err=>console.log(err));
 });
 
 module.exports = router;
