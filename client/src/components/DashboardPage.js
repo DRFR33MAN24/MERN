@@ -26,7 +26,8 @@ class DashboardPage extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     getOffers: PropTypes.func,
-    offers: PropTypes.object
+    offers: PropTypes.object,
+    user: PropTypes.object
   };
 
   componentDidMount() {
@@ -82,6 +83,7 @@ class DashboardPage extends Component {
           <div>
             {this.props.isAuthenticated ? (
               <Offer
+                subid={user.id}
                 title={title}
                 description={description}
                 link={link}
@@ -99,7 +101,8 @@ class DashboardPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  offers: state.offer
+  offers: state.offer,
+  user: state.auth.user
 });
 
 export default connect(mapStateToProps, { getOffers })(DashboardPage);
