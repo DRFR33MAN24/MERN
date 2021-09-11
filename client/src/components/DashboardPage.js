@@ -8,7 +8,9 @@ import {
   FormText,
   Container,
   Card,
-  Alert
+  Alert,
+  Row,
+  Col
 } from "reactstrap";
 import Offer from "./Offer";
 import { Redirect } from "react-router-dom";
@@ -32,7 +34,11 @@ class DashboardPage extends Component {
 
   componentDidMount() {
     console.log("dashboard DidMount is Auth", this.props.isAuthenticated);
-    this.props.getOffers(1, 10, "us", "", "ios");
+    if (this.props.isAuthenticated) {
+      const { user } = this.props;
+      this.props.getOffers(user.id, 10, "us", "", "ios");
+    }
+
     //this.props.getOffers();
   }
 
@@ -72,6 +78,7 @@ class DashboardPage extends Component {
 
   render() {
     const { offers } = this.props.offers;
+    const { user } = this.props;
     //console.log(offers);
     console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
@@ -79,23 +86,25 @@ class DashboardPage extends Component {
       return login;
     }
     return (
-      <Container className="d-flex align-items-center flex-wrap flex-md-nowrap ">
-        {offers.map(
-          ({ title, description, link, previews, amount, conversion }) => (
-            <div>
-              {this.props.isAuthenticated ? (
-                <Offer
-                  title={title}
-                  description={description}
-                  link={link}
-                  amount={amount}
-                  img={previews[0].url}
-                  conversion={conversion}
-                />
-              ) : null}
-            </div>
-          )
-        )}
+      <Container fluid={true} className="">
+        <Row className="d-flex justify-content-around">
+          {offers.map(
+            ({ title, description, link, previews, amount, conversion }) => (
+              <div className="">
+                {this.props.isAuthenticated ? (
+                  <Offer
+                    title={title}
+                    description={description}
+                    link={link}
+                    amount={amount}
+                    img={previews[0].url}
+                    conversion={conversion}
+                  />
+                ) : null}
+              </div>
+            )
+          )}
+        </Row>
       </Container>
     );
   }

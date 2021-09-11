@@ -40,7 +40,7 @@ export const getOffers = (subid, number, country, offerType, device) => (
     .get(url)
     .then(res => {
       // const offers = {}
-      console.log(res.data.offers);
+      // console.log(res.data.offers);
       dispatch({
         type: GET_OFFERS,
         payload: res.data.offers

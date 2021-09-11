@@ -11,7 +11,9 @@ import {
 } from "reactstrap";
 
 export default class Offer extends Component {
-  click = () => {};
+  click = () => {
+    window.location.href = `${this.props.link}`;
+  };
   render() {
     return (
       <div>
@@ -22,9 +24,9 @@ export default class Offer extends Component {
             <CardSubtitle tag="h6" className="mb-2 text-muted">
               {this.props.conversion}
             </CardSubtitle>
-            <CardText tag="h6">
+            {/* <CardText tag="h6">
               <div>{this.props.description}</div>
-            </CardText>
+            </CardText> */}
             <Button className="btn btn-lg w-100" onClick={this.click}>
               {this.props.amount}
             </Button>
