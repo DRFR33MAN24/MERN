@@ -16,16 +16,16 @@ export default class Offer extends Component {
     openModal: false
   };
   click = () => {
-    this.setState({ openModal: true });
+    this.setState({ openModal: !this.state.openModal });
     //window.location.href = `${this.props.link}`;
   };
   render() {
     return (
       <div>
-        {this.openModal ? (
+        {this.state.openModal ? (
           <div>
             <OfferModal
-              modal={true}
+              modal={this.click}
               title={this.props.title}
               description={this.props.description}
               link={this.props.link}

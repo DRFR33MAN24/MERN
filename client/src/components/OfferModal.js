@@ -13,22 +13,18 @@ import {
 } from "reactstrap";
 
 export default class OfferModal extends Component {
-  state = {
-    modal: false,
-    msg: ""
-  };
-
-  toggle = () => {
-    this.setState({ modal: !this.state.modal });
-  };
   render() {
     return (
       <div>
-        <Modal isOpen={this.props.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Offer Title</ModalHeader>
+        <Modal isOpen={true}>
+          <ModalHeader>{this.props.title}</ModalHeader>
           <ModalBody>
-            <p></p>
-            <Button style={{ marginTop: "2rem" }} block>
+            <p>{this.props.description}</p>
+            <Button
+              onClick={this.props.modal}
+              style={{ marginTop: "2rem" }}
+              block
+            >
               GO
             </Button>
           </ModalBody>
