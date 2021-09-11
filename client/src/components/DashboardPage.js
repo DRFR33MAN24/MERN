@@ -77,7 +77,7 @@ class DashboardPage extends Component {
       return login;
     }
     return (
-      <Container className="d-flex flex-wrap ">
+      <Container className="d-flex align-items-center flex-wrap flex-md-nowrap ">
         {offers.map(({ title, description, link, amount, img, conversion }) => (
           <div>
             {this.props.isAuthenticated ? (
