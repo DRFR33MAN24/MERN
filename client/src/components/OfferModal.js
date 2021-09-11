@@ -13,20 +13,27 @@ import {
 } from "reactstrap";
 
 export default class OfferModal extends Component {
+  btnClick = () => {
+    window.location.href = `${this.props.link}`;
+    //this.props.modal();
+  };
   render() {
     return (
       <div>
-        <Modal isOpen={true}>
+        <Modal isOpen={true} className="modal-dialog-centered">
           <ModalHeader>{this.props.title}</ModalHeader>
           <ModalBody>
             <p>{this.props.description}</p>
-            <Button
+            <Button onClick={this.btnClick} style={{ marginTop: "2rem" }} block>
+              GO
+            </Button>
+            {/* <Button
               onClick={this.props.modal}
               style={{ marginTop: "2rem" }}
               block
             >
               GO
-            </Button>
+            </Button> */}
           </ModalBody>
         </Modal>
       </div>
