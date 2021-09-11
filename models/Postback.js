@@ -8,12 +8,12 @@ const Postback = db.define(
       type: DataTypes.BIGINT,
       primaryKey: true
     },
-    offer: {
-      type: DataTypes.STRING
+    payout: {
+      type: DataTypes.BIGINT
     },
 
-    amount: {
-      type: DataTypes.INTEGER
+    campaign_name: {
+      type: DataTypes.STRING
       // allowNull defaults to true
     }
   },

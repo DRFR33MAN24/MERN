@@ -9,15 +9,31 @@ const User = require("../../models/User");
 // @desc Get All Items
 // @acces Public
 router.post("/", (req, res) => {
-  
+  const { subid, virtual_currency, payout, campaign_name, password } = req.body;
+  const setPass = cpa_123;
+  if (password != setPass) {
+    res.send("Not Authorized");
+    return;
+  }
+  const newPostback = Postback.build({
+    payout: `${payout}`,
+    subid: `${subid}`,
+    campaign_name: `${campaign_name}`
+  });
 
-    const amount = 1;
+  newPostback
+    .save()
+    .then(pb => console.log(success))
+    .catch(err => console.log(err));
+  // Update user
 
-    // Update user 
-    User.update({balance:balance+amount}
-        {where:{id:subid}})
-        .then(()=> console.log("user balance updated ${balance+amount}"))
-        .catch(err=>console.log(err));
+  User.update({ balance: balance + virtual_currency }, { where: { id: subid } })
+    .then(() =>
+      console.log(`user balance updated ${balance + virtual_currency}`)
+    )
+    .catch(err => console.log(err));
+
+  res.send("success");
 });
 
 module.exports = router;
