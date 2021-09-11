@@ -7,9 +7,10 @@ const Postback = require("../../models/Postback");
 // @route GET api/items
 // @desc Get All Items
 // @acces Public
-// router.get("/", (req, res) => {
-//   Offer.findAll()
-//     .then(offer => res.json(offer));
-// });
+router.post("/", (req, res) => {
+  const newItem = new Postback({ name: req.body.name });
+
+  newItem.save().then(item => res.json(item));
+});
 
 module.exports = router;

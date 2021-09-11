@@ -1,41 +1,17 @@
 const db = require("./../database");
 const { DataTypes } = require("sequelize");
-const Offer = db.define(
-  "Offer",
+const Postback = db.define(
+  "Postback",
   {
     // Model attributes are defined here
-    id: {
+    subid: {
       type: DataTypes.BIGINT,
       primaryKey: true
     },
-    title: {
+    offer: {
       type: DataTypes.STRING
-      // allowNull defaults to true
     },
-    description: {
-      type: DataTypes.TEXT
-      // allowNull defaults to true
-    },
-    link: {
-      type: DataTypes.STRING
-      // allowNull defaults to true
-    },
-    category: {
-      type: DataTypes.STRING
-      // allowNull defaults to true
-    },
-    conversion: {
-      type: DataTypes.STRING
-      // allowNull defaults to true
-    },
-    mobile_app: {
-      type: DataTypes.STRING
-      // allowNull defaults to true
-    },
-    img: {
-      type: DataTypes.STRING
-      // allowNull defaults to true
-    },
+
     amount: {
       type: DataTypes.INTEGER
       // allowNull defaults to true
