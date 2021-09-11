@@ -49,7 +49,7 @@ class AppNavbar extends Component {
     const userInfo = (
       <Fragment>
         <span className="navbar-text text-success ">
-          <strong>{user ? user.balance : ""}</strong>
+          <strong>{user ? user.balance + " $" : ""}</strong>
         </span>
       </Fragment>
     );
