@@ -21,7 +21,12 @@ const User = db.define(
     password: {
       type: DataTypes.STRING,
       allowNull: false
+
       // allowNull defaults to true
+    },
+    balance: {
+      type: DataTypes.BIGINT,
+      defaultValue: 0
     },
     register_date: {
       type: DataTypes.DATE,

@@ -20,7 +20,7 @@ app.use(express.json());
 db.authenticate()
   .then(() => {
     console.log("Authenticated");
-    //db.sync({ force: false });
+    db.sync({ force: false });
     //db.close();
   })
   .catch(err => {
@@ -31,6 +31,7 @@ db.authenticate()
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/offers", require("./routes/api/offers"));
+app.use("/api/postback", require("./routes/api/postback"));
 
 // Serve static assets if in production
 
