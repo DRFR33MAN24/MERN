@@ -12,7 +12,7 @@ import {
 
 export default class Offer extends Component {
   click = () => {
-    location.href = `${this.props.link + this.props.subid}`;
+
   };
   render() {
     return (

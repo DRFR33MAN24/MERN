@@ -32,6 +32,7 @@ class DashboardPage extends Component {
 
   componentDidMount() {
     console.log("dashboard DidMount is Auth", this.props.isAuthenticated);
+    // this.props.getOffers(1, 1, 'us', '', 'ios');
     this.props.getOffers();
   }
 
@@ -83,7 +84,6 @@ class DashboardPage extends Component {
           <div>
             {this.props.isAuthenticated ? (
               <Offer
-                subid={user.id}
                 title={title}
                 description={description}
                 link={link}
