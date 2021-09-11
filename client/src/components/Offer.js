@@ -11,12 +11,10 @@ import {
 } from "reactstrap";
 
 export default class Offer extends Component {
-  click = () => {
-
-  };
+  click = () => {};
   render() {
     return (
-      <div className="">
+      <div>
         <Card>
           <CardImg top width="100%" src={this.props.img} alt="Card image cap" />
           <CardBody>

@@ -32,8 +32,8 @@ class DashboardPage extends Component {
 
   componentDidMount() {
     console.log("dashboard DidMount is Auth", this.props.isAuthenticated);
-    // this.props.getOffers(1, 1, 'us', '', 'ios');
-    this.props.getOffers();
+    this.props.getOffers(1, 10, "us", "", "ios");
+    //this.props.getOffers();
   }
 
   componentWillMount() {
@@ -80,20 +80,22 @@ class DashboardPage extends Component {
     }
     return (
       <Container className="d-flex align-items-center flex-wrap flex-md-nowrap ">
-        {offers.map(({ title, description, link, amount, img, conversion }) => (
-          <div>
-            {this.props.isAuthenticated ? (
-              <Offer
-                title={title}
-                description={description}
-                link={link}
-                amount={amount}
-                img={img}
-                conversion={conversion}
-              />
-            ) : null}
-          </div>
-        ))}
+        {offers.map(
+          ({ title, description, link, previews, amount, conversion }) => (
+            <div>
+              {this.props.isAuthenticated ? (
+                <Offer
+                  title={title}
+                  description={description}
+                  link={link}
+                  amount={amount}
+                  img={previews[0].url}
+                  conversion={conversion}
+                />
+              ) : null}
+            </div>
+          )
+        )}
       </Container>
     );
   }
