@@ -4,6 +4,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  ModalFooter,
   Form,
   FormGroup,
   Label,
@@ -24,16 +25,14 @@ export default class OfferModal extends Component {
           <ModalHeader>{this.props.title}</ModalHeader>
           <ModalBody>
             <p>{this.props.description}</p>
-            <Button onClick={this.btnClick} style={{ marginTop: "2rem" }} block>
-              GO
-            </Button>
-            {/* <Button
-              onClick={this.props.modal}
-              style={{ marginTop: "2rem" }}
-              block
-            >
-              GO
-            </Button> */}
+
+            <ModalFooter className="d-flex justify-content-start">
+              <Button onClick={this.btnClick} className="flex-grow-1">
+                GO
+              </Button>
+
+              <Button onClick={this.props.modal}>Close</Button>
+            </ModalFooter>
           </ModalBody>
         </Modal>
       </div>
