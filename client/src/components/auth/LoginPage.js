@@ -65,10 +65,6 @@ class LoginPage extends Component {
     }
   }
 
-  toggle = () => {
-    this.setState({ isAuth: true });
-  };
-
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -89,14 +85,11 @@ class LoginPage extends Component {
     this.props.login(user);
   };
   render() {
-    console.log("login render", user);
-    const user = this.props.user;
+    const isAuthenticated = this.props.isAuthenticated;
+    console.log("login render", isAuthenticated);
     const dashboard = <Redirect exact to="/Dashboard" />;
-    if (user != null) {
+    if (isAuthenticated) {
       return dashboard;
-    }
-    if (user === undefined || user === null) {
-      return null;
     }
 
     return (

@@ -92,17 +92,12 @@ class RegisterPage extends Component {
   };
 
   render() {
-    const user = this.props.user;
+    const isAuthenticated = this.props.isAuthenticated;
+    console.log("login render", isAuthenticated);
     const dashboard = <Redirect exact to="/Dashboard" />;
-    if (user != null) {
+    if (isAuthenticated) {
       return dashboard;
     }
-    if (user === undefined || user === null) {
-      return null;
-    }
-    // if (this.state.reg) {
-    //   return login;
-    // }
     return (
       <Container className="mx-auto justify-content-center0">
         <Card className="p-2">

@@ -80,7 +80,7 @@ class DashboardPage extends Component {
     const { offers } = this.props.offers;
     const isAuthenticated = this.props.isAuthenticated;
     //console.log(offers);
-    console.log("dashboard render is Auth", this.props.isAuthenticated);
+    //console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
     if (!isAuthenticated) {
       return login;

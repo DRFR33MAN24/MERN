@@ -24,6 +24,13 @@ import { returnErrors } from "./errorAction";
 const url = new URL(
   "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323"
 );
+// const config = {
+//   headers: {
+//     "Access-Control-Allow-Origin": "*",
+//     "Content-Type": "application/json"
+//   }
+// };
+
 export const getOffers = (subid, number, country, offerType, device) => (
   dispatch,
   getState
