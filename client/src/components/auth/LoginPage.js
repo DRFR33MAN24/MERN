@@ -30,8 +30,10 @@ class LoginPage extends Component {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
-    clearErrors: PropTypes.func.isRequired
+    clearErrors: PropTypes.func.isRequired,
+    user: PropTypes.object
   };
+
   componentDidMount(prevProps) {
     const { error, isAuthenticated } = this.props;
 
@@ -87,11 +89,14 @@ class LoginPage extends Component {
     this.props.login(user);
   };
   render() {
-    console.log("login render", this.state.isAuth);
-    const isAuthenticated = this.props.isAuthenticated;
+    const user = this.props.user;
+    console.log("login render", user);
     const dashboard = <Redirect exact to="/Dashboard" />;
-    if (isAuthenticated) {
+    if (user != null) {
       return dashboard;
+    }
+    if (user === undefined || user === null) {
+      return null;
     }
 
     return (
@@ -134,7 +139,8 @@ class LoginPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  error: state.error
+  error: state.error,
+  user: state.auth.user
 });
 
 export default connect(mapStateToProps, { login, clearErrors })(LoginPage);
