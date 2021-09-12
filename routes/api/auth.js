@@ -17,7 +17,7 @@ router.post("/", (req, res) => {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
 
-  User.findOne({ where: { email: email } }).then(user => {
+  User.findOne({ where: { email: email } }, { plain: true }).then(user => {
     if (!user) {
       return res.status(400).json({ msg: "User Does not exists." });
     }
@@ -85,7 +85,7 @@ router.get("/user", auth, (req, res) => {
       id: req.user.id
     },
     attributes: ["password"],
-    raw: true
+    plain: true
   }).then(user => res.json(user));
 
   // User.findById(req.user.id)

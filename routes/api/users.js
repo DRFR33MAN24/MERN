@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
   }
 
   // Check for exitsting user
-  User.findOne({ where: { email: `${email}` } }).then(user => {
+  User.findOne({ where: { email: `${email}` } }, { plain: true }).then(user => {
     if (user) {
       return res.status(400).json({ msg: "User alerady exists." });
     }

@@ -78,11 +78,11 @@ class DashboardPage extends Component {
 
   render() {
     const { offers } = this.props.offers;
-    const { user } = this.props;
+    const isAuthenticated = this.props.isAuthenticated;
     //console.log(offers);
     console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
-    if (!this.state.isAuth) {
+    if (!isAuthenticated) {
       return login;
     }
     return (
@@ -91,7 +91,7 @@ class DashboardPage extends Component {
           {offers.map(
             ({ title, description, link, previews, amount, conversion }) => (
               <div className="">
-                {this.props.isAuthenticated ? (
+                {isAuthenticated ? (
                   <Offer
                     title={title}
                     description={description}

@@ -44,8 +44,10 @@ class AppNavbar extends Component {
   };
 
   render() {
-    const { isAuthenticated, user } = this.props;
-    console.log(isAuthenticated);
+    const user = this.props.user;
+    const isAuthenticated = this.props.isAuthenticated;
+    console.log("NavBar Render", isAuthenticated);
+
     const userInfo = (
       <Fragment>
         <span className="navbar-text text-success ">
@@ -96,7 +98,9 @@ class AppNavbar extends Component {
                 </NavbarBrand>
               </Container>
               <Container>
-                <Nav className="mx-auto">{isAuthenticated && userInfo}</Nav>
+                <Nav className="mx-auto">
+                  {isAuthenticated ? userInfo : null}
+                </Nav>
               </Container>
               <Container>
                 <div className="mx-auto">

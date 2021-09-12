@@ -41,7 +41,8 @@ class LoginPage extends Component {
     // }
   }
   componentDidUpdate(prevProps, prevState) {
-    const { error, isAuthenticated } = this.props;
+    const isAuthenticated = this.props.isAuthenticated;
+    const error = this.props.error;
     console.log("isAuthenticated:", isAuthenticated);
     console.log("login did update", this.state.isAuth);
     console.log("login did update prev", prevState.isAuth);
@@ -87,9 +88,9 @@ class LoginPage extends Component {
   };
   render() {
     console.log("login render", this.state.isAuth);
-
+    const isAuthenticated = this.props.isAuthenticated;
     const dashboard = <Redirect exact to="/Dashboard" />;
-    if (this.state.isAuth) {
+    if (isAuthenticated) {
       return dashboard;
     }
 
