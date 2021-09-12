@@ -37,14 +37,6 @@ class RegisterPage extends Component {
     user: PropTypes.object
   };
 
-  componentDidMount() {
-    const { error, isAuthenticated } = this.props;
-    // if (isAuthenticated) {
-    //   console.log("authenticated");
-    //   this.setState({ isAuth: true });
-    // }
-  }
-
   componentDidUpdate(prevProps, prevState) {
     console.log("com did update");
     const { error, isAuthenticated } = this.props;
