@@ -33,7 +33,8 @@ class RegisterPage extends Component {
     error: PropTypes.object.isRequired,
     register: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
-    returnErrors: PropTypes.func.isRequired
+    returnErrors: PropTypes.func.isRequired,
+    user: PropTypes.object
   };
 
   componentDidMount() {
@@ -57,18 +58,15 @@ class RegisterPage extends Component {
       // Check for register error
       if (error.id === "REGISTER_FAIL") {
         this.setState({ msg: error.msg.msg });
-      } else if (error.id === 'REGISTER_SUCCESS') {
-        console.log('register complete');
+      } else if (error.id === "REGISTER_SUCCESS") {
+        console.log("register complete");
         this.setState({ reg: true });
         //this.setState({ msg: null });
-      }
-      else {
-
+      } else {
       }
 
       //this.props.clearErrors();
     }
-
   }
 
   //   toggle = () => {
@@ -102,10 +100,13 @@ class RegisterPage extends Component {
   };
 
   render() {
+    const user = this.props.user;
     const dashboard = <Redirect exact to="/Dashboard" />;
-    const login = <Redirect exact to="/Login" />
-    if (this.state.isAuth) {
+    if (user != null) {
       return dashboard;
+    }
+    if (user === undefined || user === null) {
+      return null;
     }
     // if (this.state.reg) {
     //   return login;
@@ -160,10 +161,12 @@ class RegisterPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  error: state.error
-
+  error: state.error,
+  user: state.auth.user
 });
 
-export default connect(mapStateToProps, { register, returnErrors, clearErrors })(
-  RegisterPage
-);
+export default connect(mapStateToProps, {
+  register,
+  returnErrors,
+  clearErrors
+})(RegisterPage);

@@ -89,8 +89,8 @@ class LoginPage extends Component {
     this.props.login(user);
   };
   render() {
-    const user = this.props.user;
     console.log("login render", user);
+    const user = this.props.user;
     const dashboard = <Redirect exact to="/Dashboard" />;
     if (user != null) {
       return dashboard;
