@@ -64,9 +64,9 @@ export const register = ({ name, email, password }) => dispatch => {
     });
 };
 
-
-export const update = ({ name, email, password, id }) => dispatch => {
+export const updateDetails = ({ name, email, password, id }) => dispatch => {
   // Headers
+  console.log("updateDetails Called");
   const config = {
     headers: {
       "Content-Type": "application/json"
@@ -76,11 +76,10 @@ export const update = ({ name, email, password, id }) => dispatch => {
   // Request body
   const body = JSON.stringify({ name, email, password, id });
   axios
-    .post("/api/users", body, config)
+    .post("/api/users/update", body, config)
     .then(res =>
       dispatch({
-        type: UPDATE_SUCCESS,
-        payload: res.data
+        type: UPDATE_SUCCESS
       })
     )
     .catch(err => {

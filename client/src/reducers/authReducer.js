@@ -6,7 +6,9 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  UPDATE_SUCCESS,
+  UPDATE_FAIL
 } from "../actions/types";
 import { tr } from "date-fns/locale";
 
@@ -14,7 +16,8 @@ const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: false,
   isLoading: false,
-  user: null
+  user: null,
+  updated: false
 };
 
 export default function(state = initialState, action) {
@@ -23,6 +26,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isLoading: true
+      };
+
+    case UPDATE_SUCCESS:
+      return {
+        ...state,
+        updated: true
+      };
+
+    case UPDATE_FAIL:
+      return {
+        ...state,
+        updated: false
       };
 
     case USER_LOADED:

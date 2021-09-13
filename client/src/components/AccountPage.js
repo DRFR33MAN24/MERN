@@ -24,9 +24,9 @@ import { freemem } from "os";
 
 class AccountPage extends Component {
   state = {
-    name: "",
-    email: "",
-    password: "",
+    name: this.props.user.name,
+    email: this.props.user.email,
+    password: this.props.user.password,
     wallet: "",
     formEnabled: false
   };
@@ -72,7 +72,7 @@ class AccountPage extends Component {
 
   onEdit = () => {
     this.setState({ formEnabled: true });
-  }
+  };
 
   onSave = () => {
     const user = this.props.user;
@@ -83,26 +83,23 @@ class AccountPage extends Component {
       id: user.id
     };
 
-    if (user.name != newUser.name
-      || user.email != newUser.email
-      || user.password != newUser.password) {
-
-      // this.props.updateDetails(newUser)
+    if (
+      user.name != newUser.name ||
+      user.email != newUser.email ||
+      user.password != newUser.password
+    ) {
+      this.props.updateDetails(newUser);
+      this.setState({ formEnabled: false });
 
       //update details will issue an action to change database
-      // and send an email to user set mail address 
+      // and send an email to user set mail address
       // and change the user.active field in db to false
     }
-
-
-
-  }
-
-  onChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
   };
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
   onSubmit = e => {
     e.preventDefault();
@@ -148,26 +145,43 @@ class AccountPage extends Component {
         <Card className="shadow p-2 mb-3">
           <Label className="mb-3">User Details:</Label>
           <Container>
-
-            <Form >
+            <Form>
               <Label className="mt-2">User Name:</Label>
-              <Input disabled={!formEnabled} value={user.name}></Input>
+              <Input
+                name="name"
+                disabled={!formEnabled}
+                defaultValue={user.name}
+                onChange={value => this.onChange(value)}
+              ></Input>
               <Label className="mt-2">Email:</Label>
-              <Input disabled={!formEnabled} value={user.email}></Input>
+              <Input
+                name="email"
+                disabled={!formEnabled}
+                defaultValue={user.email}
+                onChange={value => this.onChange(value)}
+              ></Input>
               <Label className="mt-2">Password:</Label>
-              <Input disabled={!formEnabled} type="password" value={user.password}></Input>
-              <Label className="mt-2">Repeat Password:</Label>
-              <Input disabled={!formEnabled} type="password" value={user.password}></Input>
+              <Input
+                name="password"
+                disabled={!formEnabled}
+                type="password"
+                defaultValue={user.password}
+                onChange={value => this.onChange(value)}
+              ></Input>
+
               <Label className="mt-2">Wallet Address:</Label>
               <Input disabled={!formEnabled}></Input>
             </Form>
           </Container>
           <Container className="mt-3 mb-3 p-1 d-flex justify-content-center">
-            <Button className="mx-3" onClick={this.onEdit}>Edit</Button>
-            <Button className="mx-3">Save</Button>
+            <Button className="mx-3" onClick={this.onEdit}>
+              Edit
+            </Button>
+            <Button className="mx-3" onClick={this.onSave}>
+              Save
+            </Button>
           </Container>
         </Card>
-
       </Container>
     );
   }
@@ -179,4 +193,6 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, { updateDetails, clearErrors })(AccountPage);
+export default connect(mapStateToProps, { updateDetails, clearErrors })(
+  AccountPage
+);

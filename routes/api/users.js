@@ -65,34 +65,38 @@ router.post("/", (req, res) => {
   });
 });
 
-// pass the old user info 
+// pass the old user info
 router.post("/update", (req, res) => {
+  console.log("update route called");
   const { name, email, password, id } = req.body;
 
   if (!name || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
-
-
+  console.log(name, email, password);
   User.findOne({ where: { id: `${id}` } }, { plain: true }).then(user => {
     if (user) {
-
-
-
-      //update existing user 
-      const newUser = User.build({
-        name: `${name}`,
-        email: `${email}`,
-        password: `${password}`
-      });
+      //update existing user
+      // const newUser = User.build({
+      //   name: `${name}`,
+      //   email: `${email}`,
+      //   password: `${password}`
+      // });
 
       // Create salt and hash
 
       bcryptjs.genSalt(10, (err, salt) => {
-        bcryptjs.hash(newUser.password, salt, (err, hash) => {
+        bcryptjs.hash(password, salt, (err, hash) => {
           if (err) throw err;
-          newUser.password = hash;
-          newUser.update().then(user => {
+
+          User.update(
+            {
+              name: `${name}`,
+              email: `${email}`,
+              password: `${hash}`
+            },
+            { where: { id: `${id}` } }
+          ).then(user => {
             jwt.sign(
               { id: user.id },
               config.get("jwtSecret"),
