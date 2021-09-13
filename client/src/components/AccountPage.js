@@ -86,6 +86,7 @@ class AccountPage extends Component {
   };
   render() {
     const isAuthenticated = this.props.isAuthenticated;
+    const user = this.props.user;
     //console.log(offers);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
@@ -97,19 +98,31 @@ class AccountPage extends Component {
       <Container className=" mx-auto justify-content-center">
         <Card className="shadow p-2">
           <Label className="mb-3">User Details:</Label>
-          <Label>User Name:</Label>
-          <Input></Input>
-          <Label>User Name:</Label>
-          <Input></Input>
-          <Label>User Name:</Label>
-          <Input></Input>
+          <Container>
+            <Label>User Name:</Label>
+            <Input value={user.name}></Input>
+            <Label>Email:</Label>
+            <Input value={user.email}></Input>
+            <Label>Password:</Label>
+            <Input type="password" value={user.password}></Input>
+            <Label>Repeat Password:</Label>
+            <Input type="password" value={user.password}></Input>
+          </Container>
           <Container className="mt-3 mb-3 p-1 d-flex justify-content-center">
             <Button className="mx-3">Edit</Button>
             <Button className="mx-3">Save</Button>
           </Container>
         </Card>
         <Card className="shadow p-2 mt-2">
-          <Label>Payment Details:</Label>
+          <Label className="mb-3">Payment Details:</Label>
+          <Container>
+            <Label>Wallet Address:</Label>
+            <Input></Input>
+          </Container>
+          <Container className="mt-3 mb-3 p-1 d-flex justify-content-center">
+            <Button className="mx-3">Edit</Button>
+            <Button className="mx-3">Save</Button>
+          </Container>
         </Card>
       </Container>
     );
