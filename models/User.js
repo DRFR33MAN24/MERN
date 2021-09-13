@@ -10,6 +10,12 @@ const User = db.define(
       autoIncrement: true,
       primaryKey: true
     },
+
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+      // allowNull defaults to true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -32,6 +38,11 @@ const User = db.define(
       type: DataTypes.BIGINT,
       defaultValue: 0
     },
+    waller: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+
     register_date: {
       type: DataTypes.DATE,
       defaultValue: Date.now

@@ -115,19 +115,6 @@ class AccountPage extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmit = e => {
-    e.preventDefault();
-
-    const { email, password } = this.state;
-
-    const user = {
-      email,
-      password
-    };
-
-    // Attempt to login
-    this.props.login(user);
-  };
   render() {
     const isAuthenticated = this.props.isAuthenticated;
     const user = this.props.user;
