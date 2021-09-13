@@ -10,7 +10,7 @@ import {
   Card,
   Alert
 } from "reactstrap";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -138,6 +138,14 @@ class RegisterPage extends Component {
               <Button color="dark" style={{ marginTop: "2rem" }} block>
                 Register
               </Button>
+            </FormGroup>
+            <FormGroup className="d-flex flex-direction-row justify-content-between">
+              <div>
+                Already a member:{" "}
+                <Link exact to="/Login">
+                  Register now
+                </Link>
+              </div>
             </FormGroup>
           </Form>
         </Card>

@@ -14,10 +14,10 @@ import { Redirect, Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../../actions/authAction";
-import { clearErrors } from "../../actions/errorAction";
+import { login } from "../actions/authAction";
+import { clearErrors } from "../actions/errorAction";
 
-class LoginPage extends Component {
+class AccountPage extends Component {
   state = {
     isAuth: false,
 
@@ -86,55 +86,30 @@ class LoginPage extends Component {
   };
   render() {
     const isAuthenticated = this.props.isAuthenticated;
-    console.log("login render", isAuthenticated);
-    const dashboard = <Redirect exact to="/Dashboard" />;
-    if (isAuthenticated) {
-      return dashboard;
+    //console.log(offers);
+    //console.log("dashboard render is Auth", this.props.isAuthenticated);
+    const login = <Redirect exact to="/Login" />;
+    if (!isAuthenticated) {
+      return login;
     }
 
     return (
       <Container className=" mx-auto justify-content-center">
-        <Card className="p-2">
-          {this.state.msg ? (
-            <Alert color="danger">{this.state.msg}</Alert>
-          ) : null}
-          <Form onSubmit={this.onSubmit}>
-            <FormGroup>
-              <Label for="email">Email</Label>
-              <Input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-                onChange={this.onChange}
-                className="mb-3"
-              />
-
-              <Label for="password">Password</Label>
-              <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                onChange={this.onChange}
-                className="mb-3"
-              />
-              <Button color="dark" style={{ marginTop: "2rem" }} block>
-                Login
-              </Button>
-            </FormGroup>
-            <FormGroup className="d-flex flex-direction-row justify-content-between">
-              <div>
-                Not a member:{" "}
-                <Link exact to="/Register">
-                  Register now
-                </Link>
-              </div>
-              <Link exact to="/Reset">
-                Forgot Password?
-              </Link>
-            </FormGroup>
-          </Form>
+        <Card className="shadow p-2">
+          <Label className="mb-3">User Details:</Label>
+          <Label>User Name:</Label>
+          <Input></Input>
+          <Label>User Name:</Label>
+          <Input></Input>
+          <Label>User Name:</Label>
+          <Input></Input>
+          <Container className="mt-3 mb-3 p-1 d-flex justify-content-center">
+            <Button className="mx-3">Edit</Button>
+            <Button className="mx-3">Save</Button>
+          </Container>
+        </Card>
+        <Card className="shadow p-2 mt-2">
+          <Label>Payment Details:</Label>
         </Card>
       </Container>
     );
@@ -147,4 +122,4 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, { login, clearErrors })(LoginPage);
+export default connect(mapStateToProps, { login, clearErrors })(AccountPage);

@@ -27,6 +27,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LoginPage from "./auth/LoginPage";
 import RegisterPage from "./auth/RegisterPage";
 import DashboardPage from "./DashboardPage";
+import AccountPage from "./AccountPage";
 class AppNavbar extends Component {
   state = {
     isOpen: false
@@ -78,7 +79,11 @@ class AppNavbar extends Component {
             Options
           </DropdownToggle>
           <DropdownMenu right>
-            <DropdownItem>Profile</DropdownItem>
+            <DropdownItem>
+              <Link className="text-dark" exact to="/Account">
+                Account
+              </Link>
+            </DropdownItem>
             <DropdownItem divider />
             <Logout />
           </DropdownMenu>
@@ -126,6 +131,9 @@ class AppNavbar extends Component {
           </Route>
           <Route exact path="/Dashboard">
             <DashboardPage />
+          </Route>
+          <Route exact path="/Account">
+            <AccountPage />
           </Route>
           <Route path="/NotFound">
             <h1>NotFound</h1>
