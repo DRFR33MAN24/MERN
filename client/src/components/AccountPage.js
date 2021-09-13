@@ -24,6 +24,7 @@ import { freemem } from "os";
 
 class AccountPage extends Component {
   state = {
+    msg: "",
     name: this.props.user.name,
     email: this.props.user.email,
     password: this.props.user.password,
@@ -35,6 +36,7 @@ class AccountPage extends Component {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     updateDetails: PropTypes.func.isRequired,
+    updated: PropTypes.bool,
     clearErrors: PropTypes.func.isRequired,
     user: PropTypes.object
   };
@@ -50,6 +52,7 @@ class AccountPage extends Component {
   componentDidUpdate(prevProps, prevState) {
     const isAuthenticated = this.props.isAuthenticated;
     const error = this.props.error;
+    const updated = this.props.updated;
     console.log("isAuthenticated:", isAuthenticated);
     console.log("login did update", this.state.isAuth);
     console.log("login did update prev", prevState.isAuth);
@@ -57,6 +60,17 @@ class AccountPage extends Component {
       // Check for register error
       if (error.id === "LOGIN_FAIL") {
         this.setState({ msg: error.msg.msg });
+      } else {
+        this.setState({ msg: null });
+      }
+
+      // If authenticated close modal
+      // If authenicated go to dashboard
+    }
+    if (updated !== prevProps.updated) {
+      // Check for register error
+      if (error === true) {
+        this.setState({ msg: "Updated" });
       } else {
         this.setState({ msg: null });
       }
@@ -143,6 +157,7 @@ class AccountPage extends Component {
     return (
       <Container className=" mx-auto justify-content-center">
         <Card className="shadow p-2 mb-3">
+          {this.props.updated ? <Alert>Updated</Alert> : null}
           <Label className="mb-3">User Details:</Label>
           <Container>
             <Form>
@@ -189,6 +204,7 @@ class AccountPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  updated: state.auth.updated,
   error: state.error,
   user: state.auth.user
 });
