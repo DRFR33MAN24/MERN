@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import "./App.css";
 import AppNavbar from "./components/AppNavbar";
 import { Container } from "reactstrap";

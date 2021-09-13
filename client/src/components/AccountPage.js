@@ -18,23 +18,23 @@ import { Redirect, Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../actions/authAction";
+import { updateDetails } from "../actions/authAction";
 import { clearErrors } from "../actions/errorAction";
 import { freemem } from "os";
 
 class AccountPage extends Component {
   state = {
-    isAuth: false,
-
+    name: "",
     email: "",
     password: "",
-    msg: ""
+    wallet: "",
+    formEnabled: false
   };
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
-    login: PropTypes.func.isRequired,
+    updateDetails: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
     user: PropTypes.object
   };
@@ -70,6 +70,34 @@ class AccountPage extends Component {
     }
   }
 
+  onEdit = () => {
+    this.setState({ formEnabled: true });
+  }
+
+  onSave = () => {
+    const user = this.props.user;
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      id: user.id
+    };
+
+    if (user.name != newUser.name
+      || user.email != newUser.email
+      || user.password != newUser.password) {
+
+      // this.props.updateDetails(newUser)
+
+      //update details will issue an action to change database
+      // and send an email to user set mail address 
+      // and change the user.active field in db to false
+    }
+
+
+
+  }
+
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -92,6 +120,7 @@ class AccountPage extends Component {
   render() {
     const isAuthenticated = this.props.isAuthenticated;
     const user = this.props.user;
+    const formEnabled = this.state.formEnabled;
     //console.log(offers);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
@@ -116,34 +145,29 @@ class AccountPage extends Component {
 
     return (
       <Container className=" mx-auto justify-content-center">
-        <Card className="shadow p-2">
+        <Card className="shadow p-2 mb-3">
           <Label className="mb-3">User Details:</Label>
           <Container>
-            <Label>User Name:</Label>
-            <Input value={user.name}></Input>
-            <Label>Email:</Label>
-            <Input value={user.email}></Input>
-            <Label>Password:</Label>
-            <Input type="password" value={user.password}></Input>
-            <Label>Repeat Password:</Label>
-            <Input type="password" value={user.password}></Input>
+
+            <Form >
+              <Label className="mt-2">User Name:</Label>
+              <Input disabled={!formEnabled} value={user.name}></Input>
+              <Label className="mt-2">Email:</Label>
+              <Input disabled={!formEnabled} value={user.email}></Input>
+              <Label className="mt-2">Password:</Label>
+              <Input disabled={!formEnabled} type="password" value={user.password}></Input>
+              <Label className="mt-2">Repeat Password:</Label>
+              <Input disabled={!formEnabled} type="password" value={user.password}></Input>
+              <Label className="mt-2">Wallet Address:</Label>
+              <Input disabled={!formEnabled}></Input>
+            </Form>
           </Container>
           <Container className="mt-3 mb-3 p-1 d-flex justify-content-center">
-            <Button className="mx-3">Edit</Button>
+            <Button className="mx-3" onClick={this.onEdit}>Edit</Button>
             <Button className="mx-3">Save</Button>
           </Container>
         </Card>
-        <Card className="shadow p-2 mt-2">
-          <Label className="mb-3">Payment Details:</Label>
-          <Container>
-            <Label>Wallet Address:</Label>
-            <Input></Input>
-          </Container>
-          <Container className="mt-3 mb-3 p-1 d-flex justify-content-center">
-            <Button className="mx-3">Edit</Button>
-            <Button className="mx-3">Save</Button>
-          </Container>
-        </Card>
+
       </Container>
     );
   }
@@ -155,4 +179,4 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, { login, clearErrors })(AccountPage);
+export default connect(mapStateToProps, { updateDetails, clearErrors })(AccountPage);
