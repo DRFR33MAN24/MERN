@@ -8,7 +8,11 @@ import {
   FormText,
   Container,
   Card,
-  Alert
+  Alert,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
 } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
 
@@ -16,6 +20,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../actions/authAction";
 import { clearErrors } from "../actions/errorAction";
+import { freemem } from "os";
 
 class AccountPage extends Component {
   state = {
@@ -93,6 +98,21 @@ class AccountPage extends Component {
     if (!isAuthenticated) {
       return login;
     }
+
+    const confirmModal = (
+      <Fragment>
+        <Modal isOpen={true} className="modal-dialog-centered">
+          <ModalHeader>Confirm Changes</ModalHeader>
+          <ModalBody>
+            <p>Check your Email to confirm changes.</p>
+
+            <ModalFooter className="d-flex justify-content-start">
+              <Button onClick={this.props.modal}>Close</Button>
+            </ModalFooter>
+          </ModalBody>
+        </Modal>
+      </Fragment>
+    );
 
     return (
       <Container className=" mx-auto justify-content-center">
