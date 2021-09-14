@@ -19,8 +19,8 @@ var transporter = nodemailer.createTransport(
   })
 );
 
-router.get("/send", auth, function (req, res) {
-  console.log("sending Email")
+router.get("/send", function(req, res) {
+  console.log("sending Email");
   rand = Math.floor(Math.random() * 100 + 54);
   host = req.get("host");
   link = "http://" + host + "/verify?id=" + rand;
@@ -42,7 +42,7 @@ router.get("/send", auth, function (req, res) {
     .then(() => console.log("Hash saved...."))
     .catch(() => console.log("Operation failed"));
 
-  transporter.sendMail(mailOptions, function (error, response) {
+  transporter.sendMail(mailOptions, function(error, response) {
     if (error) {
       console.log(error);
       res.json({ sent: false });
@@ -54,7 +54,7 @@ router.get("/send", auth, function (req, res) {
   });
 });
 
-router.get("/verify", function (req, res) {
+router.get("/verify", function(req, res) {
   console.log(req.protocol + ":/" + req.get("host"));
   if (req.protocol + "://" + req.get("host") == "http://" + host) {
     console.log("Domain is matched. Information is from Authentic email");

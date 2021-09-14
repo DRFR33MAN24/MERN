@@ -4,7 +4,7 @@ import axios from "axios";
 import { returnErrors } from "./errorAction";
 
 export const sendEmail = email => (dispatch, getState) => {
-  console.log('snedEmail enter');
+  console.log("sendEmail enter");
   // Headers
   const config = {
     headers: {
@@ -16,7 +16,7 @@ export const sendEmail = email => (dispatch, getState) => {
   const body = JSON.stringify(email);
   axios
     .get("api/email/send", body, config)
-    .then((res) => {
+    .then(res => {
       console.log("send email get.then");
       // const offers = {}
       // console.log(res.data.offers);
@@ -26,6 +26,8 @@ export const sendEmail = email => (dispatch, getState) => {
       });
     })
     .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status, 'SENT_FAIL'))
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "SENT_FAIL")
+      )
     );
 };

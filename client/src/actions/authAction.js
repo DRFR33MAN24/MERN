@@ -38,6 +38,8 @@ export const loadUser = () => (dispatch, getState) => {
 //Register user
 
 export const register = ({ name, email, password, active }) => dispatch => {
+  dispatch(sendEmail(email));
+  //console.log("access-able");
   // Headers
   const config = {
     headers: {
@@ -53,11 +55,9 @@ export const register = ({ name, email, password, active }) => dispatch => {
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
-      })
+      });
+    })
 
-      sendEmail(email)
-    }
-    )
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
