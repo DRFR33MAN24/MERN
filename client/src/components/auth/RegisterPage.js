@@ -26,6 +26,7 @@ class RegisterPage extends Component {
     name: "",
     email: "",
     password: "",
+    active: false,
     msg: ""
   };
 
@@ -81,13 +82,14 @@ class RegisterPage extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { name, email, password } = this.state;
+    const { name, email, password, active } = this.state;
 
     // Create user object
     const newUser = {
       name,
       email,
-      password
+      password,
+      active
     };
     // Attempt to register
     this.props.register(newUser);

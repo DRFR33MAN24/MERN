@@ -1,5 +1,6 @@
 import axios from "axios";
 import { returnErrors } from "./errorAction";
+import { sendEmail } from "./sendEmailAction";
 import {
   USER_LOADED,
   USER_LOADING,
@@ -36,7 +37,7 @@ export const loadUser = () => (dispatch, getState) => {
 
 //Register user
 
-export const register = ({ name, email, password }) => dispatch => {
+export const register = ({ name, email, password, active }) => dispatch => {
   // Headers
   const config = {
     headers: {
@@ -45,14 +46,17 @@ export const register = ({ name, email, password }) => dispatch => {
   };
 
   // Request body
-  const body = JSON.stringify({ name, email, password });
+  const body = JSON.stringify({ name, email, password, active });
   axios
     .post("/api/users", body, config)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
       })
+
+      sendEmail(email)
+    }
     )
     .catch(err => {
       dispatch(

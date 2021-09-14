@@ -41,6 +41,8 @@ app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/offers", require("./routes/api/offers"));
 app.use("/api/postback", require("./routes/api/postback"));
+app.use("/api/email", require("./routes/api/email"));
+
 
 // Serve static assets if in production
 

@@ -13,4 +13,5 @@ export const GET_ERRORS = "GET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const UPDATE_SUCCESS = "UPDATE_SUCCESS";
 export const UPDATE_FAIL = "UPDATE_FAIL";
-export const EMAIL_SENT = "EMAIL_SENT";
+export const SENT_SUCCESS = "SENT_SUCCESS";
+export const SENT_FAIL = "SENT_FAIL";

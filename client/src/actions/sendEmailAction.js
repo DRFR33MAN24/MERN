@@ -1,9 +1,10 @@
-import { USER_ACTIVATE_FAIL, USER_ACTIVATE_SUCCESS } from "./types";
+import { SENT_SUCCESS, SENT_FAIL } from "./types";
 import { tokenConfig } from "./authAction";
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 
 export const sendEmail = email => (dispatch, getState) => {
+  console.log('snedEmail enter');
   // Headers
   const config = {
     headers: {
@@ -14,16 +15,17 @@ export const sendEmail = email => (dispatch, getState) => {
   // Request body
   const body = JSON.stringify(email);
   axios
-    .get("/send", body, config)
-    .then(() => {
+    .get("api/email/send", body, config)
+    .then((res) => {
+      console.log("send email get.then");
       // const offers = {}
       // console.log(res.data.offers);
       dispatch({
-        type: EMAIL_SENT,
+        type: SENT_SUCCESS,
         payload: res.data.sent
       });
     })
     .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
+      dispatch(returnErrors(err.response.data, err.response.status, 'SENT_FAIL'))
     );
 };

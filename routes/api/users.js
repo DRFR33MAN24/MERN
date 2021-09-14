@@ -11,7 +11,7 @@ const User = require("../../models/User");
 // @desc Register New User
 // @acces Public
 router.post("/", (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, active } = req.body;
 
   if (!name || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
@@ -31,7 +31,8 @@ router.post("/", (req, res) => {
     const newUser = User.build({
       name: `${name}`,
       email: `${email}`,
-      password: `${password}`
+      password: `${password}`,
+      active: `${active}`
     });
 
     // Create salt and hash

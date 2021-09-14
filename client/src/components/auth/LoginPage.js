@@ -15,7 +15,7 @@ import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/authAction";
-import { clearErrors } from "../../actions/errorAction";
+import { clearErrors, returnErrors } from "../../actions/errorAction";
 
 class LoginPage extends Component {
   state = {
@@ -31,6 +31,7 @@ class LoginPage extends Component {
     error: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
+    returnErrors: PropTypes.func.isRequired,
     user: PropTypes.object
   };
 
@@ -83,6 +84,7 @@ class LoginPage extends Component {
 
     // Attempt to login
     this.props.login(user);
+    this.props.returnErrors();
   };
   render() {
     const isAuthenticated = this.props.isAuthenticated;
@@ -147,4 +149,4 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, { login, clearErrors })(LoginPage);
+export default connect(mapStateToProps, { login, returnErrors, clearErrors })(LoginPage);

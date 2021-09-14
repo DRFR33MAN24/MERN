@@ -9,7 +9,8 @@ import {
   REGISTER_FAIL,
   UPDATE_SUCCESS,
   UPDATE_FAIL,
-  EMAIL_SENT
+  EMAIL_SENT,
+  SENT_SUCCESS
 } from "../actions/types";
 import { tr } from "date-fns/locale";
 
@@ -23,7 +24,7 @@ const initialState = {
   isRegisterd: false
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case USER_LOADING:
       return {
@@ -36,7 +37,7 @@ export default function(state = initialState, action) {
         ...state,
         updated: true
       };
-    case EMAIL_SENT:
+    case SENT_SUCCESS:
       return {
         ...state,
         mail_sent: action.payload

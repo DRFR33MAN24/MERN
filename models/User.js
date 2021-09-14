@@ -40,7 +40,7 @@ const User = db.define(
     },
     wallet: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
 
     register_date: {
