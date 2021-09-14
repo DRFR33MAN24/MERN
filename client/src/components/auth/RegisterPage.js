@@ -104,6 +104,9 @@ class RegisterPage extends Component {
     if (isAuthenticated) {
       return dashboard;
     }
+    if (isRegistered) {
+      return <h1>Check Email</h1>;
+    }
     return (
       <Container className="mx-auto justify-content-center0">
         <Card className="p-2">
