@@ -19,7 +19,8 @@ export const sendEmail = email => (dispatch, getState) => {
       // const offers = {}
       // console.log(res.data.offers);
       dispatch({
-        type: EMAIL_SENT
+        type: EMAIL_SENT,
+        payload: res.data.sent
       });
     })
     .catch(err =>

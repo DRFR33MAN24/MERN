@@ -24,7 +24,7 @@ app.get("/send", auth, function(req, res) {
   host = req.get("host");
   link = "http://" + host + "/verify?id=" + rand;
   mailOptions = {
-    to: req.to,
+    to: req.body.email,
     subject: "Please confirm your Email account",
     html:
       "Hello,<br> Please Click on the link to verify your email.<br><a href=" +
@@ -36,7 +36,7 @@ app.get("/send", auth, function(req, res) {
 
   Hash.create({
     hash: rand,
-    email: req.query.to
+    email: req.body.email
   })
     .then(() => console.log("Hash saved...."))
     .catch(() => console.log("Operation failed"));
@@ -44,10 +44,11 @@ app.get("/send", auth, function(req, res) {
   transporter.sendMail(mailOptions, function(error, response) {
     if (error) {
       console.log(error);
-      res.end("error");
+      res.json({ sent: false });
     } else {
       console.log("Message sent: " + response.message);
-      res.end("sent");
+
+      res.json({ sent: true });
     }
   });
 });
