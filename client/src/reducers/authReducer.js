@@ -8,7 +8,8 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   UPDATE_SUCCESS,
-  UPDATE_FAIL
+  UPDATE_FAIL,
+  EMAIL_SENT
 } from "../actions/types";
 import { tr } from "date-fns/locale";
 
@@ -17,7 +18,9 @@ const initialState = {
   isAuthenticated: false,
   isLoading: false,
   user: null,
-  updated: false
+  updated: false,
+  mail_sent: false,
+  isRegisterd: false
 };
 
 export default function(state = initialState, action) {
@@ -32,6 +35,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         updated: true
+      };
+    case EMAIL_SENT:
+      return {
+        ...state,
+        mail_sent: true
       };
 
     case UPDATE_FAIL:
@@ -49,13 +57,22 @@ export default function(state = initialState, action) {
       };
 
     case LOGIN_SUCCESS:
-    case REGISTER_SUCCESS:
       localStorage.setItem("token", action.payload.token);
 
       return {
         ...state,
         ...action.payload,
         isAuthenticated: true,
+        isLoading: false
+      };
+
+    case REGISTER_SUCCESS:
+      localStorage.setItem("token", action.payload.token);
+
+      return {
+        ...state,
+        ...action.payload,
+        isRegisterd: true,
         isLoading: false
       };
 

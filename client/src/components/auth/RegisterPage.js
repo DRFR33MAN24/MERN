@@ -15,6 +15,7 @@ import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../../actions/authAction";
+import { sendEmail } from "../../actions/sendEmail";
 import { clearErrors, returnErrors } from "../../actions/errorAction";
 import { bindActionCreators } from "redux";
 
@@ -34,7 +35,9 @@ class RegisterPage extends Component {
     register: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
     returnErrors: PropTypes.func.isRequired,
-    user: PropTypes.object
+    user: PropTypes.object,
+    sendEmail: PropTypes.func.isRequired,
+    isRegistered: PropTypes.bool
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -93,7 +96,10 @@ class RegisterPage extends Component {
 
   render() {
     const isAuthenticated = this.props.isAuthenticated;
+    const isRegistered = this.props.isRegistered;
     console.log("login render", isAuthenticated);
+    console.log("login render registered", isRegistered);
+
     const dashboard = <Redirect exact to="/Dashboard" />;
     if (isAuthenticated) {
       return dashboard;
@@ -156,12 +162,15 @@ class RegisterPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  isRegistered: state.auth.isRegistered,
   error: state.error,
-  user: state.auth.user
+  user: state.auth.user,
+  emailSent: state.auth.mail_sent
 });
 
 export default connect(mapStateToProps, {
   register,
   returnErrors,
-  clearErrors
+  clearErrors,
+  sendEmail
 })(RegisterPage);
