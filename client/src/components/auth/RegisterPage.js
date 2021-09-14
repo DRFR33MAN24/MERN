@@ -15,7 +15,7 @@ import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../../actions/authAction";
-import { sendEmail } from "../../actions/sendEmail";
+import { sendEmail } from "../../actions/sendEmailAction";
 import { clearErrors, returnErrors } from "../../actions/errorAction";
 import { bindActionCreators } from "redux";
 

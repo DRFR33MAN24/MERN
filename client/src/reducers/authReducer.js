@@ -39,7 +39,7 @@ export default function(state = initialState, action) {
     case EMAIL_SENT:
       return {
         ...state,
-        mail_sent: true
+        mail_sent: action.payload
       };
 
     case UPDATE_FAIL:
