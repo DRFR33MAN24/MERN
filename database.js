@@ -1,6 +1,11 @@
 const { Sequelize } = require("sequelize");
 
-module.exports = new Sequelize("sql5435448", "sql5435448", "BssywLnrj7", {
-  host: "sql5.freemysqlhosting.net",
-  dialect: "mysql"
-});
+module.exports = new Sequelize(
+  "coinguru_db",
+  "coinguru_admin",
+  "CoinGuru-123",
+  {
+    host: "sv99.ifastnet.com",
+    dialect: "mysql"
+  }
+);
