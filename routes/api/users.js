@@ -54,7 +54,8 @@ router.post("/", (req, res) => {
                 user: {
                   id: user.id,
                   name: user.name,
-                  email: user.email
+                  email: user.email,
+                  active: user.active
                 }
               });
             }
@@ -110,7 +111,8 @@ router.post("/update", (req, res) => {
                   user: {
                     id: user.id,
                     name: user.name,
-                    email: user.email
+                    email: user.email,
+                    active: user.active
                   }
                 });
               }

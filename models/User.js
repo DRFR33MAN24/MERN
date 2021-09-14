@@ -38,7 +38,7 @@ const User = db.define(
       type: DataTypes.BIGINT,
       defaultValue: 0
     },
-    waller: {
+    wallet: {
       type: DataTypes.STRING,
       allowNull: false
     },
