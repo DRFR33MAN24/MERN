@@ -112,6 +112,9 @@ class RegisterPage extends Component {
     return (
       <Container className="mx-auto justify-content-center0">
         <Card className="p-2">
+          {this.props.emailSent ? (
+            <Alert color="success">{this.state.msg}</Alert>
+          ) : null}
           {this.state.msg ? (
             <Alert color="danger">{this.state.msg}</Alert>
           ) : null}
