@@ -4,9 +4,13 @@ const Postback = db.define(
   "Postback",
   {
     // Model attributes are defined here
-    subid: {
+    id: {
       type: DataTypes.BIGINT,
+      autoIncrement: true,
       primaryKey: true
+    },
+    subid: {
+      type: DataTypes.BIGINT
     },
     payout: {
       type: DataTypes.BIGINT
