@@ -94,13 +94,15 @@ class AccountPage extends Component {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      id: user.id
+      id: user.id,
+      wallet: this.state.wallet
     };
 
     if (
       user.name != newUser.name ||
       user.email != newUser.email ||
-      user.password != newUser.password
+      user.password != newUser.password ||
+      user.wallet != newUser.wallet
     ) {
       this.props.updateDetails(newUser);
       this.setState({ formEnabled: false });

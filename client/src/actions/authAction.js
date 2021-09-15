@@ -57,7 +57,9 @@ export const register = ({ name, email, password, active }) => dispatch => {
         payload: res.data
       });
     })
-    .then(() => { dispatch(sendEmail(email)) })
+    .then(() => {
+      dispatch(sendEmail(email));
+    })
 
     .catch(err => {
       dispatch(
@@ -69,7 +71,13 @@ export const register = ({ name, email, password, active }) => dispatch => {
     });
 };
 
-export const updateDetails = ({ name, email, password, id }) => dispatch => {
+export const updateDetails = ({
+  name,
+  email,
+  password,
+  id,
+  wallet
+}) => dispatch => {
   // Headers
   console.log("updateDetails Called");
   const config = {
@@ -79,7 +87,7 @@ export const updateDetails = ({ name, email, password, id }) => dispatch => {
   };
 
   // Request body
-  const body = JSON.stringify({ name, email, password, id });
+  const body = JSON.stringify({ name, email, password, id, wallet });
   axios
     .post("/api/users/update", body, config)
     .then(res =>
@@ -87,6 +95,9 @@ export const updateDetails = ({ name, email, password, id }) => dispatch => {
         type: UPDATE_SUCCESS
       })
     )
+    .then(() => {
+      dispatch(sendEmail(email));
+    })
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, "UPDATE_FAIL")

@@ -70,12 +70,12 @@ router.post("/", (req, res) => {
 // pass the old user info
 router.post("/update", (req, res) => {
   console.log("update route called");
-  const { name, email, password, id } = req.body;
+  const { name, email, password, id, wallet } = req.body;
 
   if (!name || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
-  console.log(name, email, password);
+  console.log(name, email, password, wallet);
   User.findOne({ where: { id: `${id}` } }, { plain: true }).then(user => {
     if (user) {
       //update existing user
@@ -95,7 +95,9 @@ router.post("/update", (req, res) => {
             {
               name: `${name}`,
               email: `${email}`,
-              password: `${hash}`
+              password: `${hash}`,
+              wallet: `${wallet}`,
+              active: false
             },
             { where: { id: `${id}` } }
           ).then(user => {
