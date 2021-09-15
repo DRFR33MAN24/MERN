@@ -4,13 +4,21 @@ const router = express.Router();
 //postback Model
 const Postback = require("../../models/Postback");
 const User = require("../../models/User");
+const db = require("../../database");
 
 // @route GET api/items
 // @desc Get All Items
 // @acces Public
-router.post("/", (req, res) => {
-  const { subid, virtual_currency, payout, campaign_name, password } = req.body;
-  const setPass = cpa_123;
+router.get("/", (req, res) => {
+  const {
+    subid,
+    virtual_currency,
+    payout,
+    campaign_name,
+    password
+  } = req.query;
+  //console.log(password);
+  const setPass = "cpa_123";
   if (password != setPass) {
     res.send("Not Authorized");
     return;
@@ -27,10 +35,11 @@ router.post("/", (req, res) => {
     .catch(err => console.log(err));
   // Update user
 
-  User.update({ balance: balance + virtual_currency }, { where: { id: subid } })
-    .then(() =>
-      console.log(`user balance updated ${balance + virtual_currency}`)
-    )
+  User.update(
+    { balance: db.literal(`balance + ${payout}`) },
+    { where: { id: subid } }
+  )
+    .then(() => console.log(`user balance updated ${payout}`))
     .catch(err => console.log(err));
 
   res.send("success");
