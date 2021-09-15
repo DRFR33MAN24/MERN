@@ -21,8 +21,6 @@ import { bindActionCreators } from "redux";
 
 class RegisterPage extends Component {
   state = {
-    isAuth: false,
-    reg: false,
     name: "",
     email: "",
     password: "",
@@ -37,18 +35,15 @@ class RegisterPage extends Component {
     clearErrors: PropTypes.func.isRequired,
     returnErrors: PropTypes.func.isRequired,
     user: PropTypes.object,
-    sendEmail: PropTypes.func.isRequired,
-    isRegistered: PropTypes.bool
+    sendEmail: PropTypes.func.isRequired
+
   };
 
   componentDidUpdate(prevProps, prevState) {
     console.log("com did update");
     const { error, isAuthenticated } = this.props;
 
-    if (prevState.isAuth !== isAuthenticated) {
-      console.log("authenticated mount", isAuthenticated);
-      this.setState({ isAuth: isAuthenticated });
-    }
+
 
     if (error !== prevProps.error) {
       // Check for register error
@@ -56,8 +51,7 @@ class RegisterPage extends Component {
         this.setState({ msg: error.msg.msg });
       } else if (error.id === "REGISTER_SUCCESS") {
         console.log("register complete");
-        this.setState({ reg: true });
-        //this.setState({ msg: null });
+
       } else {
       }
 
@@ -65,13 +59,6 @@ class RegisterPage extends Component {
     }
   }
 
-  //   toggle = () => {
-  //     // Clear errors
-  //     this.props.clearErrors();
-  //     this.setState({
-  //       modal: !this.state.modal
-  //     });
-  //   };
 
   onChange = e => {
     this.setState({
@@ -98,17 +85,16 @@ class RegisterPage extends Component {
 
   render() {
     const isAuthenticated = this.props.isAuthenticated;
-    const isRegistered = this.props.isRegistered;
+
     console.log("login render", isAuthenticated);
-    console.log("login render registered", isRegistered);
+
 
     const dashboard = <Redirect exact to="/Dashboard" />;
+
     if (isAuthenticated) {
       return dashboard;
     }
-    if (isRegistered) {
-      return <h1>Check Email</h1>;
-    }
+
     return (
       <Container className="mx-auto justify-content-center0">
         <Card className="p-2">
@@ -170,7 +156,7 @@ class RegisterPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  isRegistered: state.auth.isRegistered,
+
   error: state.error,
   user: state.auth.user,
   emailSent: state.auth.mail_sent

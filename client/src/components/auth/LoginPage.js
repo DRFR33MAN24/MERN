@@ -19,7 +19,7 @@ import { clearErrors, returnErrors } from "../../actions/errorAction";
 
 class LoginPage extends Component {
   state = {
-    isAuth: false,
+
 
     email: "",
     password: "",
@@ -36,19 +36,13 @@ class LoginPage extends Component {
   };
 
   componentDidMount(prevProps) {
-    const { error, isAuthenticated } = this.props;
 
-    // if (isAuthenticated) {
-    //   console.log("authenticated mount");
-    //   this.setState({ isAuth: true });
-    // }
   }
   componentDidUpdate(prevProps, prevState) {
     const isAuthenticated = this.props.isAuthenticated;
     const error = this.props.error;
     console.log("isAuthenticated:", isAuthenticated);
-    console.log("login did update", this.state.isAuth);
-    console.log("login did update prev", prevState.isAuth);
+
     if (error !== prevProps.error) {
       // Check for register error
       if (error.id === "LOGIN_FAIL") {
@@ -60,10 +54,7 @@ class LoginPage extends Component {
       // If authenticated close modal
       // If authenicated go to dashboard
     }
-    if (prevState.isAuth !== isAuthenticated) {
-      console.log("authenticated mount", isAuthenticated);
-      this.setState({ isAuth: isAuthenticated });
-    }
+
   }
 
   onChange = e => {

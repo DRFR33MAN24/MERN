@@ -38,7 +38,7 @@ export const loadUser = () => (dispatch, getState) => {
 //Register user
 
 export const register = ({ name, email, password, active }) => dispatch => {
-  dispatch(sendEmail(email));
+  //dispatch(sendEmail(email));
   //console.log("access-able");
   // Headers
   const config = {
@@ -57,6 +57,7 @@ export const register = ({ name, email, password, active }) => dispatch => {
         payload: res.data
       });
     })
+    .then(() => { dispatch(sendEmail(email)) })
 
     .catch(err => {
       dispatch(

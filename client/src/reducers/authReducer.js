@@ -20,8 +20,7 @@ const initialState = {
   isLoading: false,
   user: null,
   updated: false,
-  mail_sent: false,
-  isRegisterd: false
+  mail_sent: false
 };
 
 export default function (state = initialState, action) {
@@ -73,7 +72,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         ...action.payload,
-        isRegisterd: true,
+
         isLoading: false
       };
 

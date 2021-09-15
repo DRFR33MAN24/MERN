@@ -21,6 +21,9 @@ router.post("/", (req, res) => {
     if (!user) {
       return res.status(400).json({ msg: "User Does not exists." });
     }
+    if (user.active === false) {
+      return res.status(400).json({ msg: "Please activate your account" });
+    }
 
     // Validate password
     bcryptjs.compare(password, user.password).then(isMatch => {
@@ -48,36 +51,7 @@ router.post("/", (req, res) => {
   });
 });
 
-// Check for exitsting user
-//   User.findOne({ email }).then(user => {
-//     if (!user) {
-//       return res.status(400).json({ msg: "User Does not exists." });
-//     }
 
-//     // Validate password
-//     bcryptjs.compare(password, user.password).then(isMatch => {
-//       if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
-//       jwt.sign(
-//         { id: user.id },
-//         config.get("jwtSecret"),
-//         {
-//           expiresIn: 3600
-//         },
-//         (err, token) => {
-//           if (err) throw err;
-//           res.json({
-//             token,
-//             user: {
-//               id: user.id,
-//               name: user.name,
-//               email: user.email
-//             }
-//           });
-//         }
-//       );
-//     });
-//   });
-// });
 
 router.get("/user", auth, (req, res) => {
   User.findAll({
