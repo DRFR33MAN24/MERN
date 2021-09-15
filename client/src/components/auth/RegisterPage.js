@@ -36,14 +36,11 @@ class RegisterPage extends Component {
     returnErrors: PropTypes.func.isRequired,
     user: PropTypes.object,
     sendEmail: PropTypes.func.isRequired
-
   };
 
   componentDidUpdate(prevProps, prevState) {
     console.log("com did update");
     const { error, isAuthenticated } = this.props;
-
-
 
     if (error !== prevProps.error) {
       // Check for register error
@@ -51,14 +48,12 @@ class RegisterPage extends Component {
         this.setState({ msg: error.msg.msg });
       } else if (error.id === "REGISTER_SUCCESS") {
         console.log("register complete");
-
       } else {
       }
 
       //this.props.clearErrors();
     }
   }
-
 
   onChange = e => {
     this.setState({
@@ -88,7 +83,6 @@ class RegisterPage extends Component {
 
     console.log("login render", isAuthenticated);
 
-
     const dashboard = <Redirect exact to="/Dashboard" />;
 
     if (isAuthenticated) {
@@ -97,9 +91,9 @@ class RegisterPage extends Component {
 
     return (
       <Container className="mx-auto justify-content-center0">
-        <Card className="p-2">
+        <Card className="shadow p-2">
           {this.props.emailSent ? (
-            <Alert color="success">{this.state.msg}</Alert>
+            <Alert color="success">{"Email sent"}</Alert>
           ) : null}
           {this.state.msg ? (
             <Alert color="danger">{this.state.msg}</Alert>

@@ -19,8 +19,6 @@ import { clearErrors, returnErrors } from "../../actions/errorAction";
 
 class LoginPage extends Component {
   state = {
-
-
     email: "",
     password: "",
     msg: ""
@@ -35,9 +33,7 @@ class LoginPage extends Component {
     user: PropTypes.object
   };
 
-  componentDidMount(prevProps) {
-
-  }
+  componentDidMount(prevProps) {}
   componentDidUpdate(prevProps, prevState) {
     const isAuthenticated = this.props.isAuthenticated;
     const error = this.props.error;
@@ -54,7 +50,6 @@ class LoginPage extends Component {
       // If authenticated close modal
       // If authenicated go to dashboard
     }
-
   }
 
   onChange = e => {
@@ -87,7 +82,7 @@ class LoginPage extends Component {
 
     return (
       <Container className=" mx-auto justify-content-center">
-        <Card className="p-2">
+        <Card className="shadow p-2">
           {this.state.msg ? (
             <Alert color="danger">{this.state.msg}</Alert>
           ) : null}
@@ -140,4 +135,6 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, { login, returnErrors, clearErrors })(LoginPage);
+export default connect(mapStateToProps, { login, returnErrors, clearErrors })(
+  LoginPage
+);

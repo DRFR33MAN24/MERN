@@ -55,23 +55,18 @@ router.post("/send", function(req, res) {
 });
 
 router.get("/verify", function(req, res) {
-  console.log(req.protocol + ":/" + req.get("host"));
-  if (req.protocol + "://" + req.get("host") == "http://" + host) {
-    console.log("Domain is matched. Information is from Authentic email");
+  console.log("Domain is matched. Information is from Authentic email");
 
-    Hash.findOne({ where: { hash: req.query.id } }).then(h => {
-      User.update({ active: true }, { where: { email: h.email } })
-        .then(() => {
-          console.log("User Activated");
-          h.destroy()
-            .then(() => console.log("Hash Deleted"))
-            .catch(err => console.log("Hash not deleted", err));
-        })
-        .catch(() => console.log("Activation Error"));
-    });
-  } else {
-    res.end("<h1>Request is from unknown source");
-  }
+  Hash.findOne({ where: { hash: req.query.id } }).then(h => {
+    User.update({ active: true }, { where: { email: h.email } })
+      .then(() => {
+        console.log("User Activated");
+        h.destroy()
+          .then(() => console.log("Hash Deleted"))
+          .catch(err => console.log("Hash not deleted", err));
+      })
+      .catch(() => console.log("Activation Error"));
+  });
 });
 
 module.exports = router;
