@@ -23,7 +23,7 @@ router.post("/send", function(req, res) {
   console.log("sending Email");
   rand = Math.floor(Math.random() * 100 + 54);
   host = req.get("host");
-  link = "http://" + host + "/verify?id=" + rand;
+  link = "http://" + host + "/api/email" + "/verify?id=" + rand;
   mailOptions = {
     to: req.body.email,
     subject: "Please confirm your Email account",
