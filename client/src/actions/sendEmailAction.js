@@ -3,7 +3,7 @@ import { tokenConfig } from "./authAction";
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 
-export const sendEmail = email => (dispatch, getState) => {
+export const sendEmail = email => dispatch => {
   console.log("sendEmail enter");
   // Headers
   const config = {
@@ -13,9 +13,10 @@ export const sendEmail = email => (dispatch, getState) => {
   };
 
   // Request body
-  const body = JSON.stringify(email);
+  const body = JSON.stringify({ email });
+  console.log(body);
   axios
-    .get("api/email/send", body, config)
+    .post("api/email/send", body, config)
     .then(res => {
       console.log("send email get.then");
       // const offers = {}
@@ -25,9 +26,10 @@ export const sendEmail = email => (dispatch, getState) => {
         payload: res.data.sent
       });
     })
-    .catch(err =>
+    .catch(err => {
+      console.log("SentFail", err);
       dispatch(
         returnErrors(err.response.data, err.response.status, "SENT_FAIL")
-      )
-    );
+      );
+    });
 };

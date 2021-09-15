@@ -19,7 +19,7 @@ var transporter = nodemailer.createTransport(
   })
 );
 
-router.get("/send", function(req, res) {
+router.post("/send", function(req, res) {
   console.log("sending Email");
   rand = Math.floor(Math.random() * 100 + 54);
   host = req.get("host");
