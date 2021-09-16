@@ -3,7 +3,7 @@ import { tokenConfig } from "./authAction";
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 
-export const getOffers = ({ subid, country, device }) => dispatch => {
+export const getOffers = (subid, country, device) => dispatch => {
   dispatch(setOffersLoading());
   console.log(country, device);
   const config = {
