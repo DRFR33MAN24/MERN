@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/auth");
-const axios = require('axios')
+const axios = require("axios");
 //Item Model
 const Offer = require("../../models/Offer");
 const OfferProvider = require("../../models/OfferProvider");
@@ -12,9 +12,7 @@ const OfferProvider = require("../../models/OfferProvider");
 
 //cpalead provider
 const url =
-  "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323&show=4"
-  ;
-
+  "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323&show=4";
 router.post("/", (req, res) => {
   const { subid, country, device } = req.body;
 
@@ -25,7 +23,8 @@ router.post("/", (req, res) => {
     const diffMins = Math.round(
       (((curr_date - last_date) % 86400000) % 3600000) / 60000
     ); // minutes
-    console.log(curr_date, last_date);
+    console.log(curr_date, last_date, diffMins);
+
     if (diffMins > 10) {
       axios
         .get(url)
@@ -56,13 +55,20 @@ router.post("/", (req, res) => {
           );
 
           Offer.bulkCreate(offer_arr)
-            .then(() => console.log("offers updated successfully"))
+            .then(() => {
+              console.log("offers updated successfully");
+              OfferProvider.update(
+                { lastUpdate: curr_date },
+                { where: { name: "cpalead" } }
+              );
+            })
             .catch(err => console.log("error updating offers", err));
         })
         .catch(err => console.log(err));
     }
   });
 
+  console.log(country, device);
   Offer.findAll({
     where: { country: country, device: device }
   }).then(offer => res.json(offer));
