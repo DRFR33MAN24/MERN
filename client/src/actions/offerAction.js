@@ -3,27 +3,34 @@ import { tokenConfig } from "./authAction";
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 
-// export const getOffers = () => (dispatch, getState) => {
-//   dispatch(setOffersLoading());
-//   axios
-//     .get("/api/offers", tokenConfig(getState))
-//     .then(res => {
+export const getOffers = ({ subid, country, offer_type, device }) => (dispatch) => {
+  dispatch(setOffersLoading());
 
-//       console.log(res.data);
-//       dispatch({
-//         type: GET_OFFERS,
-//         payload: res.data
-//       })
-//     }
-//     )
-//     .catch(err =>
-//       dispatch(returnErrors(err.response.data, err.response.status))
-//     );
-// };
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  const body = JSON.stringify({ subid, country, offer_type, device });
+  axios
+    .post("/api/offers", body, config)
+    .then(res => {
 
-const url = new URL(
-  "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323"
-);
+      console.log(res.data);
+      dispatch({
+        type: GET_OFFERS,
+        payload: res.data
+      })
+    }
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+// const url = new URL(
+//   "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323"
+// );
 // const config = {
 //   headers: {
 //     "Access-Control-Allow-Origin": "*",
@@ -31,32 +38,32 @@ const url = new URL(
 //   }
 // };
 
-export const getOffers = (subid, number, country, offerType, device) => (
-  dispatch,
-  getState
-) => {
-  dispatch(setOffersLoading());
+// export const getOffers = (subid, number, country, offerType, device) => (
+//   dispatch,
+//   getState
+// ) => {
+//   dispatch(setOffersLoading());
 
-  url.searchParams.set("subid", subid);
-  url.searchParams.set("show", number);
-  url.searchParams.set("country", country);
-  url.searchParams.set("offer_type", offerType);
-  url.searchParams.set("device", device);
+//   url.searchParams.set("subid", subid);
+//   url.searchParams.set("show", number);
+//   url.searchParams.set("country", country);
+//   url.searchParams.set("offer_type", offerType);
+//   url.searchParams.set("device", device);
 
-  axios
-    .get(url)
-    .then(res => {
-      // const offers = {}
-      // console.log(res.data.offers);
-      dispatch({
-        type: GET_OFFERS,
-        payload: res.data.offers
-      });
-    })
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
-};
+//   axios
+//     .get(url)
+//     .then(res => {
+//       // const offers = {}
+//       // console.log(res.data.offers);
+//       dispatch({
+//         type: GET_OFFERS,
+//         payload: res.data.offers
+//       });
+//     })
+//     .catch(err =>
+//       dispatch(returnErrors(err.response.data, err.response.status))
+//     );
+// };
 export const setOffersLoading = () => {
   return {
     type: OFFERS_LOADING
