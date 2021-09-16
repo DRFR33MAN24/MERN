@@ -3,7 +3,7 @@ import { tokenConfig } from "./authAction";
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 
-export const getOffers = ({ subid, country, offer_type, device }) => (dispatch) => {
+export const getOffers = ({ subid, country, device }) => (dispatch) => {
   dispatch(setOffersLoading());
 
   const config = {
@@ -11,7 +11,7 @@ export const getOffers = ({ subid, country, offer_type, device }) => (dispatch) 
       "Content-Type": "application/json"
     }
   };
-  const body = JSON.stringify({ subid, country, offer_type, device });
+  const body = JSON.stringify({ subid, country, device });
   axios
     .post("/api/offers", body, config)
     .then(res => {

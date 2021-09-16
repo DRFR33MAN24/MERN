@@ -16,7 +16,7 @@ const url =
   ;
 
 router.post("/", (req, res) => {
-  const { subid, offer_type, country, device } = req.body;
+  const { subid, country, device } = req.body;
 
   // #1 Update offers database by calling offer providers if necessary
   OfferProvider.findOne({ where: { name: "cpalead" } }).then(p => {
