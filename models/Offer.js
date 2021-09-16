@@ -6,7 +6,8 @@ const Offer = db.define(
     // Model attributes are defined here
     id: {
       type: DataTypes.BIGINT,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     title: {
       type: DataTypes.STRING

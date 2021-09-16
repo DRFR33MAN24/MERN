@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/auth");
+const axios = require('axios')
 //Item Model
 const Offer = require("../../models/Offer");
 const OfferProvider = require("../../models/OfferProvider");
@@ -10,21 +11,21 @@ const OfferProvider = require("../../models/OfferProvider");
 // @acces Public
 
 //cpalead provider
-const url = new URL(
-  "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323"
-);
+const url =
+  "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323&show=4"
+  ;
 
-router.post("/", auth, (req, res) => {
+router.post("/", (req, res) => {
   const { subid, offer_type, country, device } = req.body;
 
   // #1 Update offers database by calling offer providers if necessary
   OfferProvider.findOne({ where: { name: "cpalead" } }).then(p => {
-    const curr_date = +Date();
-    const last_date = p.lastUpdate;
+    const curr_date = new Date();
+    const last_date = new Date(p.lastUpdate);
     const diffMins = Math.round(
       (((curr_date - last_date) % 86400000) % 3600000) / 60000
     ); // minutes
-    console.log(diffMins);
+    console.log(curr_date, last_date);
     if (diffMins > 10) {
       axios
         .get(url)
@@ -63,7 +64,7 @@ router.post("/", auth, (req, res) => {
   });
 
   Offer.findAll({
-    where: { offer_type: offer_type, country: country, device: device }
+    where: { country: country, device: device }
   }).then(offer => res.json(offer));
 });
 
