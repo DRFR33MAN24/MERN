@@ -3,9 +3,9 @@ import { tokenConfig } from "./authAction";
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 
-export const getOffers = ({ subid, country, device }) => (dispatch) => {
+export const getOffers = ({ subid, country, device }) => dispatch => {
   dispatch(setOffersLoading());
-
+  console.log(country, device);
   const config = {
     headers: {
       "Content-Type": "application/json"
@@ -15,14 +15,12 @@ export const getOffers = ({ subid, country, device }) => (dispatch) => {
   axios
     .post("/api/offers", body, config)
     .then(res => {
-
       console.log(res.data);
       dispatch({
         type: GET_OFFERS,
         payload: res.data
-      })
-    }
-    )
+      });
+    })
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );

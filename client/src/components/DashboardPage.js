@@ -36,7 +36,7 @@ class DashboardPage extends Component {
     console.log("dashboard DidMount is Auth", this.props.isAuthenticated);
     if (this.props.isAuthenticated) {
       const { user } = this.props;
-      this.props.getOffers(user.id, "us", "ios");
+      this.props.getOffers({ subid: user.id, country: "us", device: "ios" });
     }
 
     //this.props.getOffers();

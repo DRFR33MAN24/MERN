@@ -15,7 +15,7 @@ const url =
   "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323&show=4";
 router.post("/", (req, res) => {
   const { subid, country, device } = req.body;
-
+  console.log(country, device);
   // #1 Update offers database by calling offer providers if necessary
   OfferProvider.findOne({ where: { name: "cpalead" } }).then(p => {
     const curr_date = new Date();
