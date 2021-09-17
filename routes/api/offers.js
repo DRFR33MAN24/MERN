@@ -70,10 +70,12 @@ router.post("/", (req, res) => {
 
   console.log(country, device);
   Offer.findAll({
-    where: { country: country, device: device }
-  }, { raw: true }).then(offer => {
+    where: { country: country, device: device },
+    raw: true,
+    nest: true
+  }).then(offer => {
     console.log(offer);
-    res.json(offer)
+    res.json(offer);
   });
 });
 

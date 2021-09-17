@@ -18,7 +18,7 @@ export const getOffers = (subid, country, device) => dispatch => {
       console.log(res.data.offers);
       dispatch({
         type: GET_OFFERS,
-        payload: res.data.offers
+        payload: res.data
       });
     })
     .catch(err =>
