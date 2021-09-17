@@ -28,6 +28,7 @@ import LoginPage from "./auth/LoginPage";
 import RegisterPage from "./auth/RegisterPage";
 import DashboardPage from "./DashboardPage";
 import AccountPage from "./AccountPage";
+import CashoutPage from "./CashoutPage";
 class AppNavbar extends Component {
   state = {
     isOpen: false
@@ -85,6 +86,18 @@ class AppNavbar extends Component {
               </Link>
             </DropdownItem>
             <DropdownItem divider />
+            <DropdownItem>
+              <Link className="text-dark" exact to="/Dashboard">
+                Dashboard
+              </Link>
+            </DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem>
+              <Link className="text-dark" exact to="/Cashout">
+                Cashout
+              </Link>
+            </DropdownItem>
+            <DropdownItem divider />
             <Logout />
           </DropdownMenu>
         </UncontrolledDropdown>
@@ -133,6 +146,9 @@ class AppNavbar extends Component {
             <DashboardPage />
           </Route>
           <Route exact path="/Account">
+            <AccountPage />
+          </Route>
+          <Route exact path="/Cashout">
             <AccountPage />
           </Route>
           <Route path="/NotFound">
