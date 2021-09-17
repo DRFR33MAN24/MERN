@@ -78,9 +78,10 @@ class DashboardPage extends Component {
 
   render() {
     const { offers } = this.props.offers;
-    const { user } = this.props.user;
+    //const { user } = this.props;
+    // console.log(user.id);
     const isAuthenticated = this.props.isAuthenticated;
-    //console.log(offers);
+    console.log(isAuthenticated);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
     if (!isAuthenticated) {
@@ -96,7 +97,7 @@ class DashboardPage extends Component {
                   <Offer
                     title={title}
                     description={description}
-                    link={new URL(link).searchParams.set("subid", user.id)}
+                    link={""}
                     amount={amount}
                     img={img}
                     conversion={conversion}
