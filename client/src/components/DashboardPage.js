@@ -104,6 +104,13 @@ class DashboardPage extends Component {
     }
     return (
       <Container fluid={true} className="">
+        <Row>
+          <Container>
+            <Row className="d-flex justify-content-left">
+              <h1>Hello</h1>
+            </Row>
+          </Container>
+        </Row>
         <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-dark">
           <Nav>
             <NavItem>
