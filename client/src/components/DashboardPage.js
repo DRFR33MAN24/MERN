@@ -105,8 +105,8 @@ class DashboardPage extends Component {
     return (
       <Container fluid={true} className="">
         <Row>
-          <Label>Featured Offers:</Label>
           <Container fluid={true}>
+            <Label className="">Featured Offers:</Label>
             <Row className="d-flex justify-content-left pl-1">
               <Offer></Offer>
             </Row>
