@@ -39,7 +39,7 @@ router.post("/", (req, res) => {
               amount,
               conversion,
               country,
-              device
+              mobile_app_type
             }) => {
               offer_arr.push({
                 title: title,
@@ -49,7 +49,7 @@ router.post("/", (req, res) => {
                 amount: amount,
                 conversion: conversion,
                 country: country,
-                device: device
+                device: mobile_app_type
               });
             }
           );
@@ -71,7 +71,10 @@ router.post("/", (req, res) => {
   console.log(country, device);
   Offer.findAll({
     where: { country: country, device: device }
-  }).then(offer => res.json(offer));
+  }, { raw: true }).then(offer => {
+    console.log(offer);
+    res.json(offer)
+  });
 });
 
 module.exports = router;

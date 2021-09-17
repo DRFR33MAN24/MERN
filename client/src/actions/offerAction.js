@@ -15,10 +15,10 @@ export const getOffers = (subid, country, device) => dispatch => {
   axios
     .post("/api/offers", body, config)
     .then(res => {
-      console.log(res.data);
+      console.log(res.data.offers);
       dispatch({
         type: GET_OFFERS,
-        payload: res.data
+        payload: res.data.offers
       });
     })
     .catch(err =>

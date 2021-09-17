@@ -89,7 +89,7 @@ class DashboardPage extends Component {
       <Container fluid={true} className="">
         <Row className="d-flex justify-content-around">
           {offers.map(
-            ({ title, description, link, previews, amount, conversion }) => (
+            ({ title, description, link, img, amount, conversion }) => (
               <div className="">
                 {isAuthenticated ? (
                   <Offer
@@ -97,7 +97,7 @@ class DashboardPage extends Component {
                     description={description}
                     link={link}
                     amount={amount}
-                    img={previews[0].url}
+                    img={img}
                     conversion={conversion}
                   />
                 ) : null}
