@@ -5,7 +5,7 @@ import { returnErrors } from "./errorAction";
 
 export const getOffers = (subid, country, device) => dispatch => {
   dispatch(setOffersLoading());
-  console.log(country, device);
+  //console.log(country, device, subid);
   const config = {
     headers: {
       "Content-Type": "application/json"
@@ -15,7 +15,7 @@ export const getOffers = (subid, country, device) => dispatch => {
   axios
     .post("/api/offers", body, config)
     .then(res => {
-      console.log(res.data.offers);
+      //console.log(res.data.offers);
       dispatch({
         type: GET_OFFERS,
         payload: res.data

@@ -44,6 +44,7 @@ class DashboardPage extends Component {
 
   componentWillMount() {
     const { isAuthenticated } = this.props;
+
     console.log("Dashboard did mount", isAuthenticated);
     this.setState({ isAuth: isAuthenticated });
   }
@@ -65,7 +66,12 @@ class DashboardPage extends Component {
   //       modal: !this.state.modal
   //     });
   //   };
-
+  getlink = (l, id) => {
+    const u = new URL(l);
+    console.log(u, l)
+    u.searchParams.set('subid', id);
+    return l;
+  }
   onChange = e => {
     // this.setState({
     //   [e.target.name]: e.target.value
@@ -78,6 +84,7 @@ class DashboardPage extends Component {
 
   render() {
     const { offers } = this.props.offers;
+    const { user } = this.props;
     //const { user } = this.props;
     // console.log(user.id);
     const isAuthenticated = this.props.isAuthenticated;
@@ -86,6 +93,9 @@ class DashboardPage extends Component {
     const login = <Redirect exact to="/Login" />;
     if (!isAuthenticated) {
       return login;
+    }
+    if (user === null) {
+      return null;
     }
     return (
       <Container fluid={true} className="">
@@ -97,7 +107,7 @@ class DashboardPage extends Component {
                   <Offer
                     title={title}
                     description={description}
-                    link={""}
+                    link={this.getlink(link, user.id)}
                     amount={amount}
                     img={img}
                     conversion={conversion}
