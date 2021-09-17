@@ -141,8 +141,8 @@ class DashboardPage extends Component {
           )}
         </Row>
 
-        <Row className="d-flex justify-content-center">
-          <Pagination aria-label="Page navigation example">
+        <Row className="d-flex justify-content-center bg-dark mb-3 mt-3">
+          <Pagination className="mt-3" aria-label="Page navigation example">
             <PaginationItem>
               <PaginationLink first href="#" />
             </PaginationItem>
