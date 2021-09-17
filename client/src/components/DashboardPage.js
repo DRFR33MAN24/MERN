@@ -13,7 +13,10 @@ import {
   Col,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+  Pagination,
+  PaginationItem,
+  PaginationLink
 } from "reactstrap";
 import Offer from "./Offer";
 import { Redirect } from "react-router-dom";
@@ -136,6 +139,38 @@ class DashboardPage extends Component {
               </div>
             )
           )}
+        </Row>
+
+        <Row className="d-flex justify-content-center">
+          <Pagination aria-label="Page navigation example">
+            <PaginationItem>
+              <PaginationLink first href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink previous href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">1</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">2</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">3</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">4</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">5</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink next href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink last href="#" />
+            </PaginationItem>
+          </Pagination>
         </Row>
       </Container>
     );
