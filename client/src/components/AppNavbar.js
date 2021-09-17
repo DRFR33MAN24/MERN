@@ -29,6 +29,7 @@ import RegisterPage from "./auth/RegisterPage";
 import DashboardPage from "./DashboardPage";
 import AccountPage from "./AccountPage";
 import CashoutPage from "./CashoutPage";
+import { toDollars } from "../../util";
 class AppNavbar extends Component {
   state = {
     isOpen: false
@@ -53,7 +54,7 @@ class AppNavbar extends Component {
     const userInfo = (
       <Fragment>
         <span className="navbar-text text-success ">
-          <strong>{user ? user.balance + " $" : ""}</strong>
+          <strong>{user ? toDollars(user.balance) : ""}</strong>
         </span>
       </Fragment>
     );
