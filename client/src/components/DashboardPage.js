@@ -25,6 +25,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../actions/authAction";
 import { Timestamp } from "bson";
+import { toDollars } from "../../util";
 
 class DashboardPage extends Component {
   state = {
@@ -139,7 +140,7 @@ class DashboardPage extends Component {
                     title={title}
                     description={description}
                     link={this.getlink(link, user.id)}
-                    amount={amount}
+                    amount={toDollars(amount)}
                     img={img}
                     conversion={conversion}
                   />
