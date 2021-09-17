@@ -78,6 +78,7 @@ class DashboardPage extends Component {
 
   render() {
     const { offers } = this.props.offers;
+    const { user } = this.props.user;
     const isAuthenticated = this.props.isAuthenticated;
     //console.log(offers);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
@@ -95,7 +96,7 @@ class DashboardPage extends Component {
                   <Offer
                     title={title}
                     description={description}
-                    link={link}
+                    link={new URL(link).searchParams.set("subid", user.id)}
                     amount={amount}
                     img={img}
                     conversion={conversion}

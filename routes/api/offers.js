@@ -74,6 +74,7 @@ router.post("/", (req, res) => {
     raw: true,
     nest: true
   }).then(offer => {
+    //loop on all offers and change subid
     console.log(offer);
     res.json(offer);
   });
