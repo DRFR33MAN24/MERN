@@ -10,7 +10,10 @@ import {
   Card,
   Alert,
   Row,
-  Col
+  Col,
+  Nav,
+  NavItem,
+  NavLink
 } from "reactstrap";
 import Offer from "./Offer";
 import { Redirect } from "react-router-dom";
@@ -68,10 +71,9 @@ class DashboardPage extends Component {
   //   };
   getlink = (l, id) => {
     const u = new URL(l);
-    console.log(u, l)
-    u.searchParams.set('subid', id);
-    return l;
-  }
+    u.searchParams.set("subid", id);
+    return u;
+  };
   onChange = e => {
     // this.setState({
     //   [e.target.name]: e.target.value
@@ -99,6 +101,24 @@ class DashboardPage extends Component {
     }
     return (
       <Container fluid={true} className="">
+        <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-dark">
+          <Nav>
+            <NavItem>
+              <NavLink href="#">Link</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#">Link</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="#">Another Link</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink disabled href="#">
+                Disabled Link
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Row>
         <Row className="d-flex justify-content-around">
           {offers.map(
             ({ title, description, link, img, amount, conversion }) => (
