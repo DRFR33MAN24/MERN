@@ -107,8 +107,8 @@ class DashboardPage extends Component {
         <Row>
           <Label>Featured Offers:</Label>
           <Container fluid={true}>
-            <Row className="d-flex justify-content-left">
-              <h1>Hello</h1>
+            <Row className="d-flex justify-content-left pl-1">
+              <Offer></Offer>
             </Row>
           </Container>
         </Row>
