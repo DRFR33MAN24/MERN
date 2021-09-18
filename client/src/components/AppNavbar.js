@@ -37,7 +37,8 @@ class AppNavbar extends Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
-    user: PropTypes.object
+    user: PropTypes.object,
+    loadUser: PropTypes.func
   };
 
   toggle = () => {
@@ -46,6 +47,10 @@ class AppNavbar extends Component {
     });
   };
 
+  updateBalance = () => {
+    this.props.loadUser();
+  }
+
   render() {
     const user = this.props.user;
     const isAuthenticated = this.props.isAuthenticated;
@@ -53,7 +58,7 @@ class AppNavbar extends Component {
 
     const userInfo = (
       <Fragment>
-        <span className="navbar-text text-success ">
+        <span className="navbar-text text-success " onClick={this.updateBalance}>
           <strong>{user ? toDollars(user.balance) : ""}</strong>
         </span>
       </Fragment>
@@ -166,4 +171,4 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, null)(AppNavbar);
+export default connect(mapStateToProps, { loadUser })(AppNavbar);
