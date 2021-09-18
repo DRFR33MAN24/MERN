@@ -19,7 +19,16 @@ const Postback = db.define(
     campaign_name: {
       type: DataTypes.STRING
       // allowNull defaults to true
+    },
+    status: {
+      type: DataTypes.STRING
+      // allowNull defaults to true
+    },
+    offer_name: {
+      type: DataTypes.STRING
+      // allowNull defaults to true
     }
+
   },
   {
     // Other model options go here
