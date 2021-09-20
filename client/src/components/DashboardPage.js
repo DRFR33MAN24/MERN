@@ -189,13 +189,13 @@ class DashboardPage extends Component {
         <Row className="d-flex justify-content-center bg-dark mb-3 mt-3">
           <Pagination className="mt-3" aria-label="Page navigation example">
             <PaginationItem>
-              <PaginationLink first href="#" onClick={this.next_page}>
-                Next
+              <PaginationLink previous href="#" onClick={this.previous_page}>
+                Back
               </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink previous href="#" onClick={this.previous_page}>
-                Back
+              <PaginationLink first href="#" onClick={this.next_page}>
+                Next
               </PaginationLink>
             </PaginationItem>
           </Pagination>

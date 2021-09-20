@@ -115,7 +115,7 @@ class AppNavbar extends Component {
     return (
       <Router>
         <div>
-          <Navbar color="dark" dark expand="xs" className="mb-5 ">
+          <Navbar color="dark" dark expand="xs" className="mb-5 fixed-top ">
             <Container>
               <Container>
                 <NavbarBrand href="/" className="mx-auto">
