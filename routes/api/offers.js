@@ -15,7 +15,7 @@ const url_cpalead =
   "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323&show=4";
 
 const url_kiwi =
-  "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/";
+  "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/?country=ALL";
 
 const CallCpalead = async () => {
   // #1 Update offers database by calling offer providers if necessary
