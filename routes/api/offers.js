@@ -139,7 +139,7 @@ router.post("/", (req, res) => {
         nest: true
       }).then(offer => {
         //loop on all offers and change subid
-        console.log(offer);
+        console.log("retrived offers", offer);
         res.json(offer);
       });
     });
