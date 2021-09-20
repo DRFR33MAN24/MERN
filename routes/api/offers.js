@@ -36,6 +36,7 @@ const CallCpalead = async () => {
     res.data.offers.map(
       ({
         title,
+        campid,
         description,
         link,
         previews,
@@ -46,6 +47,7 @@ const CallCpalead = async () => {
       }) => {
         offers_cpalead.push({
           title: title,
+          offer_id: campid,
           description: description,
           link: link,
           img: previews[0].url,
@@ -99,21 +101,13 @@ const CallKiwi = async () => {
     const res = await axios.get(url_kiwi);
     console.log("Calling kiwi API");
     res.data.offers.map(
-      ({
-        name,
-        instructions,
-        link,
-        logo,
-        amount,
-
-        countries,
-        os
-      }) => {
+      ({ name, instructions, link, logo, amount, id, countries, os }) => {
         // create an array with all the countries
         const country_arr = countries.split(",");
         country_arr.map(c => {
           offers_kiwi.push({
             title: name,
+            offer_id: id,
             description: instructions,
             link: link,
             img: logo,

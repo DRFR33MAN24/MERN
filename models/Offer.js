@@ -9,6 +9,9 @@ const Offer = db.define(
       primaryKey: true,
       autoIncrement: true
     },
+    offer_id: {
+      type: DataTypes.BIGINT
+    },
     title: {
       type: DataTypes.STRING
       // allowNull defaults to true
