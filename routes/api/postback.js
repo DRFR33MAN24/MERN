@@ -21,28 +21,9 @@ router.get('/kiwi', (req, res) => {
 
   // Importing Required Modules
   const crypto = require('crypto');
-  const buffer = require('buffer');
+  const hash = crypto.createHash('md5').update(`${sub_id}` + `${amount}` + `${kiwi_secret}`).digest();
 
-  // // Creating a private key
-  // const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
-  //   modulusLength: 2048,
-  // });
-  // // Using Hashing Algorithm
-  // const algorithm = "SHA256";
-
-  // // Converting string to buffer 
-  // const data = Buffer.from("I Love GeeksForGeeks");
-
-  // // Sign the data and returned signature in buffer 
-  // const signature = crypto.sign(algorithm, data , privateKey);
-
-  // // Verifing signature using crypto.verify() function
-  // const isVerified = crypto.verify(algorithm, data, publicKey, signature);
-
-  // // Printing the result 
-  // console.log(`Is signature verified: ${isVerified}`);
-
-  if (signature === kiwi_secret) {
+  if (signature === hash) {
 
 
 
