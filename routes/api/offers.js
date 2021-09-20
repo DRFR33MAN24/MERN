@@ -29,7 +29,7 @@ const CallCpalead = async () => {
   ); // minutes
   console.log("Time since last update cpalead", diffMins);
 
-  if (diffMins > 30) {
+  if (diffMins > 100) {
     const res = await axios.get(url_cpalead);
 
     console.log("Calling cpalead API");
@@ -97,7 +97,7 @@ const CallKiwi = async () => {
   ); // minutes
   console.log("Time since last update kiwi", diffMins);
 
-  if (diffMins > 30) {
+  if (diffMins > 100) {
     const res = await axios.get(url_kiwi);
     console.log("Calling kiwi API");
     res.data.offers.map(

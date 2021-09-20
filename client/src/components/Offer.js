@@ -34,7 +34,7 @@ export default class Offer extends Component {
             />
           </div>
         ) : null}
-        <Card>
+        <Card className="m-2">
           <CardImg top width="100%" src={this.props.img} alt="Card image cap" />
           <CardBody>
             <CardTitle tag="h5" className="truncate">

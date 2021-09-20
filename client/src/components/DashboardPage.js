@@ -167,7 +167,7 @@ class DashboardPage extends Component {
             </NavItem>
           </Nav>
         </Row>
-        <Row xs="1" sm="2" md="4" className="d-flex justify-content-around">
+        <Row xs="1" sm="2" md="4" className="d-flex justify-content-between">
           {offers
             .slice(range_min, range_max)
             .map(({ title, description, link, img, amount, conversion }) => (
