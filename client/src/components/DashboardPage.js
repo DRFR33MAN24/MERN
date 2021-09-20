@@ -98,6 +98,18 @@ class DashboardPage extends Component {
       this.setState({ offer_page: this.state.offer_page - 1 })
     }
   }
+  getInstall = () => {
+    // this.props.getOffers()
+  }
+
+  getSurvey = () => {
+    // this.props.getOffers()
+  }
+
+  getPinSubmit = () => {
+    // this.props.getOffers()
+  }
+
   onChange = e => {
     // this.setState({
     //   [e.target.name]: e.target.value
@@ -139,13 +151,13 @@ class DashboardPage extends Component {
         <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-dark">
           <Nav>
             <NavItem>
-              <NavLink href="#">Install</NavLink>
+              <NavLink href="#" onClick={this.getInstall}>Install</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Pin Submit</NavLink>
+              <NavLink href="#" onClick={this.getPinSubmit}>Pin Submit</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Survey</NavLink>
+              <NavLink href="#" onClick={this.getSurvey}>Survey</NavLink>
             </NavItem>
 
           </Nav>
