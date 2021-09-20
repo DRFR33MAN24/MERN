@@ -29,7 +29,8 @@ import { toDollars } from "../util";
 
 class DashboardPage extends Component {
   state = {
-    isAuth: false
+    isAuth: false,
+    offer_page: 1
   };
 
   static propTypes = {
@@ -83,6 +84,15 @@ class DashboardPage extends Component {
     }
     return u;
   };
+  next_page = () => {
+    this.setState({ offer_page: this.state.offer_page + 1 })
+  }
+
+  previous_page = () => {
+    if (this.state.offer_page != 0) {
+      this.setState({ offer_page: this.state.offer_page - 1 })
+    }
+  }
   onChange = e => {
     // this.setState({
     //   [e.target.name]: e.target.value
@@ -121,19 +131,15 @@ class DashboardPage extends Component {
         <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-dark">
           <Nav>
             <NavItem>
-              <NavLink href="#">Link</NavLink>
+              <NavLink href="#">Install</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Link</NavLink>
+              <NavLink href="#">Pin Submit</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Another Link</NavLink>
+              <NavLink href="#">Survey</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink disabled href="#">
-                Disabled Link
-              </NavLink>
-            </NavItem>
+
           </Nav>
         </Row>
         <Row className="d-flex justify-content-around">
@@ -158,32 +164,12 @@ class DashboardPage extends Component {
         <Row className="d-flex justify-content-center bg-dark mb-3 mt-3">
           <Pagination className="mt-3" aria-label="Page navigation example">
             <PaginationItem>
-              <PaginationLink first href="#" />
+              <PaginationLink first href="#" onClick={this.next_page} >Next</PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink previous href="#" />
+              <PaginationLink previous href="#" onClick={this.previous_page} >Back</PaginationLink>
             </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">2</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">3</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">4</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">5</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink next href="#" />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink last href="#" />
-            </PaginationItem>
+
           </Pagination>
         </Row>
       </Container>
