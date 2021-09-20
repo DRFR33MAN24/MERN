@@ -109,16 +109,20 @@ const CallKiwi = async () => {
         countries,
         os
       }) => {
-        offers_kiwi.push({
-          title: name,
-          description: instructions,
-          link: link,
-          img: logo,
-          amount: amount,
+        // create an array with all the countries
+        const country_arr = countries.split(",");
+        country_arr.map(c => {
+          offers_kiwi.push({
+            title: name,
+            description: instructions,
+            link: link,
+            img: logo,
+            amount: amount,
 
-          country: countries,
-          device: os,
-          provider: "kiwi"
+            country: c,
+            device: os,
+            provider: "kiwi"
+          });
         });
       }
     );
