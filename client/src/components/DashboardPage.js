@@ -152,7 +152,7 @@ class DashboardPage extends Component {
           <Nav>
             <NavItem>
               <NavLink href="#" onClick={this.getInstall}>
-                Install
+                <i class="bi bi-controller" size="48x"></i>
               </NavLink>
             </NavItem>
             <NavItem>
