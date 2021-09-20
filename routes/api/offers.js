@@ -17,178 +17,157 @@ const url_cpalead =
 const url_kiwi =
   "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/";
 
+const CallCpalead = async () => {
+  // #1 Update offers database by calling offer providers if necessary
+  let offers_cpalead = [];
+  const cpalead_p = await OfferProvider.findOne({ where: { name: "cpalead" } });
+  console.log("Finding cpalead Finished");
+  const curr_date = new Date();
+  const last_date = new Date(cpalead_p.lastUpdate);
+  const diffMins = Math.round(
+    (((curr_date - last_date) % 86400000) % 3600000) / 60000
+  ); // minutes
+  console.log("Time since last update cpalead", diffMins);
 
+  if (diffMins > 10) {
+    const res = await axios.get(url_cpalead);
 
+    console.log("Calling cpalead API");
+    res.data.offers.map(
+      ({
+        title,
+        description,
+        link,
+        previews,
+        amount,
+        conversion,
+        country,
+        mobile_app_type
+      }) => {
+        offers_cpalead.push({
+          title: title,
+          description: description,
+          link: link,
+          img: previews[0].url,
+          amount: amount,
+          conversion: conversion,
+          country: country,
+          device: mobile_app_type,
+          provider: "cpalead"
+        });
+      }
+    );
+
+    try {
+      numDelOffers_cpalead = await Offer.destroy({
+        where: { provider: "cpalead" }
+      });
+      console.log("number of deleted offers cpalead", numDelOffers_cpalead);
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      await Offer.bulkCreate(offers_cpalead);
+      console.log("offers created successfully cpalead");
+    } catch (error) {}
+
+    try {
+      await OfferProvider.update(
+        { lastUpdate: curr_date },
+        { where: { name: "cpalead" } }
+      );
+      console.log("offers updated successfully cpalead");
+    } catch (error) {
+      console.log("error updating offers", error);
+    }
+  }
+};
+
+const CallKiwi = async () => {
+  let offers_kiwi = [];
+  const kiwi_p = await OfferProvider.findOne({ where: { name: "kiwi" } });
+  console.log("Finding kiwi Finished");
+  const curr_date = new Date();
+  const last_date = new Date(kiwi_p.lastUpdate);
+  const diffMins = Math.round(
+    (((curr_date - last_date) % 86400000) % 3600000) / 60000
+  ); // minutes
+  console.log("Time since last update kiwi", diffMins);
+
+  if (diffMins > 10) {
+    const res = await axios.get(url_kiwi);
+    console.log("Calling kiwi API");
+    res.data.offers.map(
+      ({
+        name,
+        instructions,
+        link,
+        logo,
+        amount,
+
+        countries,
+        os
+      }) => {
+        offers_kiwi.push({
+          title: name,
+          description: instructions,
+          link: link,
+          img: logo,
+          amount: amount,
+
+          country: countries,
+          device: os,
+          provider: "kiwi"
+        });
+      }
+    );
+
+    try {
+      numDelOffers_kiwi = await Offer.destroy({
+        where: { provider: "kiwi" }
+      });
+      console.log("number of kiwi deleted offers kiwi", numDelOffers_kiwi);
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      await Offer.bulkCreate(offers_kiwi);
+      console.log("offers created successfully kiwi");
+    } catch (error) {}
+
+    try {
+      await OfferProvider.update(
+        { lastUpdate: curr_date },
+        { where: { name: "kiwi" } }
+      );
+      console.log("offers updated successfully kiwi");
+    } catch (error) {
+      console.log("error updating offers", error);
+    }
+  }
+};
 
 router.post("/", (req, res) => {
-  console.log('Get Offer Route Called');
-  let offers_kiwi = [];
-  let offers_cpalead = [];
+  console.log("Get Offer Route Called");
+  const { subid, country, device } = req.body;
+  console.log(country, device);
 
-  (async function () {
+  (async function() {
+    await Promise.all([CallCpalead(), CallKiwi()]);
 
-    (async function () {
-
-      const { subid, country, device } = req.body;
+    try {
       console.log(country, device);
-      // #1 Update offers database by calling offer providers if necessary
-      const cpalead_p = await OfferProvider.findOne({ where: { name: "cpalead" } })
-      console.log("Finding cpalead Finished");
-      const curr_date = new Date();
-      const last_date = new Date(cpalead_p.lastUpdate);
-      const diffMins = Math.round(
-        (((curr_date - last_date) % 86400000) % 3600000) / 60000
-      ); // minutes
-      console.log(curr_date, last_date, diffMins);
+      const offer = await Offer.findAll({
+        where: { country: country, device: device },
+        raw: true,
+        nest: true
+      });
 
-      if (diffMins > 10) {
-
-        const res = await axios
-          .get(url_cpalead);
-
-        console.log("Calling cpalead API");
-        res.data.offers.map(
-          ({
-            title,
-            description,
-            link,
-            previews,
-            amount,
-            conversion,
-            country,
-            mobile_app_type
-          }) => {
-            offers_cpalead.push({
-              title: title,
-              description: description,
-              link: link,
-              img: previews[0].url,
-              amount: amount,
-              conversion: conversion,
-              country: country,
-              device: mobile_app_type,
-              provider: "cpalead"
-            });
-          }
-        );
-
-
-        try {
-          numDelOffers_cpalead = await Offer.destroy({ where: { provider: "cpalead" } })
-          console.log("number of deleted offers cpalead", numDelOffers_cpalead);
-        } catch (error) {
-          console.log(error)
-        }
-
-        try {
-          await Offer.bulkCreate(offers_cpalead);
-          console.log("offers created successfully cpalead");
-        } catch (error) {
-
-        }
-
-        try {
-          await OfferProvider.update(
-            { lastUpdate: curr_date },
-            { where: { name: "cpalead" } }
-          );
-          console.log("offers updated successfully cpalead");
-        } catch (error) {
-          console.log("error updating offers", error)
-        }
-      }
-    })();
-
-
-
-
-    (async function () {
-      const kiwi_p = await OfferProvider.findOne({ where: { name: "kiwi" } });
-      console.log("Finding kiwi Finished");
-      const curr_date = new Date();
-      const last_date = new Date(kiwi_p.lastUpdate);
-      const diffMins = Math.round(
-        (((curr_date - last_date) % 86400000) % 3600000) / 60000
-      ); // minutes
-      console.log(curr_date, last_date, diffMins);
-
-      if (diffMins > 10) {
-        axios
-          .get(url_kiwi)
-          .then(res => {
-            console.log("Calling kiwi API")
-            res.data.offers.map(
-              ({
-                name,
-                instructions,
-                link,
-                logo,
-                amount,
-
-                countries,
-                os
-              }) => {
-                offers_kiwi.push({
-                  title: name,
-                  description: instructions,
-                  link: link,
-                  img: logo,
-                  amount: amount,
-
-                  country: countries,
-                  device: os,
-                  provider: "kiwi"
-                });
-              }
-            );
-          });
-
-        try {
-          numDelOffers_kiwi = await Offer.destroy({ where: { provider: "kiwi" } })
-          console.log("number of kiwi deleted offers kiwi", numDelOffers_kiwi)
-        } catch (error) {
-          console.log(error)
-        }
-
-        try {
-          await Offer.bulkCreate(offers_kiwi)
-          console.log("offers created successfully kiwi");
-        } catch (error) {
-
-        }
-
-        try {
-          await OfferProvider.update(
-            { lastUpdate: curr_date },
-            { where: { name: "kiwi" } }
-          );
-          console.log("offers updated successfully kiwi");
-        } catch (error) {
-          console.log("error updating offers", error)
-        }
-
-      }
-
-
-
-
-
-      try {
-        console.log(country, device);
-        const offer = await Offer.findAll({
-          where: { country: country, device: device },
-          raw: true,
-          nest: true
-        });
-
-
-        console.log("retrived offers", offer);
-        res.json(offer);
-      } catch (error) {
-
-      }
-    })();
-
+      console.log("retrived offers", offer);
+      res.json(offer);
+    } catch (error) {}
   })();
 });
 module.exports = router;
