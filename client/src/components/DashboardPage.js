@@ -30,7 +30,8 @@ import { toDollars } from "../util";
 class DashboardPage extends Component {
   state = {
     isAuth: false,
-    offer_page: 1
+    offer_page: 0,
+    show_items: 16
   };
 
   static propTypes = {
@@ -85,7 +86,11 @@ class DashboardPage extends Component {
     return u;
   };
   next_page = () => {
-    this.setState({ offer_page: this.state.offer_page + 1 })
+    const { offers } = this.props.offers;
+    if (this.state.offer_page * this.state.show_items < this.props.offers.length) {
+      this.setState({ offer_page: this.state.offer_page + 1 })
+    }
+
   }
 
   previous_page = () => {
@@ -106,6 +111,9 @@ class DashboardPage extends Component {
   render() {
     const { offers } = this.props.offers;
     const { user } = this.props;
+
+    const range_min = this.state.show_items * this.state.offer_page;
+    const range_max = range_min + this.state.show_items;
     //const { user } = this.props;
     // console.log(user.id);
     const isAuthenticated = this.props.isAuthenticated;
@@ -143,7 +151,7 @@ class DashboardPage extends Component {
           </Nav>
         </Row>
         <Row className="d-flex justify-content-around">
-          {offers.map(
+          {offers.slice(range_min, range_max).map(
             ({ title, description, link, img, amount, conversion }) => (
               <div className="">
                 {isAuthenticated ? (
