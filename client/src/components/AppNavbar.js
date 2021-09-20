@@ -22,14 +22,14 @@ import LoginModal from "./auth/LoginModal";
 import Logout from "./auth/Logout";
 import { stat } from "fs";
 import { DEFAULT_MIN_VERSION } from "tls";
-import { logout } from "../actions/authAction";
+import { logout, loadUser } from "../actions/authAction";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LoginPage from "./auth/LoginPage";
 import RegisterPage from "./auth/RegisterPage";
 import DashboardPage from "./DashboardPage";
 import AccountPage from "./AccountPage";
 import CashoutPage from "./CashoutPage";
-import { toDollars } from "../../util";
+import { toDollars } from "../util";
 class AppNavbar extends Component {
   state = {
     isOpen: false
@@ -49,7 +49,7 @@ class AppNavbar extends Component {
 
   updateBalance = () => {
     this.props.loadUser();
-  }
+  };
 
   render() {
     const user = this.props.user;
@@ -58,7 +58,10 @@ class AppNavbar extends Component {
 
     const userInfo = (
       <Fragment>
-        <span className="navbar-text text-success " onClick={this.updateBalance}>
+        <span
+          className="navbar-text text-success "
+          onClick={this.updateBalance}
+        >
           <strong>{user ? toDollars(user.balance) : ""}</strong>
         </span>
       </Fragment>

@@ -25,7 +25,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../actions/authAction";
 import { Timestamp } from "bson";
-import { toDollars } from "../../util";
+import { toDollars } from "../util";
 
 class DashboardPage extends Component {
   state = {
@@ -75,7 +75,12 @@ class DashboardPage extends Component {
   //   };
   getlink = (l, id) => {
     const u = new URL(l);
-    u.searchParams.set("subid", id);
+    const domain = u.hostname;
+    if (domain === "www.kiwiwall.com") {
+      u.searchParams.set("s", id);
+    } else {
+      u.searchParams.set("subid", id);
+    }
     return u;
   };
   onChange = e => {
