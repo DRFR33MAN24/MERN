@@ -87,28 +87,28 @@ class DashboardPage extends Component {
   };
   next_page = () => {
     const { offers } = this.props.offers;
-    if (this.state.offer_page * this.state.show_items < this.props.offers.length) {
-      this.setState({ offer_page: this.state.offer_page + 1 })
+    if (this.state.offer_page * this.state.show_items < offers.length) {
+      console.log("next page", offers.length);
+      this.setState({ offer_page: this.state.offer_page + 1 });
     }
-
-  }
+  };
 
   previous_page = () => {
     if (this.state.offer_page != 0) {
-      this.setState({ offer_page: this.state.offer_page - 1 })
+      this.setState({ offer_page: this.state.offer_page - 1 });
     }
-  }
+  };
   getInstall = () => {
     // this.props.getOffers()
-  }
+  };
 
   getSurvey = () => {
     // this.props.getOffers()
-  }
+  };
 
   getPinSubmit = () => {
     // this.props.getOffers()
-  }
+  };
 
   onChange = e => {
     // this.setState({
@@ -151,20 +151,26 @@ class DashboardPage extends Component {
         <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-dark">
           <Nav>
             <NavItem>
-              <NavLink href="#" onClick={this.getInstall}>Install</NavLink>
+              <NavLink href="#" onClick={this.getInstall}>
+                Install
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" onClick={this.getPinSubmit}>Pin Submit</NavLink>
+              <NavLink href="#" onClick={this.getPinSubmit}>
+                Pin Submit
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" onClick={this.getSurvey}>Survey</NavLink>
+              <NavLink href="#" onClick={this.getSurvey}>
+                Survey
+              </NavLink>
             </NavItem>
-
           </Nav>
         </Row>
-        <Row className="d-flex justify-content-around">
-          {offers.slice(range_min, range_max).map(
-            ({ title, description, link, img, amount, conversion }) => (
+        <Row xs="1" sm="2" md="4" className="d-flex justify-content-around">
+          {offers
+            .slice(range_min, range_max)
+            .map(({ title, description, link, img, amount, conversion }) => (
               <div className="">
                 {isAuthenticated ? (
                   <Offer
@@ -177,19 +183,21 @@ class DashboardPage extends Component {
                   />
                 ) : null}
               </div>
-            )
-          )}
+            ))}
         </Row>
 
         <Row className="d-flex justify-content-center bg-dark mb-3 mt-3">
           <Pagination className="mt-3" aria-label="Page navigation example">
             <PaginationItem>
-              <PaginationLink first href="#" onClick={this.next_page} >Next</PaginationLink>
+              <PaginationLink first href="#" onClick={this.next_page}>
+                Next
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink previous href="#" onClick={this.previous_page} >Back</PaginationLink>
+              <PaginationLink previous href="#" onClick={this.previous_page}>
+                Back
+              </PaginationLink>
             </PaginationItem>
-
           </Pagination>
         </Row>
       </Container>

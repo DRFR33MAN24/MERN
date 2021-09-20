@@ -34,7 +34,7 @@ export default class Offer extends Component {
             />
           </div>
         ) : null}
-        <Card>
+        <Card className="embed-responsive-">
           <CardImg top width="100%" src={this.props.img} alt="Card image cap" />
           <CardBody>
             <CardTitle tag="h5">{this.props.title}</CardTitle>
