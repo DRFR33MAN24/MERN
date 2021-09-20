@@ -34,10 +34,12 @@ export default class Offer extends Component {
             />
           </div>
         ) : null}
-        <Card className="embed-responsive-">
+        <Card>
           <CardImg top width="100%" src={this.props.img} alt="Card image cap" />
           <CardBody>
-            <CardTitle tag="h5">{this.props.title}</CardTitle>
+            <CardTitle tag="h5" className="truncate">
+              {this.props.title}
+            </CardTitle>
             <CardSubtitle tag="h6" className="mb-2 text-muted">
               {this.props.conversion}
             </CardSubtitle>

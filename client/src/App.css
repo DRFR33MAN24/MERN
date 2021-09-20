@@ -22,3 +22,10 @@
 .my-card-text {
   overflow-wrap: break-word;
 }
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
