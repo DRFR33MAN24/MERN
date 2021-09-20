@@ -18,7 +18,6 @@ const url_kiwi =
   "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/";
 
 router.post("/", (req, res) => {
-
   let offers_kiwi = [];
   let offers_cpalead = [];
   const { subid, country, device } = req.body;
@@ -36,7 +35,6 @@ router.post("/", (req, res) => {
       axios
         .get(url_cpalead)
         .then(res => {
-
           res.data.offers.map(
             ({
               title,
@@ -60,7 +58,9 @@ router.post("/", (req, res) => {
               });
             }
           );
-
+          Offer.destroy({ where: { provider: "cpalead" } })
+            .then(n => console.log("number of deleted offers", n))
+            .catch(err => console.log(err));
           Offer.bulkCreate(offers_cpalead)
             .then(() => {
               console.log("offers updated successfully");
@@ -76,7 +76,6 @@ router.post("/", (req, res) => {
     }
   });
 
-
   OfferProvider.findOne({ where: { name: "kiwi" } }).then(p => {
     const curr_date = new Date();
     const last_date = new Date(p.lastUpdate);
@@ -89,7 +88,6 @@ router.post("/", (req, res) => {
       axios
         .get(url_kiwi)
         .then(res => {
-
           res.data.offers.map(
             ({
               name,
@@ -113,7 +111,9 @@ router.post("/", (req, res) => {
               });
             }
           );
-
+          Offer.destroy({ where: { provider: "kiwi" } })
+            .then(n => console.log("number of deleted offers", n))
+            .catch(err => console.log(err));
           Offer.bulkCreate(offers_kiwi)
             .then(() => {
               console.log("offers updated successfully");
@@ -127,7 +127,6 @@ router.post("/", (req, res) => {
         .catch(err => console.log(err));
     }
   });
-
 
   console.log(country, device);
   Offer.findAll({

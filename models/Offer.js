@@ -32,14 +32,17 @@ const Offer = db.define(
     },
     device: {
       type: DataTypes.STRING
-    }
-    ,
+    },
     img: {
       type: DataTypes.STRING
       // allowNull defaults to true
     },
     amount: {
       type: DataTypes.INTEGER
+      // allowNull defaults to true
+    },
+    provider: {
+      type: DataTypes.STRING
       // allowNull defaults to true
     }
   },
