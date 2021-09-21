@@ -53,6 +53,7 @@ class CashoutPage extends Component {
   render() {
     const isAuthenticated = this.props.isAuthenticated;
     const user = this.props.user;
+    const { activity } = this.props.activity;
     const formEnabled = this.state.formEnabled;
     //console.log(offers);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
@@ -82,11 +83,9 @@ class CashoutPage extends Component {
         <Card className="shadow mt-5 p-3">
           <Label>Activity:</Label>
           <ListGroup>
-            <ListGroupItem>Cras justo odio</ListGroupItem>
-            <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-            <ListGroupItem>Morbi leo risus</ListGroupItem>
-            <ListGroupItem>Porta ac consectetur ac</ListGroupItem>
-            <ListGroupItem>Vestibulum at eros</ListGroupItem>
+            {activity.map(({ payout, campaign_name }) => {
+              <ListGroupItem>${payout}</ListGroupItem>;
+            })}
           </ListGroup>
         </Card>
       </Container>
