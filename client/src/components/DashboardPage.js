@@ -33,8 +33,7 @@ class DashboardPage extends Component {
   state = {
     isAuth: false,
     offer_page: 0,
-    show_items: 16,
-    country: ""
+    show_items: 16
   };
 
   static propTypes = {
@@ -48,8 +47,9 @@ class DashboardPage extends Component {
     console.log("dashboard DidMount is Auth", this.props.isAuthenticated);
     if (this.props.isAuthenticated) {
       const { user } = this.props;
-      console.log("mount");
-      this.props.getOffers(user.id, this.state.country, "ios");
+      axios.get("https://freegeoip.app/json/").then(res => {
+        this.props.getOffers(user.id, res.data.country_code, "ios");
+      });
     }
 
     //this.props.getOffers();
@@ -57,7 +57,6 @@ class DashboardPage extends Component {
 
   componentWillMount() {
     const { isAuthenticated } = this.props;
-    this.getCountry();
 
     console.log("Dashboard will mount", isAuthenticated);
     this.setState({ isAuth: isAuthenticated });
@@ -73,15 +72,6 @@ class DashboardPage extends Component {
     }
   }
 
-  getCountry = () => {
-    axios
-      .get("https://freegeoip.app/json/")
-      .then(res => {
-        this.setState({ country: res.data.country_code });
-        console.log("object");
-      })
-      .catch(err => console.log(err));
-  };
   getlink = (l, id) => {
     const u = new URL(l);
     const domain = u.hostname;
