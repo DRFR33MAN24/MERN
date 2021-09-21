@@ -39,7 +39,8 @@ class AppNavbar extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     user: PropTypes.object,
-    loadUser: PropTypes.func
+    loadUser: PropTypes.func,
+    logout: PropTypes.func.isRequired
   };
 
   toggle = () => {
@@ -122,9 +123,15 @@ class AppNavbar extends Component {
                 <div className="ml-3">Cashout</div>
               </Link>
             </DropdownItem>
+            <DropdownItem divider />
             <DropdownItem>
-              <Icon.House size={24} />
-              <Logout />
+              <div
+                className="d-flex justify-content-start"
+                onClick={this.props.logout}
+              >
+                <Icon.CashCoin size={24} />
+                <div className="ml-3">Logout</div>
+              </div>
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
@@ -192,4 +199,4 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, { loadUser })(AppNavbar);
+export default connect(mapStateToProps, { loadUser, logout })(AppNavbar);
