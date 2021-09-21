@@ -3,7 +3,7 @@ import { tokenConfig } from "./authAction";
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 
-export const getActivity = (subid, country, device) => dispatch => {
+export const getActivity = subid => dispatch => {
   dispatch(setActivityLoading());
   //console.log(country, device, subid);
   const config = {
@@ -11,7 +11,7 @@ export const getActivity = (subid, country, device) => dispatch => {
       "Content-Type": "application/json"
     }
   };
-  const body = JSON.stringify({ subid, country, device });
+  const body = JSON.stringify({ subid });
   axios
     .post("/api/activity", body, config)
     .then(res => {
