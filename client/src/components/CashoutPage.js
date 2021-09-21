@@ -67,18 +67,21 @@ class CashoutPage extends Component {
     return (
       <Container className=" mx-auto justify-content-center py-5">
         <Card className="shadow mt-5">
-          <Container fluid={true} className="d-flex justify-content-start">
+          <Container
+            fluid={true}
+            className="d-flex justify-content-start flex-column"
+          >
             <div>
-              <h1>Balance</h1>
-              <h1>555</h1>
+              <h3>Balance</h3>
+              <h3>555</h3>
             </div>
             <div>
-              <h1>Total</h1>
-              <h1>555</h1>
+              <h3>Pending</h3>
+              <h3>555</h3>
             </div>
             <div>
-              <h1>Pending</h1>
-              <h1>555</h1>
+              <h3>Total</h3>
+              <h3>555</h3>
             </div>
           </Container>
         </Card>
