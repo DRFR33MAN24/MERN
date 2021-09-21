@@ -83,7 +83,7 @@ class LoginPage extends Component {
 
     return (
       <Container className=" mx-auto justify-content-center mt-5">
-        <Container className=" justify-content-center align-items-center">
+        <Container className=" mx-auto justify-content-center">
           <Icon.Key size={128} />
         </Container>
         <Card className="shadow p-2">
