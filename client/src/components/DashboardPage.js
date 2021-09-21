@@ -18,7 +18,7 @@ import {
   PaginationItem,
   PaginationLink
 } from "reactstrap";
-import * as Icon from 'react-bootstrap-icons';
+import * as Icon from "react-bootstrap-icons";
 import Offer from "./Offer";
 import { Redirect } from "react-router-dom";
 import { getOffers } from "../actions/offerAction";
@@ -27,12 +27,14 @@ import PropTypes from "prop-types";
 import { register } from "../actions/authAction";
 import { Timestamp } from "bson";
 import { toDollars } from "../util";
+import axios from "axios";
 
 class DashboardPage extends Component {
   state = {
     isAuth: false,
     offer_page: 0,
-    show_items: 16
+    show_items: 16,
+    country: ""
   };
 
   static propTypes = {
@@ -46,7 +48,8 @@ class DashboardPage extends Component {
     console.log("dashboard DidMount is Auth", this.props.isAuthenticated);
     if (this.props.isAuthenticated) {
       const { user } = this.props;
-      this.props.getOffers(user.id, "us", "ios");
+      console.log("mount");
+      this.props.getOffers(user.id, this.state.country, "ios");
     }
 
     //this.props.getOffers();
@@ -54,8 +57,9 @@ class DashboardPage extends Component {
 
   componentWillMount() {
     const { isAuthenticated } = this.props;
+    this.getCountry();
 
-    console.log("Dashboard did mount", isAuthenticated);
+    console.log("Dashboard will mount", isAuthenticated);
     this.setState({ isAuth: isAuthenticated });
   }
 
@@ -69,13 +73,15 @@ class DashboardPage extends Component {
     }
   }
 
-  //   toggle = () => {
-  //     // Clear errors
-  //     this.props.clearErrors();
-  //     this.setState({
-  //       modal: !this.state.modal
-  //     });
-  //   };
+  getCountry = () => {
+    axios
+      .get("https://freegeoip.app/json/")
+      .then(res => {
+        this.setState({ country: res.data.country_code });
+        console.log("object");
+      })
+      .catch(err => console.log(err));
+  };
   getlink = (l, id) => {
     const u = new URL(l);
     const domain = u.hostname;
@@ -170,19 +176,19 @@ class DashboardPage extends Component {
             <NavItem>
               <NavLink href="#" onClick={this.getInstall}>
                 <Icon.Controller color="black" fill="gold" size={32} />
-                <span>  Games</span>
+                <span> Games</span>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" onClick={this.getPinSubmit}>
                 <Icon.Keyboard color="black" fill="gold" size={32} />
-                <span>  PIN Submit</span>
+                <span> PIN Submit</span>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" onClick={this.getSurvey}>
                 <Icon.Newspaper color="black" fill="gold" size={32} />
-                <span>  Survey</span>
+                <span> Survey</span>
               </NavLink>
             </NavItem>
           </Nav>

@@ -38,7 +38,7 @@ class CashoutPage extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
-    activity: PropTypes.object.isRequired,
+    activity: PropTypes.object,
     getActivity: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
     user: PropTypes.object
@@ -54,6 +54,7 @@ class CashoutPage extends Component {
     const isAuthenticated = this.props.isAuthenticated;
     const user = this.props.user;
     const { activity } = this.props.activity;
+    console.log(activity);
     const formEnabled = this.state.formEnabled;
     //console.log(offers);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);

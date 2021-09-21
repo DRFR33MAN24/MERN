@@ -7,20 +7,19 @@ const Postback = require("../../models/Postback");
 
 router.post("/", (req, res) => {
   console.log("Get Activity Route Called");
-  const { sudid } = req.body;
-  (async function() {
-    // await Promise.all([CallCpalead(), CallKiwi()]);
+  const { subid } = req.body;
 
-    try {
-      const postback = await Postback.findAll({
-        where: { subid: subid },
-        raw: true,
-        nest: true
-      });
+  // await Promise.all([CallCpalead(), CallKiwi()]);
 
+  Postback.findAll({
+    where: { subid: subid },
+    raw: true,
+    nest: true
+  })
+    .then(postback => {
       console.log("retrived activity", postback);
       res.json(postback);
-    } catch (error) {}
-  })();
+    })
+    .catch(err => console.log(err));
 });
 module.exports = router;

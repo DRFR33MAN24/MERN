@@ -5,7 +5,7 @@ import { returnErrors } from "./errorAction";
 
 export const getActivity = subid => dispatch => {
   dispatch(setActivityLoading());
-  //console.log(country, device, subid);
+  console.log("activity action called");
   const config = {
     headers: {
       "Content-Type": "application/json"
