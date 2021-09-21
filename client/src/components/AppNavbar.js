@@ -97,7 +97,7 @@ class AppNavbar extends Component {
                 to="/Account"
               >
                 <Icon.Person size={24} />
-                <div className="ml-1">Account</div>
+                <div className="ml-3">Account</div>
               </Link>
             </DropdownItem>
             <DropdownItem divider />
@@ -108,7 +108,7 @@ class AppNavbar extends Component {
                 to="/Dashboard"
               >
                 <Icon.House size={24} />
-                <div className="ml-1">Dashboard</div>
+                <div className="ml-3">Dashboard</div>
               </Link>
             </DropdownItem>
             <DropdownItem divider />
@@ -119,11 +119,13 @@ class AppNavbar extends Component {
                 to="/Cashout"
               >
                 <Icon.CashCoin size={24} />
-                <div className="ml-1">Cashout</div>
+                <div className="ml-3">Cashout</div>
               </Link>
             </DropdownItem>
-            <DropdownItem divider />
-            <Logout />
+            <DropdownItem>
+              <Icon.House size={24} />
+              <Logout />
+            </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Fragment>
