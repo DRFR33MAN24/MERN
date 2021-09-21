@@ -15,3 +15,5 @@ export const UPDATE_SUCCESS = "UPDATE_SUCCESS";
 export const UPDATE_FAIL = "UPDATE_FAIL";
 export const SENT_SUCCESS = "SENT_SUCCESS";
 export const SENT_FAIL = "SENT_FAIL";
+export const GET_ACTIVITY = "GET_ACTIVITY";
+export const ACTIVITY_LOADING = "ACTIVITY_LOADING";
