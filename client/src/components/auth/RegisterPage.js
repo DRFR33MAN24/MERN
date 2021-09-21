@@ -11,7 +11,7 @@ import {
   Alert
 } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
-
+import * as Icon from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../../actions/authAction";
@@ -90,7 +90,10 @@ class RegisterPage extends Component {
     }
 
     return (
-      <Container className="mx-auto justify-content-center0">
+      <Container className="mx-auto justify-content-center">
+        <Container className=" mx-auto justify-content-center text-center p-5">
+          <Icon.Key size={128} />
+        </Container>
         <Card className="shadow p-2">
           {this.props.emailSent ? (
             <Alert color="success">{"Email sent"}</Alert>
