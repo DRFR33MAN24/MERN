@@ -3,24 +3,23 @@ const router = express.Router();
 const auth = require("../../middleware/auth");
 const axios = require("axios");
 
-const Offer = require("../../models/Offer");
-const OfferProvider = require("../../models/OfferProvider");
+const Postback = require("../../models/Postback");
 
 router.post("/", (req, res) => {
   console.log("Get Activity Route Called");
-
+  const { sudid } = req.body;
   (async function() {
     // await Promise.all([CallCpalead(), CallKiwi()]);
 
     try {
-      const offer = await Offer.findAll({
-        where: { country: country, device: device },
+      const postback = await Postback.findAll({
+        where: { subid: subid },
         raw: true,
         nest: true
       });
 
-      console.log("retrived offers", offer);
-      res.json(offer);
+      console.log("retrived activity", postback);
+      res.json(postback);
     } catch (error) {}
   })();
 });

@@ -47,10 +47,6 @@ class CashoutPage extends Component {
   componentDidMount(prevProps) {
     const { error, isAuthenticated } = this.props;
     this.props.getActivity();
-    // if (isAuthenticated) {
-    //   console.log("authenticated mount");
-    //   this.setState({ isAuth: true });
-    // }
   }
   componentDidUpdate(prevProps, prevState) {}
 
