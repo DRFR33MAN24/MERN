@@ -22,6 +22,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { updateDetails } from "../actions/authAction";
 import { clearErrors } from "../actions/errorAction";
+import { getActivity } from "../actions/activityAction";
 import { freemem } from "os";
 
 class CashoutPage extends Component {
@@ -38,7 +39,7 @@ class CashoutPage extends Component {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     activity: PropTypes.object.isRequired,
-    getActivity: this.propTypes.func.isRequired,
+    getActivity: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
     user: PropTypes.object
   };
