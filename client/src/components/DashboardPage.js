@@ -137,8 +137,8 @@ class DashboardPage extends Component {
       return null;
     }
     return (
-      <Container fluid={true} className="">
-        <Row>
+      <Container fluid={true} className=" py-5">
+        <Row className="mt-2">
           <Container fluid={true}>
             <Label className="">Featured Offers:</Label>
             <Row className="d-flex justify-content-left pl-1">
