@@ -12,6 +12,9 @@ const Offer = db.define(
     offer_id: {
       type: DataTypes.BIGINT
     },
+    featured: {
+      type: DataTypes.BOOLEAN
+    },
     title: {
       type: DataTypes.STRING
       // allowNull defaults to true

@@ -18,7 +18,7 @@ import {
   PaginationItem,
   PaginationLink
 } from "reactstrap";
-import {Controller} from 
+
 import Offer from "./Offer";
 import { Redirect } from "react-router-dom";
 import { getOffers } from "../actions/offerAction";
@@ -27,7 +27,6 @@ import PropTypes from "prop-types";
 import { register } from "../actions/authAction";
 import { Timestamp } from "bson";
 import { toDollars } from "../util";
-
 
 class DashboardPage extends Component {
   state = {
@@ -125,6 +124,7 @@ class DashboardPage extends Component {
   render() {
     const { offers } = this.props.offers;
     const { user } = this.props;
+    const featuredOffers = offers.filter(item => item.featured === true);
 
     const range_min = this.state.show_items * this.state.offer_page;
     const range_max = range_min + this.state.show_items;
@@ -146,16 +146,29 @@ class DashboardPage extends Component {
           <Container fluid={true}>
             <Label className="">Featured Offers:</Label>
             <Row className="d-flex justify-content-left pl-1">
-              <Offer></Offer>
+              {featuredOffers.map(
+                ({ title, description, link, img, amount, conversion }) => (
+                  <div className="">
+                    {isAuthenticated ? (
+                      <Offer
+                        title={title}
+                        description={description}
+                        link={this.getlink(link, user.id)}
+                        amount={toDollars(amount)}
+                        img={img}
+                        conversion={conversion}
+                      />
+                    ) : null}
+                  </div>
+                )
+              )}
             </Row>
           </Container>
         </Row>
         <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-dark">
           <Nav>
             <NavItem>
-              <NavLink href="#" onClick={this.getInstall}>
-                </Controller>
-              </NavLink>
+              <NavLink href="#" onClick={this.getInstall}></NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" onClick={this.getPinSubmit}>
