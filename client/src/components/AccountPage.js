@@ -144,8 +144,8 @@ class AccountPage extends Component {
     );
 
     return (
-      <Container className=" mx-auto justify-content-center">
-        <Card className="shadow p-2 mb-3">
+      <Container className=" mx-auto justify-content-center py-5 ">
+        <Card className="shadow p-2 mb-3 mt-5">
           {this.props.updated ? <Alert>Updated</Alert> : null}
           <Label className="mb-3">User Details:</Label>
           <Container>
