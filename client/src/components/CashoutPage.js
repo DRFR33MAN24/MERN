@@ -37,87 +37,21 @@ class CashoutPage extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
-    updateDetails: PropTypes.func.isRequired,
-    updated: PropTypes.bool,
+    activity: PropTypes.object.isRequired,
+    getActivity: this.propTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
     user: PropTypes.object
   };
 
   componentDidMount(prevProps) {
     const { error, isAuthenticated } = this.props;
-
+    this.props.getActivity();
     // if (isAuthenticated) {
     //   console.log("authenticated mount");
     //   this.setState({ isAuth: true });
     // }
   }
-  componentDidUpdate(prevProps, prevState) {
-    const isAuthenticated = this.props.isAuthenticated;
-    const error = this.props.error;
-    const updated = this.props.updated;
-    console.log("isAuthenticated:", isAuthenticated);
-    console.log("login did update", this.state.isAuth);
-    console.log("login did update prev", prevState.isAuth);
-    if (error !== prevProps.error) {
-      // Check for register error
-      if (error.id === "LOGIN_FAIL") {
-        this.setState({ msg: error.msg.msg });
-      } else {
-        this.setState({ msg: null });
-      }
-
-      // If authenticated close modal
-      // If authenicated go to dashboard
-    }
-    if (updated !== prevProps.updated) {
-      // Check for register error
-      if (error === true) {
-        this.setState({ msg: "Updated" });
-      } else {
-        this.setState({ msg: null });
-      }
-
-      // If authenticated close modal
-      // If authenicated go to dashboard
-    }
-    if (prevState.isAuth !== isAuthenticated) {
-      console.log("authenticated mount", isAuthenticated);
-      this.setState({ isAuth: isAuthenticated });
-    }
-  }
-
-  onEdit = () => {
-    this.setState({ formEnabled: true });
-  };
-
-  onSave = () => {
-    const user = this.props.user;
-    const newUser = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      id: user.id,
-      wallet: this.state.wallet
-    };
-
-    if (
-      user.name != newUser.name ||
-      user.email != newUser.email ||
-      user.password != newUser.password ||
-      user.wallet != newUser.wallet
-    ) {
-      this.props.updateDetails(newUser);
-      this.setState({ formEnabled: false });
-
-      //update details will issue an action to change database
-      // and send an email to user set mail address
-      // and change the user.active field in db to false
-    }
-  };
-
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+  componentDidUpdate(prevProps, prevState) {}
 
   render() {
     const isAuthenticated = this.props.isAuthenticated;
@@ -129,21 +63,6 @@ class CashoutPage extends Component {
     if (!isAuthenticated) {
       return login;
     }
-
-    const confirmModal = (
-      <Fragment>
-        <Modal isOpen={true} className="modal-dialog-centered">
-          <ModalHeader>Confirm Changes</ModalHeader>
-          <ModalBody>
-            <p>Check your Email to confirm changes.</p>
-
-            <ModalFooter className="d-flex justify-content-start">
-              <Button onClick={this.props.modal}>Close</Button>
-            </ModalFooter>
-          </ModalBody>
-        </Modal>
-      </Fragment>
-    );
 
     return (
       <Container className=" mx-auto justify-content-center py-5">
@@ -163,7 +82,7 @@ class CashoutPage extends Component {
             </div>
           </Container>
         </Card>
-        <Card className="shadow mt-5">
+        <Card className="shadow mt-5 p-3">
           <Label>Activity:</Label>
           <ListGroup>
             <ListGroupItem>Cras justo odio</ListGroupItem>
