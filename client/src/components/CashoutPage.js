@@ -84,9 +84,11 @@ class CashoutPage extends Component {
         <Card className="shadow mt-5 p-3">
           <Label>Activity:</Label>
           <ListGroup>
-            {activity.map(({ payout, campaign_name }) => {
-              <ListGroupItem>${payout}</ListGroupItem>;
-            })}
+            {activity.map(({ payout }) => (
+              <div className="">
+                {true ? <ListGroupItem>${payout}</ListGroupItem> : null}
+              </div>
+            ))}
           </ListGroup>
         </Card>
       </Container>
