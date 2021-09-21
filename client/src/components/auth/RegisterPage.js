@@ -90,11 +90,11 @@ class RegisterPage extends Component {
     }
 
     return (
-      <Container className="mx-auto justify-content-center">
+      <Container className="mx-auto justify-content-center mt-5">
         <Container className=" mx-auto justify-content-center text-center p-5">
           <Icon.Key size={128} />
         </Container>
-        <Card className="shadow p-2">
+        <Card className="shadow p-4">
           {this.props.emailSent ? (
             <Alert color="success">{"Email sent"}</Alert>
           ) : null}
@@ -140,7 +140,7 @@ class RegisterPage extends Component {
               <div>
                 Already a member:{" "}
                 <Link exact to="/Login">
-                  Register now
+                  Login
                 </Link>
               </div>
             </FormGroup>

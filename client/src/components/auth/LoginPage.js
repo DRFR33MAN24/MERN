@@ -86,7 +86,7 @@ class LoginPage extends Component {
         <Container className=" mx-auto justify-content-center text-center p-5">
           <Icon.Key size={128} />
         </Container>
-        <Card className="shadow p-2">
+        <Card className="shadow p-4">
           {this.state.msg ? (
             <Alert color="danger">{this.state.msg}</Alert>
           ) : null}
