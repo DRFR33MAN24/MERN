@@ -46,7 +46,7 @@ class CashoutPage extends Component {
 
   componentDidMount(prevProps) {
     const { error, isAuthenticated } = this.props;
-    this.props.getActivity();
+    this.props.getActivity(13);
   }
   componentDidUpdate(prevProps, prevState) {}
 

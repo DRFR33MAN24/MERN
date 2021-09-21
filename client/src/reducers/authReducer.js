@@ -18,12 +18,12 @@ const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: false,
   isLoading: false,
-  user: null,
+  user: {},
   updated: false,
   mail_sent: false
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case USER_LOADING:
       return {
