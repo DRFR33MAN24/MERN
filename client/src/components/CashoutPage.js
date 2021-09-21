@@ -69,7 +69,7 @@ class CashoutPage extends Component {
         <Card className="shadow mt-5">
           <Container
             fluid={true}
-            className="d-flex justify-content-start flex-column"
+            className="d-flex justify-content-start flex-column p-4"
           >
             <div>
               <h3>Balance</h3>
