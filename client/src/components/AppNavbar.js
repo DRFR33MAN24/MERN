@@ -102,14 +102,24 @@ class AppNavbar extends Component {
             </DropdownItem>
             <DropdownItem divider />
             <DropdownItem>
-              <Link className="text-dark" exact to="/Dashboard">
-                Dashboard
+              <Link
+                className="text-dark d-flex justify-content-start "
+                exact
+                to="/Dashboard"
+              >
+                <Icon.House size={24} />
+                <div className="ml-1">Dashboard</div>
               </Link>
             </DropdownItem>
             <DropdownItem divider />
             <DropdownItem>
-              <Link className="text-dark" exact to="/Cashout">
-                Cashout
+              <Link
+                className="text-dark d-flex justify-content-start "
+                exact
+                to="/Cashout"
+              >
+                <Icon.CashCoin size={24} />
+                <div className="ml-1">Cashout</div>
               </Link>
             </DropdownItem>
             <DropdownItem divider />
