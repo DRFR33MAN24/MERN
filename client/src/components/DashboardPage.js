@@ -18,7 +18,7 @@ import {
   PaginationItem,
   PaginationLink
 } from "reactstrap";
-
+import * as Icon from 'react-bootstrap-icons';
 import Offer from "./Offer";
 import { Redirect } from "react-router-dom";
 import { getOffers } from "../actions/offerAction";
@@ -168,16 +168,21 @@ class DashboardPage extends Component {
         <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-dark">
           <Nav>
             <NavItem>
-              <NavLink href="#" onClick={this.getInstall}></NavLink>
+              <NavLink href="#" onClick={this.getInstall}>
+                <Icon.Controller color="black" fill="gold" size={32} />
+                <span>  Games</span>
+              </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" onClick={this.getPinSubmit}>
-                Pin Submit
+                <Icon.Keyboard color="black" fill="gold" size={32} />
+                <span>  PIN Submit</span>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" onClick={this.getSurvey}>
-                Survey
+                <Icon.Newspaper color="black" fill="gold" size={32} />
+                <span>  Survey</span>
               </NavLink>
             </NavItem>
           </Nav>
