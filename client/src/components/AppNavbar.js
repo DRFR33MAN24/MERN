@@ -158,7 +158,7 @@ class AppNavbar extends Component {
             <AccountPage />
           </Route>
           <Route exact path="/Cashout">
-            <AccountPage />
+            <CashoutPage />
           </Route>
           <Route path="/NotFound">
             <h1>NotFound</h1>

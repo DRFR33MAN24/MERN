@@ -153,7 +153,7 @@ router.post("/", (req, res) => {
   console.log(country, device);
 
   (async function() {
-    await Promise.all([CallCpalead(), CallKiwi()]);
+    // await Promise.all([CallCpalead(), CallKiwi()]);
 
     try {
       console.log(country, device);

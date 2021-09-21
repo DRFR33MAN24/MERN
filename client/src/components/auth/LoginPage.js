@@ -81,7 +81,7 @@ class LoginPage extends Component {
     }
 
     return (
-      <Container className=" mx-auto justify-content-center">
+      <Container className=" mx-auto justify-content-center mt-5">
         <Card className="shadow p-2">
           {this.state.msg ? (
             <Alert color="danger">{this.state.msg}</Alert>
