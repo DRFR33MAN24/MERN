@@ -18,6 +18,7 @@ import {
   PaginationItem,
   PaginationLink
 } from "reactstrap";
+import {Controller} from 
 import Offer from "./Offer";
 import { Redirect } from "react-router-dom";
 import { getOffers } from "../actions/offerAction";
@@ -26,6 +27,7 @@ import PropTypes from "prop-types";
 import { register } from "../actions/authAction";
 import { Timestamp } from "bson";
 import { toDollars } from "../util";
+
 
 class DashboardPage extends Component {
   state = {
@@ -152,7 +154,7 @@ class DashboardPage extends Component {
           <Nav>
             <NavItem>
               <NavLink href="#" onClick={this.getInstall}>
-                <i class="bi bi-controller" size="48x"></i>
+                </Controller>
               </NavLink>
             </NavItem>
             <NavItem>
