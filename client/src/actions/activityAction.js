@@ -1,10 +1,10 @@
-import { GET_OFFERS, OFFERS_LOADING } from "./types";
+import { GET_ACTIVITY, ACTIVITY_LOADING } from "./types";
 import { tokenConfig } from "./authAction";
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 
-export const getOffers = (subid, country, device) => dispatch => {
-  dispatch(setOffersLoading());
+export const getActivity = (subid, country, device) => dispatch => {
+  dispatch(setActivityLoading());
   //console.log(country, device, subid);
   const config = {
     headers: {
@@ -13,11 +13,11 @@ export const getOffers = (subid, country, device) => dispatch => {
   };
   const body = JSON.stringify({ subid, country, device });
   axios
-    .post("/api/offers", body, config)
+    .post("/api/activity", body, config)
     .then(res => {
       //console.log(res.data.offers);
       dispatch({
-        type: GET_OFFERS,
+        type: GET_ACTIVITY,
         payload: res.data
       });
     })
@@ -26,8 +26,8 @@ export const getOffers = (subid, country, device) => dispatch => {
     );
 };
 
-export const setOffersLoading = () => {
+export const setActivityLoading = () => {
   return {
-    type: OFFERS_LOADING
+    type: ACTIVITY_LOADING
   };
 };

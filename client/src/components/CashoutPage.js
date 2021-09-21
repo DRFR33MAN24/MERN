@@ -99,11 +99,11 @@ class CashoutPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  updated: state.auth.updated,
+  activity: state.activity,
   error: state.error,
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, { updateDetails, clearErrors })(
+export default connect(mapStateToProps, { getActivity, clearErrors })(
   CashoutPage
 );
