@@ -10,6 +10,7 @@ import {
   Card,
   Alert
 } from "reactstrap";
+import * as Icon from "react-bootstrap-icons";
 import { Redirect, Link } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -82,6 +83,9 @@ class LoginPage extends Component {
 
     return (
       <Container className=" mx-auto justify-content-center mt-5">
+        <Container className=" justify-content-center align-items-center">
+          <Icon.Key size={128} />
+        </Container>
         <Card className="shadow p-2">
           {this.state.msg ? (
             <Alert color="danger">{this.state.msg}</Alert>
