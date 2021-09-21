@@ -14,7 +14,8 @@ import {
   ModalBody,
   ModalFooter,
   ListGroup,
-  ListGroupItem
+  ListGroupItem,
+  Row
 } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
 
@@ -84,9 +85,32 @@ class CashoutPage extends Component {
         <Card className="shadow mt-5 p-3">
           <Label>Activity:</Label>
           <ListGroup>
-            {activity.map(({ payout }) => (
+            <div>
+              <ListGroupItem>
+                <Container fluid={true}>
+                  <Row className="d-flex justify-content-around">
+                    <div>subid</div>
+                    <div>payout</div>
+                    <div>campaign_name</div>
+                    <div>status</div>
+                  </Row>
+                </Container>
+              </ListGroupItem>
+            </div>
+            {activity.map(({ payout, subid, campaign_name, status }) => (
               <div className="">
-                {true ? <ListGroupItem>${payout}</ListGroupItem> : null}
+                <ListGroupItem
+                  color={status === "credited" ? "success" : "danger"}
+                >
+                  <Container fluid={true}>
+                    <Row className="d-flex justify-content-around">
+                      <div>{subid}</div>
+                      <div>{payout}</div>
+                      <div>{campaign_name}</div>
+                      <div>{status}</div>
+                    </Row>
+                  </Container>
+                </ListGroupItem>
               </div>
             ))}
           </ListGroup>
