@@ -15,6 +15,7 @@ import {
   DropdownMenu,
   DropdownToggle
 } from "reactstrap";
+import * as Icon from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import RegisterModal from "./auth/RegisterModal";
@@ -85,13 +86,18 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <UncontrolledDropdown nav inNavbar>
-          <DropdownToggle nav caret>
-            Options
+          <DropdownToggle nav>
+            <Icon.Gear size={24} />
           </DropdownToggle>
           <DropdownMenu right>
             <DropdownItem>
-              <Link className="text-dark" exact to="/Account">
-                Account
+              <Link
+                className="text-dark d-flex justify-content-start "
+                exact
+                to="/Account"
+              >
+                <Icon.Person size={24} />
+                <div className="ml-1">Account</div>
               </Link>
             </DropdownItem>
             <DropdownItem divider />
