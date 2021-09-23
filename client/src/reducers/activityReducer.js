@@ -1,4 +1,4 @@
-import { GET_ACTIVITY, ACTIVITY_LOADING } from "../actions/types";
+import { GET_ACTIVITY, ACTIVITY_LOADING, SUB_PAYMENT } from "../actions/types";
 
 const initialState = {
   activity: [],
@@ -8,6 +8,13 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ACTIVITY:
+      return {
+        ...state,
+        activity: action.payload,
+        loading: false
+      };
+
+    case SUB_PAYMENT:
       return {
         ...state,
         activity: action.payload,
