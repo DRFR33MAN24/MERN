@@ -38,6 +38,7 @@ export const loadUser = () => (dispatch, getState) => {
 //Register user
 
 export const register = ({ name, email, password, active }) => dispatch => {
+  dispatch({ type: USER_LOADING });
   //dispatch(sendEmail(email));
   //console.log("access-able");
   // Headers
@@ -78,6 +79,7 @@ export const updateDetails = ({
   id,
   wallet
 }) => dispatch => {
+  dispatch({ type: USER_LOADING });
   // Headers
   console.log("updateDetails Called");
   const config = {

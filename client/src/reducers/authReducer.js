@@ -23,7 +23,7 @@ const initialState = {
   mail_sent: false
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case USER_LOADING:
       return {
@@ -34,7 +34,8 @@ export default function(state = initialState, action) {
     case UPDATE_SUCCESS:
       return {
         ...state,
-        updated: true
+        updated: true,
+        isLoading: false
       };
     case SENT_SUCCESS:
       return {
@@ -45,7 +46,8 @@ export default function(state = initialState, action) {
     case UPDATE_FAIL:
       return {
         ...state,
-        updated: false
+        updated: false,
+        isLoading: false
       };
 
     case USER_LOADED:
