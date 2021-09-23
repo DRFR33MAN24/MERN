@@ -45,3 +45,5 @@ let SiteLogger = (req, res, next) => {
   });
   next();
 };
+
+module.exports = { SiteLogger };

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const logToFile = require("../../middleware/logToFile");
 //const auth = require("../../middleware/auth");
 //postback Model
 const Postback = require("../../models/Postback");
@@ -10,27 +11,23 @@ const kiwi_secret = "kiwi_123";
 // @route GET api/items
 // @desc Get All Items
 // @acces Public
-router.get('/kiwi', (req, res) => {
-  const {
-    sub_id,
-    amount,
-    status,
-    offer_name,
-    signature
-  } = req.query;
+router.use("/kiwi", logToFile.SiteLogger);
+router.use("/cpalead", logToFile.SiteLogger);
+router.get("/kiwi", (req, res) => {
+  const { sub_id, amount, status, offer_name, signature } = req.query;
 
   // Importing Required Modules
-  const crypto = require('crypto');
-  const hash = crypto.createHash('md5').update(`${sub_id}` + `${amount}` + `${kiwi_secret}`).digest();
+  const crypto = require("crypto");
+  const hash = crypto
+    .createHash("md5")
+    .update(`${sub_id}` + `${amount}` + `${kiwi_secret}`)
+    .digest();
 
   if (signature === hash) {
-
-
-
     const newPostback = Postback.build({
       payout: `${amount}`,
       subid: `${sub_id}`,
-      campaign_name: 'kiwi',
+      campaign_name: "kiwi",
       status: `${status}`,
       offer_name: `${offer_name}`
     });
@@ -49,29 +46,20 @@ router.get('/kiwi', (req, res) => {
       .catch(err => console.log(err));
 
     res.send("success");
-  }
-  else {
-
+  } else {
     res.send("Not Authorized");
     return;
-
   }
 });
 
-
 router.get("/cpalead", (req, res) => {
-
   const { password, subid, payout } = req.query;
 
   if (password === cpalead_pass) {
-
-
-
-
     const newPostback = Postback.build({
       payout: `${payout}`,
       subid: `${subid}`,
-      campaign_name: 'cpalead'
+      campaign_name: "cpalead"
     });
 
     newPostback
@@ -88,15 +76,10 @@ router.get("/cpalead", (req, res) => {
       .catch(err => console.log(err));
 
     res.send("success");
-  }
-
-  else {
-
+  } else {
     res.send("Not Authorized");
     return;
-
   }
-
 });
 
 module.exports = router;
