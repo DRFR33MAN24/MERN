@@ -111,7 +111,7 @@ export const updateDetails = ({
 };
 
 // Login User
-export const login = ({ email, password }) => dispatch => {
+export const login = ({ email, password, token }) => dispatch => {
   dispatch({ type: USER_LOADING });
   // Headers
   const config = {
@@ -121,7 +121,7 @@ export const login = ({ email, password }) => dispatch => {
   };
 
   // Request body
-  const body = JSON.stringify({ email, password });
+  const body = JSON.stringify({ email, password, token });
   axios
     .post("/api/auth", body, config)
     .then(res =>

@@ -10,9 +10,10 @@ import {
   Card,
   Alert
 } from "reactstrap";
+
 import * as Icon from "react-bootstrap-icons";
 import { Redirect, Link } from "react-router-dom";
-
+import ReCaptchaV2 from "react-google-recaptcha";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/authAction";
@@ -23,7 +24,8 @@ class LoginPage extends Component {
   state = {
     email: "",
     password: "",
-    msg: ""
+    msg: "",
+    token: ""
   };
 
   static propTypes = {
@@ -36,7 +38,7 @@ class LoginPage extends Component {
     user: PropTypes.object
   };
 
-  componentDidMount(prevProps) { }
+  componentDidMount(prevProps) {}
   componentDidUpdate(prevProps, prevState) {
     const isAuthenticated = this.props.isAuthenticated;
     const error = this.props.error;
@@ -61,14 +63,22 @@ class LoginPage extends Component {
     });
   };
 
+  handleToken = token => {
+    this.setState({ token: token });
+  };
+  handleExpire = () => {
+    this.setState({ token: null });
+  };
+
   onSubmit = e => {
     e.preventDefault();
 
-    const { email, password } = this.state;
+    const { email, password, token } = this.state;
 
     const user = {
       email,
-      password
+      password,
+      token
     };
 
     // Attempt to login
@@ -85,7 +95,6 @@ class LoginPage extends Component {
     }
 
     return (
-
       <Container className=" mx-auto justify-content-center mt-5 mb-5">
         <LoadingModal open={isLoading} />
         <Container className=" mx-auto justify-content-center text-center p-5">
@@ -115,6 +124,11 @@ class LoginPage extends Component {
                 placeholder="Password"
                 onChange={this.onChange}
                 className="mb-3"
+              />
+              <ReCaptchaV2
+                sitekey="6LfG0occAAAAABe0wZRxEEiRfF8viAUIWLOaqYkI"
+                onChange={this.handleToken}
+                onExpired={this.handleExpire}
               />
               <Button color="dark" style={{ marginTop: "2rem" }} block>
                 Login

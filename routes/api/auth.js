@@ -10,8 +10,19 @@ const User = require("../../models/User");
 // @route POST api/auth
 // @desc Auth the user
 // @acces Public
-router.post("/", (req, res) => {
-  const { email, password } = req.body;
+router.post("/", async (req, res) => {
+  const { email, password, token } = req.body;
+  // Verify URL
+  const query = stringify({
+    secret: config.get("reCAPTCHA"),
+    response: req.body.token,
+    remoteip: req.connection.remoteAddress
+  });
+  const verifyURL = `${config.get("verifyURL")} + ${query}`;
+  const body = await axios.get(verifyURL);
+  if (body.data.success !== undefined && !body.data.success) {
+    return res.status(400).json({ msg: "Failed captch verification" });
+  }
 
   if (!email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
@@ -50,8 +61,6 @@ router.post("/", (req, res) => {
     });
   });
 });
-
-
 
 router.get("/user", auth, (req, res) => {
   User.findAll({

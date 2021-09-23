@@ -1,3 +1,4 @@
 {
-  "jwtSecret": "sl_myJwtSecret"
+  "jwtSecret": "sl_myJwtSecret",
+  "reCAPTCHA": "6LfG0occAAAAADNrmRlvQDau3d5CJ3jVL5Y-tqUV"
 }
