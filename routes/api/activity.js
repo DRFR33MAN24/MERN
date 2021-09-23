@@ -16,6 +16,7 @@ router.post("/", (req, res) => {
 
   Postback.findAll({
     where: { subid: subid },
+    order: [['createdAt', 'DESC']],
     raw: true,
     nest: true
   })
