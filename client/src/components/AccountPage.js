@@ -21,7 +21,7 @@ import PropTypes from "prop-types";
 import { updateDetails } from "../actions/authAction";
 import { clearErrors } from "../actions/errorAction";
 import { freemem } from "os";
-
+import LoadingModal from '../LoadingModal';
 class AccountPage extends Component {
   state = {
     msg: "",
@@ -34,6 +34,7 @@ class AccountPage extends Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
+    isLoading: PropTypes.bool,
     error: PropTypes.object.isRequired,
     updateDetails: PropTypes.func.isRequired,
     updated: PropTypes.bool,
@@ -119,6 +120,7 @@ class AccountPage extends Component {
 
   render() {
     const isAuthenticated = this.props.isAuthenticated;
+    const isLoading = this.props.isLoading;
     const user = this.props.user;
     const formEnabled = this.state.formEnabled;
     //console.log(offers);
@@ -145,6 +147,7 @@ class AccountPage extends Component {
 
     return (
       <Container className=" mx-auto justify-content-center py-5 ">
+        <LoadingModal open={isLoading} />
         <Card className="shadow p-2 mb-3 mt-5">
           {this.props.updated ? <Alert>Updated</Alert> : null}
           <Label className="mb-3">User Details:</Label>
@@ -193,6 +196,7 @@ class AccountPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  isLoading: state.auth.isLoading,
   updated: state.auth.updated,
   error: state.error,
   user: state.auth.user
