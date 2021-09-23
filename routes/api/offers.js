@@ -12,7 +12,7 @@ const OfferProvider = require("../../models/OfferProvider");
 
 //cpalead provider
 const url_cpalead =
-  "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323&show=4";
+  "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323&show=10";
 
 const url_kiwi =
   "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/?country=ALL";
@@ -154,6 +154,7 @@ router.post("/", (req, res) => {
 
   (async function() {
     // await Promise.all([CallCpalead(), CallKiwi()]);
+    await CallCpalead();
 
     try {
       console.log(country, device);

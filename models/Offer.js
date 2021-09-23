@@ -15,6 +15,11 @@ const Offer = db.define(
     featured: {
       type: DataTypes.BOOLEAN
     },
+
+    disabled: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
     title: {
       type: DataTypes.STRING
       // allowNull defaults to true
