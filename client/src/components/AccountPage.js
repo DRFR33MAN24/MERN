@@ -21,7 +21,7 @@ import PropTypes from "prop-types";
 import { updateDetails } from "../actions/authAction";
 import { clearErrors } from "../actions/errorAction";
 import { freemem } from "os";
-import LoadingModal from '../LoadingModal';
+import LoadingModal from "./LoadingModal";
 class AccountPage extends Component {
   state = {
     msg: "",

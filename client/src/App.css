@@ -29,3 +29,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.loading-modal {
+  background: transparent;
+}

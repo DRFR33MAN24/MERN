@@ -18,7 +18,7 @@ const url_kiwi =
   "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/?country=ALL";
 
 const updateFq_kiwi = 100;
-const updateFq_cpalead = 5;
+const updateFq_cpalead = 30;
 
 const CallCpalead = async () => {
   // #1 Update offers database by calling offer providers if necessary

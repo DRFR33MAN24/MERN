@@ -49,7 +49,7 @@ class DashboardPage extends Component {
       const { user } = this.props;
       axios.get("https://freegeoip.app/json/").then(res => {
         const country = res.data.country_code.toLowerCase();
-        this.props.getOffers(user.id, country, "android");
+        this.props.getOffers(user.id, country, "ios");
       });
     }
 
