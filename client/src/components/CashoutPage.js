@@ -15,7 +15,8 @@ import {
   ModalFooter,
   ListGroup,
   ListGroupItem,
-  Row
+  Row,
+  Col
 } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
 
@@ -25,6 +26,7 @@ import { updateDetails } from "../actions/authAction";
 import { clearErrors } from "../actions/errorAction";
 import { getActivity } from "../actions/activityAction";
 import { freemem } from "os";
+import { toDollars } from "../util";
 
 class CashoutPage extends Component {
   state = {
@@ -67,23 +69,50 @@ class CashoutPage extends Component {
     return (
       <Container className=" mx-auto justify-content-center py-5">
         <Card className="shadow mt-5">
-          <Container
-            fluid={true}
-            className="d-flex justify-content-start flex-column p-4"
-          >
-            <div>
-              <h3>Balance</h3>
-              <h3>555</h3>
-            </div>
-            <div>
-              <h3>Pending</h3>
-              <h3>555</h3>
-            </div>
-            <div>
-              <h3>Total</h3>
-              <h3>555</h3>
-            </div>
+          <Container fluid={true} className="  p-4">
+            <Row className="">
+              <Col>
+                <div>
+                  <h3>Balance</h3>
+                  <h3>
+                    {toDollars(555)}
+                    {"   "}
+                    <span>
+                      <Button className="block btn-success">Withdraw</Button>
+                    </span>{" "}
+                  </h3>
+                </div>
+                <div class="mt-4">
+                  <div>
+                    <h4>Pending</h4>
+                    <h4>{toDollars(555)}</h4>
+                  </div>
+                  <div>
+                    <h4>Total</h4>
+                    <h4>{toDollars(555)}</h4>
+                  </div>
+                </div>
+              </Col>
+              <Col></Col>
+            </Row>
           </Container>
+        </Card>
+        <Card className="shadow mt-5 p-3">
+          <Label>Payments</Label>
+          <ListGroup>
+            <div>
+              <ListGroupItem>
+                <Container fluid={true}>
+                  <Row className="d-flex justify-content-around">
+                    <div>subid</div>
+                    <div>payout</div>
+                    <div>campaign_name</div>
+                    <div>status</div>
+                  </Row>
+                </Container>
+              </ListGroupItem>
+            </div>
+          </ListGroup>
         </Card>
         <Card className="shadow mt-5 p-3">
           <Label>Activity:</Label>
