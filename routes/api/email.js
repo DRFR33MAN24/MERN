@@ -22,9 +22,9 @@ var transporter = nodemailer.createTransport(
 
 router.post("/send", function (req, res) {
   console.log("sending Email");
-  const hash = crypto.createHash('md5').update(req.body.email).digest('hex');
+  rand = crypto.createHash('md5').update(req.body.email).digest('hex');
   host = req.get("host");
-  link = "http://" + host + "/api/email" + "/verify?id=" + hash;
+  link = "http://" + host + "/api/email" + "/verify?id=" + rand;
   mailOptions = {
     to: req.body.email,
     subject: "Please confirm your Email account",
