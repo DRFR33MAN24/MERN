@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/auth");
 const axios = require("axios");
-
+const util = require("../../util");
 const Postback = require("../../models/Postback");
 
 router.post("/", (req, res) => {
@@ -21,6 +21,7 @@ router.post("/", (req, res) => {
   })
     .then(postback => {
       console.log("retrived activity", postback);
+      postback.payout = util.applyCut(postback.payout);
       res.json(postback);
     })
     .catch(err => console.log(err));
