@@ -17,3 +17,4 @@ export const SENT_SUCCESS = "SENT_SUCCESS";
 export const SENT_FAIL = "SENT_FAIL";
 export const GET_ACTIVITY = "GET_ACTIVITY";
 export const ACTIVITY_LOADING = "ACTIVITY_LOADING";
+export const SUB_PAYMENT = "SUB_PAYMENT";
