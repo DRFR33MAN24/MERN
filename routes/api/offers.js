@@ -17,6 +17,9 @@ const url_cpalead =
 const url_kiwi =
   "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/?country=ALL";
 
+const updateFq_kiwi = 100;
+const updateFq_cpalead = 5;
+
 const CallCpalead = async () => {
   // #1 Update offers database by calling offer providers if necessary
   let offers_cpalead = [];
@@ -29,7 +32,7 @@ const CallCpalead = async () => {
   ); // minutes
   console.log("Time since last update cpalead", diffMins);
 
-  if (diffMins > 100) {
+  if (diffMins > updateFq_cpalead) {
     const res = await axios.get(url_cpalead);
 
     console.log("Calling cpalead API");
@@ -97,7 +100,7 @@ const CallKiwi = async () => {
   ); // minutes
   console.log("Time since last update kiwi", diffMins);
 
-  if (diffMins > 100) {
+  if (diffMins > updateFq_kiwi) {
     const res = await axios.get(url_kiwi);
     console.log("Calling kiwi API");
     res.data.offers.map(
@@ -166,7 +169,9 @@ router.post("/", (req, res) => {
 
       console.log("retrived offers", offer);
       res.json(offer);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   })();
 });
 module.exports = router;

@@ -18,7 +18,7 @@ const Offer = db.define(
 
     disabled: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true
+      defaultValue: false
     },
     title: {
       type: DataTypes.STRING
