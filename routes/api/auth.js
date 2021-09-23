@@ -4,6 +4,8 @@ const bcryptjs = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
 const auth = require("../../middleware/auth");
+const axios = require("axios");
+const { stringify } = require("query-string");
 // User Model
 const User = require("../../models/User");
 
@@ -13,16 +15,17 @@ const User = require("../../models/User");
 router.post("/", async (req, res) => {
   const { email, password, token } = req.body;
   // Verify URL
-  const query = JSON.stringify({
+  const query = stringify({
     secret: config.get("reCAPTCHA"),
     response: req.body.token,
     remoteip: req.connection.remoteAddress
   });
   const verifyURL = `${config.get("verifyURL")} + ${query}`;
+  console.log(verifyURL);
   const body = await axios.get(verifyURL);
   if (body.data.success !== undefined && !body.data.success) {
     console.log(body.data);
-    return res.status(400).json({ msg: "Failed captch verification" });
+    return res.status(400).json({ msg: "Failed captcha verification" });
   }
 
   if (!email || !password) {

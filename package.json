@@ -27,6 +27,7 @@
     "nodemailer": "^6.6.3",
     "nodemailer-smtp-transport": "^2.7.4",
     "prop-types": "^15.7.2",
+    "query-string": "^7.0.1",
     "sequelize": "^6.6.5"
   },
   "devDependencies": {
