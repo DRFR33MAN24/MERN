@@ -20,11 +20,11 @@ router.post("/", async (req, res) => {
     response: req.body.token,
     remoteip: req.connection.remoteAddress
   });
-  const verifyURL = `${config.get("verifyURL")} + ${query}`;
-  console.log(verifyURL);
+  const verifyURL = `${config.get("verifyURL")}${query}`;
+  //console.log(verifyURL);
   const body = await axios.get(verifyURL);
+  //console.log(body.data);
   if (body.data.success !== undefined && !body.data.success) {
-    console.log(body.data);
     return res.status(400).json({ msg: "Failed captcha verification" });
   }
 
