@@ -13,7 +13,7 @@ const User = require("../../models/User");
 router.post("/", async (req, res) => {
   const { email, password, token } = req.body;
   // Verify URL
-  const query = stringify({
+  const query = JSON.stringify({
     secret: config.get("reCAPTCHA"),
     response: req.body.token,
     remoteip: req.connection.remoteAddress
@@ -21,6 +21,7 @@ router.post("/", async (req, res) => {
   const verifyURL = `${config.get("verifyURL")} + ${query}`;
   const body = await axios.get(verifyURL);
   if (body.data.success !== undefined && !body.data.success) {
+    console.log(body.data);
     return res.status(400).json({ msg: "Failed captch verification" });
   }
 
