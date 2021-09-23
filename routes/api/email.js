@@ -5,6 +5,7 @@ const User = require("../../models/User");
 const Hash = require("../../models/Hash");
 var nodemailer = require("nodemailer");
 var smtpTransport = require("nodemailer-smtp-transport");
+const jwt = require('jsonwebtoken');
 
 var rand, mailOptions, host, link;
 
@@ -19,11 +20,11 @@ var transporter = nodemailer.createTransport(
   })
 );
 
-router.post("/send", function(req, res) {
+router.post("/send", function (req, res) {
   console.log("sending Email");
-  rand = Math.floor(Math.random() * 100 + 54);
+  const hash = crypto.createHash('md5').update(req.body.email).digest('hex');
   host = req.get("host");
-  link = "http://" + host + "/api/email" + "/verify?id=" + rand;
+  link = "http://" + host + "/api/email" + "/verify?id=" + hash;
   mailOptions = {
     to: req.body.email,
     subject: "Please confirm your Email account",
@@ -42,7 +43,7 @@ router.post("/send", function(req, res) {
     .then(() => console.log("Hash saved...."))
     .catch(() => console.log("Operation failed"));
 
-  transporter.sendMail(mailOptions, function(error, response) {
+  transporter.sendMail(mailOptions, function (error, response) {
     if (error) {
       console.log(error);
       res.json({ sent: false });
@@ -54,7 +55,7 @@ router.post("/send", function(req, res) {
   });
 });
 
-router.get("/verify", function(req, res) {
+router.get("/verify", function (req, res) {
   console.log("Domain is matched. Information is from Authentic email");
 
   Hash.findOne({ where: { hash: req.query.id } }).then(h => {
