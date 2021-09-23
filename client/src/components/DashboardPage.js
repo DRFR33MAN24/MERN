@@ -49,7 +49,7 @@ class DashboardPage extends Component {
       const { user } = this.props;
       axios.get("https://freegeoip.app/json/").then(res => {
         const country = res.data.country_code.toLowerCase();
-        this.props.getOffers(user.id, "us", "ios");
+        this.props.getOffers(user.id, country, "android");
       });
     }
 
@@ -128,7 +128,7 @@ class DashboardPage extends Component {
     //const { user } = this.props;
     // console.log(user.id);
     const isAuthenticated = this.props.isAuthenticated;
-    console.log(offers);
+    // console.log(offers);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
     if (!isAuthenticated) {
