@@ -17,6 +17,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/authAction";
 import { clearErrors, returnErrors } from "../../actions/errorAction";
+import LoadingModal from "../LoadingModal";
 
 class LoginPage extends Component {
   state = {
@@ -27,6 +28,7 @@ class LoginPage extends Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
+    isLoading: PropTypes.bool,
     error: PropTypes.object.isRequired,
     login: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
@@ -34,7 +36,7 @@ class LoginPage extends Component {
     user: PropTypes.object
   };
 
-  componentDidMount(prevProps) {}
+  componentDidMount(prevProps) { }
   componentDidUpdate(prevProps, prevState) {
     const isAuthenticated = this.props.isAuthenticated;
     const error = this.props.error;
@@ -75,6 +77,7 @@ class LoginPage extends Component {
   };
   render() {
     const isAuthenticated = this.props.isAuthenticated;
+    const isLoading = this.props.isLoading;
     console.log("login render", isAuthenticated);
     const dashboard = <Redirect exact to="/Dashboard" />;
     if (isAuthenticated) {
@@ -82,7 +85,9 @@ class LoginPage extends Component {
     }
 
     return (
+
       <Container className=" mx-auto justify-content-center mt-5 mb-5">
+        <LoadingModal open={isLoading} />
         <Container className=" mx-auto justify-content-center text-center p-5">
           <Icon.Key size={128} />
         </Container>
@@ -135,6 +140,7 @@ class LoginPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  isLoading: state.auth.isLoading,
   error: state.error,
   user: state.auth.user
 });
