@@ -9,7 +9,10 @@ router.post("/", (req, res) => {
   console.log("Get Activity Route Called");
   const { subid } = req.body;
 
-  // await Promise.all([CallCpalead(), CallKiwi()]);
+  // findall records with a given subid in postback
+  // ignore disabled offers
+  // apply cut on remaining offers
+  // sort by date and retrurn
 
   Postback.findAll({
     where: { subid: subid },
