@@ -4,6 +4,7 @@ const auth = require("../../middleware/auth");
 const axios = require("axios");
 const util = require("../../util");
 const Postback = require("../../models/Postback");
+const Payment = require("../../models/Payment");
 
 router.post("/", (req, res) => {
   console.log("Get Activity Route Called");
@@ -16,7 +17,7 @@ router.post("/", (req, res) => {
 
   Postback.findAll({
     where: { subid: subid },
-    order: [['createdAt', 'DESC']],
+    order: [["createdAt", "DESC"]],
     raw: true,
     nest: true
   })
@@ -25,6 +26,20 @@ router.post("/", (req, res) => {
       postback.payout = util.applyCut(postback.payout);
       res.json(postback);
     })
+    .catch(err => console.log(err));
+});
+
+router.post("/payment", (req, res) => {
+  console.log("Get Activity Payment Route Called");
+  const { subid, payout } = req.body;
+
+  Payment.create({
+    subid: subid,
+    payout: payout,
+    status: "pending",
+    submitDate: Date.now
+  })
+    .then(() => console.log("Payment order submitted"))
     .catch(err => console.log(err));
 });
 module.exports = router;
