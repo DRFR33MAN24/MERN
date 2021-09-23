@@ -17,6 +17,7 @@ import PropTypes from "prop-types";
 import { register } from "../../actions/authAction";
 import { sendEmail } from "../../actions/sendEmailAction";
 import { clearErrors, returnErrors } from "../../actions/errorAction";
+import LoadingModal from '../LoadingModal';
 import { bindActionCreators } from "redux";
 
 class RegisterPage extends Component {
@@ -30,6 +31,7 @@ class RegisterPage extends Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
+    isLoading: PropTypes.bool,
     error: PropTypes.object.isRequired,
     register: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
@@ -80,7 +82,7 @@ class RegisterPage extends Component {
 
   render() {
     const isAuthenticated = this.props.isAuthenticated;
-
+    const isLoading = this.props.isLoading;
     console.log("login render", isAuthenticated);
 
     const dashboard = <Redirect exact to="/Dashboard" />;
@@ -91,6 +93,7 @@ class RegisterPage extends Component {
 
     return (
       <Container className="mx-auto justify-content-center mt-5">
+        <LoadingModal open={isLoading} />
         <Container className=" mx-auto justify-content-center text-center p-5">
           <Icon.Key size={128} />
         </Container>
@@ -153,7 +156,7 @@ class RegisterPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-
+  isLoading: state.auth.isLoading,
   error: state.error,
   user: state.auth.user,
   emailSent: state.auth.mail_sent
