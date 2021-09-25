@@ -3,7 +3,8 @@ const router = express.Router();
 const bcryptjs = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
-
+const axios = require("axios");
+const { stringify } = require("query-string");
 // User Model
 const User = require("../../models/User");
 
@@ -11,7 +12,21 @@ const User = require("../../models/User");
 // @desc Register New User
 // @acces Public
 router.post("/", (req, res) => {
-  const { name, email, password, active } = req.body;
+  const { name, email, password, active, token } = req.body;
+
+  // Verify URL
+  const query = stringify({
+    secret: config.get("reCAPTCHA"),
+    response: req.body.token,
+    remoteip: req.connection.remoteAddress
+  });
+  const verifyURL = `${config.get("verifyURL")}${query}`;
+  //console.log(verifyURL);
+  const body = await axios.get(verifyURL);
+  //console.log(body.data);
+  if (body.data.success !== undefined && !body.data.success) {
+    return res.status(400).json({ msg: "Failed captcha verification" });
+  }
 
   if (!name || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });

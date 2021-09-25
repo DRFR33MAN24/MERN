@@ -12,6 +12,7 @@ import {
 } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
+import ReCaptchaV2 from "react-google-recaptcha";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../../actions/authAction";
@@ -26,7 +27,8 @@ class RegisterPage extends Component {
     email: "",
     password: "",
     active: false,
-    msg: ""
+    msg: "",
+    token: ""
   };
 
   static propTypes = {
@@ -56,7 +58,12 @@ class RegisterPage extends Component {
       //this.props.clearErrors();
     }
   }
-
+  handleToken = token => {
+    this.setState({ token: token });
+  };
+  handleExpire = () => {
+    this.setState({ token: null });
+  };
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -66,14 +73,15 @@ class RegisterPage extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { name, email, password, active } = this.state;
+    const { name, email, password, active, token } = this.state;
 
     // Create user object
     const newUser = {
       name,
       email,
       password,
-      active
+      active,
+      token
     };
     // Attempt to register
     this.props.register(newUser);
@@ -134,6 +142,11 @@ class RegisterPage extends Component {
                 placeholder="Password"
                 onChange={this.onChange}
                 className="mb-3"
+              />
+              <ReCaptchaV2
+                sitekey="6LfG0occAAAAABe0wZRxEEiRfF8viAUIWLOaqYkI"
+                onChange={this.handleToken}
+                onExpired={this.handleExpire}
               />
               <Button color="dark" style={{ marginTop: "2rem" }} block>
                 Register
