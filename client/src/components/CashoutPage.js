@@ -41,7 +41,7 @@ class CashoutPage extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
-    activity: PropTypes.object,
+    activity: PropTypes.array,
     getActivity: PropTypes.func.isRequired,
     submitPayment: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
@@ -52,7 +52,7 @@ class CashoutPage extends Component {
     const { error, isAuthenticated } = this.props;
     this.props.getActivity(13);
   }
-  componentDidUpdate(prevProps, prevState) {}
+  componentDidUpdate(prevProps, prevState) { }
   onWithdraw = () => {
     this.props.submitPayment();
     // this.props.getActivity();
@@ -60,8 +60,9 @@ class CashoutPage extends Component {
   render() {
     const isAuthenticated = this.props.isAuthenticated;
     const user = this.props.user;
-    const { activity } = this.props.activity;
-    console.log(activity);
+    console.log(this.props.activity);
+    const { postpack, payment, total } = this.props.activity;
+
     const formEnabled = this.state.formEnabled;
     //console.log(offers);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
@@ -138,7 +139,7 @@ class CashoutPage extends Component {
                 </Container>
               </ListGroupItem>
             </div>
-            {activity.map(({ payout, subid, campaign_name, status }) => (
+            {postpack.map(({ payout, subid, campaign_name, status }) => (
               <div className="">
                 <ListGroupItem
                   color={status === "credited" ? "success" : "danger"}
