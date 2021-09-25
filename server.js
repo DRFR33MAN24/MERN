@@ -44,6 +44,7 @@ app.use("/api/activity", require("./routes/api/activity"));
 app.use("/api/postback", require("./routes/api/postback"));
 app.use("/api/email", require("./routes/api/email"));
 app.use("/api/stats", require("./routes/api/stats"));
+app.use("/api/contact", require("./routes/api/contact"));
 
 // Serve static assets if in production
 
