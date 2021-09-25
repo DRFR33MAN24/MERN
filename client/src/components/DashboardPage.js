@@ -26,7 +26,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../actions/authAction";
 import { Timestamp } from "bson";
-import { toDollars } from "../util";
+import { toDollars, getOS } from "../util";
 import axios from "axios";
 
 class DashboardPage extends Component {
@@ -47,9 +47,10 @@ class DashboardPage extends Component {
     console.log("dashboard DidMount is Auth", this.props.isAuthenticated);
     if (this.props.isAuthenticated) {
       const { user } = this.props;
+      const clientOS = getOS();
       axios.get("https://freegeoip.app/json/").then(res => {
         const country = res.data.country_code.toLowerCase();
-        this.props.getOffers(user.id, country, "ios");
+        this.props.getOffers(user.id, country, clientOS);
       });
     }
 
