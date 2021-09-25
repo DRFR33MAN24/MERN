@@ -166,22 +166,24 @@ class CashoutPage extends Component {
                 </Container>
               </ListGroupItem>
             </div>
-            {/* {postback.map(({ payout, subid, campaign_name, status }) => (
-              <div className="">
-                <ListGroupItem
-                  color={status === "credited" ? "success" : "danger"}
-                >
-                  <Container fluid={true}>
-                    <Row className="d-flex justify-content-around">
-                      <div>{subid}</div>
-                      <div>{payout}</div>
-                      <div>{campaign_name}</div>
-                      <div>{status}</div>
-                    </Row>
-                  </Container>
-                </ListGroupItem>
-              </div>
-            ))} */}
+            {postback
+              ? postback.map(({ payout, subid, campaign_name, status }) => (
+                  <div className="">
+                    <ListGroupItem
+                      color={status === "credited" ? "success" : "danger"}
+                    >
+                      <Container fluid={true}>
+                        <Row className="d-flex justify-content-around">
+                          <div>{subid}</div>
+                          <div>{payout}</div>
+                          <div>{campaign_name}</div>
+                          <div>{status}</div>
+                        </Row>
+                      </Container>
+                    </ListGroupItem>
+                  </div>
+                ))
+              : null}
           </ListGroup>
         </Card>
       </Container>
