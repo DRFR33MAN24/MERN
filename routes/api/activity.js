@@ -27,6 +27,10 @@ router.post("/", (req, res) => {
       res.json(postback);
     })
     .catch(err => console.log(err));
+
+  // find all payments
+  // get total and pending valuss
+  // return all in a big object
 });
 
 router.post("/payment", (req, res) => {

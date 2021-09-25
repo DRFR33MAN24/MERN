@@ -24,7 +24,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { updateDetails } from "../actions/authAction";
 import { clearErrors } from "../actions/errorAction";
-import { getActivity } from "../actions/activityAction";
+import { getActivity, submitPayment } from "../actions/activityAction";
 import { freemem } from "os";
 import { toDollars } from "../util";
 
@@ -43,6 +43,7 @@ class CashoutPage extends Component {
     error: PropTypes.object.isRequired,
     activity: PropTypes.object,
     getActivity: PropTypes.func.isRequired,
+    submitPayment: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
     user: PropTypes.object
   };
@@ -52,7 +53,10 @@ class CashoutPage extends Component {
     this.props.getActivity(13);
   }
   componentDidUpdate(prevProps, prevState) {}
-
+  onWithdraw = () => {
+    this.props.submitPayment();
+    // this.props.getActivity();
+  };
   render() {
     const isAuthenticated = this.props.isAuthenticated;
     const user = this.props.user;
@@ -78,7 +82,12 @@ class CashoutPage extends Component {
                     {toDollars(555)}
                     {"   "}
                     <span>
-                      <Button className="block btn-success">Withdraw</Button>
+                      <Button
+                        className="block btn-success"
+                        onClick={this.onWithdraw}
+                      >
+                        Withdraw
+                      </Button>
                     </span>{" "}
                   </h3>
                 </div>
@@ -159,6 +168,8 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, { getActivity, clearErrors })(
-  CashoutPage
-);
+export default connect(mapStateToProps, {
+  getActivity,
+  submitPayment,
+  clearErrors
+})(CashoutPage);

@@ -17,7 +17,7 @@ export default function(state = initialState, action) {
     case SUB_PAYMENT:
       return {
         ...state,
-        activity: action.payload,
+
         loading: false
       };
 

@@ -39,8 +39,7 @@ export const submitPayment = (subid, payout) => dispatch => {
     .then(res => {
       //console.log(res.data.offers);
       dispatch({
-        type: SUB_PAYMENT,
-        payload: res.data
+        type: SUB_PAYMENT
       });
     })
     .catch(err =>
