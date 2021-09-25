@@ -40,6 +40,7 @@ class CashoutPage extends Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
+    isLoading: PropTypes.bool,
     error: PropTypes.object.isRequired,
     activity: PropTypes.object,
     getActivity: PropTypes.func.isRequired,
@@ -57,10 +58,20 @@ class CashoutPage extends Component {
     }
     // this.props.getActivity(13);
   }
-  componentDidUpdate(prevProps, prevState) {}
+  componentDidUpdate(prevProps, prevState) {
+    const isLoading = this.props.isLoading;
+    if (prevProps.isLoading != isLoading && !isLoading) {
+      const { user } = this.props;
+
+      if (user) {
+        this.props.getActivity(user.id);
+      }
+    }
+  }
   onWithdraw = () => {
-    this.props.submitPayment();
-    // this.props.getActivity();
+    const user = this.props.user;
+    this.props.submitPayment(user.id);
+    //this.props.getActivity(user.id);
   };
   render() {
     const isAuthenticated = this.props.isAuthenticated;
@@ -193,6 +204,7 @@ class CashoutPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  isLoading: state.auth.isLoading,
   activity: state.activity.activity,
   error: state.error,
   user: state.auth.user

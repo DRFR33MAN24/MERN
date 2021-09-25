@@ -25,7 +25,7 @@ export const getActivity = subid => dispatch => {
       dispatch(returnErrors(err.response.data, err.response.status))
     );
 };
-export const submitPayment = (subid, payout) => dispatch => {
+export const submitPayment = subid => dispatch => {
   dispatch(setActivityLoading());
   console.log("activity payment action called");
   const config = {
@@ -42,6 +42,7 @@ export const submitPayment = (subid, payout) => dispatch => {
         type: SUB_PAYMENT
       });
     })
+
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );

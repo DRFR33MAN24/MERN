@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../../middleware/auth");
-const axios = require("axios");
+
 const util = require("../../util");
 const Postback = require("../../models/Postback");
 const Payment = require("../../models/Payment");
-
+const User = require("../../models/User");
 router.post("/", (req, res) => {
   console.log("Get Activity Route Called");
   const { subid } = req.body;
@@ -63,17 +62,38 @@ router.post("/", (req, res) => {
   // return all in a big object
 });
 
-router.post("/payment", (req, res) => {
+router.post("/payment", async (req, res) => {
   console.log("Get Activity Payment Route Called");
-  const { subid, payout } = req.body;
+  const { subid } = req.body;
+  let balance = 0;
+  try {
+    user = await User.findOne({ where: { id: subid }, plain: true });
+    console.log(user);
+    balance = user.balance;
+  } catch (error) {}
+  try {
+    await Payment.create({
+      subid: subid,
+      payout: balance,
+      status: "pending",
+      submitDate: Date.now
+    });
+    console.log("Payment order submitted");
+  } catch (error) {
+    console.log(error);
+  }
 
-  Payment.create({
-    subid: subid,
-    payout: payout,
-    status: "pending",
-    submitDate: Date.now
-  })
-    .then(() => console.log("Payment order submitted"))
-    .catch(err => console.log(err));
+  try {
+    await User.update(
+      { balance: 0 },
+      {
+        where: {
+          id: subid
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
 });
 module.exports = router;
