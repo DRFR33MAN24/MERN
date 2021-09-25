@@ -1,7 +1,7 @@
 import { GET_ACTIVITY, ACTIVITY_LOADING, SUB_PAYMENT } from "../actions/types";
 
 const initialState = {
-  activity: [],
+  activity: {},
   loading: false
 };
 

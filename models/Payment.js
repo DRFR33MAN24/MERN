@@ -1,7 +1,7 @@
 const db = require("./../database");
 const { DataTypes } = require("sequelize");
 const Payment = db.define(
-  "Postback",
+  "Payment",
   {
     // Model attributes are defined here
     id: {

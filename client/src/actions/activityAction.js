@@ -15,7 +15,7 @@ export const getActivity = subid => dispatch => {
   axios
     .post("/api/activity", body, config)
     .then(res => {
-      //console.log(res.data.offers);
+      // console.log(res.data);
       dispatch({
         type: GET_ACTIVITY,
         payload: res.data

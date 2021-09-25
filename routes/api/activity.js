@@ -6,7 +6,7 @@ const util = require("../../util");
 const Postback = require("../../models/Postback");
 const Payment = require("../../models/Payment");
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   console.log("Get Activity Route Called");
   const { subid } = req.body;
 
@@ -14,54 +14,52 @@ router.post("/", (req, res) => {
   // ignore disabled offers
   // apply cut on remaining offers
   // sort by date and retrurn
-  const activity = {};
-  const total = 0;
-  (async function () {
-    try {
-      const postback = await Postback.findAll({
-        where: { subid: subid },
-        order: [["createdAt", "DESC"]],
-        raw: true,
-        nest: true
-      });
 
-      const total = 0;
-      console.log("retrived activity", postback);
-      postback.map(({ payout }) => {
-        payout = util.applyCut(payout);
-        total = total + payout;
-      });
+  let total = 0;
+  let postback;
+  try {
+    postback = await Postback.findAll({
+      where: { subid: subid },
+      order: [["createdAt", "DESC"]],
+      raw: true,
+      nest: true
+    });
 
-      // res.json(postback);
-    } catch (error) {
-      console.log(error);
-    }
+    console.log("retrived activity", postback);
+    postback.map(({ payout }) => {
+      payout = util.applyCut(payout);
+      total = total + payout;
+    });
 
-    // find all payments
-    try {
-      payment = await Payment.findAll({
-        where: { subid: subid },
-        order: [["createdAt", "DESC"]],
-        raw: true,
-        nest: true
-      });
+    // res.json(postback);
+  } catch (error) {
+    console.log(error);
+  }
+  let payment;
+  try {
+    payment = await Payment.findAll({
+      where: { subid: subid },
+      order: [["createdAt", "DESC"]],
+      raw: true,
+      nest: true
+    });
 
-      console.log("retrived payment", postback);
+    console.log("retrived payment", postback);
 
-      // res.json(payment);
-    } catch (error) {
-      console.log(error);
-    }
+    // res.json(payment);
+  } catch (error) {
+    console.log(error);
+  }
 
-    activity = {
-      payment: payment,
-      postback: postback,
-      total: total
-    }
-    res.json(activity);
-    // get total and pending valuss
-    // return all in a big object
-  })();
+  const activity = {
+    payment: payment,
+    postback: postback,
+    total: total
+  };
+  res.json(activity);
+  console.log(activity);
+  // get total and pending valuss
+  // return all in a big object
 });
 
 router.post("/payment", (req, res) => {

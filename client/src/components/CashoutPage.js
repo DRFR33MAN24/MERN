@@ -41,7 +41,7 @@ class CashoutPage extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
-    activity: PropTypes.array,
+    activity: PropTypes.object,
     getActivity: PropTypes.func.isRequired,
     submitPayment: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
@@ -56,7 +56,7 @@ class CashoutPage extends Component {
     }
     // this.props.getActivity(13);
   }
-  componentDidUpdate(prevProps, prevState) { }
+  componentDidUpdate(prevProps, prevState) {}
   onWithdraw = () => {
     this.props.submitPayment();
     // this.props.getActivity();
@@ -66,7 +66,7 @@ class CashoutPage extends Component {
     const user = this.props.user;
     console.log(this.props.activity);
     const { postpack, payment, total } = this.props.activity;
-
+    console.log(postpack, payment, total);
     const formEnabled = this.state.formEnabled;
     //console.log(offers);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
@@ -126,7 +126,7 @@ class CashoutPage extends Component {
                 </Container>
               </ListGroupItem>
             </div>
-            {payment.map(({ payout, subid, status }) => (
+            {/* {payment.map(({ payout, subid, status }) => (
               <div className="">
                 <ListGroupItem
                   color={status === "credited" ? "success" : "danger"}
@@ -140,7 +140,7 @@ class CashoutPage extends Component {
                   </Container>
                 </ListGroupItem>
               </div>
-            ))}
+            ))} */}
           </ListGroup>
         </Card>
         <Card className="shadow mt-5 p-3">
@@ -158,7 +158,7 @@ class CashoutPage extends Component {
                 </Container>
               </ListGroupItem>
             </div>
-            {postpack.map(({ payout, subid, campaign_name, status }) => (
+            {/* {postpack.map(({ payout, subid, campaign_name, status }) => (
               <div className="">
                 <ListGroupItem
                   color={status === "credited" ? "success" : "danger"}
@@ -173,7 +173,7 @@ class CashoutPage extends Component {
                   </Container>
                 </ListGroupItem>
               </div>
-            ))}
+            ))} */}
           </ListGroup>
         </Card>
       </Container>
@@ -183,7 +183,7 @@ class CashoutPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  activity: state.activity,
+  activity: state.activity.activity,
   error: state.error,
   user: state.auth.user
 });
