@@ -50,7 +50,7 @@ class CashoutPage extends Component {
 
   componentDidMount(prevProps) {
     const { error, isAuthenticated } = this.props;
-    const user = this.props.user;
+    const { user } = this.props;
     console.log(user);
     if (user) {
       this.props.getActivity(user.id);
@@ -75,13 +75,13 @@ class CashoutPage extends Component {
     if (!isAuthenticated) {
       return login;
     }
-    if (
-      postback === undefined ||
-      payment === undefined ||
-      total === undefined
-    ) {
-      return;
-    }
+    // if (
+    //   postback === undefined ||
+    //   payment === undefined ||
+    //   total === undefined
+    // ) {
+    //   return;
+    // }
 
     return (
       <Container className=" mx-auto justify-content-center py-5">
