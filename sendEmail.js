@@ -1,31 +1,29 @@
 var nodemailer = require("nodemailer");
 var smtpTransport = require("nodemailer-smtp-transport");
 
-var transporter = nodemailer.createTransport(
-  smtpTransport({
-    service: "gmail",
-    host: "smtp.gmail.com",
-    auth: {
-      user: "cudddan@gmail.com",
-      pass: "blackmesa-123"
-    }
-  })
-);
+async function SendMail(mailOptions) {
+  return new Promise((resolve, reject) => {
+    var transporter = nodemailer.createTransport(
+      smtpTransport({
+        service: "gmail",
+        host: "smtp.gmail.com",
+        auth: {
+          user: "cudddan@gmail.com",
+          pass: "blackmesa-123"
+        }
+      })
+    );
 
-const sendEmail = (to, subject, html) => {
-  const mailOptions = {
-    to: to,
-    subject: subject,
-    html: html
-  };
-
-  transporter.sendMail(mailOptions, function(error, response) {
-    if (error) {
-      return false;
-    } else {
-      return true;
-    }
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        console.log("error is " + error);
+        resolve(false); // or use rejcet(false) but then you will have to handle errors
+      } else {
+        console.log("Email sent: " + info.response);
+        resolve(true);
+      }
+    });
   });
-};
+}
 
-module.exports = { sendEmail };
+module.exports = { SendMail };
