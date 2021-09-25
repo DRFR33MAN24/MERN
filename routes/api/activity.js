@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
   // sort by date and retrurn
   const activity = {};
   const total = 0;
-  (async function() {
+  (async function () {
     try {
       const postback = await Postback.findAll({
         where: { subid: subid },
@@ -53,6 +53,12 @@ router.post("/", (req, res) => {
       console.log(error);
     }
 
+    activity = {
+      payment: payment,
+      postback: postback,
+      total: total
+    }
+    res.json(activity);
     // get total and pending valuss
     // return all in a big object
   })();
