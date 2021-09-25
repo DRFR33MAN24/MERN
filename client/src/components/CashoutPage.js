@@ -50,7 +50,11 @@ class CashoutPage extends Component {
 
   componentDidMount(prevProps) {
     const { error, isAuthenticated } = this.props;
-    this.props.getActivity(13);
+    const user = this.props.user;
+    if (user) {
+      this.props.getActivity(user.id);
+    }
+    // this.props.getActivity(13);
   }
   componentDidUpdate(prevProps, prevState) { }
   onWithdraw = () => {
@@ -80,7 +84,7 @@ class CashoutPage extends Component {
                 <div>
                   <h3>Balance</h3>
                   <h3>
-                    {toDollars(555)}
+                    {toDollars(user.balance)}
                     {"   "}
                     <span>
                       <Button
@@ -99,7 +103,7 @@ class CashoutPage extends Component {
                   </div>
                   <div>
                     <h4>Total</h4>
-                    <h4>{toDollars(555)}</h4>
+                    <h4>{toDollars(total)}</h4>
                   </div>
                 </div>
               </Col>
@@ -116,12 +120,27 @@ class CashoutPage extends Component {
                   <Row className="d-flex justify-content-around">
                     <div>subid</div>
                     <div>payout</div>
-                    <div>campaign_name</div>
+
                     <div>status</div>
                   </Row>
                 </Container>
               </ListGroupItem>
             </div>
+            {payment.map(({ payout, subid, status }) => (
+              <div className="">
+                <ListGroupItem
+                  color={status === "credited" ? "success" : "danger"}
+                >
+                  <Container fluid={true}>
+                    <Row className="d-flex justify-content-around">
+                      <div>{subid}</div>
+                      <div>{payout}</div>
+                      <div>{status}</div>
+                    </Row>
+                  </Container>
+                </ListGroupItem>
+              </div>
+            ))}
           </ListGroup>
         </Card>
         <Card className="shadow mt-5 p-3">
