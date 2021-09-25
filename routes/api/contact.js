@@ -3,19 +3,7 @@ const router = express.Router();
 
 const axios = require("axios");
 const { stringify } = require("query-string");
-var nodemailer = require("nodemailer");
-var smtpTransport = require("nodemailer-smtp-transport");
-
-var transporter = nodemailer.createTransport(
-  smtpTransport({
-    service: "gmail",
-    host: "smtp.gmail.com",
-    auth: {
-      user: "cudddan@gmail.com",
-      pass: "blackmesa-123"
-    }
-  })
-);
+const {SendMail} = require('../../sendEmail');
 
 const mail = "support@coinguru.biz";
 
@@ -42,15 +30,13 @@ router.post("/", (req, res) => {
     html:`${req.body.email}   ${req.body.message}`
   };
 
-    transporter.sendMail(mailOptions, function (error, response) {
-    if (error) {
-      console.log(error);
-      res.json({ sent: false });
-    } else {
-      console.log("Message sent: " + response.message);
-
-      res.json({ sent: true });
-    }
+  SendMail(mailOptions)
+  .then(res =>{
+      res.json({sent:true})
+  })
+  .catch(err=>{
+      res.json({sent:false})
+      console.log(err);
   })
 
   }
