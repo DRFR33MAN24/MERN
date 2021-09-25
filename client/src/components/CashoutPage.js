@@ -58,16 +58,7 @@ class CashoutPage extends Component {
     }
     // this.props.getActivity(13);
   }
-  componentDidUpdate(prevProps, prevState) {
-    const isLoading = this.props.isLoading;
-    if (prevProps.isLoading != isLoading && !isLoading) {
-      const { user } = this.props;
-
-      if (user) {
-        this.props.getActivity(user.id);
-      }
-    }
-  }
+  componentDidUpdate(prevProps, prevState) {}
   onWithdraw = () => {
     const user = this.props.user;
     this.props.submitPayment(user.id);
