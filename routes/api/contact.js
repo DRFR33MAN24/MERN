@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../../middleware/auth");
+
 const axios = require("axios");
 const { stringify } = require("query-string");
 var nodemailer = require("nodemailer");
@@ -36,7 +36,7 @@ router.post("/", (req, res) => {
   }
 
   else{
-     const   mailOptions = {
+     const mailOptions = {
     to: mail,
     subject: req.body.subject,
     html:`${req.body.email}   ${req.body.message}`
