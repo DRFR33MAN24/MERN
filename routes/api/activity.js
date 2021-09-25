@@ -14,23 +14,48 @@ router.post("/", (req, res) => {
   // ignore disabled offers
   // apply cut on remaining offers
   // sort by date and retrurn
+  const activity = {};
+  const total = 0;
+  (async function() {
+    try {
+      const postback = await Postback.findAll({
+        where: { subid: subid },
+        order: [["createdAt", "DESC"]],
+        raw: true,
+        nest: true
+      });
 
-  Postback.findAll({
-    where: { subid: subid },
-    order: [["createdAt", "DESC"]],
-    raw: true,
-    nest: true
-  })
-    .then(postback => {
+      const total = 0;
       console.log("retrived activity", postback);
-      postback.payout = util.applyCut(postback.payout);
-      res.json(postback);
-    })
-    .catch(err => console.log(err));
+      postback.map(({ payout }) => {
+        payout = util.applyCut(payout);
+        total = total + payout;
+      });
 
-  // find all payments
-  // get total and pending valuss
-  // return all in a big object
+      // res.json(postback);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // find all payments
+    try {
+      payment = await Payment.findAll({
+        where: { subid: subid },
+        order: [["createdAt", "DESC"]],
+        raw: true,
+        nest: true
+      });
+
+      console.log("retrived payment", postback);
+
+      // res.json(payment);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // get total and pending valuss
+    // return all in a big object
+  })();
 });
 
 router.post("/payment", (req, res) => {
