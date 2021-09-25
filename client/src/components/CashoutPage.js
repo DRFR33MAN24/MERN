@@ -134,7 +134,7 @@ class CashoutPage extends Component {
                 </Container>
               </ListGroupItem>
             </div>
-            {payment.map(({ payout, subid, status }) => (
+            {/* {payment.map(({ payout, subid, status }) => (
               <div className="">
                 <ListGroupItem
                   color={status === "credited" ? "success" : "danger"}
@@ -148,7 +148,7 @@ class CashoutPage extends Component {
                   </Container>
                 </ListGroupItem>
               </div>
-            ))}
+            ))} */}
           </ListGroup>
         </Card>
         <Card className="shadow mt-5 p-3">
@@ -166,7 +166,7 @@ class CashoutPage extends Component {
                 </Container>
               </ListGroupItem>
             </div>
-            {postback.map(({ payout, subid, campaign_name, status }) => (
+            {/* {postback.map(({ payout, subid, campaign_name, status }) => (
               <div className="">
                 <ListGroupItem
                   color={status === "credited" ? "success" : "danger"}
@@ -181,7 +181,7 @@ class CashoutPage extends Component {
                   </Container>
                 </ListGroupItem>
               </div>
-            ))}
+            ))} */}
           </ListGroup>
         </Card>
       </Container>
