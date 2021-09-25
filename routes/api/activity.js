@@ -6,7 +6,7 @@ const util = require("../../util");
 const Postback = require("../../models/Postback");
 const Payment = require("../../models/Payment");
 
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
   console.log("Get Activity Route Called");
   const { subid } = req.body;
 
@@ -14,50 +14,51 @@ router.post("/", async (req, res) => {
   // ignore disabled offers
   // apply cut on remaining offers
   // sort by date and retrurn
+  (async function() {
+    let total = 0;
+    let postback;
+    try {
+      postback = await Postback.findAll({
+        where: { subid: subid },
+        order: [["createdAt", "DESC"]],
+        raw: true,
+        nest: true
+      });
 
-  let total = 0;
-  let postback;
-  try {
-    postback = await Postback.findAll({
-      where: { subid: subid },
-      order: [["createdAt", "DESC"]],
-      raw: true,
-      nest: true
-    });
+      console.log("retrived activity", postback);
+      postback.map(({ payout }) => {
+        payout = util.applyCut(payout);
+        total = total + payout;
+      });
 
-    console.log("retrived activity", postback);
-    postback.map(({ payout }) => {
-      payout = util.applyCut(payout);
-      total = total + payout;
-    });
+      // res.json(postback);
+    } catch (error) {
+      console.log(error);
+    }
+    let payment;
+    try {
+      payment = await Payment.findAll({
+        where: { subid: subid },
+        order: [["createdAt", "DESC"]],
+        raw: true,
+        nest: true
+      });
 
-    // res.json(postback);
-  } catch (error) {
-    console.log(error);
-  }
-  let payment;
-  try {
-    payment = await Payment.findAll({
-      where: { subid: subid },
-      order: [["createdAt", "DESC"]],
-      raw: true,
-      nest: true
-    });
+      console.log("retrived payment", payment);
 
-    console.log("retrived payment", postback);
+      // res.json(payment);
+    } catch (error) {
+      console.log(error);
+    }
 
-    // res.json(payment);
-  } catch (error) {
-    console.log(error);
-  }
-
-  const activity = {
-    payment: payment,
-    postback: postback,
-    total: total
-  };
-  res.json(activity);
-  console.log(activity);
+    const activity = {
+      payment: payment,
+      postback: postback,
+      total: total
+    };
+    res.json(activity);
+    console.log(activity);
+  })();
   // get total and pending valuss
   // return all in a big object
 });

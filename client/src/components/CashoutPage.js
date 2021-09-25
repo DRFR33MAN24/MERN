@@ -51,6 +51,7 @@ class CashoutPage extends Component {
   componentDidMount(prevProps) {
     const { error, isAuthenticated } = this.props;
     const user = this.props.user;
+    console.log(user);
     if (user) {
       this.props.getActivity(user.id);
     }
@@ -65,14 +66,21 @@ class CashoutPage extends Component {
     const isAuthenticated = this.props.isAuthenticated;
     const user = this.props.user;
     console.log(this.props.activity);
-    const { postpack, payment, total } = this.props.activity;
-    console.log(postpack, payment, total);
+    const { postback, payment, total } = this.props.activity;
+    console.log(postback, payment, total);
     const formEnabled = this.state.formEnabled;
-    //console.log(offers);
+    //console.log(user.id);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
     if (!isAuthenticated) {
       return login;
+    }
+    if (
+      postback === undefined ||
+      payment === undefined ||
+      total === undefined
+    ) {
+      return;
     }
 
     return (
@@ -126,7 +134,7 @@ class CashoutPage extends Component {
                 </Container>
               </ListGroupItem>
             </div>
-            {/* {payment.map(({ payout, subid, status }) => (
+            {payment.map(({ payout, subid, status }) => (
               <div className="">
                 <ListGroupItem
                   color={status === "credited" ? "success" : "danger"}
@@ -140,7 +148,7 @@ class CashoutPage extends Component {
                   </Container>
                 </ListGroupItem>
               </div>
-            ))} */}
+            ))}
           </ListGroup>
         </Card>
         <Card className="shadow mt-5 p-3">
@@ -158,7 +166,7 @@ class CashoutPage extends Component {
                 </Container>
               </ListGroupItem>
             </div>
-            {/* {postpack.map(({ payout, subid, campaign_name, status }) => (
+            {postback.map(({ payout, subid, campaign_name, status }) => (
               <div className="">
                 <ListGroupItem
                   color={status === "credited" ? "success" : "danger"}
@@ -173,7 +181,7 @@ class CashoutPage extends Component {
                   </Container>
                 </ListGroupItem>
               </div>
-            ))} */}
+            ))}
           </ListGroup>
         </Card>
       </Container>
