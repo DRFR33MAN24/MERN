@@ -28,6 +28,7 @@ import { register } from "../actions/authAction";
 import { Timestamp } from "bson";
 import { toDollars, getOS } from "../util";
 import axios from "axios";
+import NoContent from "./NoContent";
 
 class DashboardPage extends Component {
   state = {
@@ -145,21 +146,27 @@ class DashboardPage extends Component {
           <Container fluid={true}>
             <Label className="">Featured Offers:</Label>
             <Row className="d-flex justify-content-left pl-1">
-              {featuredOffers.map(
-                ({ title, description, link, img, amount, conversion }) => (
-                  <div className="">
-                    {isAuthenticated ? (
-                      <Offer
-                        title={title}
-                        description={description}
-                        link={this.getlink(link, user.id)}
-                        amount={toDollars(amount)}
-                        img={img}
-                        conversion={conversion}
-                      />
-                    ) : null}
-                  </div>
+              {featuredOffers.length != 0 ? (
+                featuredOffers.map(
+                  ({ title, description, link, img, amount, conversion }) => (
+                    <div className="">
+                      {isAuthenticated ? (
+                        <Offer
+                          title={title}
+                          description={description}
+                          link={this.getlink(link, user.id)}
+                          amount={toDollars(amount)}
+                          img={img}
+                          conversion={conversion}
+                        />
+                      ) : (
+                        <NoContent />
+                      )}
+                    </div>
+                  )
                 )
+              ) : (
+                <NoContent />
               )}
             </Row>
           </Container>
