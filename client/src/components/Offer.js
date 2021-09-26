@@ -10,6 +10,7 @@ import {
   CardTitle
 } from "reactstrap";
 import OfferModal from "./OfferModal";
+import siteLogo from "./site_logo2.png";
 
 export default class Offer extends Component {
   state = {
@@ -41,8 +42,8 @@ export default class Offer extends Component {
           >
             <Container fluid={true} className="mr-4">
               <img
-                className="mb-5 ml-2"
-                src="./site_logo2.png"
+                className="mb-5 ml-2 "
+                src={siteLogo}
                 width="80"
                 height="16"
               />
