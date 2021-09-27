@@ -96,15 +96,13 @@ class CashoutPage extends Component {
                   <h3>
                     {toDollars(user.balance)}
                     {"   "}
-                    <span>
-                      <Button
-                        className="block btn-success"
-                        onClick={this.onWithdraw}
-                      >
-                        Withdraw
-                      </Button>
-                    </span>{" "}
                   </h3>
+                  <Button
+                    className="block btn-success mt-1"
+                    onClick={this.onWithdraw}
+                  >
+                    Withdraw
+                  </Button>
                 </div>
                 <div class="mt-4">
                   <div>
