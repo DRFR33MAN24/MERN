@@ -128,29 +128,30 @@ class CashoutPage extends Component {
               <ListGroupItem>
                 <Container fluid={true}>
                   <Row className="d-flex justify-content-around">
-                    <div>subid</div>
-                    <div>payout</div>
-
-                    <div>status</div>
+                    <div>Payout</div>
+                    <div>Status</div>
+                    <div>Submit Date</div>
                   </Row>
                 </Container>
               </ListGroupItem>
             </div>
-            {payment.map(({ payout, subid, status }) => (
-              <div className="">
-                <ListGroupItem
-                  color={status === "credited" ? "success" : "danger"}
-                >
-                  <Container fluid={true}>
-                    <Row className="d-flex justify-content-around">
-                      <div>{subid}</div>
-                      <div>{payout}</div>
-                      <div>{status}</div>
-                    </Row>
-                  </Container>
-                </ListGroupItem>
-              </div>
-            ))}
+            {payment
+              ? payment.map(({ payout, subid, status, submitDate }) => (
+                  <div className="">
+                    <ListGroupItem
+                      color={status === "credited" ? "success" : "danger"}
+                    >
+                      <Container fluid={true}>
+                        <Row className="d-flex justify-content-around">
+                          <div>{payout}</div>
+                          <div>{status}</div>
+                          <div>{submitDate}</div>
+                        </Row>
+                      </Container>
+                    </ListGroupItem>
+                  </div>
+                ))
+              : null}
           </ListGroup>
         </Card>
         <Card className="shadow mt-5 p-3">
