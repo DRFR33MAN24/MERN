@@ -107,7 +107,7 @@ class CashoutPage extends Component {
                 <div class="mt-4">
                   <div>
                     <h4>Pending</h4>
-                    <h4>{toDollars(555)}</h4>
+                    <h4>{toDollars(0)}</h4>
                   </div>
                   <div>
                     <h4>Total</h4>
@@ -159,10 +159,10 @@ class CashoutPage extends Component {
               <ListGroupItem>
                 <Container fluid={true}>
                   <Row className="d-flex justify-content-around">
-                    <div>subid</div>
-                    <div>payout</div>
-                    <div>campaign_name</div>
-                    <div>status</div>
+                    <div>Offer Id</div>
+                    <div>Payout</div>
+                    <div>Status</div>
+                    <div>Date</div>
                   </Row>
                 </Container>
               </ListGroupItem>
