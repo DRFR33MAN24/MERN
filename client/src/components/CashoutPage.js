@@ -27,6 +27,7 @@ import { clearErrors } from "../actions/errorAction";
 import { getActivity, submitPayment } from "../actions/activityAction";
 import { freemem } from "os";
 import { toDollars, getFormattedDate } from "../util";
+import LoadingModal from "./LoadingModal";
 
 class CashoutPage extends Component {
   state = {
@@ -66,6 +67,7 @@ class CashoutPage extends Component {
   };
   render() {
     const isAuthenticated = this.props.isAuthenticated;
+    const isLoading = this.props.loading;
     const user = this.props.user;
     console.log(this.props.activity);
     const { postback, payment, total } = this.props.activity;
@@ -87,6 +89,7 @@ class CashoutPage extends Component {
 
     return (
       <Container className=" mx-auto justify-content-center py-5">
+        <LoadingModal open={isLoading} />
         <Card className="shadow mt-5">
           <Container fluid={true} className="  p-4">
             <Row className="">
