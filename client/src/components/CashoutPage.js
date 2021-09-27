@@ -79,13 +79,6 @@ class CashoutPage extends Component {
     if (!isAuthenticated) {
       return login;
     }
-    // if (
-    //   postback === undefined ||
-    //   payment === undefined ||
-    //   total === undefined
-    // ) {
-    //   return;
-    // }
 
     return (
       <Container className=" mx-auto justify-content-center py-5">
@@ -140,7 +133,19 @@ class CashoutPage extends Component {
               ? payment.map(({ payout, subid, status, submitDate }) => (
                   <div className="">
                     <ListGroupItem
-                      color={status === "credited" ? "success" : "danger"}
+                      color={(() => {
+                        switch (status) {
+                          case "pending":
+                            return "warning";
+
+                          case "paid":
+                            return "success";
+                          case "rejected":
+                            return "danger";
+                          default:
+                            return "warning";
+                        }
+                      })()}
                     >
                       <Container fluid={true}>
                         <Row className="d-flex justify-content-around">
