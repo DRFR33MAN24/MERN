@@ -26,7 +26,7 @@ import { updateDetails } from "../actions/authAction";
 import { clearErrors } from "../actions/errorAction";
 import { getActivity, submitPayment } from "../actions/activityAction";
 import { freemem } from "os";
-import { toDollars } from "../util";
+import { toDollars, getFormattedDate } from "../util";
 
 class CashoutPage extends Component {
   state = {
@@ -145,7 +145,7 @@ class CashoutPage extends Component {
                         <Row className="d-flex justify-content-around">
                           <div>{payout}</div>
                           <div>{status}</div>
-                          <div>{submitDate}</div>
+                          <div>{getFormattedDate(new Date(submitDate))}</div>
                         </Row>
                       </Container>
                     </ListGroupItem>

@@ -81,7 +81,7 @@ router.post("/payment", async (req, res) => {
       subid: subid,
       payout: balance,
       status: "pending",
-      submitDate: util.getFormattedDate(date)
+      submitDate: date
     });
     console.log("Payment order submitted");
   } catch (error) {
