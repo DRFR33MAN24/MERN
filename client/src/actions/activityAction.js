@@ -1,5 +1,5 @@
 import { GET_ACTIVITY, ACTIVITY_LOADING, SUB_PAYMENT } from "./types";
-import { tokenConfig } from "./authAction";
+import { tokenConfig, loadUser } from "./authAction";
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 
@@ -27,6 +27,7 @@ export const getActivity = subid => dispatch => {
 };
 export const submitPayment = subid => dispatch => {
   dispatch(setActivityLoading());
+
   console.log("activity payment action called");
   const config = {
     headers: {
@@ -43,6 +44,7 @@ export const submitPayment = subid => dispatch => {
         payload: res.data
       });
     })
+    .then(() => dispatch(loadUser()))
 
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
