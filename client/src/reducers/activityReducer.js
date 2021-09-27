@@ -2,8 +2,7 @@ import { GET_ACTIVITY, ACTIVITY_LOADING, SUB_PAYMENT } from "../actions/types";
 
 const initialState = {
   activity: {},
-  loading: false,
-  updateRequired: false
+  loading: false
 };
 
 export default function(state = initialState, action) {
@@ -12,16 +11,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         activity: action.payload,
-        loading: false,
-        updateRequired: false
-      };
-
-    case SUB_PAYMENT:
-      return {
-        ...state,
-
-        loading: false,
-        updateRequired: true
+        loading: false
       };
 
     case ACTIVITY_LOADING:

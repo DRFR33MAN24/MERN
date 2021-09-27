@@ -5,7 +5,54 @@ const util = require("../../util");
 const Postback = require("../../models/Postback");
 const Payment = require("../../models/Payment");
 const User = require("../../models/User");
-router.post("/", (req, res) => {
+
+const getActivity = async subid => {
+  let total = 0;
+  let postback;
+  try {
+    postback = await Postback.findAll({
+      where: { subid: subid },
+      order: [["createdAt", "DESC"]],
+      raw: true,
+      nest: true
+    });
+
+    console.log("retrived activity", postback);
+    postback.map(({ payout }) => {
+      payout = util.applyCut(payout);
+      total = total + payout;
+    });
+
+    // res.json(postback);
+  } catch (error) {
+    console.log(error);
+  }
+  let payment;
+  try {
+    payment = await Payment.findAll({
+      where: { subid: subid },
+      order: [["createdAt", "DESC"]],
+      raw: true,
+      nest: true
+    });
+
+    console.log("retrived payment", payment);
+
+    // res.json(payment);
+  } catch (error) {
+    console.log(error);
+  }
+
+  const activity = {
+    payment: payment,
+    postback: postback,
+    total: total
+  };
+  console.log(activity);
+  return activity;
+};
+
+router.post("/", async (req, res) => {
   console.log("Get Activity Route Called");
   const { subid } = req.body;
 
@@ -13,51 +60,8 @@ router.post("/", (req, res) => {
   // ignore disabled offers
   // apply cut on remaining offers
   // sort by date and retrurn
-  (async function() {
-    let total = 0;
-    let postback;
-    try {
-      postback = await Postback.findAll({
-        where: { subid: subid },
-        order: [["createdAt", "DESC"]],
-        raw: true,
-        nest: true
-      });
-
-      console.log("retrived activity", postback);
-      postback.map(({ payout }) => {
-        payout = util.applyCut(payout);
-        total = total + payout;
-      });
-
-      // res.json(postback);
-    } catch (error) {
-      console.log(error);
-    }
-    let payment;
-    try {
-      payment = await Payment.findAll({
-        where: { subid: subid },
-        order: [["createdAt", "DESC"]],
-        raw: true,
-        nest: true
-      });
-
-      console.log("retrived payment", payment);
-
-      // res.json(payment);
-    } catch (error) {
-      console.log(error);
-    }
-
-    const activity = {
-      payment: payment,
-      postback: postback,
-      total: total
-    };
-    res.json(activity);
-    console.log(activity);
-  })();
+  const activity = await getActivity(subid);
+  res.json(activity);
   // get total and pending valuss
   // return all in a big object
 });
@@ -92,6 +96,13 @@ router.post("/payment", async (req, res) => {
         }
       }
     );
+  } catch (error) {
+    console.log(error);
+  }
+
+  try {
+    const activity = await getActivity(subid);
+    res.json(activity);
   } catch (error) {
     console.log(error);
   }

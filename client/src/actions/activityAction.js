@@ -37,9 +37,10 @@ export const submitPayment = subid => dispatch => {
   axios
     .post("/api/activity/payment", body, config)
     .then(res => {
-      //console.log(res.data.offers);
+      console.log(res.data);
       dispatch({
-        type: SUB_PAYMENT
+        type: GET_ACTIVITY,
+        payload: res.data
       });
     })
 
