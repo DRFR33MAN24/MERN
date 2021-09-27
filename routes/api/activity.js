@@ -66,6 +66,15 @@ router.post("/", async (req, res) => {
   // return all in a big object
 });
 
+router.get("/downloadCSV", async (req, res) => {
+  console.log("Get CSV Route Called");
+  // get all payments
+  // get users by subid retrived from payments
+  // get payout and wallet adderess
+  // create csv file save to desk
+  // .then sendFile to browser
+});
+
 router.post("/payment", async (req, res) => {
   console.log("Get Activity Payment Route Called");
   const { subid } = req.body;
