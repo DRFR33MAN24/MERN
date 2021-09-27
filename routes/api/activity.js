@@ -69,6 +69,31 @@ router.post("/", async (req, res) => {
 
 router.get("/downloadCSV", async (req, res) => {
   console.log("Get CSV Route Called");
+
+  const data = [];
+  const users = await User.findAll({
+    include: [
+      {
+        model: Payment
+      }
+    ]
+  });
+
+  users.map(({ wallet, model }) => {
+    let totalPayout = 0;
+
+    model.map(({ payout }) => {
+      totalPayout += payout;
+    });
+
+    data.push({ address: wallet, amount: totalPayout });
+  });
+
+  const csv = new ObjectsToCsv(data);
+  await csv.toDisk("./payments.csv");
+
+  res.download("./payments.csv");
+
   // get all payments
   // get users by subid retrived from payments
   // get payout and wallet adderess
