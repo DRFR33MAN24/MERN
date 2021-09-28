@@ -88,7 +88,8 @@ class AppNavbar extends Component {
       <Fragment>
         <UncontrolledDropdown nav inNavbar>
           <DropdownToggle nav>
-            <Icon.Gear size={24} />
+            {/* <Icon.Gear size={24} /> */}
+            <i class="fa fa-lg fa-cog"></i>
           </DropdownToggle>
           <DropdownMenu right>
             <DropdownItem>
@@ -97,7 +98,7 @@ class AppNavbar extends Component {
                 exact
                 to="/Account"
               >
-                <Icon.Person size={24} />
+                <i class="fa fa-lg fa-user"></i>
                 <div className="ml-3">Account</div>
               </Link>
             </DropdownItem>
@@ -108,7 +109,7 @@ class AppNavbar extends Component {
                 exact
                 to="/Dashboard"
               >
-                <Icon.House size={24} />
+                <i class="fa fa-lg fa-home"></i>
                 <div className="ml-3">Dashboard</div>
               </Link>
             </DropdownItem>
@@ -119,7 +120,7 @@ class AppNavbar extends Component {
                 exact
                 to="/Cashout"
               >
-                <Icon.CashCoin size={24} />
+                <i class="fas fa-lg fa-money-bill-alt"></i>
                 <div className="ml-3">Cashout</div>
               </Link>
             </DropdownItem>
@@ -129,7 +130,7 @@ class AppNavbar extends Component {
                 className="d-flex justify-content-start"
                 onClick={this.props.logout}
               >
-                <Icon.CashCoin size={24} />
+                <i class="fas fa-lg fa-sign-out-alt"></i>
                 <div className="ml-3">Logout</div>
               </div>
             </DropdownItem>
