@@ -63,6 +63,10 @@ body {
   margin-left: 40vw;
 }
 
+.custom-icon {
+  color: #292b2c;
+}
+
 .social-btn {
   display: inline-block;
   border-radius: 20px;

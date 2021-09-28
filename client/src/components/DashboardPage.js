@@ -206,26 +206,31 @@ class DashboardPage extends Component {
                 <NoContent />
               )}
             </Carousel>
-
           </Container>
         </Row>
         <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-light">
           <Nav>
             <NavItem>
               <NavLink href="#" onClick={this.getInstall}>
-                <i class="fa fa-2x fa-gamepad" aria-hidden="true"></i>
+                <i
+                  class="fa fa-2x fa-gamepad custom-icon"
+                  aria-hidden="true"
+                ></i>
                 <span> Games</span>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" onClick={this.getPinSubmit}>
-                <i class="fa fa-2x fa-keyboard" aria-hidden="true"></i>
+                <i
+                  class="fa fa-2x fa-keyboard custom-icon"
+                  aria-hidden="true"
+                ></i>
                 <span> PIN Submit</span>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" onClick={this.getSurvey}>
-                <i class='fas fa-2x fa-poll'></i>
+                <i class="fas fa-2x fa-poll custom-icon"></i>
                 <span> Survey</span>
               </NavLink>
             </NavItem>
