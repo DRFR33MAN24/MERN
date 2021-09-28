@@ -90,7 +90,7 @@ class AppNavbar extends Component {
         <UncontrolledDropdown nav inNavbar>
           <DropdownToggle nav>
             {/* <Icon.Gear size={24} /> */}
-            <i class="fa fa-lg fa-cog"></i>
+            <i class="fa fa-lg fa-cog custom-icon"></i>
           </DropdownToggle>
           <DropdownMenu right>
             <DropdownItem>

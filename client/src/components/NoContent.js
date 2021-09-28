@@ -9,7 +9,7 @@ export default class NoContent extends Component {
           className="d-flex justify-content-center
          text-muted "
         >
-          <h1>NoContent</h1>
+          <h1>Content not Available !!</h1>
         </Container>
       </div>
     );
