@@ -28,6 +28,7 @@ import { getActivity, submitPayment } from "../actions/activityAction";
 import { freemem } from "os";
 import { toDollars, getFormattedDate } from "../util";
 import LoadingModal from "./LoadingModal";
+import PerformanceChart from "./PerformanceChart";
 
 class CashoutPage extends Component {
   state = {
@@ -111,7 +112,9 @@ class CashoutPage extends Component {
                   </div>
                 </div>
               </Col>
-              <Col></Col>
+              <Col>
+                <PerformanceChart />
+              </Col>
             </Row>
           </Container>
         </Card>
