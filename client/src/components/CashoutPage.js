@@ -86,7 +86,7 @@ class CashoutPage extends Component {
         <LoadingModal open={isLoading} />
         <Card className="shadow mt-5">
           <Container fluid={true} className="  p-4">
-            <Row className="">
+            <Row>
               <Col>
                 <div>
                   <h3>Balance</h3>
@@ -113,7 +113,7 @@ class CashoutPage extends Component {
                 </div>
               </Col>
               <Col>
-                <PerformanceChart />
+                <PerformanceChart width={200} />
               </Col>
             </Row>
           </Container>

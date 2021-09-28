@@ -8,7 +8,7 @@ export default class PerformanceChart extends Component {
       datasets: [
         {
           label: "# Offers Completed",
-          data: [12, 19, 3, 5, 2, 3],
+          data: [120, 19, 30, 5, 2, 3],
           fill: false,
           backgroundColor: "rgb(255, 255, 255)",
           borderColor: "rgba(240, 173, 78, 1)"
@@ -32,7 +32,7 @@ export default class PerformanceChart extends Component {
         <div className="header">
           <h1 className="title">Performance</h1>
         </div>
-        <Line data={data} options={options} />
+        <Line width={800} height={300} data={data} options={options} />
       </div>
     );
   }
