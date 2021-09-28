@@ -17,6 +17,7 @@ export default class PerformanceChart extends Component {
     };
 
     const options = {
+      maintainAspectRatio: true,
       scales: {
         yAxes: [
           {
@@ -28,7 +29,14 @@ export default class PerformanceChart extends Component {
       }
     };
     return (
-      <div>
+      <div
+        style={{
+          position: "relative",
+          margin: "auto",
+          width: "60vw",
+          height: "60%"
+        }}
+      >
         <div className="header">
           <h1 className="title">Performance</h1>
         </div>

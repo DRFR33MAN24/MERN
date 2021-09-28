@@ -113,7 +113,7 @@ class CashoutPage extends Component {
                 </div>
               </Col>
               <Col>
-                <PerformanceChart width={200} />
+                <PerformanceChart />
               </Col>
             </Row>
           </Container>
