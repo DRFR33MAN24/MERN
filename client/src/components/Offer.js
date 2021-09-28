@@ -39,15 +39,12 @@ export default class Offer extends Component {
         <Card className="m-2 custom-card-shadow p-3">
           <Container
             fluid={true}
-            className="d-flex flex-row justify-content-between bg-dark"
+            className="d-flex flex-row justify-content-between "
           >
-            <Container
-              fluid={true}
-              className=" d-flex justify-content-start bg-success"
-            >
+            <Container fluid={true} className=" d-flex justify-content-start ">
               <img className="mb-5 " src={siteLogo} width="80" height="16" />
             </Container>
-            <Container className="d-flex flex-row justify-content-center py-3 bg-warning">
+            <Container className="d-flex flex-row justify-content-center py-3 ">
               <Row className="pl-2">
                 <div className=" btn btn-white ">
                   {" "}
