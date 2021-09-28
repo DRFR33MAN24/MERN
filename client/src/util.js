@@ -42,4 +42,15 @@ function getFormattedDate(date) {
   return month + "/" + day + "/" + year;
 }
 
+function Last7Days() {
+  var result = [];
+  for (var i = 0; i < 7; i++) {
+    var d = new Date();
+    d.setDate(d.getDate() - i);
+    result.push(formatDate(d));
+  }
+
+  return result.join(",");
+}
+
 module.exports = { toDollars, getOS, getFormattedDate };
