@@ -54,7 +54,7 @@ class DashboardPage extends Component {
       axios.get("https://freegeoip.app/json/").then(res => {
         const country = res.data.country_code.toLowerCase();
         // this.props.getOffers(user.id, country, clientOS);
-        this.props.getOffers(user.id, "in", "android");
+        this.props.getOffers(user.id, "us", "android");
       });
     }
 
@@ -126,24 +126,24 @@ class DashboardPage extends Component {
   render() {
     const { offers } = this.props.offers;
     const { user } = this.props;
-    const featuredOffers = offers.filter(item => item.featured === true);
-
+    const featuredOffers = offers.filter(item => item.featured === 1);
+    //console.log(featuredOffers);
     const range_min = this.state.show_items * this.state.offer_page;
     const range_max = range_min + this.state.show_items;
 
     const responsive = {
       desktop: {
-        breakpoint: { max: 3000, min: 1024 },
+        breakpoint: { max: 3000, min: 600 },
         items: 3,
         slidesToSlide: 3 // optional, default to 1.
       },
       tablet: {
-        breakpoint: { max: 1024, min: 464 },
+        breakpoint: { max: 600, min: 550 },
         items: 2,
         slidesToSlide: 2 // optional, default to 1.
       },
       mobile: {
-        breakpoint: { max: 464, min: 0 },
+        breakpoint: { max: 400, min: 0 },
         items: 1,
         slidesToSlide: 1 // optional, default to 1.
       }
@@ -173,20 +173,38 @@ class DashboardPage extends Component {
               ssr={true} // means to render carousel on server-side.
               infinite={true}
               autoPlay={this.props.deviceType !== "mobile" ? true : false}
-              autoPlaySpeed={1000}
+              autoPlaySpeed={200}
               keyBoardControl={true}
               customTransition="all .5"
-              transitionDuration={500}
+              transitionDuration={2000}
               containerClass="carousel-container"
               removeArrowOnDeviceType={["tablet", "mobile"]}
               deviceType={this.props.deviceType}
               dotListClass="custom-dot-list-style"
               itemClass="carousel-item-padding-40-px"
             >
-              <div>Item 1</div>
-              <div>Item 2</div>
-              <div>Item 3</div>
-              <div>Item 4</div>
+              {featuredOffers.length != 0 ? (
+                featuredOffers.map(
+                  ({ title, description, link, img, amount, conversion }) => (
+                    <div className="">
+                      {isAuthenticated ? (
+                        <Offer
+                          title={title}
+                          description={description}
+                          link={this.getlink(link, user.id)}
+                          amount={toDollars(amount)}
+                          img={img}
+                          conversion={conversion}
+                        />
+                      ) : (
+                        <NoContent />
+                      )}
+                    </div>
+                  )
+                )
+              ) : (
+                <NoContent />
+              )}
             </Carousel>
             {/* <Row className="d-flex justify-content-left pl-1">
               {featuredOffers.length != 0 ? (
@@ -236,7 +254,7 @@ class DashboardPage extends Component {
             </NavItem>
           </Nav>
         </Row>
-        <Row xs="1" sm="2" md="4" className="d-flex justify-content-between">
+        <Row className="d-flex justify-content-start">
           {offers
             .slice(range_min, range_max)
             .map(({ title, description, link, img, amount, conversion }) => (
