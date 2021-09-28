@@ -8,7 +8,8 @@ import {
   FormText,
   Container,
   Card,
-  Alert
+  Alert,
+  Row
 } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
@@ -100,10 +101,14 @@ class RegisterPage extends Component {
     }
 
     return (
-      <Container className="mx-auto justify-content-center mt-5">
+      <Container className="mx-auto justify-content-center mt-5 mb-5">
         <LoadingModal open={isLoading} />
-        <Container className=" mx-auto justify-content-center text-center p-5">
-          <Icon.Key size={128} />
+        <Container className=" mx-auto  justify-content-start  p-5">
+          <Row className="px-3">
+            <i class="fas fa-3x fa-user-plus" ></i>
+            <h1 className="ml-3">Register</h1>
+          </Row>
+          <hr></hr>
         </Container>
         <Card className="shadow p-4">
           {this.props.emailSent ? (

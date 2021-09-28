@@ -54,7 +54,7 @@ const CallCpalead = async () => {
           description: description,
           link: link,
           img: previews[0].url,
-          amount: amount,
+          amount: (amount * 100),
           conversion: conversion,
           country: country,
           device: mobile_app_type,
@@ -75,7 +75,7 @@ const CallCpalead = async () => {
     try {
       await Offer.bulkCreate(offers_cpalead);
       console.log("offers created successfully cpalead");
-    } catch (error) {}
+    } catch (error) { }
 
     try {
       await OfferProvider.update(
@@ -136,7 +136,7 @@ const CallKiwi = async () => {
     try {
       await Offer.bulkCreate(offers_kiwi);
       console.log("offers created successfully kiwi");
-    } catch (error) {}
+    } catch (error) { }
 
     try {
       await OfferProvider.update(
@@ -155,7 +155,7 @@ router.post("/", (req, res) => {
   const { subid, country, device } = req.body;
   console.log(country, device);
 
-  (async function() {
+  (async function () {
     // await Promise.all([CallCpalead(), CallKiwi()]);
     await CallCpalead();
 

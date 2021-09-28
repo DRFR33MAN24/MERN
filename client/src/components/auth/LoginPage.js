@@ -8,7 +8,8 @@ import {
   FormText,
   Container,
   Card,
-  Alert
+  Alert,
+  Row
 } from "reactstrap";
 
 import * as Icon from "react-bootstrap-icons";
@@ -38,7 +39,7 @@ class LoginPage extends Component {
     user: PropTypes.object
   };
 
-  componentDidMount(prevProps) {}
+  componentDidMount(prevProps) { }
   componentDidUpdate(prevProps, prevState) {
     const isAuthenticated = this.props.isAuthenticated;
     const error = this.props.error;
@@ -97,8 +98,12 @@ class LoginPage extends Component {
     return (
       <Container className=" mx-auto justify-content-center mt-5 mb-5">
         <LoadingModal open={isLoading} />
-        <Container className=" mx-auto justify-content-center text-center p-5">
-          <Icon.Key size={128} />
+        <Container className=" mx-auto  justify-content-start  p-5">
+          <Row className="px-3">
+            <i class="fas fa-3x fa-sign-in-alt" ></i>
+            <h1 className="ml-3">Login</h1>
+          </Row>
+          <hr></hr>
         </Container>
         <Card className="shadow p-4">
           {this.state.msg ? (
