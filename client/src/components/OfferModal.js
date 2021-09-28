@@ -27,11 +27,16 @@ export default class OfferModal extends Component {
             <p>{this.props.description}</p>
 
             <ModalFooter className="d-flex justify-content-start">
-              <Button onClick={this.btnClick} className="flex-grow-1">
+              <Button
+                onClick={this.btnClick}
+                className="flex-grow-1 bg-warning"
+              >
                 GO
               </Button>
 
-              <Button onClick={this.props.modal}>Close</Button>
+              <Button className="bg-warning" onClick={this.props.modal}>
+                Close
+              </Button>
             </ModalFooter>
           </ModalBody>
         </Modal>
