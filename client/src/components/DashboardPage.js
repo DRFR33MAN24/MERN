@@ -18,6 +18,8 @@ import {
   PaginationItem,
   PaginationLink
 } from "reactstrap";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import * as Icon from "react-bootstrap-icons";
 import Offer from "./Offer";
 import { Redirect } from "react-router-dom";
@@ -128,6 +130,24 @@ class DashboardPage extends Component {
 
     const range_min = this.state.show_items * this.state.offer_page;
     const range_max = range_min + this.state.show_items;
+
+    const responsive = {
+      desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3,
+        slidesToSlide: 3 // optional, default to 1.
+      },
+      tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2,
+        slidesToSlide: 2 // optional, default to 1.
+      },
+      mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1,
+        slidesToSlide: 1 // optional, default to 1.
+      }
+    };
     //const { user } = this.props;
     // console.log(user.id);
     const isAuthenticated = this.props.isAuthenticated;
@@ -145,7 +165,30 @@ class DashboardPage extends Component {
         <Row className="mt-2">
           <Container fluid={true}>
             <Label className="">Featured Offers:</Label>
-            <Row className="d-flex justify-content-left pl-1">
+            <Carousel
+              swipeable={false}
+              draggable={false}
+              showDots={true}
+              responsive={responsive}
+              ssr={true} // means to render carousel on server-side.
+              infinite={true}
+              autoPlay={this.props.deviceType !== "mobile" ? true : false}
+              autoPlaySpeed={1000}
+              keyBoardControl={true}
+              customTransition="all .5"
+              transitionDuration={500}
+              containerClass="carousel-container"
+              removeArrowOnDeviceType={["tablet", "mobile"]}
+              deviceType={this.props.deviceType}
+              dotListClass="custom-dot-list-style"
+              itemClass="carousel-item-padding-40-px"
+            >
+              <div>Item 1</div>
+              <div>Item 2</div>
+              <div>Item 3</div>
+              <div>Item 4</div>
+            </Carousel>
+            {/* <Row className="d-flex justify-content-left pl-1">
               {featuredOffers.length != 0 ? (
                 featuredOffers.map(
                   ({ title, description, link, img, amount, conversion }) => (
@@ -168,7 +211,7 @@ class DashboardPage extends Component {
               ) : (
                 <NoContent />
               )}
-            </Row>
+            </Row> */}
           </Container>
         </Row>
         <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-dark">
