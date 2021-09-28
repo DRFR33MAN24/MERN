@@ -15,7 +15,7 @@ import {
   DropdownMenu,
   DropdownToggle
 } from "reactstrap";
-import siteLogo from '../../src/coinguru2.png'
+import siteLogo from "../../src/coinguru2.png";
 import * as Icon from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -65,7 +65,7 @@ class AppNavbar extends Component {
           className="navbar-text text-success "
           onClick={this.updateBalance}
         >
-          <strong>{user ? toDollars(user.balance) : ""}</strong>
+          <h5>{user ? toDollars(user.balance) : ""}</h5>
         </span>
       </Fragment>
     );
@@ -142,7 +142,12 @@ class AppNavbar extends Component {
     return (
       <Router>
         <div>
-          <Navbar color="light" light expand="xs" className="mb-5 fixed-top  shadow ">
+          <Navbar
+            color="light"
+            light
+            expand="xs"
+            className="mb-5 fixed-top  shadow "
+          >
             <Container>
               <Container>
                 <NavbarBrand href="/" className="mx-auto">
