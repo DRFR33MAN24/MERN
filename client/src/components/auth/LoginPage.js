@@ -96,7 +96,7 @@ class LoginPage extends Component {
     }
 
     return (
-      <Container className=" mx-auto justify-content-center mt-5 mb-5">
+      <Container className=" mx-auto justify-content-center mt-5 mb-5 ">
         <LoadingModal open={isLoading} />
         <Container className=" mx-auto  justify-content-start  p-5">
           <Row className="px-3">
@@ -105,7 +105,7 @@ class LoginPage extends Component {
           </Row>
           <hr></hr>
         </Container>
-        <Card className="shadow p-4">
+        <Card className="shadow p-4 bg-light">
           {this.state.msg ? (
             <Alert color="danger">{this.state.msg}</Alert>
           ) : null}
@@ -135,7 +135,7 @@ class LoginPage extends Component {
                 onChange={this.handleToken}
                 onExpired={this.handleExpire}
               />
-              <Button color="dark" style={{ marginTop: "2rem" }} block>
+              <Button color="warning" style={{ marginTop: "2rem" }} block>
                 Login
               </Button>
             </FormGroup>

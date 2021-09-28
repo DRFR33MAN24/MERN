@@ -15,6 +15,7 @@ import {
   DropdownMenu,
   DropdownToggle
 } from "reactstrap";
+import siteLogo from '../../src/coinguru2.png'
 import * as Icon from "react-bootstrap-icons";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -141,13 +142,19 @@ class AppNavbar extends Component {
     return (
       <Router>
         <div>
-          <Navbar color="dark" dark expand="xs" className="mb-5 fixed-top ">
+          <Navbar color="light" light expand="xs" className="mb-5 fixed-top  shadow ">
             <Container>
               <Container>
                 <NavbarBrand href="/" className="mx-auto">
-                  <div>
-                    <img class="mr-3" src="../../img/brand.png" alt=""></img>
-                  </div>
+                  <a href="" class="navbar-brand">
+                    <img
+                      class="d-flex"
+                      src={siteLogo}
+                      width="180"
+                      height="32"
+                      alt=""
+                    />
+                  </a>
                 </NavbarBrand>
               </Container>
               <Container>

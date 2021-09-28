@@ -161,7 +161,7 @@ class DashboardPage extends Component {
       return null;
     }
     return (
-      <Container fluid={true} className=" py-5">
+      <Container fluid={true} className=" py-5 ">
         <Row className="mt-2">
           <Container fluid={true}>
             <Label className="">Featured Offers:</Label>
@@ -206,49 +206,26 @@ class DashboardPage extends Component {
                 <NoContent />
               )}
             </Carousel>
-            {/* <Row className="d-flex justify-content-left pl-1">
-              {featuredOffers.length != 0 ? (
-                featuredOffers.map(
-                  ({ title, description, link, img, amount, conversion }) => (
-                    <div className="">
-                      {isAuthenticated ? (
-                        <Offer
-                          title={title}
-                          description={description}
-                          link={this.getlink(link, user.id)}
-                          amount={toDollars(amount)}
-                          img={img}
-                          conversion={conversion}
-                        />
-                      ) : (
-                        <NoContent />
-                      )}
-                    </div>
-                  )
-                )
-              ) : (
-                <NoContent />
-              )}
-            </Row> */}
+
           </Container>
         </Row>
-        <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-dark">
+        <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-light">
           <Nav>
             <NavItem>
               <NavLink href="#" onClick={this.getInstall}>
-                <Icon.Controller color="black" fill="gold" size={32} />
+                <i class="fa fa-2x fa-gamepad" aria-hidden="true"></i>
                 <span> Games</span>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" onClick={this.getPinSubmit}>
-                <Icon.Keyboard color="black" fill="gold" size={32} />
+                <i class="fa fa-2x fa-keyboard" aria-hidden="true"></i>
                 <span> PIN Submit</span>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" onClick={this.getSurvey}>
-                <Icon.Newspaper color="black" fill="gold" size={32} />
+                <i class='fas fa-2x fa-poll'></i>
                 <span> Survey</span>
               </NavLink>
             </NavItem>
