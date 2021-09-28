@@ -26,6 +26,8 @@ app.use(express.json());
 //   .connect(db)
 //   .then(() => console.log("MongoDB Connected"))
 //   .catch(err => console.log(err));
+User.hasMany(Payment, { as: 'payments' });
+Payment.belongsTo(User, { foreignKey: 'subid' });
 
 db.authenticate()
   .then(() => {
@@ -37,8 +39,7 @@ db.authenticate()
     console.log("Unable to connect", err);
   });
 
-Payment.belongsTo(User);
-User.hasMany(Payment);
+
 //app.use("/api/items", require("./routes/api/items"));
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));

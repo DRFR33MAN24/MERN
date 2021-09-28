@@ -72,17 +72,14 @@ router.get("/downloadCSV", async (req, res) => {
 
   const data = [];
   const users = await User.findAll({
-    include: [
-      {
-        model: Payment
-      }
-    ]
+    include: [{ model: Payment, as: 'payments' }]
   });
+  console.log(users);
 
-  users.map(({ wallet, model }) => {
+  users.map(({ wallet, payments }) => {
     let totalPayout = 0;
 
-    model.map(({ payout }) => {
+    payments.map(({ payout }) => {
       totalPayout += payout;
     });
 
@@ -109,7 +106,7 @@ router.post("/payment", async (req, res) => {
     user = await User.findOne({ where: { id: subid }, plain: true });
     console.log(user);
     balance = user.balance;
-  } catch (error) {}
+  } catch (error) { }
   try {
     const date = new Date();
     await Payment.create({

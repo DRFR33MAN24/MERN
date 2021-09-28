@@ -10,7 +10,7 @@ const Payment = db.define(
       primaryKey: true
     },
     subid: {
-      type: DataTypes.BIGINT
+      type: DataTypes.INTEGER
     },
     payout: {
       type: DataTypes.BIGINT
