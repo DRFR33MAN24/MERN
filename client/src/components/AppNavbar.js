@@ -121,12 +121,11 @@ class AppNavbar extends Component {
             </DropdownItem>
             <DropdownItem divider />
             <DropdownItem>
-              <div
-                className="d-flex justify-content-start"
-                onClick={this.props.logout}
-              >
-                <i class="fas fa-lg fa-sign-out-alt"></i>
-                <div className="ml-3">Logout</div>
+              <div className="text-dark" onClick={this.props.logout}>
+                <Row className="d-flex justify-content-start">
+                  <i className="fas fa-lg fa-sign-out-alt fa-pull-left mt-2 mr-3"></i>
+                  <span>Logout</span>
+                </Row>
               </div>
             </DropdownItem>
           </DropdownMenu>
