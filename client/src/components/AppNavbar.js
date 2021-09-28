@@ -94,35 +94,29 @@ class AppNavbar extends Component {
           </DropdownToggle>
           <DropdownMenu right>
             <DropdownItem>
-              <Link
-                className="text-dark d-flex justify-content-start "
-                exact
-                to="/Account"
-              >
-                <i class="fa fa-lg fa-user"></i>
-                <div className="ml-3">Account</div>
+              <Link className="text-dark  " exact to="/Account">
+                <Row className="d-flex justify-content-start4">
+                  <i className="fa fa-lg fa-user fa-pull-left mt-2 mr-3"></i>
+                  <span>Account</span>
+                </Row>
               </Link>
             </DropdownItem>
             <DropdownItem divider />
             <DropdownItem>
-              <Link
-                className="text-dark d-flex justify-content-start "
-                exact
-                to="/Dashboard"
-              >
-                <i class="fa fa-lg fa-home"></i>
-                <div className="ml-3">Dashboard</div>
+              <Link className="text-dark  " exact to="/Dashboard">
+                <Row className="d-flex justify-content-start ">
+                  <i className="fa fa-lg fa-home fa-pull-left mt-2 mr-3"></i>
+                  <span>Dashboard</span>
+                </Row>
               </Link>
             </DropdownItem>
             <DropdownItem divider />
             <DropdownItem>
-              <Link
-                className="text-dark d-flex justify-content-start "
-                exact
-                to="/Cashout"
-              >
-                <i class="fas fa-lg fa-money-bill-alt"></i>
-                <div className="ml-3">Cashout</div>
+              <Link className="text-dark  " exact to="/Cashout">
+                <Row className="d-flex justify-content-start">
+                  <i className="fas fa-lg fa-money-bill-alt fa-pull-left mt-2 mr-3"></i>
+                  <span>Cashout</span>
+                </Row>
               </Link>
             </DropdownItem>
             <DropdownItem divider />
