@@ -7,7 +7,8 @@ import {
   CardBody,
   CardText,
   CardSubtitle,
-  CardTitle
+  CardTitle,
+  Row
 } from "reactstrap";
 import OfferModal from "./OfferModal";
 import siteLogo from "./site_logo2.png";
@@ -38,27 +39,24 @@ export default class Offer extends Component {
         <Card className="m-2 custom-card-shadow p-3">
           <Container
             fluid={true}
-            className="d-flex flex-row justify-content-center"
+            className="d-flex flex-row justify-content-between bg-dark"
           >
-            <Container fluid={true} className="mr-4">
-              <img
-                className="mb-5 ml-2 "
-                src={siteLogo}
-                width="80"
-                height="16"
-              />
+            <Container
+              fluid={true}
+              className=" d-flex justify-content-start bg-success"
+            >
+              <img className="mb-5 " src={siteLogo} width="80" height="16" />
             </Container>
-            <Container className="d-flex flex-row justify-content-center p-3">
-              <div className=" btn btn-white d-flex justify-content-center">
-                {" "}
-                <i class="fab fa-facebook social-btn"></i>{" "}
-              </div>
-              <div className=" btn btn-white d-flex justify-content-center">
-                <i class="fab fa-twitter social-btn"></i>
-              </div>
-              <div className=" btn btn-white d-flex justify-content-center">
-                <i class="fab fa-instagram social-btn "></i>
-              </div>
+            <Container className="d-flex flex-row justify-content-center py-3 bg-warning">
+              <Row className="pl-2">
+                <div className=" btn btn-white ">
+                  {" "}
+                  <i className="fab fa-facebook fa-pull-right social-btn"></i>{" "}
+                </div>
+                <div className=" btn btn-white ">
+                  <i className="fab fa-twitter fa-pull-right social-btn"></i>
+                </div>
+              </Row>
             </Container>
           </Container>
           <CardImg top width="100%" src={this.props.img} alt="Card image cap" />
