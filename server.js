@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const config = require("config");
 const path = require("path");
 const db = require("./database");
-
+const User = require('./models/User');
+const Payment = require('./models/Payment');
 const app = express();
 
 app.use(express.json());
@@ -36,6 +37,8 @@ db.authenticate()
     console.log("Unable to connect", err);
   });
 
+Payment.belongsTo(User);
+User.hasMany(Payment);
 //app.use("/api/items", require("./routes/api/items"));
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
