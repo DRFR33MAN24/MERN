@@ -47,7 +47,7 @@ function Last7Days() {
   for (var i = 0; i < 7; i++) {
     var d = new Date();
     d.setDate(d.getDate() - i);
-    result.push(formatDate(d));
+    result.push(getFormattedDate(d));
   }
 
   return result.join(",");
