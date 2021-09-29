@@ -23,7 +23,7 @@ import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { updateDetails } from "../actions/authAction";
-import { clearErrors } from "../actions/errorAction";
+import { clearErrors, returnErrors } from "../actions/errorAction";
 import { getActivity, submitPayment } from "../actions/activityAction";
 import { freemem } from "os";
 import { toDollars, getFormattedDate } from "../util";

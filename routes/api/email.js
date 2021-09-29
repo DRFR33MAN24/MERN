@@ -6,15 +6,25 @@ const Hash = require("../../models/Hash");
 var nodemailer = require("nodemailer");
 var smtpTransport = require("nodemailer-smtp-transport");
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
 var rand, mailOptions, host, link;
 
 var transporter = nodemailer.createTransport(
   smtpTransport({
-    service: "gmail",
-    host: "smtp.gmail.com",
+    // service: "gmail",
+    // host: "smtp.gmail.com",
+    // auth: {
+    //   user: "cudddan@gmail.com",
+    //   pass: "blackmesa-123"
+    // }
+
+    service: "localhost",
+    host: "mail.coinguru.biz",
+    port: 290,
+    secure: true,
     auth: {
-      user: "cudddan@gmail.com",
+      user: "support@coinguru.biz",
       pass: "blackmesa-123"
     }
   })

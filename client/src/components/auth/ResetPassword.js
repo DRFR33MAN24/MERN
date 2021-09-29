@@ -17,7 +17,7 @@ import { Redirect, Link } from "react-router-dom";
 import ReCaptchaV2 from "react-google-recaptcha";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { login } from "../../actions/authAction";
+import { login, resetPassword } from "../../actions/authAction";
 import { clearErrors, returnErrors } from "../../actions/errorAction";
 import LoadingModal from "../LoadingModal";
 
@@ -33,14 +33,14 @@ class ResetPassword extends Component {
     isAuthenticated: PropTypes.bool,
     isLoading: PropTypes.bool,
     error: PropTypes.object.isRequired,
-    resetPass: PropTypes.func.isRequired,
+    resetPassword: PropTypes.func.isRequired,
     resetted: PropTypes.bool,
     clearErrors: PropTypes.func.isRequired,
     returnErrors: PropTypes.func.isRequired,
     user: PropTypes.object
   };
 
-  componentDidMount(prevProps) {}
+  componentDidMount(prevProps) { }
   componentDidUpdate(prevProps, prevState) {
     const isAuthenticated = this.props.isAuthenticated;
     const error = this.props.error;
@@ -84,7 +84,7 @@ class ResetPassword extends Component {
     };
 
     // Attempt to login
-    this.props.resetPass(reset);
+    this.props.resetPassword(reset);
     this.props.returnErrors();
   };
   render() {
@@ -171,7 +171,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  resetPass,
+  resetPassword,
   returnErrors,
   clearErrors
 })(ResetPassword);
