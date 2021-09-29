@@ -20,8 +20,8 @@ router.get("/kiwi", (req, res) => {
   const crypto = require("crypto");
   const hash = crypto
     .createHash("md5")
-    .update(`${sub_id}` + `${amount}` + `${kiwi_secret}`)
-    .digest();
+    .update(`${sub_id}:${amount}:${kiwi_secret}`)
+    .digest('hex');
 
   if (signature === hash) {
     const newPostback = Postback.build({
