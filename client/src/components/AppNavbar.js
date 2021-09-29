@@ -33,6 +33,7 @@ import AccountPage from "./AccountPage";
 import CashoutPage from "./CashoutPage";
 import { toDollars } from "../util";
 import ResetPassword from "./auth/ResetPassword";
+import NotFound from "./NotFound";
 class AppNavbar extends Component {
   state = {
     isOpen: false
@@ -195,8 +196,8 @@ class AppNavbar extends Component {
           <Route exact path="/Cashout">
             <CashoutPage />
           </Route>
-          <Route path="/NotFound">
-            <h1>NotFound</h1>
+          <Route path="*" exact={true}>
+            <NotFound />
           </Route>
         </Switch>
       </Router>
