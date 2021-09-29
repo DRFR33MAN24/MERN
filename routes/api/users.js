@@ -146,6 +146,20 @@ router.post("/reset", (req, res) => {
   console.log("reset route called");
   const { email, password, token } = req.body;
 
+    // Verify URL
+  const query = stringify({
+    secret: config.get("reCAPTCHA"),
+    response: req.body.token,
+    remoteip: req.connection.remoteAddress
+  });
+  const verifyURL = `${config.get("verifyURL")}${query}`;
+  //console.log(verifyURL);
+  const body = await axios.get(verifyURL);
+  //console.log(body.data);
+  if (body.data.success !== undefined && !body.data.success) {
+    return res.status(400).json({ msg: "Failed captcha verification" });
+  }
+
   if (!token || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
