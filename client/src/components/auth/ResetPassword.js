@@ -34,6 +34,7 @@ class ResetPassword extends Component {
     isLoading: PropTypes.bool,
     error: PropTypes.object.isRequired,
     resetPass: PropTypes.func.isRequired,
+    resetted: PropTypes.bool,
     clearErrors: PropTypes.func.isRequired,
     returnErrors: PropTypes.func.isRequired,
     user: PropTypes.object
@@ -160,6 +161,7 @@ class ResetPassword extends Component {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   isLoading: state.auth.isLoading,
+  resetted: state.auth.resetted,
   error: state.error,
   user: state.auth.user
 });
