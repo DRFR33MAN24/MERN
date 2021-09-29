@@ -150,7 +150,13 @@ router.post("/reset", (req, res) => {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
   console.log(email, password, token);
-  User.findOne({ where: { id: `${id}` } }, { plain: true }).then(user => {
+
+  // if user dosen't exitst do nothing
+  // if user exists de-activate user
+  // change password
+  // send message to his email with link to activate
+
+  User.findOne({ where: { email: `${email}` } }, { plain: true }).then(user => {
     if (user) {
       //update existing user
       // const newUser = User.build({
@@ -167,13 +173,11 @@ router.post("/reset", (req, res) => {
 
           User.update(
             {
-              name: `${name}`,
-              email: `${email}`,
               password: `${hash}`,
-              wallet: `${wallet}`,
+
               active: false
             },
-            { where: { id: `${id}` } }
+            { where: { email: `${email}` } }
           ).then(user => {
             jwt.sign(
               { id: user.id },
@@ -197,6 +201,8 @@ router.post("/reset", (req, res) => {
           });
         });
       });
+    } else {
+      return res.status(400).json({ msg: "User dosen't exists" });
     }
   });
 });
