@@ -110,6 +110,9 @@ router.post("/payment", async (req, res) => {
       return res.status(400).json({ msg: "Please enter a valid wallet address" });
     }
     balance = user.balance;
+    if (balance <= 0) {
+      return res.status(400).json({ msg: "Not enough balance" });
+    }
   } catch (error) { }
   try {
     const date = new Date();

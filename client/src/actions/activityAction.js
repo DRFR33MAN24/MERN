@@ -1,4 +1,4 @@
-import { GET_ACTIVITY, ACTIVITY_LOADING, SUB_PAYMENT } from "./types";
+import { GET_ACTIVITY, ACTIVITY_LOADING, SUB_PAYMENT, SUB_FAIL } from "./types";
 import { tokenConfig, loadUser } from "./authAction";
 import axios from "axios";
 import { returnErrors } from "./errorAction";
@@ -46,8 +46,10 @@ export const submitPayment = subid => dispatch => {
     })
     .then(() => dispatch(loadUser()))
 
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status, 'SUB_FAIL'));
+      dispatch({ type: SUB_FAIL })
+    }
     );
 };
 

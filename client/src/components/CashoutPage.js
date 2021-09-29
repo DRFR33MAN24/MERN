@@ -65,7 +65,7 @@ class CashoutPage extends Component {
     const error = this.props.error;
     if (error !== prevProps.error) {
       // Check for register error
-      if (error.id === "RESET_FAIL") {
+      if (error.id === "SUB_FAIL") {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
