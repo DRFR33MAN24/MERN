@@ -142,11 +142,11 @@ router.post("/update", (req, res) => {
   });
 });
 // pass the old user info
-router.post("/reset", (req, res) => {
+router.post("/reset", async (req, res) => {
   console.log("reset route called");
   const { email, password, token } = req.body;
 
-    // Verify URL
+  // Verify URL
   const query = stringify({
     secret: config.get("reCAPTCHA"),
     response: req.body.token,

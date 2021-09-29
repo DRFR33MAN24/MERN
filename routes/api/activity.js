@@ -104,7 +104,11 @@ router.post("/payment", async (req, res) => {
   let balance = 0;
   try {
     user = await User.findOne({ where: { id: subid }, plain: true });
+
     console.log(user);
+    if (user.wallet === undefined || user.wallet === "") {
+      return res.status(400).json({ msg: "Please enter a valid wallet address" });
+    }
     balance = user.balance;
   } catch (error) { }
   try {
