@@ -146,7 +146,7 @@ class ResetPassword extends Component {
                   Register now
                 </Link>
               </div>
-              <Link exact to="/Reset">
+              <Link exact to="/Login">
                 Login
               </Link>
             </FormGroup>

@@ -32,6 +32,7 @@ import DashboardPage from "./DashboardPage";
 import AccountPage from "./AccountPage";
 import CashoutPage from "./CashoutPage";
 import { toDollars } from "../util";
+import ResetPassword from "./auth/ResetPassword";
 class AppNavbar extends Component {
   state = {
     isOpen: false
@@ -181,6 +182,9 @@ class AppNavbar extends Component {
           </Route>
           <Route exact path="/Register">
             <RegisterPage />
+          </Route>
+          <Route exact path="/Reset">
+            <ResetPassword />
           </Route>
           <Route exact path="/Dashboard">
             <DashboardPage />
