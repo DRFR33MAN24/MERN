@@ -11,7 +11,9 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   UPDATE_SUCCESS,
-  UPDATE_FAIL
+  UPDATE_FAIL,
+  RESET_FAIL,
+  RESET_SUCCESS
 } from "./types";
 
 // Check token & load user

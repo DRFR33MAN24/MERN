@@ -10,7 +10,9 @@ import {
   UPDATE_SUCCESS,
   UPDATE_FAIL,
   EMAIL_SENT,
-  SENT_SUCCESS
+  SENT_SUCCESS,
+  RESET_SUCCESS,
+  RESET_FAIL
 } from "../actions/types";
 import { tr } from "date-fns/locale";
 
@@ -20,10 +22,11 @@ const initialState = {
   isLoading: false,
   user: {},
   updated: false,
-  mail_sent: false
+  mail_sent: false,
+  resetted: false
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case USER_LOADING:
       return {
@@ -37,17 +40,28 @@ export default function (state = initialState, action) {
         updated: true,
         isLoading: false
       };
-    case SENT_SUCCESS:
-      return {
-        ...state,
-        mail_sent: action.payload
-      };
-
     case UPDATE_FAIL:
       return {
         ...state,
         updated: false,
         isLoading: false
+      };
+    case RESET_SUCCESS:
+      return {
+        ...state,
+        resetted: true,
+        isLoading: false
+      };
+    case RESET_FAIL:
+      return {
+        ...state,
+        resetted: false,
+        isLoading: false
+      };
+    case SENT_SUCCESS:
+      return {
+        ...state,
+        mail_sent: action.payload
       };
 
     case USER_LOADED:
