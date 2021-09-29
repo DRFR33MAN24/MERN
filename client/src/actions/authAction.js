@@ -37,7 +37,13 @@ export const loadUser = () => (dispatch, getState) => {
 
 //Register user
 
-export const register = ({ name, email, password, active, token }) => dispatch => {
+export const register = ({
+  name,
+  email,
+  password,
+  active,
+  token
+}) => dispatch => {
   dispatch({ type: USER_LOADING });
   //dispatch(sendEmail(email));
   //console.log("access-able");
@@ -106,6 +112,38 @@ export const updateDetails = ({
       );
       dispatch({
         type: UPDATE_FAIL
+      });
+    });
+};
+
+export const resetPassword = ({ email, password, token }) => dispatch => {
+  dispatch({ type: USER_LOADING });
+  // Headers
+  console.log("resetPassword Called");
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  // Request body
+  const body = JSON.stringify({ email, password, token });
+  axios
+    .post("/api/users/reset", body, config)
+    .then(res =>
+      dispatch({
+        type: RESET_SUCCESS
+      })
+    )
+    .then(() => {
+      dispatch(sendEmail(email));
+    })
+    .catch(err => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "RESET_FAIL")
+      );
+      dispatch({
+        type: RESET_FAIL
       });
     });
 };
