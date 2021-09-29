@@ -7,7 +7,7 @@ const Postback = require("../../models/Postback");
 const User = require("../../models/User");
 const db = require("../../database");
 const cpalead_pass = "cpalead_123";
-const kiwi_secret = "kiwi_123";
+const kiwi_secret = "lsRWy0Q2FZDWIJliNuje4BFTSUSFCL1O";
 // @route GET api/items
 // @desc Get All Items
 // @acces Public
@@ -45,7 +45,7 @@ router.get("/kiwi", (req, res) => {
       .then(() => console.log(`user balance updated ${amount}`))
       .catch(err => console.log(err));
 
-    res.send("success");
+    res.send(1);
   } else {
     res.send("Not Authorized");
     return;

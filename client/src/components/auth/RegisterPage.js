@@ -149,7 +149,7 @@ class RegisterPage extends Component {
                 className="mb-3"
               />
               <ReCaptchaV2
-                sitekey="6LfG0occAAAAABe0wZRxEEiRfF8viAUIWLOaqYkI"
+                sitekey="6Le54pscAAAAACxYbAovh0tZWg-KSZ1v_CPigC2A"
                 onChange={this.handleToken}
                 onExpired={this.handleExpire}
               />
