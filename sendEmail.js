@@ -5,10 +5,15 @@ async function SendMail(mailOptions) {
   return new Promise((resolve, reject) => {
     var transporter = nodemailer.createTransport(
       smtpTransport({
-        service: "gmail",
-        host: "smtp.gmail.com",
+        // service: "gmail",
+        // host: "smtp.gmail.com",
+        // auth: {
+        //   user: "cudddan@gmail.com",
+        //   pass: "blackmesa-123"
+        service: "localhost",
+        host: "mail.coinguru.biz",
         auth: {
-          user: "cudddan@gmail.com",
+          user: "support@coinguru.biz",
           pass: "blackmesa-123"
         }
       })
