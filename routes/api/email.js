@@ -26,6 +26,9 @@ var transporter = nodemailer.createTransport(
     auth: {
       user: "support@coinguru.biz",
       pass: "blackmesa-123"
+    },
+    tls: {
+      rejectUnauthorized: false
     }
   })
 );
