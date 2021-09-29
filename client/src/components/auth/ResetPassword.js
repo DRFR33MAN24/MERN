@@ -90,6 +90,7 @@ class ResetPassword extends Component {
   render() {
     const isAuthenticated = this.props.isAuthenticated;
     const isLoading = this.props.isLoading;
+    const resetted = this.props.resetted;
     console.log("reset render", isAuthenticated);
     const dashboard = <Redirect exact to="/Dashboard" />;
     if (isAuthenticated) {
@@ -109,6 +110,9 @@ class ResetPassword extends Component {
         <Card className="shadow p-4 bg-light">
           {this.state.msg ? (
             <Alert color="danger">{this.state.msg}</Alert>
+          ) : null}
+          {resetted ? (
+            <Alert color="success">Password resetted successfully</Alert>
           ) : null}
           <Form onSubmit={this.onSubmit}>
             <FormGroup>
