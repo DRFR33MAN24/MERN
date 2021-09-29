@@ -5,7 +5,7 @@ const Hash = db.define(
   {
     // Model attributes are defined here
     hash: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.STRING,
       allowNull: false
     },
     email: {
