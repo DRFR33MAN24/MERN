@@ -3,31 +3,14 @@ const mongoose = require("mongoose");
 const config = require("config");
 const path = require("path");
 const db = require("./database");
-const User = require('./models/User');
-const Payment = require('./models/Payment');
+const User = require("./models/User");
+const Payment = require("./models/Payment");
 const app = express();
 
 app.use(express.json());
 
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
-
-// DB Config
-// const db = config.get("mongoURI");
-
-//connect to mongodb
-// mongoose
-//   .connect(db)
-//   .then(() => console.log("MongoDB Connected"))
-//   .catch(err => console.log(err));
-User.hasMany(Payment, { as: 'payments' });
-Payment.belongsTo(User, { foreignKey: 'subid' });
+User.hasMany(Payment, { as: "payments" });
+Payment.belongsTo(User, { foreignKey: "subid" });
 
 db.authenticate()
   .then(() => {
@@ -39,8 +22,7 @@ db.authenticate()
     console.log("Unable to connect", err);
   });
 
-
-//app.use("/api/items", require("./routes/api/items"));
+app.use(express.static("app"));
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/offers", require("./routes/api/offers"));
