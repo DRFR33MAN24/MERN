@@ -201,7 +201,19 @@ class CashoutPage extends Component {
                   ({ payout, id, offer_name, status, createdAt }) => (
                     <div className="">
                       <ListGroupItem
-                        color={status === "credited" ? "success" : "danger"}
+                        color={(() => {
+                          switch (status) {
+                            case "pending":
+                              return "warning";
+
+                            case "credited":
+                              return "success";
+                            case "reversed":
+                              return "danger";
+                            default:
+                              return "warning";
+                          }
+                        })()}
                       >
                         <Container fluid={true}>
                           <Row className="d-flex justify-content-around">
