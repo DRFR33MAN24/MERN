@@ -89,37 +89,32 @@ class CashoutPage extends Component {
     console.log(postback, payment, total);
     ////////////////////////////////////////////////////////////////////
 
+    let count = [];
+    const labelDays = Last7Days();
     if (postback != undefined) {
       const endDate = new Date();
       const startDate = new Date(endDate - 7 * 24 * 60 * 60 * 1000);
-      //console.log(endDate, startDate);
-      const labelDays = Last7Days();
+
       // console.log(startDate, endDate, labelDays);
       var resultProductData = postback.filter(function(a) {
         var hitDates = a.createdAt;
-        // extract all date strings
-        //hitDates = Object.keys(hitDates);
-        // convert strings to Date objcts
+
         hitDates = new Date(hitDates);
         // filter this dates by startDate and endDate
 
         return hitDates >= startDate && hitDates <= endDate;
       });
 
-      //console.log(resultProductData);
-      let count = [];
       labelDays.map(d => {
         let c = resultProductData.filter(postbackDate => {
           let date = new Date(postbackDate.createdAt);
-          //console.log(date, d);
+
           date = getFormattedDate(date);
 
-          // console.log(d, "DDD", date, date === d);
           return date === d;
         }).length;
         count.push(c);
       });
-      console.log(labelDays, resultProductData, count);
     }
     //////////////////////////////////////////////////////////////////////////////////
     const formEnabled = this.state.formEnabled;
@@ -165,7 +160,7 @@ class CashoutPage extends Component {
                 </div>
               </Col>
               <Col>
-                <PerformanceChart />
+                <PerformanceChart labels={labelDays} data={count} />
               </Col>
             </Row>
           </Container>

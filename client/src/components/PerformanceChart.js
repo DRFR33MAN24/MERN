@@ -7,11 +7,11 @@ export default class PerformanceChart extends Component {
     // construct data by filtering the activity array and counting
 
     const data = {
-      labels: ["1", "2", "3", "4", "5", "6"],
+      labels: this.props.labels,
       datasets: [
         {
           label: "# Offers Completed",
-          data: [120, 19, 30, 5, 2, 3],
+          data: this.props.date,
           fill: false,
           backgroundColor: "rgb(255, 255, 255)",
           borderColor: "rgba(240, 173, 78, 1)"
