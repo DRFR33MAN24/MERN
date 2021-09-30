@@ -3,6 +3,9 @@ import { Line } from "react-chartjs-2";
 
 export default class PerformanceChart extends Component {
   render() {
+    // get all activity from cashout component passed as prop
+    // construct data by filtering the activity array and counting
+
     const data = {
       labels: ["1", "2", "3", "4", "5", "6"],
       datasets: [
