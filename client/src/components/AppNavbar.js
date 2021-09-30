@@ -178,7 +178,7 @@ class AppNavbar extends Component {
           <Route exact path="/Login">
             <LoginPage />
           </Route>
-          <Route exact path="/">
+          <Route path="/">
             <LoginPage />
           </Route>
           <Route exact path="/Register">
