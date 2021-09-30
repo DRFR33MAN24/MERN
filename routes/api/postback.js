@@ -54,13 +54,14 @@ router.get("/kiwi", (req, res) => {
 });
 
 router.get("/cpalead", (req, res) => {
-  const { password, subid, payout } = req.query;
+  const { password, subid, payout, title } = req.query;
 
   if (password === cpalead_pass) {
     const newPostback = Postback.build({
       payout: `${payout}`,
       subid: `${subid}`,
-      campaign_name: "cpalead"
+      campaign_name: "cpalead",
+      offer_name: `${title}`
     });
 
     newPostback
