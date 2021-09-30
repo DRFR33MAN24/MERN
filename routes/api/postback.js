@@ -61,6 +61,7 @@ router.get("/cpalead", (req, res) => {
       payout: `${payout}`,
       subid: `${subid}`,
       campaign_name: "cpalead",
+      status: `pending`,
       offer_name: `${title}`
     });
 
