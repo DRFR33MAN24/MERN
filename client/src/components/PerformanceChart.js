@@ -11,7 +11,7 @@ export default class PerformanceChart extends Component {
       datasets: [
         {
           label: "# Offers Completed",
-          data: this.props.date,
+          data: this.props.data,
           fill: false,
           backgroundColor: "rgb(255, 255, 255)",
           borderColor: "rgba(240, 173, 78, 1)"
