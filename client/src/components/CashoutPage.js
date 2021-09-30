@@ -209,7 +209,7 @@ class CashoutPage extends Component {
                             <div>{offer_name}</div>
                             <div>{payout}</div>
                             <div>{status}</div>
-                            <div>{createdAt}</div>
+                            <div>{getFormattedDate(new Date(createdAt))}</div>
                           </Row>
                         </Container>
                       </ListGroupItem>
