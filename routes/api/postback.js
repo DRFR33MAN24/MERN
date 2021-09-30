@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const logToFile = require("../../middleware/logToFile");
+const util = require("util");
 //const auth = require("../../middleware/auth");
 //postback Model
 const Postback = require("../../models/Postback");
@@ -21,7 +22,7 @@ router.get("/kiwi", (req, res) => {
   const hash = crypto
     .createHash("md5")
     .update(`${sub_id}:${amount}:${kiwi_secret}`)
-    .digest('hex');
+    .digest("hex");
 
   if (signature === hash) {
     const newPostback = Postback.build({
@@ -39,10 +40,10 @@ router.get("/kiwi", (req, res) => {
     // Update user
 
     User.update(
-      { balance: db.literal(`balance + ${amount}`) },
+      { balance: db.literal(`balance + ${util.applyCut(amount)}`) },
       { where: { id: sub_id } }
     )
-      .then(() => console.log(`user balance updated ${amount}`))
+      .then(() => console.log(`user balance updated ${util.applyCut(amount)}`))
       .catch(err => console.log(err));
 
     res.send(1);
@@ -69,10 +70,10 @@ router.get("/cpalead", (req, res) => {
     // Update user
 
     User.update(
-      { balance: db.literal(`balance + ${payout}`) },
+      { balance: db.literal(`balance + ${util.applyCut(payout)}`) },
       { where: { id: subid } }
     )
-      .then(() => console.log(`user balance updated ${payout}`))
+      .then(() => console.log(`user balance updated ${util.applyCut(payout)}`))
       .catch(err => console.log(err));
 
     res.send("success");

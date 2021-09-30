@@ -135,7 +135,7 @@ class AppNavbar extends Component {
       </Fragment>
     );
     return (
-      <Router>
+      <Router basename="/app">
         <div>
           <Navbar
             color="light"
