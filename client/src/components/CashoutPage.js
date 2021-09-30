@@ -73,7 +73,6 @@ class CashoutPage extends Component {
     }
     // If authenticated close modal
     // If authenicated go to dashboard
-
   }
   onWithdraw = () => {
     const user = this.props.user;
@@ -152,32 +151,32 @@ class CashoutPage extends Component {
             </div>
             {payment
               ? payment.map(({ payout, subid, status, submitDate }) => (
-                <div className="">
-                  <ListGroupItem
-                    color={(() => {
-                      switch (status) {
-                        case "pending":
-                          return "warning";
+                  <div className="">
+                    <ListGroupItem
+                      color={(() => {
+                        switch (status) {
+                          case "pending":
+                            return "warning";
 
-                        case "paid":
-                          return "success";
-                        case "rejected":
-                          return "danger";
-                        default:
-                          return "warning";
-                      }
-                    })()}
-                  >
-                    <Container fluid={true}>
-                      <Row className="d-flex justify-content-around">
-                        <div>{payout}</div>
-                        <div>{status}</div>
-                        <div>{getFormattedDate(new Date(submitDate))}</div>
-                      </Row>
-                    </Container>
-                  </ListGroupItem>
-                </div>
-              ))
+                          case "paid":
+                            return "success";
+                          case "rejected":
+                            return "danger";
+                          default:
+                            return "warning";
+                        }
+                      })()}
+                    >
+                      <Container fluid={true}>
+                        <Row className="d-flex justify-content-around">
+                          <div>{payout}</div>
+                          <div>{status}</div>
+                          <div>{getFormattedDate(new Date(submitDate))}</div>
+                        </Row>
+                      </Container>
+                    </ListGroupItem>
+                  </div>
+                ))
               : null}
           </ListGroup>
         </Card>
@@ -189,6 +188,7 @@ class CashoutPage extends Component {
                 <Container fluid={true}>
                   <Row className="d-flex justify-content-around">
                     <div>Offer Id</div>
+                    <div>Name</div>
                     <div>Payout</div>
                     <div>Status</div>
                     <div>Date</div>
@@ -197,22 +197,25 @@ class CashoutPage extends Component {
               </ListGroupItem>
             </div>
             {postback
-              ? postback.map(({ payout, subid, campaign_name, status }) => (
-                <div className="">
-                  <ListGroupItem
-                    color={status === "credited" ? "success" : "danger"}
-                  >
-                    <Container fluid={true}>
-                      <Row className="d-flex justify-content-around">
-                        <div>{subid}</div>
-                        <div>{payout}</div>
-                        <div>{campaign_name}</div>
-                        <div>{status}</div>
-                      </Row>
-                    </Container>
-                  </ListGroupItem>
-                </div>
-              ))
+              ? postback.map(
+                  ({ payout, id, offer_name, status, createdAt }) => (
+                    <div className="">
+                      <ListGroupItem
+                        color={status === "credited" ? "success" : "danger"}
+                      >
+                        <Container fluid={true}>
+                          <Row className="d-flex justify-content-around">
+                            <div>{id}</div>
+                            <div>{offer_name}</div>
+                            <div>{payout}</div>
+                            <div>{status}</div>
+                            <div>{createdAt}</div>
+                          </Row>
+                        </Container>
+                      </ListGroupItem>
+                    </div>
+                  )
+                )
               : null}
           </ListGroup>
         </Card>
