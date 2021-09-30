@@ -22,7 +22,6 @@ db.authenticate()
     console.log("Unable to connect", err);
   });
 
-app.use(express.static("app"));
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/offers", require("./routes/api/offers"));
@@ -32,6 +31,10 @@ app.use("/api/email", require("./routes/api/email"));
 app.use("/api/stats", require("./routes/api/stats"));
 app.use("/api/contact", require("./routes/api/contact"));
 
+//app.use(express.static("app"));
+app.get("/app/*", function(req, res) {
+  res.sendfile("/app/index.html");
+});
 // Serve static assets if in production
 
 if (process.env.NODE_ENV === "production") {
