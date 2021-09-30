@@ -26,7 +26,7 @@ import { updateDetails } from "../actions/authAction";
 import { clearErrors, returnErrors } from "../actions/errorAction";
 import { getActivity, submitPayment } from "../actions/activityAction";
 import { freemem } from "os";
-import { toDollars, getFormattedDate } from "../util";
+import { toDollars, getFormattedDate, Last7Days } from "../util";
 import LoadingModal from "./LoadingModal";
 import PerformanceChart from "./PerformanceChart";
 
@@ -87,6 +87,38 @@ class CashoutPage extends Component {
     console.log(this.props.activity);
     const { postback, payment, total } = this.props.activity;
     console.log(postback, payment, total);
+    ////////////////////////////////////////////////////////////////////
+    const endDate = new Date();
+    const startDate = new Date(endDate - 7 * 24 * 60 * 60 * 1000);
+    //console.log(endDate, startDate);
+    const labelDays = Last7Days();
+    // console.log(startDate, endDate, labelDays);
+    var resultProductData = postback.filter(function(a) {
+      var hitDates = a.createdAt;
+      // extract all date strings
+      //hitDates = Object.keys(hitDates);
+      // convert strings to Date objcts
+      hitDates = new Date(hitDates);
+      // filter this dates by startDate and endDate
+
+      return hitDates >= startDate && hitDates <= endDate;
+    });
+
+    //console.log(resultProductData);
+    let count = [];
+    labelDays.map(d => {
+      let c = resultProductData.filter(postbackDate => {
+        let date = new Date(postbackDate.createdAt);
+        //console.log(date, d);
+        date = getFormattedDate(date);
+
+        // console.log(d, "DDD", date, date === d);
+        return date === d;
+      }).length;
+      count.push(c);
+    });
+    console.log(labelDays, resultProductData, count);
+    //////////////////////////////////////////////////////////////////////////////////
     const formEnabled = this.state.formEnabled;
     //console.log(user.id);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);

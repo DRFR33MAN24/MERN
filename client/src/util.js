@@ -50,7 +50,7 @@ function Last7Days() {
     result.push(getFormattedDate(d));
   }
 
-  return result.join(",");
+  return result;
 }
 
 module.exports = { toDollars, getOS, getFormattedDate, Last7Days };
