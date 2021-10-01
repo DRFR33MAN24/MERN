@@ -128,9 +128,8 @@ class DashboardPage extends Component {
     const { user } = this.props;
     const featuredOffers = offers.filter(item => item.featured === 1);
     const surveys = offers.filter(item => {
-      return (item.category === 'Survey') || (item.category === 'Daily')
-    }
-    )
+      return item.category === "Survey" || item.category === "Daily";
+    });
     console.log(surveys);
     const range_min = this.state.show_items * this.state.offer_page;
     const range_max = range_min + this.state.show_items;
@@ -166,10 +165,10 @@ class DashboardPage extends Component {
     }
     return (
       <Container fluid={true} className=" py-5 ">
-        <Row className='mt-2'>
+        <Row className="mt-2">
           <Container fluid={true} className="py-5">
             <table class="table table-striped">
-              <thead className='thead-dark'>
+              <thead className="thead-dark">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
@@ -179,46 +178,48 @@ class DashboardPage extends Component {
                 </tr>
               </thead>
               <tbody>
-                {surveys ? (surveys.map(({ title, description, link, amount }, index) => (
-                  <tr>
-                    <th scope="row">{index}</th>
-                    <td>{title}</td>
-                    <td>{description}</td>
-                    <td>{amount}</td>
-                    <td>
-                      <a href={this.getlink(link, user.id)}>Join</a>
-                    </td>
-                  </tr>
-                ))) : null
-                }
-
+                {surveys
+                  ? surveys.map(
+                      ({ title, description, link, amount }, index) => (
+                        <tr>
+                          <th scope="row">{index}</th>
+                          <td>{title}</td>
+                          <td>{description}</td>
+                          <td>{amount}</td>
+                          <td>
+                            <a href={this.getlink(link, user.id)}>Join</a>
+                          </td>
+                        </tr>
+                      )
+                    )
+                  : null}
               </tbody>
             </table>
           </Container>
         </Row>
-        <Row className="mt-2">
-          <Container fluid={true}>
-            <Label className="">Featured Offers:</Label>
-            <Carousel
-              swipeable={false}
-              draggable={false}
-              showDots={true}
-              responsive={responsive}
-              ssr={true} // means to render carousel on server-side.
-              infinite={true}
-              autoPlay={this.props.deviceType !== "mobile" ? true : false}
-              autoPlaySpeed={200}
-              keyBoardControl={true}
-              customTransition="all .5"
-              transitionDuration={2000}
-              containerClass="carousel-container"
-              removeArrowOnDeviceType={["tablet", "mobile"]}
-              deviceType={this.props.deviceType}
-              dotListClass="custom-dot-list-style"
-              itemClass="carousel-item-padding-40-px"
-            >
-              {featuredOffers.length != 0 ? (
-                featuredOffers.map(
+        {featuredOffers.length != 0 ? (
+          <Row className="mt-2">
+            <Container fluid={true}>
+              <Label className="">Featured Offers:</Label>
+              <Carousel
+                swipeable={false}
+                draggable={false}
+                showDots={true}
+                responsive={responsive}
+                ssr={true} // means to render carousel on server-side.
+                infinite={true}
+                autoPlay={this.props.deviceType !== "mobile" ? true : false}
+                autoPlaySpeed={200}
+                keyBoardControl={true}
+                customTransition="all .5"
+                transitionDuration={2000}
+                containerClass="carousel-container"
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+                deviceType={this.props.deviceType}
+                dotListClass="custom-dot-list-style"
+                itemClass="carousel-item-padding-40-px"
+              >
+                {featuredOffers.map(
                   ({ title, description, link, img, amount, conversion }) => (
                     <div className="">
                       {isAuthenticated ? (
@@ -230,18 +231,16 @@ class DashboardPage extends Component {
                           img={img}
                           conversion={conversion}
                         />
-                      ) : (
-                        <NoContent />
-                      )}
+                      ) : null}
                     </div>
                   )
-                )
-              ) : (
-                <NoContent />
-              )}
-            </Carousel>
-          </Container>
-        </Row>
+                )}
+              </Carousel>
+            </Container>
+          </Row>
+        ) : (
+          <NoContent />
+        )}
         <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-light">
           <Nav>
             <NavItem>
