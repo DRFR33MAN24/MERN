@@ -67,15 +67,15 @@ class AppNavbar extends Component {
     const userInfo = (
       <Fragment>
 
-        {isLoading ?
+        {!isLoading ? (
 
           <span
-            className="navbar-text text-success "
+            className="navbar-text text-dark "
             onClick={this.updateBalance}
           >
             <h5>{user ? toDollars(user.balance) : ""}</h5>
           </span>
-          : <Spinner color="dark" />
+        ) : (<Spinner color="dark" />)
         }
       </Fragment>
     );
@@ -215,6 +215,7 @@ class AppNavbar extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  isLoading: state.auth.isLoading,
   user: state.auth.user
 });
 

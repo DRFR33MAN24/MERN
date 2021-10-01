@@ -127,11 +127,10 @@ class DashboardPage extends Component {
     const { offers } = this.props.offers;
     const { user } = this.props;
     const featuredOffers = offers.filter(item => item.featured === 1);
-    const surveys = offers.filter(item => {
-      return (item.category === 'Survey') ||
-        (item.category === 'Daily')
-    })
-    //console.log(featuredOffers);
+    const surveys = offers.filter(item =>
+      (item.category === 'Survey')
+    )
+    console.log(surveys);
     const range_min = this.state.show_items * this.state.offer_page;
     const range_max = range_min + this.state.show_items;
 
@@ -167,7 +166,7 @@ class DashboardPage extends Component {
     return (
       <Container fluid={true} className=" py-5 ">
         <Row className='mt-2'>
-          <Container fluid={true}>
+          <Container fluid={true} className="py-5">
             <table class="table table-striped">
               <thead className='thead-dark'>
                 <tr>
@@ -175,38 +174,23 @@ class DashboardPage extends Component {
                   <th scope="col">Name</th>
                   <th scope="col">Description</th>
                   <th scope="col">Payout</th>
+                  <th scope="col">link</th>
                 </tr>
               </thead>
               <tbody>
-                {surveys ? surveys.map(({ title, description, link, amount }, index) => {
+                {surveys ? (surveys.map(({ title, description, link, amount }, index) => (
                   <tr>
                     <th scope="row">{index}</th>
                     <td>{title}</td>
                     <td>{description}</td>
                     <td>{amount}</td>
                     <td>
-                      <a href={link}>Join</a>
+                      <a href={this.getlink(link, user.id)}>Join</a>
                     </td>
                   </tr>
-                }) : null}
-                {/* <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr> */}
+                ))) : null
+                }
+
               </tbody>
             </table>
           </Container>

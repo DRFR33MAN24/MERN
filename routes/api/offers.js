@@ -13,12 +13,12 @@ const OfferProvider = require("../../models/OfferProvider");
 //cpalead provider
 const url_cpalead =
   "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323&show=100";
-
+// test_cond
 const url_kiwi =
-  "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/?country=ALL";
+  "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/?country=us";
 
 const updateFq_kiwi = 100;
-const updateFq_cpalead = 30;
+const updateFq_cpalead = 100;
 
 const CallCpalead = async () => {
   // #1 Update offers database by calling offer providers if necessary
@@ -157,8 +157,9 @@ router.post("/", (req, res) => {
   console.log(country, device);
 
   (async function () {
-    // await Promise.all([CallCpalead(), CallKiwi()]);
-    await CallCpalead();
+    await Promise.all([CallCpalead(), CallKiwi()]);
+    //await CallCpalead();
+    // await CallKiwi();
 
     try {
       console.log(country, device);
