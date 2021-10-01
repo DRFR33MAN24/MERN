@@ -166,6 +166,9 @@ class DashboardPage extends Component {
     return (
       <Container fluid={true} className=" py-5 ">
         <Row className="mt-2">
+          <Container fluid={true} className="shadow mt-3 bg-light">
+            <h3 className="mt-5 ml-2 ">Featured Surveys</h3>
+          </Container>
           <Container fluid={true} className="py-5">
             <table class="table table-striped">
               <thead className="thead-dark">
@@ -187,7 +190,7 @@ class DashboardPage extends Component {
                           <td>{description}</td>
                           <td>{amount}</td>
                           <td>
-                            <a href={this.getlink(link, user.id)}>Join</a>
+                            <a href={this.getlink(link, user.id)}>Go</a>
                           </td>
                         </tr>
                       )
