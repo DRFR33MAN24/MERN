@@ -168,8 +168,8 @@ class DashboardPage extends Component {
       <Container fluid={true} className=" py-5 ">
         <Row className='mt-2'>
           <Container fluid={true}>
-            <table class="table">
-              <thead>
+            <table class="table table-striped">
+              <thead className='thead-dark'>
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
