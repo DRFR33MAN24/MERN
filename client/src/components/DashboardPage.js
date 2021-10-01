@@ -127,8 +127,9 @@ class DashboardPage extends Component {
     const { offers } = this.props.offers;
     const { user } = this.props;
     const featuredOffers = offers.filter(item => item.featured === 1);
-    const surveys = offers.filter(item =>
-      (item.category === 'Survey')
+    const surveys = offers.filter(item => {
+      return (item.category === 'Survey') || (item.category === 'Daily')
+    }
     )
     console.log(surveys);
     const range_min = this.state.show_items * this.state.offer_page;
