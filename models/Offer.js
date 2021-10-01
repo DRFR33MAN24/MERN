@@ -56,6 +56,10 @@ const Offer = db.define(
       type: DataTypes.STRING
       // allowNull defaults to true
     }
+    ,
+    category: {
+      type: DataTypes.STRING
+    }
   },
   {
     // Other model options go here

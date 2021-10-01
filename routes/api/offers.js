@@ -104,7 +104,7 @@ const CallKiwi = async () => {
     const res = await axios.get(url_kiwi);
     console.log("Calling kiwi API");
     res.data.offers.map(
-      ({ name, instructions, link, logo, amount, id, countries, os }) => {
+      ({ name, instructions, link, logo, amount, id, countries, os, category }) => {
         // create an array with all the countries
         const country_arr = countries.split(",");
         country_arr.map(c => {
@@ -118,7 +118,8 @@ const CallKiwi = async () => {
             conversion: instructions,
             country: c,
             device: os,
-            provider: "kiwi"
+            provider: "kiwi",
+            category: category
           });
         });
       }
