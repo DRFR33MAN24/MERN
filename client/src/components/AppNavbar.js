@@ -13,7 +13,8 @@ import {
   UncontrolledDropdown,
   DropdownItem,
   DropdownMenu,
-  DropdownToggle
+  DropdownToggle,
+  Spinner
 } from "reactstrap";
 import siteLogo from "../../src/coinguru2.png";
 import * as Icon from "react-bootstrap-icons";
@@ -43,6 +44,7 @@ class AppNavbar extends Component {
     isAuthenticated: PropTypes.bool,
     user: PropTypes.object,
     loadUser: PropTypes.func,
+    isLoading: PropTypes.bool,
     logout: PropTypes.func.isRequired
   };
 
@@ -59,16 +61,22 @@ class AppNavbar extends Component {
   render() {
     const user = this.props.user;
     const isAuthenticated = this.props.isAuthenticated;
+    const isLoading = this.props.isLoading;
     //console.log("NavBar Render", user);
 
     const userInfo = (
       <Fragment>
-        <span
-          className="navbar-text text-success "
-          onClick={this.updateBalance}
-        >
-          <h5>{user ? toDollars(user.balance) : ""}</h5>
-        </span>
+
+        {isLoading ?
+
+          <span
+            className="navbar-text text-success "
+            onClick={this.updateBalance}
+          >
+            <h5>{user ? toDollars(user.balance) : ""}</h5>
+          </span>
+          : <Spinner color="dark" />
+        }
       </Fragment>
     );
     const guestLinks = (
