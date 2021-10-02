@@ -42,7 +42,12 @@ export default class Offer extends Component {
             className="d-flex flex-row justify-content-between "
           >
             <Container fluid={true} className=" d-flex justify-content-start ">
-              <img className="mb-5 " src={siteLogo} width="80" height="16" />
+              <img
+                className="mb-5 offer-img"
+                src={siteLogo}
+                width="80"
+                height="16"
+              />
             </Container>
             <Container className="d-flex flex-row justify-content-center py-3 ">
               <Row className="pl-2">

@@ -125,7 +125,7 @@ const CallKiwi = async () => {
             link: link,
             img: logo,
             amount: amount,
-            conversion: instructions,
+            conversion: category,
             country: c,
             device: os,
             provider: "kiwi",

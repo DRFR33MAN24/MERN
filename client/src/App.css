@@ -67,6 +67,10 @@ body {
   color: #292b2c;
 }
 
+.offer-img {
+  object-fit: contain;
+}
+
 .social-btn {
   display: inline-block;
   border-radius: 20px;
