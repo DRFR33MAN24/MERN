@@ -32,16 +32,16 @@ app.use("/api/stats", require("./routes/api/stats"));
 app.use("/api/contact", require("./routes/api/contact"));
 
 //app.use(express.static("app"));
-// app.get("/app/*", function(req, res) {
-//   res.sendfile("/app/index.html");
-// });
+app.get("/app/*", function(req, res) {
+  res.sendfile("/app/index.html");
+});
 // Serve static assets if in production
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("/app"));
+  app.use(express.static("build"));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "app", "index.html"));
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 
