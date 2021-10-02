@@ -42,9 +42,15 @@ app.use("/api/contact", require("./routes/api/contact"));
 
 app.use(express.static("app"));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "app", "index.html"));
-  console.log(path.resolve(__dirname, "app", "index.html"));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "app", "index.html"));
+//   console.log(path.resolve(__dirname, "app", "index.html"));
+// });
+
+/* GET React App */
+app.get(["/app", "/app/*"], function(req, res, next) {
+  res.sendFile(path.join(__dirname, "app", "index.html"));
+  console.log("check");
 });
 
 const port = process.env.PORT || 5000;

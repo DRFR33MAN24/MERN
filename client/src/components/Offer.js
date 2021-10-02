@@ -66,7 +66,7 @@ export default class Offer extends Component {
             <CardTitle tag="h5" className="truncate">
               {this.props.title}
             </CardTitle>
-            <CardSubtitle tag="h6" className="mb-2 text-muted">
+            <CardSubtitle tag="h6" className="mb-2 text-muted truncate">
               {this.props.conversion}
             </CardSubtitle>
             {/* <CardText tag="h6">

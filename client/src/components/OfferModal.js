@@ -25,6 +25,7 @@ export default class OfferModal extends Component {
           <ModalHeader>{this.props.title}</ModalHeader>
           <ModalBody>
             <p>{this.props.description}</p>
+            <p>{this.props.conversion}</p>
 
             <ModalFooter className="d-flex justify-content-start">
               <Button
