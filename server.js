@@ -33,11 +33,18 @@ app.use("/api/contact", require("./routes/api/contact"));
 
 // Serve static assets if in production
 
-app.use(express.static("build"));
+// app.use(express.static("build"));
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   console.log(path.resolve(__dirname, "client", "build", "index.html"));
+// });
+
+app.use(express.static("app"));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  console.log(path.resolve(__dirname, "client", "build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "app", "index.html"));
+  console.log(path.resolve(__dirname, "app", "index.html"));
 });
 
 const port = process.env.PORT || 5000;

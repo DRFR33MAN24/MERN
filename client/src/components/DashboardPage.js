@@ -188,9 +188,14 @@ class DashboardPage extends Component {
                           <th scope="row">{index}</th>
                           <td>{title}</td>
                           <td>{description}</td>
-                          <td>{amount}</td>
+                          <td>{toDollars(amount)}</td>
                           <td>
-                            <a href={this.getlink(link, user.id)}>Go</a>
+                            <a
+                              className="btn btn-dark"
+                              href={this.getlink(link, user.id)}
+                            >
+                              Go
+                            </a>
                           </td>
                         </tr>
                       )
