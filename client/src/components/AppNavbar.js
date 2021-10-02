@@ -66,17 +66,13 @@ class AppNavbar extends Component {
 
     const userInfo = (
       <Fragment>
-
         {!isLoading ? (
-
-          <span
-            className="navbar-text text-dark "
-            onClick={this.updateBalance}
-          >
+          <span className="navbar-text text-dark " onClick={this.updateBalance}>
             <h5>{user ? toDollars(user.balance) : ""}</h5>
           </span>
-        ) : (<Spinner color="dark" />)
-        }
+        ) : (
+          <Spinner color="dark" />
+        )}
       </Fragment>
     );
     const guestLinks = (

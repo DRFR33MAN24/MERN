@@ -12,13 +12,13 @@ const OfferProvider = require("../../models/OfferProvider");
 
 //cpalead provider
 const url_cpalead =
-  "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323&show=100";
-// test_cond
-const url_kiwi =
-  "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/?country=us";
+  "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323";
 
-const updateFq_kiwi = 100;
-const updateFq_cpalead = 100;
+const url_kiwi =
+  "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/";
+
+const updateFq_kiwi = 10;
+const updateFq_cpalead = 10;
 
 const CallCpalead = async () => {
   // #1 Update offers database by calling offer providers if necessary
@@ -54,7 +54,7 @@ const CallCpalead = async () => {
           description: description,
           link: link,
           img: previews[0].url,
-          amount: (amount * 100),
+          amount: amount * 100,
           conversion: conversion,
           country: country,
           device: mobile_app_type,
@@ -75,7 +75,7 @@ const CallCpalead = async () => {
     try {
       await Offer.bulkCreate(offers_cpalead);
       console.log("offers created successfully cpalead");
-    } catch (error) { }
+    } catch (error) {}
 
     try {
       await OfferProvider.update(
@@ -104,7 +104,17 @@ const CallKiwi = async () => {
     const res = await axios.get(url_kiwi);
     console.log("Calling kiwi API");
     res.data.offers.map(
-      ({ name, instructions, link, logo, amount, id, countries, os, category }) => {
+      ({
+        name,
+        instructions,
+        link,
+        logo,
+        amount,
+        id,
+        countries,
+        os,
+        category
+      }) => {
         // create an array with all the countries
         const country_arr = countries.split(",");
         country_arr.map(c => {
@@ -137,7 +147,7 @@ const CallKiwi = async () => {
     try {
       await Offer.bulkCreate(offers_kiwi);
       console.log("offers created successfully kiwi");
-    } catch (error) { }
+    } catch (error) {}
 
     try {
       await OfferProvider.update(
@@ -156,7 +166,7 @@ router.post("/", (req, res) => {
   const { subid, country, device } = req.body;
   console.log(country, device);
 
-  (async function () {
+  (async function() {
     await Promise.all([CallCpalead(), CallKiwi()]);
     //await CallCpalead();
     // await CallKiwi();

@@ -53,8 +53,8 @@ class DashboardPage extends Component {
       const clientOS = getOS();
       axios.get("https://freegeoip.app/json/").then(res => {
         const country = res.data.country_code.toLowerCase();
-        // this.props.getOffers(user.id, country, clientOS);
-        this.props.getOffers(user.id, "us", "android");
+        this.props.getOffers(user.id, country, clientOS);
+        //this.props.getOffers(user.id, "us", "android");
       });
     }
 
