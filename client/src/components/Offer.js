@@ -42,12 +42,7 @@ export default class Offer extends Component {
             className="d-flex flex-row justify-content-between "
           >
             <Container fluid={true} className=" d-flex justify-content-start ">
-              <img
-                className="mb-5 offer-img"
-                src={siteLogo}
-                width="80"
-                height="16"
-              />
+              <img className="mb-5 " src={siteLogo} width="80" height="16" />
             </Container>
             <Container className="d-flex flex-row justify-content-center py-3 ">
               <Row className="pl-2">
@@ -61,7 +56,13 @@ export default class Offer extends Component {
               </Row>
             </Container>
           </Container>
-          <CardImg top width="100%" src={this.props.img} alt="Card image cap" />
+          <CardImg
+            top
+            width="100%"
+            className="offer-img"
+            src={this.props.img}
+            alt="Card image cap"
+          />
           <Container className="d-flex justify-content-end align-items-center mt-2">
             <i className="fa fa-download px-2 py-1"></i>
             <i className="fab fa-android px-2 py-1"></i>
