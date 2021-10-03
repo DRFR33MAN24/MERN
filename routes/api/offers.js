@@ -15,9 +15,9 @@ const url_cpalead =
   "http://cpalead.com/dashboard/reports/campaign_json.php?id=1721323";
 
 const url_kiwi =
-  "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/";
+  "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/?country=ALL";
 
-const updateFq_kiwi = 10;
+const updateFq_kiwi = 100;
 const updateFq_cpalead = 10;
 
 const CallCpalead = async () => {
@@ -58,7 +58,8 @@ const CallCpalead = async () => {
           conversion: conversion,
           country: country,
           device: mobile_app_type,
-          provider: "cpalead"
+          provider: "cpalead",
+          category: conversion
         });
       }
     );
@@ -167,8 +168,8 @@ router.post("/", (req, res) => {
   console.log(country, device);
 
   (async function() {
-    await Promise.all([CallCpalead(), CallKiwi()]);
-    //await CallCpalead();
+    //await Promise.all([CallCpalead(), CallKiwi()]);
+    await CallCpalead();
     // await CallKiwi();
 
     try {

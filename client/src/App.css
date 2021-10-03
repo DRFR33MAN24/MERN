@@ -68,7 +68,9 @@ body {
 }
 
 .offer-img {
-  object-fit: contain;
+  max-height: 240px;
+  min-height: 240px;
+  max-width: 300px;
 }
 
 .social-btn {

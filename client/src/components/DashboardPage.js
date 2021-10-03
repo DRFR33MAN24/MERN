@@ -53,8 +53,9 @@ class DashboardPage extends Component {
       const clientOS = getOS();
       axios.get("https://freegeoip.app/json/").then(res => {
         const country = res.data.country_code.toLowerCase();
-        this.props.getOffers(user.id, country, clientOS);
-        //this.props.getOffers(user.id, "us", "android");
+        // test_con
+        //this.props.getOffers(user.id, country, clientOS);
+        this.props.getOffers(user.id, "us", "android");
       });
     }
 
@@ -128,7 +129,11 @@ class DashboardPage extends Component {
     const { user } = this.props;
     const featuredOffers = offers.filter(item => item.featured === 1);
     const surveys = offers.filter(item => {
-      return item.category === "Survey" || item.category === "Daily";
+      return (
+        item.category === "Survey" ||
+        item.category === "Daily" ||
+        item.category === "Complete Survey"
+      );
     });
     console.log(surveys);
     const range_min = this.state.show_items * this.state.offer_page;
@@ -277,7 +282,7 @@ class DashboardPage extends Component {
             </NavItem>
           </Nav>
         </Row>
-        <Row className="d-flex justify-content-start">
+        <Row className="d-flex justify-content-start" id="offers">
           {offers
             .slice(range_min, range_max)
             .map(({ title, description, link, img, amount, conversion }) => (
@@ -299,12 +304,16 @@ class DashboardPage extends Component {
         <Row className="d-flex justify-content-center bg-dark mb-3 mt-3">
           <Pagination className="mt-3" aria-label="Page navigation example">
             <PaginationItem>
-              <PaginationLink previous href="#" onClick={this.previous_page}>
+              <PaginationLink
+                previous
+                href="#offers"
+                onClick={this.previous_page}
+              >
                 Back
               </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink first href="#" onClick={this.next_page}>
+              <PaginationLink first href="#offers" onClick={this.next_page}>
                 Next
               </PaginationLink>
             </PaginationItem>
