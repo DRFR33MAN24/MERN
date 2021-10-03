@@ -144,36 +144,35 @@ class AppNavbar extends Component {
           <Navbar
             color="light"
             light
-            expand="xs"
+            expand="sm"
             className="mb-5 fixed-top  shadow "
           >
             <Container>
-              <Container>
-                <NavbarBrand href="/" className="mx-auto">
-                  <a href="" class="navbar-brand">
-                    <img
-                      class="d-flex"
-                      src={siteLogo}
-                      width="180"
-                      height="32"
-                      alt=""
-                    />
-                  </a>
-                </NavbarBrand>
-              </Container>
-              <Container>
-                <Nav className="mx-auto">
-                  {isAuthenticated ? userInfo : null}
-                </Nav>
-              </Container>
-              <Container>
-                <div className="mx-auto">
+              <Row className="d-flex flex-row">
+                <Col>
+                  <NavbarBrand href="/">
+                    <a href="" className="navbar-brand">
+                      <img
+                        className="d-flex img-responsive"
+                        src={siteLogo}
+                        width="180"
+                        height="32"
+                        alt=""
+                      />
+                    </a>
+                  </NavbarBrand>
+                </Col>
+                <Col>
+                  <Nav>{isAuthenticated ? userInfo : null}</Nav>
+                </Col>
+
+                <Col>
                   <NavbarToggler onClick={this.toggle} />
                   <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav navbar>{isAuthenticated ? authLinks : guestLinks}</Nav>
                   </Collapse>
-                </div>
-              </Container>
+                </Col>
+              </Row>
             </Container>
           </Navbar>
         </div>
