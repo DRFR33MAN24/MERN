@@ -16,7 +16,11 @@ import {
   NavLink,
   Pagination,
   PaginationItem,
-  PaginationLink
+  PaginationLink,
+  ButtonDropdown,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle
 } from "reactstrap";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -36,7 +40,10 @@ class DashboardPage extends Component {
   state = {
     isAuth: false,
     offer_page: 0,
-    show_items: 16
+    show_items: 16,
+    dropdownOpen: false,
+    sortType: 1,
+    offerType: 1
   };
 
   static propTypes = {
@@ -103,16 +110,72 @@ class DashboardPage extends Component {
     }
   };
   getInstall = () => {
-    // this.props.getOffers()
+    this.setState({ offerType: 1 });
   };
 
-  getSurvey = () => {
-    // this.props.getOffers()
+  getPopular = () => {
+    this.setState({ offerType: 2 });
   };
 
-  getPinSubmit = () => {
-    // this.props.getOffers()
+  getCC = () => {
+    this.setState({ offerType: 3 });
   };
+
+  getMin = () => {
+    this.setState({ sortType: 1 })
+  }
+
+  getMax = () => {
+    this.setState({ sortType: 2 })
+  }
+
+  getNew = () => {
+    this.setState({ sortType: 3 })
+  }
+
+  getFinalOffers = () => {
+    const { offers } = this.props.offers;
+    let offers_semi;
+
+    switch (this.state.offerType) {
+      case 1:
+        offers_semi = offers.filter(item => {
+          return (item.category === 'Mobile')
+        })
+        break;
+
+      case 2:
+        offers_semi = offers.filter(item => {
+          return (item.category === 'Pop')
+        })
+
+        break;
+
+      case 3:
+        offers_semi = offers.filter(item => {
+          return (item.category === 'CC')
+        })
+
+        break;
+
+      default:
+        offers_semi = offers.filter(item => {
+          return (item.category === 'Pop')
+        })
+        break;
+    }
+
+    switch (this.state.sortType) {
+      case 1:
+        return offers_semi.sort((a, b) => a.amount - b.amount);
+
+      case 2:
+        return offers_semi.sort((a, b) => b.amount - a.amount);
+
+      default:
+        return offers_semi.sort((a, b) => b.amount - a.amount);
+    }
+  }
 
   onChange = e => {
     // this.setState({
@@ -124,8 +187,14 @@ class DashboardPage extends Component {
     e.preventDefault();
   };
 
+  toggle = () => {
+    this.setState({ dropdownOpen: !this.state.dropdownOpen });
+  }
+
   render() {
     const { offers } = this.props.offers;
+    const offers_final = this.getFinalOffers();
+
     const { user } = this.props;
     const featuredOffers = offers.filter(item => item.featured === 1);
     const surveys = offers.filter(item => {
@@ -188,23 +257,23 @@ class DashboardPage extends Component {
               <tbody>
                 {surveys
                   ? surveys.map(
-                      ({ title, description, link, amount }, index) => (
-                        <tr>
-                          <th scope="row">{index}</th>
-                          <td>{title}</td>
-                          <td>{description}</td>
-                          <td>{toDollars(amount)}</td>
-                          <td>
-                            <a
-                              className="btn btn-dark"
-                              href={this.getlink(link, user.id)}
-                            >
-                              Go
-                            </a>
-                          </td>
-                        </tr>
-                      )
+                    ({ title, description, link, amount }, index) => (
+                      <tr>
+                        <th scope="row">{index}</th>
+                        <td>{title}</td>
+                        <td>{description}</td>
+                        <td>{toDollars(amount)}</td>
+                        <td>
+                          <a
+                            className="btn btn-dark"
+                            href={this.getlink(link, user.id)}
+                          >
+                            Go
+                          </a>
+                        </td>
+                      </tr>
                     )
+                  )
                   : null}
               </tbody>
             </table>
@@ -259,31 +328,48 @@ class DashboardPage extends Component {
             <NavItem>
               <NavLink href="#" onClick={this.getInstall}>
                 <i
-                  class="fa fa-2x fa-gamepad custom-icon"
+                  class="fas fa-2x fa-mobile-alt custom-icon"
                   aria-hidden="true"
                 ></i>
-                <span> Games</span>
+                <span> Mobile</span>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" onClick={this.getPinSubmit}>
+              <NavLink href="#" onClick={this.getPopular}>
                 <i
-                  class="fa fa-2x fa-keyboard custom-icon"
+                  class="fa fa-2x  fa-line-chart custom-icon"
                   aria-hidden="true"
                 ></i>
-                <span> PIN Submit</span>
+                <span> Popular</span>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" onClick={this.getSurvey}>
-                <i class="fas fa-2x fa-poll custom-icon"></i>
-                <span> Survey</span>
+              <NavLink href="#" onClick={this.getCC}>
+                <i class="fas fa-2x fa-shopping-cart custom-icon"></i>
+                <span> Purchase</span>
               </NavLink>
+            </NavItem>
+            <NavItem>
+              <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                <DropdownToggle caret>
+                  Sort
+                </DropdownToggle>
+                <DropdownMenu>
+
+                  <DropdownItem ><NavLink
+                    onClick={this.getMin}>min{'->'}max</NavLink></DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem><NavLink onClick={this.getMax}>
+                    max{'->'}min</NavLink></DropdownItem>
+                  <DropdownItem divider />
+
+                </DropdownMenu>
+              </ButtonDropdown>
             </NavItem>
           </Nav>
         </Row>
-        <Row className="d-flex justify-content-start" id="offers">
-          {offers
+        <Row className="d-flex justify-content-center" id="offers">
+          {offers_final
             .slice(range_min, range_max)
             .map(({ title, description, link, img, amount, conversion }) => (
               <div className="">
