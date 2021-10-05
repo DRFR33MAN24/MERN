@@ -97,11 +97,11 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <Container>
-          <Col xs="12" className="d-flex justify-content-center">
+          <Col xs="12" className="d-flex justify-content-center ">
             <Link className="text-dark  " exact to="/Account">
-              <Row className="d-flex align-self-end">
-                <i className="fa fa-lg fa-user fa-pull-left mt-2 mr-3"></i>
-                <span>Account</span>
+              <Row className="d-flex align-self-end  p-2">
+                <i className="fa fa-lg fa-user fa-pull-left mt-2 mr-3 align-self-start"></i>
+                <span className="align-self-end">Account</span>
               </Row>
             </Link>
           </Col>
@@ -110,9 +110,9 @@ class AppNavbar extends Component {
 
           <Col xs="12" className="d-flex justify-content-center">
             <Link className="text-dark  " exact to="/Dashboard">
-              <Row className="d-flex justify-content-end ">
-                <i className="fa fa-lg fa-home fa-pull-left mt-2 mr-3"></i>
-                <span>Dashboard</span>
+              <Row className="d-flex align-self-end p-2">
+                <i className="fa fa-lg fa-home fa-pull-left mt-2 mr-3 align-self-start"></i>
+                <span className="align-self-end">Dashboard</span>
               </Row>
             </Link>
           </Col>
@@ -121,7 +121,7 @@ class AppNavbar extends Component {
 
           <Col xs="12" className="d-flex justify-content-center">
             <Link className="text-dark  " exact to="/Cashout">
-              <Row className="d-flex justify-content-end">
+              <Row className="d-flex justify-content-end p-2">
                 <i className="fas fa-lg fa-money-bill-alt fa-pull-left mt-2 mr-3"></i>
                 <span>Cashout</span>
               </Row>
@@ -132,7 +132,7 @@ class AppNavbar extends Component {
 
           <Col xs="12" className="d-flex justify-content-center">
             <div className="text-dark" onClick={this.props.logout}>
-              <Row className="d-flex justify-content-end">
+              <Row className="d-flex justify-content-end p-2">
                 <i className="fas fa-lg fa-sign-out-alt fa-pull-left mt-2 mr-3"></i>
                 <span>Logout</span>
               </Row>
