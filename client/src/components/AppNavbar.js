@@ -78,16 +78,16 @@ class AppNavbar extends Component {
     const guestLinks = (
       <Fragment>
         <Container>
-          <Col sm="12" className="d-flex justify-content-center">
+          <Col sm="12" className="d-flex justify-content-center p-2">
             {/* <RegisterModal /> */}
             <Link exact to="/Register" className="text-start">
               Register
             </Link>
           </Col>
 
-          <Col sm="12" className="d-flex justify-content-center">
+          <Col sm="12" className="d-flex justify-content-center p-2">
             {/* <LoginModal /> */}
-            <Link exact to="/Login" className="text-start">
+            <Link exact to="/Login" className="text-start ">
               Login
             </Link>
           </Col>
