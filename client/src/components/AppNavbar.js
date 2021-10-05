@@ -77,103 +77,96 @@ class AppNavbar extends Component {
     );
     const guestLinks = (
       <Fragment>
-        <NavItem>
-          {/* <RegisterModal /> */}
-          <Link exact to="/Register">
-            <NavLink href="/Register">Register</NavLink>
-          </Link>
-        </NavItem>
-        <NavItem>
-          {/* <LoginModal /> */}
-          <Link exact to="/Login">
-            <NavLink href="/Login">Login</NavLink>
-          </Link>
-        </NavItem>
+        <Container>
+          <Col sm="12" className="d-flex justify-content-center">
+            {/* <RegisterModal /> */}
+            <Link exact to="/Register" className="text-start">
+              Register
+            </Link>
+          </Col>
+
+          <Col sm="12" className="d-flex justify-content-center">
+            {/* <LoginModal /> */}
+            <Link exact to="/Login" className="text-start">
+              Login
+            </Link>
+          </Col>
+        </Container>
       </Fragment>
     );
     const authLinks = (
       <Fragment>
-        <UncontrolledDropdown nav inNavbar>
-          <DropdownToggle nav>
-            {/* <Icon.Gear size={24} /> */}
-            <i class="fa fa-lg fa-cog custom-icon"></i>
-          </DropdownToggle>
-          <DropdownMenu right>
-            <DropdownItem>
-              <Link className="text-dark  " exact to="/Account">
-                <Row className="d-flex justify-content-start4">
-                  <i className="fa fa-lg fa-user fa-pull-left mt-2 mr-3"></i>
-                  <span>Account</span>
-                </Row>
-              </Link>
-            </DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>
-              <Link className="text-dark  " exact to="/Dashboard">
-                <Row className="d-flex justify-content-start ">
-                  <i className="fa fa-lg fa-home fa-pull-left mt-2 mr-3"></i>
-                  <span>Dashboard</span>
-                </Row>
-              </Link>
-            </DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>
-              <Link className="text-dark  " exact to="/Cashout">
-                <Row className="d-flex justify-content-start">
-                  <i className="fas fa-lg fa-money-bill-alt fa-pull-left mt-2 mr-3"></i>
-                  <span>Cashout</span>
-                </Row>
-              </Link>
-            </DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>
-              <div className="text-dark" onClick={this.props.logout}>
-                <Row className="d-flex justify-content-start">
-                  <i className="fas fa-lg fa-sign-out-alt fa-pull-left mt-2 mr-3"></i>
-                  <span>Logout</span>
-                </Row>
-              </div>
-            </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
+        <Container>
+          <Col xs="12" className="d-flex justify-content-center">
+            <Link className="text-dark  " exact to="/Account">
+              <Row className="d-flex align-self-end">
+                <i className="fa fa-lg fa-user fa-pull-left mt-2 mr-3"></i>
+                <span>Account</span>
+              </Row>
+            </Link>
+          </Col>
+
+          <DropdownItem divider />
+
+          <Col xs="12" className="d-flex justify-content-center">
+            <Link className="text-dark  " exact to="/Dashboard">
+              <Row className="d-flex justify-content-end ">
+                <i className="fa fa-lg fa-home fa-pull-left mt-2 mr-3"></i>
+                <span>Dashboard</span>
+              </Row>
+            </Link>
+          </Col>
+
+          <DropdownItem divider />
+
+          <Col xs="12" className="d-flex justify-content-center">
+            <Link className="text-dark  " exact to="/Cashout">
+              <Row className="d-flex justify-content-end">
+                <i className="fas fa-lg fa-money-bill-alt fa-pull-left mt-2 mr-3"></i>
+                <span>Cashout</span>
+              </Row>
+            </Link>
+          </Col>
+
+          <DropdownItem divider />
+
+          <Col xs="12" className="d-flex justify-content-center">
+            <div className="text-dark" onClick={this.props.logout}>
+              <Row className="d-flex justify-content-end">
+                <i className="fas fa-lg fa-sign-out-alt fa-pull-left mt-2 mr-3"></i>
+                <span>Logout</span>
+              </Row>
+            </div>
+          </Col>
+        </Container>
       </Fragment>
     );
     return (
       <Router basename="/app">
         <div>
-          <Navbar
-            color="light"
-            light
-            expand="sm"
-            className="mb-5 fixed-top  shadow "
-          >
-            <Container>
-              <Row className="d-flex flex-row">
-                <Col>
-                  <NavbarBrand href="/">
-                    <a href="" className="navbar-brand">
-                      <img
-                        className="d-flex img-responsive"
-                        src={siteLogo}
-                        width="180"
-                        height="32"
-                        alt=""
-                      />
-                    </a>
-                  </NavbarBrand>
-                </Col>
-                <Col>
-                  <Nav>{isAuthenticated ? userInfo : null}</Nav>
-                </Col>
+          <Navbar color="light" light className="mb-5 fixed-top  shadow ">
+            <Col xs="4" className="align-self-start mr-auto">
+              <NavbarBrand href="/">
+                <a href="" className="navbar-brand">
+                  <img src={siteLogo} width="180" height="32" alt="" />
+                </a>
+              </NavbarBrand>
+            </Col>
+            <Col xs="4" className="align-self-center ml-auto">
+              {isAuthenticated ? userInfo : null}
+            </Col>
 
-                <Col>
-                  <NavbarToggler onClick={this.toggle} />
-                  <Collapse isOpen={this.state.isOpen} navbar>
-                    <Nav navbar>{isAuthenticated ? authLinks : guestLinks}</Nav>
-                  </Collapse>
-                </Col>
-              </Row>
-            </Container>
+            <NavbarToggler
+              onClick={this.toggle}
+              className=" align-self-end ml-auto"
+            />
+
+            <Col xs="12">
+              <Collapse isOpen={this.state.isOpen} navbar>
+                {/* <Nav>{isAuthenticated ? authLinks : guestLinks}</Nav> */}
+                {isAuthenticated ? authLinks : guestLinks}
+              </Collapse>
+            </Col>
           </Navbar>
         </div>
 

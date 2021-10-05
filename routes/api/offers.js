@@ -168,8 +168,9 @@ router.post("/", (req, res) => {
   console.log(country, device);
 
   (async function() {
+    //test_cond
     //await Promise.all([CallCpalead(), CallKiwi()]);
-    await CallCpalead();
+    // await CallCpalead();
     // await CallKiwi();
 
     try {
