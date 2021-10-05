@@ -32,47 +32,54 @@ router.post("/", async (req, res) => {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
 
-  User.findOne({ where: { email: email } }, { plain: true }).then(user => {
-    if (!user) {
-      return res.status(400).json({ msg: "User Does not exists." });
-    }
-    if (user.active === false) {
-      return res.status(400).json({ msg: "Please activate your account" });
-    }
+  let user = await User.findOne({ where: { email: email } }, { plain: true });
+  if (!user) {
+    return res.status(400).json({ msg: "User Does not exists." });
+  }
+  if (user.active === false) {
+    return res.status(400).json({ msg: "Please activate your account" });
+  }
 
-    // Validate password
-    bcryptjs.compare(password, user.password).then(isMatch => {
-      if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
-      jwt.sign(
-        { id: user.id },
-        config.get("jwtSecret"),
-        {
-          expiresIn: 3600
-        },
-        (err, token) => {
-          if (err) throw err;
-          res.json({
-            token,
-            user: {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-              balance: user.balance
-            }
-          });
-        }
-      );
-    });
+  // Validate password
+  bcryptjs.compare(password, user.password).then(isMatch => {
+    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+    jwt.sign(
+      { id: user.id },
+      config.get("jwtSecret"),
+      {
+        expiresIn: 3600
+      },
+      (err, token) => {
+        if (err) throw err;
+        res.json({
+          token,
+          user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            balance: user.balance
+          }
+        });
+      }
+    );
   });
 });
 
-router.get("/user", auth, (req, res) => {
-  User.findAll({
+
+router.get("/user", auth, async (req, res) => {
+  let user = await User.findAll({
     where: {
       id: req.user.id
     },
     plain: true
-  }).then(user => res.json(user));
+  });
+
+  if (user.active === false) {
+    return res.status(400).json({ msg: "Please activate your account" });
+  }
+
+  res.json(user);
+
 
   // User.findById(req.user.id)
   //   .select("-password")

@@ -33,54 +33,54 @@ router.post("/", async (req, res) => {
   }
 
   // Check for exitsting user
-  User.findOne({ where: { email: `${email}` } }, { plain: true }).then(user => {
-    if (user) {
-      return res.status(400).json({ msg: "User alerady exists." });
-    }
+  let user = await User.findOne({ where: { email: `${email}` } }, { plain: true });
+  if (user) {
+    return res.status(400).json({ msg: "User alerady exists." });
+  }
 
-    // const newUser = new User({
-    //   name,
-    //   email,
-    //   password
-    // });
-    const newUser = User.build({
-      name: `${name}`,
-      email: `${email}`,
-      password: `${password}`,
-      active: `${active}`
-    });
+  // const newUser = new User({
+  //   name,
+  //   email,
+  //   password
+  // });
+  const newUser = User.build({
+    name: `${name}`,
+    email: `${email}`,
+    password: `${password}`,
+    active: `${active}`
+  });
 
-    // Create salt and hash
+  // Create salt and hash
 
-    bcryptjs.genSalt(10, (err, salt) => {
-      bcryptjs.hash(newUser.password, salt, (err, hash) => {
-        if (err) throw err;
-        newUser.password = hash;
-        newUser.save().then(user => {
-          jwt.sign(
-            { id: user.id },
-            config.get("jwtSecret"),
-            {
-              expiresIn: 3600
-            },
-            (err, token) => {
-              if (err) throw err;
-              res.json({
-                token,
-                user: {
-                  id: user.id,
-                  name: user.name,
-                  email: user.email,
-                  active: user.active
-                }
-              });
-            }
-          );
-        });
+  bcryptjs.genSalt(10, (err, salt) => {
+    bcryptjs.hash(newUser.password, salt, (err, hash) => {
+      if (err) throw err;
+      newUser.password = hash;
+      newUser.save().then(user => {
+        jwt.sign(
+          { id: user.id },
+          config.get("jwtSecret"),
+          {
+            expiresIn: 3600
+          },
+          (err, token) => {
+            if (err) throw err;
+            res.json({
+              token,
+              user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                active: user.active
+              }
+            });
+          }
+        );
       });
     });
   });
 });
+
 
 // pass the old user info
 router.post("/update", (req, res) => {
