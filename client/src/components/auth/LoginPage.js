@@ -86,6 +86,7 @@ class LoginPage extends Component {
     // Attempt to login
     this.props.login(user);
     this.props.returnErrors();
+    window.grecaptcha.reset();
   };
   render() {
     const isAuthenticated = this.props.isAuthenticated;

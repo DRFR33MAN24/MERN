@@ -88,6 +88,7 @@ class RegisterPage extends Component {
     // Attempt to register
     this.props.register(newUser);
     this.props.returnErrors();
+    window.grecaptcha.reset();
   };
 
   render() {
