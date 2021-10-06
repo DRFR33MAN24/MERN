@@ -80,14 +80,24 @@ class AppNavbar extends Component {
         <Container>
           <Col sm="12" className="d-flex justify-content-center p-2">
             {/* <RegisterModal /> */}
-            <Link exact to="/Register" className="text-start">
+            <Link
+              onClick={this.toggle}
+              exact
+              to="/Register"
+              className="text-start"
+            >
               Register
             </Link>
           </Col>
 
           <Col sm="12" className="d-flex justify-content-center p-2">
             {/* <LoginModal /> */}
-            <Link exact to="/Login" className="text-start ">
+            <Link
+              onClick={this.toggle}
+              exact
+              to="/Login"
+              className="text-start "
+            >
               Login
             </Link>
           </Col>
@@ -98,7 +108,12 @@ class AppNavbar extends Component {
       <Fragment>
         <Container>
           <Col xs="12" className="d-flex justify-content-center ">
-            <Link className="text-dark  " exact to="/Account">
+            <Link
+              onClick={this.toggle}
+              className="text-dark  "
+              exact
+              to="/Account"
+            >
               <Row className="d-flex align-self-end  p-2">
                 <i className="fa fa-lg fa-user fa-pull-left mt-2 mr-3 align-self-start"></i>
                 <span className="align-self-end">Account</span>
@@ -109,7 +124,12 @@ class AppNavbar extends Component {
           <DropdownItem divider />
 
           <Col xs="12" className="d-flex justify-content-center">
-            <Link className="text-dark  " exact to="/Dashboard">
+            <Link
+              onClick={this.toggle}
+              className="text-dark  "
+              exact
+              to="/Dashboard"
+            >
               <Row className="d-flex align-self-end p-2">
                 <i className="fa fa-lg fa-home fa-pull-left mt-2 mr-3 align-self-start"></i>
                 <span className="align-self-end">Dashboard</span>
@@ -120,7 +140,12 @@ class AppNavbar extends Component {
           <DropdownItem divider />
 
           <Col xs="12" className="d-flex justify-content-center">
-            <Link className="text-dark  " exact to="/Cashout">
+            <Link
+              onClick={this.toggle}
+              className="text-dark  "
+              exact
+              to="/Cashout"
+            >
               <Row className="d-flex justify-content-end p-2">
                 <i className="fas fa-lg fa-money-bill-alt fa-pull-left mt-2 mr-3"></i>
                 <span>Cashout</span>
@@ -131,7 +156,13 @@ class AppNavbar extends Component {
           <DropdownItem divider />
 
           <Col xs="12" className="d-flex justify-content-center">
-            <div className="text-dark" onClick={this.props.logout}>
+            <div
+              className="text-dark"
+              onClick={e => {
+                this.props.logout();
+                this.toggle();
+              }}
+            >
               <Row className="d-flex justify-content-end p-2">
                 <i className="fas fa-lg fa-sign-out-alt fa-pull-left mt-2 mr-3"></i>
                 <span>Logout</span>
