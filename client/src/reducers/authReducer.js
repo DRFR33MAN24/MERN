@@ -83,6 +83,7 @@ export default function(state = initialState, action) {
       };
 
     case REGISTER_SUCCESS:
+      //console.log(REGISTER_SUCCESS);
       localStorage.setItem("token", action.payload.token);
 
       return {
