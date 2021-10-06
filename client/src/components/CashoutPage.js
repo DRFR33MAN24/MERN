@@ -210,54 +210,53 @@ class CashoutPage extends Component {
         </Card>
         <Card className="shadow mt-5 p-3">
           <Label>Activity:</Label>
-          <ListGroup>
-            <div>
-              <ListGroupItem>
-                <Container fluid={true}>
-                  <Row className="d-flex justify-content-around">
-                    <div>Offer Id</div>
-                    <div>Name</div>
-                    <div>Payout</div>
-                    <div>Status</div>
-                    <div>Date</div>
-                  </Row>
-                </Container>
-              </ListGroupItem>
-            </div>
-            {postback
-              ? postback.map(
-                  ({ payout, id, offer_name, status, createdAt }) => (
-                    <div className="">
-                      <ListGroupItem
-                        color={(() => {
-                          switch (status) {
-                            case "pending":
-                              return "warning";
+          <Container>
+            <table class="table table-striped">
+              <thead className="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">OfferID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Payout</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {postback
+                  ? postback.map(
+                      (
+                        { payout, id, offer_name, status, createdAt },
+                        index
+                      ) => (
+                        <tr
+                          className={(() => {
+                            switch (status) {
+                              case "pending":
+                                return "table-warning";
 
-                            case "credited":
-                              return "success";
-                            case "reversed":
-                              return "danger";
-                            default:
-                              return "warning";
-                          }
-                        })()}
-                      >
-                        <Container fluid={true}>
-                          <Row className="d-flex justify-content-around">
-                            <div>{id}</div>
-                            <div>{offer_name}</div>
-                            <div>{payout}</div>
-                            <div>{status}</div>
-                            <div>{getFormattedDate(new Date(createdAt))}</div>
-                          </Row>
-                        </Container>
-                      </ListGroupItem>
-                    </div>
-                  )
-                )
-              : null}
-          </ListGroup>
+                              case "paid":
+                                return "table-success";
+                              case "rejected":
+                                return "table-danger";
+                              default:
+                                return "table-warning";
+                            }
+                          })()}
+                        >
+                          <th scope="row">{index}</th>
+                          <td>{id}</td>
+                          <td>{offer_name}</td>
+                          <td>{payout}</td>
+                          <td>{status}</td>
+                          <td>{getFormattedDate(new Date(createdAt))}</td>
+                        </tr>
+                      )
+                    )
+                  : null}
+              </tbody>
+            </table>
+          </Container>
         </Card>
       </Container>
     );
