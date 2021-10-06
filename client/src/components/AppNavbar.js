@@ -179,14 +179,11 @@ class AppNavbar extends Component {
                 </a>
               </NavbarBrand>
             </Col>
-            <Col xs="4" className="align-self-center ml-auto">
+            <Col xs="4" className="align-self-center ml-auto mr-auto">
               {isAuthenticated ? userInfo : null}
             </Col>
 
-            <NavbarToggler
-              onClick={this.toggle}
-              className=" align-self-end ml-auto"
-            />
+            <NavbarToggler onClick={this.toggle} className=" align-self-end " />
 
             <Col xs="12">
               <Collapse isOpen={this.state.isOpen} navbar>
