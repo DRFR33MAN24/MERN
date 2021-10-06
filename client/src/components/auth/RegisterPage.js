@@ -9,7 +9,8 @@ import {
   Container,
   Card,
   Alert,
-  Row
+  Row,
+  Col
 } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
@@ -19,7 +20,7 @@ import PropTypes from "prop-types";
 import { register } from "../../actions/authAction";
 import { sendEmail } from "../../actions/sendEmailAction";
 import { clearErrors, returnErrors } from "../../actions/errorAction";
-import LoadingModal from '../LoadingModal';
+import LoadingModal from "../LoadingModal";
 import { bindActionCreators } from "redux";
 
 class RegisterPage extends Component {
@@ -105,68 +106,72 @@ class RegisterPage extends Component {
         <LoadingModal open={isLoading} />
         <Container className=" mx-auto  justify-content-start  p-5">
           <Row className="px-3">
-            <i class="fas fa-3x fa-user-plus" ></i>
+            <i class="fas fa-3x fa-user-plus"></i>
             <h1 className="ml-3">Register</h1>
           </Row>
           <hr></hr>
         </Container>
-        <Card className="shadow p-4 bg-light">
-          {this.props.emailSent ? (
-            <Alert color="success">{"Email sent"}</Alert>
-          ) : null}
-          {this.state.msg ? (
-            <Alert color="danger">{this.state.msg}</Alert>
-          ) : null}
-          <Form onSubmit={this.onSubmit}>
-            <FormGroup>
-              <Label for="name">Name</Label>
-              <Input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Name"
-                onChange={this.onChange}
-                className="mb-3"
-              />
+        <Row className="d-flex justify-content-center ">
+          <Col lg="6" xs="12">
+            <Card className="shadow p-4 bg-light">
+              {this.props.emailSent ? (
+                <Alert color="success">{"Email sent"}</Alert>
+              ) : null}
+              {this.state.msg ? (
+                <Alert color="danger">{this.state.msg}</Alert>
+              ) : null}
+              <Form onSubmit={this.onSubmit}>
+                <FormGroup>
+                  <Label for="name">Name</Label>
+                  <Input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Name"
+                    onChange={this.onChange}
+                    className="mb-3"
+                  />
 
-              <Label for="email">Email</Label>
-              <Input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-                onChange={this.onChange}
-                className="mb-3"
-              />
+                  <Label for="email">Email</Label>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    onChange={this.onChange}
+                    className="mb-3"
+                  />
 
-              <Label for="password">Password</Label>
-              <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                onChange={this.onChange}
-                className="mb-3"
-              />
-              <ReCaptchaV2
-                sitekey="6Le54pscAAAAACxYbAovh0tZWg-KSZ1v_CPigC2A"
-                onChange={this.handleToken}
-                onExpired={this.handleExpire}
-              />
-              <Button color="warning" style={{ marginTop: "2rem" }} block>
-                Register
-              </Button>
-            </FormGroup>
-            <FormGroup className="d-flex flex-direction-row justify-content-between">
-              <div>
-                Already a member:{" "}
-                <Link exact to="/Login">
-                  Login
-                </Link>
-              </div>
-            </FormGroup>
-          </Form>
-        </Card>
+                  <Label for="password">Password</Label>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    onChange={this.onChange}
+                    className="mb-3"
+                  />
+                  <ReCaptchaV2
+                    sitekey="6Le54pscAAAAACxYbAovh0tZWg-KSZ1v_CPigC2A"
+                    onChange={this.handleToken}
+                    onExpired={this.handleExpire}
+                  />
+                  <Button color="warning" style={{ marginTop: "2rem" }} block>
+                    Register
+                  </Button>
+                </FormGroup>
+                <FormGroup className="d-flex flex-direction-row justify-content-between">
+                  <div>
+                    Already a member:{" "}
+                    <Link exact to="/Login">
+                      Login
+                    </Link>
+                  </div>
+                </FormGroup>
+              </Form>
+            </Card>
+          </Col>
+        </Row>
       </Container>
     );
   }
