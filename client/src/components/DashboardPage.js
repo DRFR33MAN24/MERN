@@ -110,15 +110,15 @@ class DashboardPage extends Component {
     }
   };
   getInstall = () => {
-    this.setState({ offerType: 1 });
+    this.setState({ offerType: 1, offer_page: 0 });
   };
 
   getPopular = () => {
-    this.setState({ offerType: 2 });
+    this.setState({ offerType: 2, offer_page: 0 });
   };
 
   getCC = () => {
-    this.setState({ offerType: 3 });
+    this.setState({ offerType: 3, offer_page: 0 });
   };
 
   getMin = () => {
@@ -375,20 +375,33 @@ class DashboardPage extends Component {
         <Row className="d-flex justify-content-center" id="offers">
           {offers_final
             .slice(range_min, range_max)
-            .map(({ title, description, link, img, amount, conversion }) => (
-              <div className="">
-                {isAuthenticated ? (
-                  <Offer
-                    title={title}
-                    description={description}
-                    link={this.getlink(link, user.id)}
-                    amount={toDollars(amount)}
-                    img={img}
-                    conversion={conversion}
-                  />
-                ) : null}
-              </div>
-            ))}
+            .map(
+              ({
+                title,
+                description,
+                link,
+                img,
+                amount,
+                conversion,
+                device,
+                category
+              }) => (
+                <div className="">
+                  {isAuthenticated ? (
+                    <Offer
+                      title={title}
+                      description={description}
+                      link={this.getlink(link, user.id)}
+                      amount={toDollars(amount)}
+                      img={img}
+                      conversion={conversion}
+                      device={device}
+                      category={category}
+                    />
+                  ) : null}
+                </div>
+              )
+            )}
         </Row>
 
         <Row className="d-flex justify-content-center bg-dark mb-3 mt-3">

@@ -33,6 +33,7 @@ export default class Offer extends Component {
               link={this.props.link}
               amount={this.props.amount}
               conversion={this.props.conversion}
+              device={this.props.device}
             />
           </div>
         ) : null}
@@ -64,9 +65,15 @@ export default class Offer extends Component {
             alt="Card image cap"
           />
           <Container className="d-flex justify-content-end align-items-center mt-2">
-            <i className="fa fa-download px-2 py-1"></i>
-            <i className="fab fa-android px-2 py-1"></i>
-            <i className="fab fa-apple px-2 py-1"></i>
+            {this.props.category === "Mobile" ? (
+              <i className="fa fa-download px-2 py-1"></i>
+            ) : null}
+            {this.props.device === "android" ? (
+              <i className="fab fa-android px-2 py-1"></i>
+            ) : null}
+            {this.props.device === "ios" ? (
+              <i className="fab fa-apple px-2 py-1"></i>
+            ) : null}
           </Container>
           <CardBody>
             <CardTitle tag="h5" className="truncate">
