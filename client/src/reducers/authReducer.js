@@ -18,7 +18,7 @@ import { tr } from "date-fns/locale";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  isAuthenticated: false,
+  isAuthenticated: undefined,
   isLoading: false,
   user: {},
   updated: false,

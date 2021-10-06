@@ -122,16 +122,16 @@ class DashboardPage extends Component {
   };
 
   getMin = () => {
-    this.setState({ sortType: 1 })
-  }
+    this.setState({ sortType: 1 });
+  };
 
   getMax = () => {
-    this.setState({ sortType: 2 })
-  }
+    this.setState({ sortType: 2 });
+  };
 
   getNew = () => {
-    this.setState({ sortType: 3 })
-  }
+    this.setState({ sortType: 3 });
+  };
 
   getFinalOffers = () => {
     const { offers } = this.props.offers;
@@ -140,28 +140,28 @@ class DashboardPage extends Component {
     switch (this.state.offerType) {
       case 1:
         offers_semi = offers.filter(item => {
-          return (item.category === 'Mobile')
-        })
+          return item.category === "Mobile";
+        });
         break;
 
       case 2:
         offers_semi = offers.filter(item => {
-          return (item.category === 'Pop')
-        })
+          return item.category === "Pop";
+        });
 
         break;
 
       case 3:
         offers_semi = offers.filter(item => {
-          return (item.category === 'CC')
-        })
+          return item.category === "CC";
+        });
 
         break;
 
       default:
         offers_semi = offers.filter(item => {
-          return (item.category === 'Pop')
-        })
+          return item.category === "Pop";
+        });
         break;
     }
 
@@ -175,7 +175,7 @@ class DashboardPage extends Component {
       default:
         return offers_semi.sort((a, b) => b.amount - a.amount);
     }
-  }
+  };
 
   onChange = e => {
     // this.setState({
@@ -189,7 +189,7 @@ class DashboardPage extends Component {
 
   toggle = () => {
     this.setState({ dropdownOpen: !this.state.dropdownOpen });
-  }
+  };
 
   render() {
     const { offers } = this.props.offers;
@@ -231,8 +231,11 @@ class DashboardPage extends Component {
     // console.log(offers);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
-    if (!isAuthenticated) {
+    if (isAuthenticated === false) {
       return login;
+    }
+    if (isAuthenticated === undefined) {
+      return <h1>wait...</h1>;
     }
     if (user === null) {
       return null;
@@ -257,23 +260,23 @@ class DashboardPage extends Component {
               <tbody>
                 {surveys
                   ? surveys.map(
-                    ({ title, description, link, amount }, index) => (
-                      <tr>
-                        <th scope="row">{index}</th>
-                        <td>{title}</td>
-                        <td>{description}</td>
-                        <td>{toDollars(amount)}</td>
-                        <td>
-                          <a
-                            className="btn btn-dark"
-                            href={this.getlink(link, user.id)}
-                          >
-                            Go
-                          </a>
-                        </td>
-                      </tr>
+                      ({ title, description, link, amount }, index) => (
+                        <tr>
+                          <th scope="row">{index}</th>
+                          <td>{title}</td>
+                          <td>{description}</td>
+                          <td>{toDollars(amount)}</td>
+                          <td>
+                            <a
+                              className="btn btn-dark"
+                              href={this.getlink(link, user.id)}
+                            >
+                              Go
+                            </a>
+                          </td>
+                        </tr>
+                      )
                     )
-                  )
                   : null}
               </tbody>
             </table>
@@ -350,19 +353,20 @@ class DashboardPage extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle caret>
-                  Sort
-                </DropdownToggle>
+              <ButtonDropdown
+                isOpen={this.state.dropdownOpen}
+                toggle={this.toggle}
+              >
+                <DropdownToggle caret>Sort</DropdownToggle>
                 <DropdownMenu>
-
-                  <DropdownItem ><NavLink
-                    onClick={this.getMin}>min{'->'}max</NavLink></DropdownItem>
+                  <DropdownItem>
+                    <NavLink onClick={this.getMin}>min{"->"}max</NavLink>
+                  </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem><NavLink onClick={this.getMax}>
-                    max{'->'}min</NavLink></DropdownItem>
+                  <DropdownItem>
+                    <NavLink onClick={this.getMax}>max{"->"}min</NavLink>
+                  </DropdownItem>
                   <DropdownItem divider />
-
                 </DropdownMenu>
               </ButtonDropdown>
             </NavItem>

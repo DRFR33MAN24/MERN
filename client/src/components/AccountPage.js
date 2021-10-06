@@ -126,8 +126,11 @@ class AccountPage extends Component {
     //console.log(offers);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
-    if (!isAuthenticated) {
+    if (isAuthenticated === false) {
       return login;
+    }
+    if (isAuthenticated === undefined) {
+      return <h1>wait...</h1>;
     }
 
     const confirmModal = (
