@@ -177,7 +177,13 @@ class AccountPage extends Component {
               ></Input>
 
               <Label className="mt-2">Wallet Address:</Label>
-              <Input disabled={!formEnabled}></Input>
+              <Input
+                name="wallet"
+                type="text"
+                defaultValue={user.wallet}
+                onChange={value => this.onChange(value)}
+                disabled={!formEnabled}
+              ></Input>
             </Form>
           </Container>
           <Container className="mt-3 mb-3 p-1 d-flex justify-content-center">
