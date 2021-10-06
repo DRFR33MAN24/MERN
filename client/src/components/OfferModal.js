@@ -24,8 +24,14 @@ export default class OfferModal extends Component {
         <Modal isOpen={true} className="modal-dialog-centered">
           <ModalHeader>{this.props.title}</ModalHeader>
           <ModalBody>
-            <p>{this.props.description}</p>
-            <p>{this.props.conversion}</p>
+            {this.props.description === this.props.conversion ? (
+              <p>{this.props.description}</p>
+            ) : (
+              <div>
+                <p>{this.props.conversion}</p>
+                <p>{this.props.description}</p>
+              </div>
+            )}
 
             <ModalFooter className="d-flex justify-content-start">
               <Button

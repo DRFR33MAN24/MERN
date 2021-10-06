@@ -243,9 +243,17 @@ class DashboardPage extends Component {
     return (
       <Container fluid={true} className=" py-5 ">
         <Row className="mt-2">
-          <Container fluid={true} className="shadow mt-3 bg-light">
+          <Container className="text-center">
             <h3 className="mt-5 ml-2 ">Featured Surveys</h3>
+            <hr
+              style={{
+                color: "black",
+                backgroundColor: "black",
+                height: 3
+              }}
+            />
           </Container>
+
           <Container fluid={true} className="py-5">
             <table class="table table-striped">
               <thead className="thead-dark">
@@ -282,7 +290,7 @@ class DashboardPage extends Component {
             </table>
           </Container>
         </Row>
-        {featuredOffers.length != 0 ? (
+        {/* {featuredOffers.length != 0 ? (
           <Row className="mt-2">
             <Container fluid={true}>
               <Label className="">Featured Offers:</Label>
@@ -325,7 +333,7 @@ class DashboardPage extends Component {
           </Row>
         ) : (
           <NoContent />
-        )}
+        )} */}
         <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-light">
           <Nav>
             <NavItem>

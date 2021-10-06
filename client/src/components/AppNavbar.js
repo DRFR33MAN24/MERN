@@ -119,11 +119,9 @@ class AppNavbar extends Component {
                 <span className="align-self-end">Account</span>
               </Row>
             </Link>
-          </Col>
 
-          <DropdownItem divider />
+            <DropdownItem divider />
 
-          <Col xs="12" className="d-flex justify-content-center">
             <Link
               onClick={this.toggle}
               className="text-dark  "
@@ -135,28 +133,24 @@ class AppNavbar extends Component {
                 <span className="align-self-end">Dashboard</span>
               </Row>
             </Link>
-          </Col>
 
-          <DropdownItem divider />
+            <DropdownItem divider />
 
-          <Col xs="12" className="d-flex justify-content-center">
             <Link
               onClick={this.toggle}
               className="text-dark  "
               exact
               to="/Cashout"
             >
-              <Row className="d-flex justify-content-end p-2">
+              <Row className="p-2">
                 <i className="fas fa-lg fa-money-bill-alt fa-pull-left mt-2 mr-3"></i>
-                <span>Cashout</span>
+                <div className="d-inline">Cashout</div>
               </Row>
             </Link>
-          </Col>
 
-          <DropdownItem divider />
+            <DropdownItem divider />
 
-          <Col xs="12" className="d-flex justify-content-center">
-            <div
+            <Link
               className="text-dark"
               onClick={e => {
                 this.props.logout();
@@ -167,7 +161,7 @@ class AppNavbar extends Component {
                 <i className="fas fa-lg fa-sign-out-alt fa-pull-left mt-2 mr-3"></i>
                 <span>Logout</span>
               </Row>
-            </div>
+            </Link>
           </Col>
         </Container>
       </Fragment>
