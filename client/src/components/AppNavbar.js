@@ -107,61 +107,63 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <Container>
-          <Col xs="12" className="d-flex justify-content-center ">
-            <Link
-              onClick={this.toggle}
-              className="text-dark  "
-              exact
-              to="/Account"
-            >
-              <Row className="d-flex align-self-end  p-2">
-                <i className="fa fa-lg fa-user fa-pull-left mt-2 mr-3 align-self-start"></i>
-                <span className="align-self-end">Account</span>
+          <Col xs="12" className="d-flex justify-content-center  ">
+            <Container className="d-flex flex-column ">
+              <Row className=" p-1 ">
+                <Link
+                  onClick={this.toggle}
+                  className="text-dark  d-inline"
+                  exact
+                  to="/Account"
+                >
+                  <i className="fa fa-lg fa-user   mr-3 "></i>
+                  Account
+                </Link>
               </Row>
-            </Link>
 
-            <DropdownItem divider />
+              <DropdownItem divider />
 
-            <Link
-              onClick={this.toggle}
-              className="text-dark  "
-              exact
-              to="/Dashboard"
-            >
-              <Row className="d-flex align-self-end p-2">
-                <i className="fa fa-lg fa-home fa-pull-left mt-2 mr-3 align-self-start"></i>
-                <span className="align-self-end">Dashboard</span>
+              <Row className=" p-1 ">
+                <Link
+                  onClick={this.toggle}
+                  className="text-dark  d-inline"
+                  exact
+                  to="/Dashboard"
+                >
+                  <i className="fa fa-lg fa-home   mr-3 "></i>
+                  Dashboard
+                </Link>
               </Row>
-            </Link>
 
-            <DropdownItem divider />
+              <DropdownItem divider />
 
-            <Link
-              onClick={this.toggle}
-              className="text-dark  "
-              exact
-              to="/Cashout"
-            >
-              <Row className="p-2">
-                <i className="fas fa-lg fa-money-bill-alt fa-pull-left mt-2 mr-3"></i>
-                <div className="d-inline">Cashout</div>
+              <Row className="p-1">
+                <Link
+                  onClick={this.toggle}
+                  className="text-dark  d-inline"
+                  exact
+                  to="/Cashout"
+                >
+                  <i className="fas fa-lg fa-money-bill-alt   mr-3"></i>
+                  Cashout
+                </Link>
               </Row>
-            </Link>
 
-            <DropdownItem divider />
+              <DropdownItem divider />
 
-            <Link
-              className="text-dark"
-              onClick={e => {
-                this.props.logout();
-                this.toggle();
-              }}
-            >
-              <Row className="d-flex justify-content-end p-2">
-                <i className="fas fa-lg fa-sign-out-alt fa-pull-left mt-2 mr-3"></i>
-                <span>Logout</span>
+              <Row className=" p-1">
+                <Link
+                  className="text-dark d-inline"
+                  onClick={e => {
+                    this.props.logout();
+                    this.toggle();
+                  }}
+                >
+                  <i className="fas fa-lg fa-sign-out-alt   mr-3"></i>
+                  Logout
+                </Link>
               </Row>
-            </Link>
+            </Container>
           </Col>
         </Container>
       </Fragment>
