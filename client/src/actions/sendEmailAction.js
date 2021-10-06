@@ -16,7 +16,7 @@ export const sendEmail = email => dispatch => {
   const body = JSON.stringify({ email });
   console.log(body);
   axios
-    .post("api/email/send", body, config)
+    .post("/api/email/send", body, config)
     .then(res => {
       console.log("send email get.then");
       // const offers = {}
