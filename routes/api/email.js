@@ -81,6 +81,7 @@ router.get("/verify", function(req, res) {
           .then(() => console.log("Hash Deleted"))
           .catch(err => console.log("Hash not deleted", err));
       })
+      .then(() => res.redirect("https://coinguru.biz/app"))
       .catch(() => console.log("Activation Error"));
   });
 });
