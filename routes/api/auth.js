@@ -57,14 +57,14 @@ router.post("/", async (req, res) => {
             id: user.id,
             name: user.name,
             email: user.email,
-            balance: user.balance
+            balance: user.balance,
+            password: user.password
           }
         });
       }
     );
   });
 });
-
 
 router.get("/user", auth, async (req, res) => {
   let user = await User.findAll({
@@ -79,7 +79,6 @@ router.get("/user", auth, async (req, res) => {
   }
 
   res.json(user);
-
 
   // User.findById(req.user.id)
   //   .select("-password")

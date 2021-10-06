@@ -33,7 +33,10 @@ router.post("/", async (req, res) => {
   }
 
   // Check for exitsting user
-  let user = await User.findOne({ where: { email: `${email}` } }, { plain: true });
+  let user = await User.findOne(
+    { where: { email: `${email}` } },
+    { plain: true }
+  );
   if (user) {
     return res.status(400).json({ msg: "User alerady exists." });
   }
@@ -81,26 +84,45 @@ router.post("/", async (req, res) => {
   });
 });
 
-
 // pass the old user info
 router.post("/update", (req, res) => {
   console.log("update route called");
   const { name, email, password, id, wallet } = req.body;
 
   if (!name || !email || !password) {
+    console.log(name, email, password);
     return res.status(400).json({ msg: "Please enter all fields" });
   }
   console.log(name, email, password, wallet);
   User.findOne({ where: { id: `${id}` } }, { plain: true }).then(user => {
     if (user) {
-      //update existing user
-      // const newUser = User.build({
-      //   name: `${name}`,
-      //   email: `${email}`,
-      //   password: `${password}`
-      // });
+      if (user.password === password) {
+        User.update(
+          {
+            name: `${name}`,
+            email: `${email}`,
 
-      // Create salt and hash
+            wallet: `${wallet}`,
+            active: false
+          },
+          { where: { id: `${id}` } }
+        )
+          .then(user => {
+            res.json({
+              user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                active: user.active,
+                password: user.password
+              }
+            });
+            console.log("user updated");
+          })
+          .catch(err => console.log(err));
+
+        return;
+      }
 
       bcryptjs.genSalt(10, (err, salt) => {
         bcryptjs.hash(password, salt, (err, hash) => {

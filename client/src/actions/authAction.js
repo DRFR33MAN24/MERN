@@ -58,6 +58,7 @@ export const register = ({
 
   // Request body
   const body = JSON.stringify({ name, email, password, active, token });
+
   axios
     .post("/api/users", body, config)
     .then(res => {
