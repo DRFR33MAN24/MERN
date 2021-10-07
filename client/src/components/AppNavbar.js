@@ -236,7 +236,7 @@ class AppNavbar extends Component {
             exact
             path="/Help"
             component={() => {
-              window.location.href = "https://supportcoinguru.biz/hesk";
+              window.location.href = "https://support.coinguru.biz/hesk";
               return null;
             }}
           />
