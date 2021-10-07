@@ -336,48 +336,50 @@ class DashboardPage extends Component {
         )} */}
         <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-light">
           <Nav>
-            <NavItem>
-              <NavLink href="#" onClick={this.getInstall}>
-                <i
-                  class="fas fa-2x fa-mobile-alt custom-icon"
-                  aria-hidden="true"
-                ></i>
-                <span> Mobile</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#" onClick={this.getPopular}>
-                <i
-                  class="fa fa-2x  fa-line-chart custom-icon"
-                  aria-hidden="true"
-                ></i>
-                <span> Popular</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#" onClick={this.getCC}>
-                <i class="fas fa-2x fa-shopping-cart custom-icon"></i>
-                <span> Purchase</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <ButtonDropdown
-                isOpen={this.state.dropdownOpen}
-                toggle={this.toggle}
-              >
-                <DropdownToggle caret>Sort</DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem>
-                    <NavLink onClick={this.getMin}>min{"->"}max</NavLink>
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    <NavLink onClick={this.getMax}>max{"->"}min</NavLink>
-                  </DropdownItem>
-                  <DropdownItem divider />
-                </DropdownMenu>
-              </ButtonDropdown>
-            </NavItem>
+            <Container className="d-flex flex-row flex-wrap justify-content-center">
+              <NavItem>
+                <NavLink href="#" onClick={this.getInstall}>
+                  <i
+                    class="fas fa-2x fa-mobile-alt custom-icon"
+                    aria-hidden="true"
+                  ></i>
+                  <span> Mobile</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#" onClick={this.getPopular}>
+                  <i
+                    class="fa fa-2x  fa-line-chart custom-icon"
+                    aria-hidden="true"
+                  ></i>
+                  <span> Popular</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="#" onClick={this.getCC}>
+                  <i class="fas fa-2x fa-shopping-cart custom-icon"></i>
+                  <span> Purchase</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <ButtonDropdown
+                  isOpen={this.state.dropdownOpen}
+                  toggle={this.toggle}
+                >
+                  <DropdownToggle caret>Sort</DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>
+                      <NavLink onClick={this.getMin}>min{"->"}max</NavLink>
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>
+                      <NavLink onClick={this.getMax}>max{"->"}min</NavLink>
+                    </DropdownItem>
+                    <DropdownItem divider />
+                  </DropdownMenu>
+                </ButtonDropdown>
+              </NavItem>
+            </Container>
           </Nav>
         </Row>
         <Row className="d-flex justify-content-center" id="offers">

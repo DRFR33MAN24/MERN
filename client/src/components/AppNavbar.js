@@ -188,15 +188,18 @@ class AppNavbar extends Component {
             <Col xs="4" className="align-self-start mr-auto">
               <NavbarBrand href="/">
                 <a href="" className="navbar-brand">
-                  <img src={siteLogo} width="180" height="32" alt="" />
+                  <img src={siteLogo} className="site-logo" />
                 </a>
               </NavbarBrand>
             </Col>
-            <Col xs="4" className="align-self-center ml-auto mr-auto">
+            <Col xs="4" className="align-self-center ml-auto mr-auto mt-auto">
               {isAuthenticated ? userInfo : null}
             </Col>
 
-            <NavbarToggler onClick={this.toggle} className=" align-self-end " />
+            <NavbarToggler
+              onClick={this.toggle}
+              className=" align-self-end mt-auto mb-auto mr-auto "
+            />
 
             <Col xs="12">
               <Collapse isOpen={this.state.isOpen} navbar>

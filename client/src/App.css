@@ -82,8 +82,18 @@ body {
   padding: 0.2em 0.2em;
 }
 
+.site-logo {
+  width: 180px;
+  height: 32px;
+}
+
 @media (max-width: 767px) {
   .custom-dropDown-toggle {
     visibility: none;
+  }
+
+  .site-logo {
+    width: 90px;
+    height: 16px;
   }
 }
