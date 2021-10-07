@@ -148,6 +148,19 @@ class AppNavbar extends Component {
                   Cashout
                 </Link>
               </Row>
+              <DropdownItem divider />
+
+              <Row className="p-1">
+                <Link
+                  onClick={this.toggle}
+                  className="text-dark  d-inline"
+                  exact
+                  to="/Help"
+                >
+                  <i className="fas fa-lg fa-question-circle   mr-3"></i>
+                  Help
+                </Link>
+              </Row>
 
               <DropdownItem divider />
 
@@ -216,6 +229,15 @@ class AppNavbar extends Component {
           <Route exact path="/Cashout">
             <CashoutPage />
           </Route>
+          <Route
+            exact
+            path="/Help"
+            component={() => {
+              window.location.href = "https://supportcoinguru.biz/hesk";
+              return null;
+            }}
+          />
+
           <Route path="*" exact={true}>
             <NotFound />
           </Route>
