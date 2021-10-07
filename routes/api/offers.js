@@ -17,7 +17,7 @@ const url_cpalead =
 const url_kiwi =
   "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/?country=ALL";
 
-const updateFq_kiwi = 100;
+const updateFq_kiwi = 10;
 const updateFq_cpalead = 10;
 
 const CallCpalead = async () => {
