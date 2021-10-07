@@ -9,7 +9,8 @@ import {
   Container,
   Card,
   Alert,
-  Row
+  Row,
+  Col
 } from "reactstrap";
 
 import * as Icon from "react-bootstrap-icons";
@@ -40,7 +41,7 @@ class ResetPassword extends Component {
     user: PropTypes.object
   };
 
-  componentDidMount(prevProps) { }
+  componentDidMount(prevProps) {}
   componentDidUpdate(prevProps, prevState) {
     const isAuthenticated = this.props.isAuthenticated;
     const error = this.props.error;
@@ -107,56 +108,60 @@ class ResetPassword extends Component {
           </Row>
           <hr></hr>
         </Container>
-        <Card className="shadow p-4 bg-light">
-          {this.state.msg ? (
-            <Alert color="danger">{this.state.msg}</Alert>
-          ) : null}
-          {resetted ? (
-            <Alert color="success">Password resetted successfully</Alert>
-          ) : null}
-          <Form onSubmit={this.onSubmit}>
-            <FormGroup>
-              <Label for="email">Email</Label>
-              <Input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-                onChange={this.onChange}
-                className="mb-3"
-              />
+        <Row className="d-flex justify-content-center ">
+          <Col lg="6" xs="12">
+            <Card className="shadow p-4 bg-light">
+              {this.state.msg ? (
+                <Alert color="danger">{this.state.msg}</Alert>
+              ) : null}
+              {resetted ? (
+                <Alert color="success">Password resetted successfully</Alert>
+              ) : null}
+              <Form onSubmit={this.onSubmit}>
+                <FormGroup>
+                  <Label for="email">Email</Label>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    onChange={this.onChange}
+                    className="mb-3"
+                  />
 
-              <Label for="password">Password</Label>
-              <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                onChange={this.onChange}
-                className="mb-3"
-              />
-              <ReCaptchaV2
-                sitekey="6Le54pscAAAAACxYbAovh0tZWg-KSZ1v_CPigC2A"
-                onChange={this.handleToken}
-                onExpired={this.handleExpire}
-              />
-              <Button color="warning" style={{ marginTop: "2rem" }} block>
-                Login
-              </Button>
-            </FormGroup>
-            <FormGroup className="d-flex flex-direction-row justify-content-between">
-              <div>
-                Not a member:{" "}
-                <Link exact to="/Register">
-                  Register now
-                </Link>
-              </div>
-              <Link exact to="/Login">
-                Login
-              </Link>
-            </FormGroup>
-          </Form>
-        </Card>
+                  <Label for="password">Password</Label>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    onChange={this.onChange}
+                    className="mb-3"
+                  />
+                  <ReCaptchaV2
+                    sitekey="6Le54pscAAAAACxYbAovh0tZWg-KSZ1v_CPigC2A"
+                    onChange={this.handleToken}
+                    onExpired={this.handleExpire}
+                  />
+                  <Button color="warning" style={{ marginTop: "2rem" }} block>
+                    Login
+                  </Button>
+                </FormGroup>
+                <FormGroup className="d-flex flex-direction-row justify-content-between">
+                  <div>
+                    Not a member:{" "}
+                    <Link exact to="/Register">
+                      Register now
+                    </Link>
+                  </div>
+                  <Link exact to="/Login">
+                    Login
+                  </Link>
+                </FormGroup>
+              </Form>
+            </Card>
+          </Col>
+        </Row>
       </Container>
     );
   }
