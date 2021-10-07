@@ -168,11 +168,6 @@ router.post("/", (req, res) => {
   console.log(country, device);
 
   (async function() {
-    //test_cond
-    //await Promise.all([CallCpalead(), CallKiwi()]);
-    // await CallCpalead();
-    // await CallKiwi();
-
     try {
       console.log(country, device);
       const offer = await Offer.findAll({
@@ -183,6 +178,9 @@ router.post("/", (req, res) => {
 
       console.log("retrived offers", offer);
       res.json(offer);
+      await Promise.all([CallCpalead(), CallKiwi()]);
+      // await CallCpalead();
+      // await CallKiwi();
     } catch (error) {
       console.log(error);
     }
