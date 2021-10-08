@@ -67,7 +67,7 @@ router.get("/kiwi", async (req, res) => {
       { where: { id: sub_id } }
     );
 
-    res.status(200).end(1);
+    res.status(200).end("1");
   } else {
     res.end("Not Authorized");
     return;
