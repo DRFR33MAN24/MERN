@@ -267,7 +267,7 @@ class CashoutPage extends Component {
                           })()}
                         >
                           <th scope="row">{index}</th>
-                          <td>{id}</td>
+
                           <td>{offer_name}</td>
                           <td>{payout}</td>
                           <td>{status}</td>
