@@ -14,8 +14,9 @@ const kiwi_secret = "lsRWy0Q2FZDWIJliNuje4BFTSUSFCL1O";
 // @acces Public
 router.use("/kiwi", logToFile.SiteLogger);
 router.use("/cpalead", logToFile.SiteLogger);
-router.get("/kiwi", (req, res) => {
-  const { sub_id, amount, status, offer_name, signature } = req.query;
+
+router.get("/kiwi", async (req, res) => {
+  const { sub_id, amount, status, offer_name, signature, trans_id, offer_id } = req.query;
 
   // Importing Required Modules
   const crypto = require("crypto");
@@ -25,26 +26,39 @@ router.get("/kiwi", (req, res) => {
     .digest("hex");
 
   if (signature === hash) {
+
+    postback = await Postback.findOne({
+      where: {
+        offer_id: offer_id,
+        trans_id: trans_id
+      },
+
+      raw: true,
+      nest: true
+    });
+
+    if (postback === null) {
+      res.send(1);
+      return;
+    }
+
     const newPostback = Postback.build({
       payout: `${amount}`,
       subid: `${sub_id}`,
       campaign_name: "kiwi",
       status: `${status}`,
-      offer_name: `${offer_name}`
+      offer_name: `${offer_name}`,
+      trans_id: `${trans_id}`,
+      offer_id: `${offer_id}`
     });
 
-    newPostback
-      .save()
-      .then(pb => console.log(success))
-      .catch(err => console.log(err));
+    await newPostback.save();
     // Update user
 
-    User.update(
+    await User.update(
       { balance: db.literal(`balance + ${util.applyCut(amount)}`) },
       { where: { id: sub_id } }
-    )
-      .then(() => console.log(`user balance updated ${util.applyCut(amount)}`))
-      .catch(err => console.log(err));
+    );
 
     res.send(1);
   } else {

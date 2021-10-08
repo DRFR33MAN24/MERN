@@ -27,6 +27,12 @@ const Postback = db.define(
     offer_name: {
       type: DataTypes.STRING
       // allowNull defaults to true
+    },
+    trans_id: {
+      type: DataTypes.BIGINT
+    },
+    offer_id: {
+      type: DataTypes.BIGINT
     }
 
   },

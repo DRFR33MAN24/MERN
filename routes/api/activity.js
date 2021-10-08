@@ -19,9 +19,11 @@ const getActivity = async subid => {
     });
 
     console.log("retrived activity", postback);
-    postback.map(({ payout }) => {
-      payout = util.applyCut(payout);
-      total = total + payout;
+    const postback_final = postback.map((post) => {
+      var temp = Object.assign({}, post);
+      temp.payout = util.applyCut(temp.payout);
+      total = total + temp.payout;
+      return temp;
     });
 
     // res.json(postback);
@@ -46,7 +48,7 @@ const getActivity = async subid => {
 
   const activity = {
     payment: payment,
-    postback: postback,
+    postback: postback_final,
     total: total
   };
   console.log(activity);
