@@ -96,7 +96,7 @@ class CashoutPage extends Component {
       const startDate = new Date(endDate - 7 * 24 * 60 * 60 * 1000);
 
       // console.log(startDate, endDate, labelDays);
-      var resultProductData = postback.filter(function(a) {
+      var resultProductData = postback.filter(function (a) {
         var hitDates = a.createdAt;
 
         hitDates = new Date(hitDates);
@@ -184,29 +184,29 @@ class CashoutPage extends Component {
               <tbody>
                 {payment
                   ? payment.map(
-                      ({ payout, subid, status, submitDate }, index) => (
-                        <tr
-                          className={(() => {
-                            switch (status) {
-                              case "pending":
-                                return "table-warning";
+                    ({ payout, subid, status, submitDate }, index) => (
+                      <tr
+                        className={(() => {
+                          switch (status) {
+                            case "pending":
+                              return "table-warning";
 
-                              case "paid":
-                                return "table-success";
-                              case "rejected":
-                                return "table-danger";
-                              default:
-                                return "table-warning";
-                            }
-                          })()}
-                        >
-                          <th scope="row">{index}</th>
-                          <td>{payout}</td>
-                          <td>{status}</td>
-                          <td>{getFormattedDate(new Date(submitDate))}</td>
-                        </tr>
-                      )
+                            case "paid":
+                              return "table-success";
+                            case "rejected":
+                              return "table-danger";
+                            default:
+                              return "table-warning";
+                          }
+                        })()}
+                      >
+                        <th scope="row">{index}</th>
+                        <td>{payout}</td>
+                        <td>{status}</td>
+                        <td>{getFormattedDate(new Date(submitDate))}</td>
+                      </tr>
                     )
+                  )
                   : null}
               </tbody>
             </table>
@@ -229,34 +229,33 @@ class CashoutPage extends Component {
               <tbody>
                 {postback
                   ? postback.map(
-                      (
-                        { payout, id, offer_name, status, createdAt },
-                        index
-                      ) => (
-                        <tr
-                          className={(() => {
-                            switch (status) {
-                              case "pending":
-                                return "table-warning";
+                    (
+                      { payout, id, offer_name, status, createdAt },
+                      index
+                    ) => (
+                      <tr
+                        className={(() => {
+                          switch (status) {
+                            case "pending":
+                              return "table-warning";
 
-                              case "paid":
-                                return "table-success";
-                              case "rejected":
-                                return "table-danger";
-                              default:
-                                return "table-warning";
-                            }
-                          })()}
-                        >
-                          <th scope="row">{index}</th>
-                          <td>{id}</td>
-                          <td>{offer_name}</td>
-                          <td>{payout}</td>
-                          <td>{status}</td>
-                          <td>{getFormattedDate(new Date(createdAt))}</td>
-                        </tr>
-                      )
+                            case "paid":
+                              return "table-success";
+                            case "rejected":
+                              return "table-danger";
+                            default:
+                              return "table-warning";
+                          }
+                        })()}
+                      >
+                        <th scope="row">{index}</th>
+                        <td>{offer_name}</td>
+                        <td>{toDollars(payout)}</td>
+                        <td>{status}</td>
+                        <td>{getFormattedDate(new Date(createdAt))}</td>
+                      </tr>
                     )
+                  )
                   : null}
               </tbody>
             </table>
