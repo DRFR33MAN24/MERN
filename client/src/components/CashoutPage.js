@@ -61,6 +61,14 @@ class CashoutPage extends Component {
     }
     // this.props.getActivity(13);
   }
+
+  componentWillReceiveProps(prevProps) {
+    const { error, isAuthenticated, user } = this.props;
+    if (prevProps.user.id != user.id) {
+      //this.props.getActivity(user.id);
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const error = this.props.error;
     if (error !== prevProps.error) {

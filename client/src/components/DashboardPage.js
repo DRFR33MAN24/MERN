@@ -54,7 +54,14 @@ class DashboardPage extends Component {
   };
 
   componentDidMount() {
-    console.log("dashboard DidMount is Auth", this.props.isAuthenticated);
+    const { isAuthenticated, user } = this.props;
+    console.log(
+      "DashboardPage -> componentDidMount -> isAuthenticated",
+      isAuthenticated
+    );
+
+    console.log("DashboardPage -> componentDidMount -> user", user);
+
     if (this.props.isAuthenticated) {
       const { user } = this.props;
       const clientOS = getOS();
@@ -69,22 +76,31 @@ class DashboardPage extends Component {
     //this.props.getOffers();
   }
 
-  componentWillMount() {
-    const { isAuthenticated } = this.props;
+  componentWillMount() {}
 
-    console.log("Dashboard will mount", isAuthenticated);
-    this.setState({ isAuth: isAuthenticated });
-  }
+  componentWillReceiveProps(prevProps) {
+    const { isAuthenticated, user } = this.props;
+    console.log(
+      "DashboardPage -> componentWillReceiveProps -> isAuthenticated",
+      isAuthenticated
+    );
+    console.log(
+      "DashboardPage -> componentWillReceiveProps -> isAuthenticated",
+      prevProps.isAuthenticated
+    );
+    console.log("DashboardPage -> componentWillReceiveProps -> user", user);
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log("Dashboard did update");
-    const { isAuthenticated } = this.props;
+    if (prevProps.isAuthenticated != isAuthenticated) {
+      const clientOS = getOS();
+      axios.get("https://freegeoip.app/json/").then(res => {
+        const country = res.data.country_code.toLowerCase();
 
-    if (prevState.isAuth !== isAuthenticated) {
-      console.log(" dash authenticated mount", isAuthenticated);
-      this.setState({ isAuth: isAuthenticated });
+        this.props.getOffers(user.id, country, clientOS);
+        //this.props.getOffers(user.id, "us", "android");
+      });
     }
   }
+  componentDidUpdate(prevProps, prevState) {}
 
   getlink = (l, id) => {
     const u = new URL(l);
@@ -229,7 +245,7 @@ class DashboardPage extends Component {
     // console.log(user.id);
     const isAuthenticated = this.props.isAuthenticated;
     // console.log(offers);
-    //console.log("dashboard render is Auth", this.props.isAuthenticated);
+    console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
     if (isAuthenticated === false) {
       return login;
