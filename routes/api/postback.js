@@ -44,7 +44,7 @@ router.get("/kiwi", async (req, res) => {
       nest: true
     });
 
-    if (postback === null) {
+    if (postback != null) {
       res.status(200).end("1");
       return;
     }
