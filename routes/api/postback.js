@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const logToFile = require("../../middleware/logToFile");
-const util = require("util");
+const util = require("../../util");
 //const auth = require("../../middleware/auth");
 //postback Model
 const Postback = require("../../models/Postback");
@@ -55,8 +55,8 @@ router.get("/kiwi", async (req, res) => {
       campaign_name: "kiwi",
       status: `${status}`,
       offer_name: `${offer_name}`,
-      trans_id: trans_id,
-      offer_id: offer_id
+      trans_id: `${trans_id}`,
+      offer_id: `${offer_id}`
     });
 
     await newPostback.save();
