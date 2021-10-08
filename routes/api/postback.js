@@ -55,8 +55,8 @@ router.get("/kiwi", async (req, res) => {
       campaign_name: "kiwi",
       status: `${status}`,
       offer_name: `${offer_name}`,
-      trans_id: `${trans_id}`,
-      offer_id: `${offer_id}`
+      trans_id: trans_id,
+      offer_id: offer_id
     });
 
     await newPostback.save();
@@ -69,7 +69,7 @@ router.get("/kiwi", async (req, res) => {
 
     res.status(200).end(1);
   } else {
-    res.send("Not Authorized");
+    res.end("Not Authorized");
     return;
   }
 });
@@ -99,9 +99,9 @@ router.get("/cpalead", (req, res) => {
       .then(() => console.log(`user balance updated ${util.applyCut(payout)}`))
       .catch(err => console.log(err));
 
-    res.status(200).send("success");
+    res.status(200).end("success");
   } else {
-    res.status(400).send("Not Authorized");
+    res.status(400).end("Not Authorized");
     return;
   }
 });
