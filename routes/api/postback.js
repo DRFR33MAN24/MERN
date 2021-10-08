@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const logToFile = require("../../middleware/logToFile");
-const util = require("util");
+const util = require("../../util");
 //const auth = require("../../middleware/auth");
 //postback Model
 const Postback = require("../../models/Postback");
@@ -16,7 +16,15 @@ router.use("/kiwi", logToFile.SiteLogger);
 router.use("/cpalead", logToFile.SiteLogger);
 
 router.get("/kiwi", async (req, res) => {
-  const { sub_id, amount, status, offer_name, signature, trans_id, offer_id } = req.query;
+  const {
+    sub_id,
+    amount,
+    status,
+    offer_name,
+    signature,
+    trans_id,
+    offer_id
+  } = req.query;
 
   // Importing Required Modules
   const crypto = require("crypto");
@@ -26,7 +34,6 @@ router.get("/kiwi", async (req, res) => {
     .digest("hex");
 
   if (signature === hash) {
-
     postback = await Postback.findOne({
       where: {
         offer_id: offer_id,
@@ -37,8 +44,8 @@ router.get("/kiwi", async (req, res) => {
       nest: true
     });
 
-    if (postback === null) {
-      res.send(1);
+    if (postback != null) {
+      res.status(200).end("1");
       return;
     }
 
@@ -60,9 +67,9 @@ router.get("/kiwi", async (req, res) => {
       { where: { id: sub_id } }
     );
 
-    res.send(1);
+    res.status(200).end("1");
   } else {
-    res.send("Not Authorized");
+    res.end("Not Authorized");
     return;
   }
 });
@@ -92,9 +99,9 @@ router.get("/cpalead", (req, res) => {
       .then(() => console.log(`user balance updated ${util.applyCut(payout)}`))
       .catch(err => console.log(err));
 
-    res.send("success");
+    res.status(200).end("success");
   } else {
-    res.send("Not Authorized");
+    res.status(400).end("Not Authorized");
     return;
   }
 });

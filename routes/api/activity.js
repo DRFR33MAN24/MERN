@@ -10,6 +10,7 @@ const ObjectsToCsv = require("objects-to-csv");
 const getActivity = async subid => {
   let total = 0;
   let postback;
+  let postback_final;
   try {
     postback = await Postback.findAll({
       where: { subid: subid },
@@ -19,7 +20,7 @@ const getActivity = async subid => {
     });
 
     console.log("retrived activity", postback);
-    const postback_final = postback.map((post) => {
+    postback_final = postback.map(post => {
       var temp = Object.assign({}, post);
       temp.payout = util.applyCut(temp.payout);
       total = total + temp.payout;
@@ -74,7 +75,7 @@ router.get("/downloadCSV", async (req, res) => {
 
   const data = [];
   const users = await User.findAll({
-    include: [{ model: Payment, as: 'payments' }]
+    include: [{ model: Payment, as: "payments" }]
   });
   console.log(users);
 
@@ -109,13 +110,15 @@ router.post("/payment", async (req, res) => {
 
     console.log(user);
     if (user.wallet === undefined || user.wallet === "") {
-      return res.status(400).json({ msg: "Please enter a valid wallet address" });
+      return res
+        .status(400)
+        .json({ msg: "Please enter a valid wallet address" });
     }
     balance = user.balance;
     if (balance <= 0) {
       return res.status(400).json({ msg: "Not enough balance" });
     }
-  } catch (error) { }
+  } catch (error) {}
   try {
     const date = new Date();
     await Payment.create({
