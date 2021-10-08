@@ -55,6 +55,10 @@ class CashoutPage extends Component {
   componentDidMount(prevProps) {
     const { error, isAuthenticated } = this.props;
 
+    console.log(
+      "CashoutPage -> componentDidMount -> isAuthenticated",
+      isAuthenticated
+    );
     if (isAuthenticated) {
       const { user } = this.props;
       this.props.getActivity(user.id);
@@ -63,20 +67,13 @@ class CashoutPage extends Component {
   }
 
   componentWillReceiveProps(prevProps) {
-    const { error, isAuthenticated, user } = this.props;
-    console.log("CashoutPage -> componentWillReceiveProps -> user", user.id);
-    console.log(
-      "CashoutPage -> componentWillReceiveProps -> isAuthenticated",
-      isAuthenticated
-    );
-    console.log(
-      "CashoutPage -> componentWillReceiveProps -> prevProps.user.id",
-      prevProps.user.id
-    );
-
-    if (prevProps.isAuthenticated != isAuthenticated) {
-      this.props.getActivity(prevProps.user.id);
-    }
+    //const { error, isAuthenticated, user } = this.props;
+    // if (
+    //   prevProps.isAuthenticated != isAuthenticated &&
+    //   prevProps.user.id != null
+    // ) {
+    //   this.props.getActivity(prevProps.user.id);
+    // }
   }
 
   componentDidUpdate(prevProps, prevState) {
