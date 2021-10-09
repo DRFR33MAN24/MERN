@@ -59,22 +59,18 @@ class CashoutPage extends Component {
       "CashoutPage -> componentDidMount -> isAuthenticated",
       isAuthenticated
     );
-    if (isAuthenticated) {
-      const { user } = this.props;
-      this.props.getActivity(user.id);
-    }
+    // if (isAuthenticated) {
+    //   const { user } = this.props;
+    //   this.props.getActivity(user.id);
+    // }
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    this.props.getActivity(user.id);
     // this.props.getActivity(13);
   }
 
-  componentWillReceiveProps(prevProps) {
-    //const { error, isAuthenticated, user } = this.props;
-    // if (
-    //   prevProps.isAuthenticated != isAuthenticated &&
-    //   prevProps.user.id != null
-    // ) {
-    //   this.props.getActivity(prevProps.user.id);
-    // }
-  }
+  componentWillReceiveProps(prevProps) {}
 
   componentDidUpdate(prevProps, prevState) {
     const error = this.props.error;
