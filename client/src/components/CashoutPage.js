@@ -143,7 +143,7 @@ class CashoutPage extends Component {
     return (
       <Container className=" mx-auto justify-content-center py-5">
         <LoadingModal open={isLoading} />
-        <Card className="shadow mt-5">
+        <Card className="custom-card-shadow mt-5">
           {this.state.msg ? (
             <Alert color="danger">{this.state.msg}</Alert>
           ) : null}
@@ -180,10 +180,10 @@ class CashoutPage extends Component {
             </Row>
           </Container>
         </Card>
-        <Card className="shadow mt-5 p-1">
+        <Card className="custom-card-shadow mt-5 p-1">
           <Label>Payments</Label>
           <Container fluid={true}>
-            <table class="table table-striped shadow table-sm">
+            <table class="table table-striped  table-sm">
               <thead className="bg-light">
                 <tr>
                   <th scope="col">#</th>
@@ -223,10 +223,10 @@ class CashoutPage extends Component {
             </table>
           </Container>
         </Card>
-        <Card className="shadow mt-5 p-1">
+        <Card className="custom-card-shadow mt-5 p-1">
           <Label>Activity:</Label>
           <Container fluid={true}>
-            <table class="table table-striped shadow table-sm">
+            <table class="table table-striped  table-sm">
               <thead className="bg-light">
                 <tr>
                   <th scope="col">#</th>

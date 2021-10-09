@@ -238,7 +238,7 @@ class DashboardPage extends Component {
           </Container>
 
           <Container className="py-5 ">
-            <table class="table table-striped shadow table-sm ">
+            <table class="table table-striped  custom-card-shadow table-sm ">
               <thead className="bg-light">
                 <tr>
                   <th scope="col">#</th>
@@ -317,7 +317,7 @@ class DashboardPage extends Component {
         ) : (
           <NoContent />
         )} */}
-        <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-light">
+        <Row className="d-flex justify-content-center mb-3 mt-3  custom-card-shadow bg-light">
           <Nav>
             <Container className="d-flex flex-row flex-wrap justify-content-center">
               <NavItem>
@@ -358,7 +358,12 @@ class DashboardPage extends Component {
                   isOpen={this.state.dropdownOpen}
                   toggle={this.toggle}
                 >
-                  <DropdownToggle caret>Sort</DropdownToggle>
+                  <DropdownToggle
+                    caret
+                    className=" btn btn-warning custom-btn mt-1"
+                  >
+                    Sort
+                  </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem>
                       <NavLink onClick={this.getMin}>min{"->"}max</NavLink>
@@ -406,14 +411,14 @@ class DashboardPage extends Component {
             )}
         </Row>
 
-        <Row className="d-flex justify-content-center bg-dark shadow mb-3 mt-3">
+        <Row className="d-flex justify-content-center bg-light custom-card-shadow mb-3 mt-3">
           <Pagination className="mt-3" aria-label="Page navigation example">
             <PaginationItem>
               <PaginationLink
                 previous
                 href="#offers"
                 onClick={this.previous_page}
-                className="bg-light"
+                className=" bg-warning text-dark custom-btn"
               >
                 Back
               </PaginationLink>
@@ -423,7 +428,7 @@ class DashboardPage extends Component {
                 first
                 href="#offers"
                 onClick={this.next_page}
-                className="bg-light"
+                className=" bg-warning text-dark custom-btn"
               >
                 Next
               </PaginationLink>

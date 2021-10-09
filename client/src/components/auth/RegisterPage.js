@@ -114,7 +114,7 @@ class RegisterPage extends Component {
         </Container>
         <Row className="d-flex justify-content-center ">
           <Col lg="6" xs="12">
-            <Card className="shadow p-4 bg-light">
+            <Card className="custom-card-shadow p-4 bg-light">
               {this.props.emailSent ? (
                 <Alert color="success">{"Email sent"}</Alert>
               ) : null}
