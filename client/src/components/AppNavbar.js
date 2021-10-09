@@ -66,10 +66,14 @@ class AppNavbar extends Component {
     document.removeEventListener("mousedown", this.mouseDownHandler);
   }
 
-  mouseDownHandler = (event) => {
+  mouseDownHandler = event => {
     if (!this.menu.current.contains(event.target)) {
-      this.toggle()
+      this.close();
     }
+  };
+
+  close = () => {
+    this.setState({ isOpen: false });
   };
 
   toggle = () => {
@@ -226,7 +230,7 @@ class AppNavbar extends Component {
             />
 
             <Col xs="12">
-              <Collapse isOpen={this.state.isOpen} navbar >
+              <Collapse isOpen={this.state.isOpen} navbar>
                 {/* <Nav>{isAuthenticated ? authLinks : guestLinks}</Nav> */}
                 {isAuthenticated ? authLinks : guestLinks}
               </Collapse>

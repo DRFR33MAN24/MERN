@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Button,
   Form,
@@ -10,7 +10,11 @@ import {
   Card,
   Alert,
   Row,
-  Col
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
 } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
@@ -96,6 +100,38 @@ class RegisterPage extends Component {
     const isLoading = this.props.isLoading;
     console.log("login render", isAuthenticated);
 
+    const confirmModal = (
+      <Fragment>
+        <Modal
+          isOpen={true}
+          modalTransition={{ timeout: 2000 }}
+          className="modal-dialog-centered"
+        >
+          <ModalHeader>Email Sent</ModalHeader>
+          <ModalBody className="text-center">
+            <i class="fa fa-envelope fa-5x" aria-hidden="true"></i>
+            <p className="font-italic">Check your Email to confirm changes.</p>
+
+            <ModalFooter className="d-flex justify-content-start">
+              <Button
+                block
+                className="btn btn-warning custom-btn"
+                onClick={e => {
+                  window.location.href = "/Login";
+                }}
+              >
+                Login
+              </Button>
+              <p className="text-dark">
+                <span className="font-weight-bold">NOTE:</span> In case you
+                can't find the message, please check your spam
+              </p>
+            </ModalFooter>
+          </ModalBody>
+        </Modal>
+      </Fragment>
+    );
+
     const dashboard = <Redirect exact to="/Dashboard" />;
 
     if (isAuthenticated) {
@@ -115,9 +151,8 @@ class RegisterPage extends Component {
         <Row className="d-flex justify-content-center ">
           <Col lg="6" xs="12">
             <Card className="custom-card-shadow p-4 bg-light">
-              {this.props.emailSent ? (
-                <Alert color="success">{"Email sent"}</Alert>
-              ) : null}
+              {true ? confirmModal : null}
+              {this.props.emailSent ? <Alert color="success"></Alert> : null}
               {this.state.msg ? (
                 <Alert color="danger">{this.state.msg}</Alert>
               ) : null}
