@@ -74,6 +74,7 @@ export default function(state = initialState, action) {
 
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
 
       return {
         ...state,
@@ -99,6 +100,7 @@ export default function(state = initialState, action) {
     case REGISTER_FAIL:
       console.log("logout fired");
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
       return {
         ...state,
         token: null,

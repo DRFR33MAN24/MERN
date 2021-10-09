@@ -54,37 +54,20 @@ class DashboardPage extends Component {
   };
 
   componentDidMount() {
-    console.log("dashboard DidMount is Auth", this.props.isAuthenticated);
-    if (this.props.isAuthenticated) {
-      const { user } = this.props;
-      const clientOS = getOS();
-      axios.get("https://freegeoip.app/json/").then(res => {
-        const country = res.data.country_code.toLowerCase();
+    const user = JSON.parse(localStorage.getItem("user"));
+    const clientOS = getOS();
+    axios.get("https://freegeoip.app/json/").then(res => {
+      const country = res.data.country_code.toLowerCase();
 
-        this.props.getOffers(user.id, country, clientOS);
-        //this.props.getOffers(user.id, "us", "android");
-      });
-    }
-
-    //this.props.getOffers();
+      this.props.getOffers(user.id, country, clientOS);
+      //this.props.getOffers(user.id, "us", "android");
+    });
   }
 
-  componentWillMount() {
-    const { isAuthenticated } = this.props;
+  componentWillMount() {}
 
-    console.log("Dashboard will mount", isAuthenticated);
-    this.setState({ isAuth: isAuthenticated });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log("Dashboard did update");
-    const { isAuthenticated } = this.props;
-
-    if (prevState.isAuth !== isAuthenticated) {
-      console.log(" dash authenticated mount", isAuthenticated);
-      this.setState({ isAuth: isAuthenticated });
-    }
-  }
+  componentWillReceiveProps(prevProps) {}
+  componentDidUpdate(prevProps, prevState) {}
 
   getlink = (l, id) => {
     const u = new URL(l);
@@ -229,7 +212,7 @@ class DashboardPage extends Component {
     // console.log(user.id);
     const isAuthenticated = this.props.isAuthenticated;
     // console.log(offers);
-    //console.log("dashboard render is Auth", this.props.isAuthenticated);
+    console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
     if (isAuthenticated === false) {
       return login;
@@ -254,9 +237,9 @@ class DashboardPage extends Component {
             />
           </Container>
 
-          <Container fluid={true} className="py-5">
-            <table class="table table-striped">
-              <thead className="thead-dark">
+          <Container className="py-5 ">
+            <table class="table table-striped  custom-card-shadow table-sm ">
+              <thead className="bg-light">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
@@ -276,7 +259,7 @@ class DashboardPage extends Component {
                           <td>{toDollars(amount)}</td>
                           <td>
                             <a
-                              className="btn btn-dark"
+                              className="btn btn-warning custom-btn"
                               href={this.getlink(link, user.id)}
                             >
                               Go
@@ -334,39 +317,53 @@ class DashboardPage extends Component {
         ) : (
           <NoContent />
         )} */}
-        <Row className="d-flex justify-content-center mb-3 mt-3 shadow bg-light">
+        <Row className="d-flex justify-content-center mb-3 mt-3  custom-card-shadow bg-light">
           <Nav>
             <Container className="d-flex flex-row flex-wrap justify-content-center">
               <NavItem>
-                <NavLink href="#" onClick={this.getInstall}>
+                <NavLink
+                  href="#"
+                  onClick={this.getInstall}
+                  className="text-dark"
+                >
                   <i
-                    class="fas fa-2x fa-mobile-alt custom-icon"
+                    class="fas fa-2x fa-mobile-alt custom-icon align-middle"
                     aria-hidden="true"
                   ></i>
                   <span> Mobile</span>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#" onClick={this.getPopular}>
+                <NavLink
+                  href="#"
+                  onClick={this.getPopular}
+                  className="text-dark"
+                >
                   <i
-                    class="fa fa-2x  fa-line-chart custom-icon"
+                    class="fa fa-2x  fa-line-chart custom-icon align-middle"
                     aria-hidden="true"
                   ></i>
                   <span> Popular</span>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#" onClick={this.getCC}>
-                  <i class="fas fa-2x fa-shopping-cart custom-icon"></i>
+                <NavLink href="#" onClick={this.getCC} className="text-dark">
+                  <i class="fas fa-2x fa-shopping-cart custom-icon align-middle"></i>
                   <span> Purchase</span>
                 </NavLink>
               </NavItem>
+
               <NavItem>
                 <ButtonDropdown
                   isOpen={this.state.dropdownOpen}
                   toggle={this.toggle}
                 >
-                  <DropdownToggle caret>Sort</DropdownToggle>
+                  <DropdownToggle
+                    caret
+                    className=" btn btn-warning custom-btn mt-1"
+                  >
+                    Sort
+                  </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem>
                       <NavLink onClick={this.getMin}>min{"->"}max</NavLink>
@@ -414,19 +411,25 @@ class DashboardPage extends Component {
             )}
         </Row>
 
-        <Row className="d-flex justify-content-center bg-dark mb-3 mt-3">
+        <Row className="d-flex justify-content-center bg-light custom-card-shadow mb-3 mt-3">
           <Pagination className="mt-3" aria-label="Page navigation example">
             <PaginationItem>
               <PaginationLink
                 previous
                 href="#offers"
                 onClick={this.previous_page}
+                className=" bg-warning text-dark custom-btn"
               >
                 Back
               </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink first href="#offers" onClick={this.next_page}>
+              <PaginationLink
+                first
+                href="#offers"
+                onClick={this.next_page}
+                className=" bg-warning text-dark custom-btn"
+              >
                 Next
               </PaginationLink>
             </PaginationItem>

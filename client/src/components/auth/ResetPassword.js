@@ -110,7 +110,7 @@ class ResetPassword extends Component {
         </Container>
         <Row className="d-flex justify-content-center ">
           <Col lg="6" xs="12">
-            <Card className="shadow p-4 bg-light">
+            <Card className="custom-card-shadow p-4 bg-light">
               {this.state.msg ? (
                 <Alert color="danger">{this.state.msg}</Alert>
               ) : null}

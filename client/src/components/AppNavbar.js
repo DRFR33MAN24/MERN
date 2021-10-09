@@ -26,7 +26,13 @@ import Logout from "./auth/Logout";
 import { stat } from "fs";
 import { DEFAULT_MIN_VERSION } from "tls";
 import { logout, loadUser } from "../actions/authAction";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  NavLink as NV
+} from "react-router-dom";
 import LoginPage from "./auth/LoginPage";
 import RegisterPage from "./auth/RegisterPage";
 import DashboardPage from "./DashboardPage";
@@ -84,7 +90,7 @@ class AppNavbar extends Component {
               onClick={this.toggle}
               exact
               to="/Register"
-              className="text-start"
+              className="text-start text-dark"
             >
               Register
             </Link>
@@ -96,7 +102,7 @@ class AppNavbar extends Component {
               onClick={this.toggle}
               exact
               to="/Login"
-              className="text-start "
+              className="text-start text-dark "
             >
               Login
             </Link>
@@ -107,16 +113,16 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <Container>
-          <Col xs="12" className="d-flex justify-content-center  ">
+          <Col xs="12" className="d-flex justify-content-center align-middle ">
             <Container className="d-flex flex-column ">
-              <Row className=" p-1 ">
+              <Row className=" p-1  ">
                 <Link
                   onClick={this.toggle}
-                  className="text-dark  d-inline"
+                  className="text-dark  d-inline  "
                   exact
                   to="/Account"
                 >
-                  <i className="fa fa-lg fa-user   mr-3 "></i>
+                  <i className="fa fa-lg fa-user   mr-3 align-middle"></i>
                   Account
                 </Link>
               </Row>
@@ -130,7 +136,7 @@ class AppNavbar extends Component {
                   exact
                   to="/Dashboard"
                 >
-                  <i className="fa fa-lg fa-home   mr-3 "></i>
+                  <i className="fa fa-lg fa-home   mr-3 align-middle"></i>
                   Dashboard
                 </Link>
               </Row>
@@ -144,7 +150,7 @@ class AppNavbar extends Component {
                   exact
                   to="/Cashout"
                 >
-                  <i className="fas fa-lg fa-money-bill-alt   mr-3"></i>
+                  <i className="fas fa-lg fa-money-bill-alt   mr-3 align-middle"></i>
                   Cashout
                 </Link>
               </Row>
@@ -157,7 +163,7 @@ class AppNavbar extends Component {
                   exact
                   to="/Help"
                 >
-                  <i className="fas fa-lg fa-question-circle   mr-3"></i>
+                  <i className="fas fa-lg fa-question-circle   mr-3 align-middle"></i>
                   Help
                 </Link>
               </Row>
@@ -172,7 +178,7 @@ class AppNavbar extends Component {
                     this.toggle();
                   }}
                 >
-                  <i className="fas fa-lg fa-sign-out-alt   mr-3"></i>
+                  <i className="fas fa-lg fa-sign-out-alt   mr-3 align-middle"></i>
                   Logout
                 </Link>
               </Row>
