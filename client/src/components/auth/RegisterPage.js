@@ -110,7 +110,9 @@ class RegisterPage extends Component {
           <ModalHeader>Email Sent</ModalHeader>
           <ModalBody className="text-center">
             <i class="fa fa-envelope fa-5x" aria-hidden="true"></i>
-            <p className="font-italic">Check your Email to confirm changes.</p>
+            <p className="font-italic">
+              Check your Email to activate your account.
+            </p>
 
             <ModalFooter className="d-flex justify-content-start">
               <Button
@@ -151,7 +153,7 @@ class RegisterPage extends Component {
         <Row className="d-flex justify-content-center ">
           <Col lg="6" xs="12">
             <Card className="custom-card-shadow p-4 bg-light">
-              {true ? confirmModal : null}
+              {this.props.emailSent ? confirmModal : null}
               {this.props.emailSent ? <Alert color="success"></Alert> : null}
               {this.state.msg ? (
                 <Alert color="danger">{this.state.msg}</Alert>

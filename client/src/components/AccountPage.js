@@ -135,13 +135,30 @@ class AccountPage extends Component {
 
     const confirmModal = (
       <Fragment>
-        <Modal isOpen={true} className="modal-dialog-centered">
-          <ModalHeader>Confirm Changes</ModalHeader>
-          <ModalBody>
-            <p>Check your Email to confirm changes.</p>
+        <Modal
+          isOpen={true}
+          modalTransition={{ timeout: 2000 }}
+          className="modal-dialog-centered"
+        >
+          <ModalHeader>Email Sent</ModalHeader>
+          <ModalBody className="text-center">
+            <i class="fa fa-envelope fa-5x" aria-hidden="true"></i>
+            <p className="font-italic">Check your Email to confirm changes.</p>
 
             <ModalFooter className="d-flex justify-content-start">
-              <Button onClick={this.props.modal}>Close</Button>
+              <Button
+                block
+                className="btn btn-warning custom-btn"
+                onClick={e => {
+                  window.location.href = "/Login";
+                }}
+              >
+                Login
+              </Button>
+              <p className="text-dark">
+                <span className="font-weight-bold">NOTE:</span> In case you
+                can't find the message, please check your spam
+              </p>
             </ModalFooter>
           </ModalBody>
         </Modal>
@@ -153,6 +170,7 @@ class AccountPage extends Component {
         <LoadingModal open={isLoading} />
         <Card className="custom-card-shadow p-2 mb-3 mt-5">
           {this.props.updated ? <Alert>Updated</Alert> : null}
+          {this.props.updated ? confirmModal : null}
           <Label className="mb-3">User Details:</Label>
           <Container>
             <Form>

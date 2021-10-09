@@ -114,6 +114,7 @@ class AppNavbar extends Component {
               to="/Register"
               className="text-start text-dark"
             >
+              <i className="fa fa-lg fa-user-plus   mr-3 align-middle"></i>
               Register
             </Link>
           </Col>
@@ -126,6 +127,7 @@ class AppNavbar extends Component {
               to="/Login"
               className="text-start text-dark "
             >
+              <i className="fas fa-lg fa-sign-in-alt   mr-3 align-middle"></i>
               Login
             </Link>
           </Col>
