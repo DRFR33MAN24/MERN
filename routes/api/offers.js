@@ -18,7 +18,7 @@ const url_kiwi =
   "https://www.kiwiwall.com/get-offers/8mj7rMyCaqd04dKDgLL22oRZC9zqmBtY/?country=ALL";
 
 const updateFq_kiwi = 30;
-const updateFq_cpalead = 10;
+const updateFq_cpalead = 30;
 
 const CallCpalead = async () => {
   // #1 Update offers database by calling offer providers if necessary
@@ -178,10 +178,10 @@ router.post("/", (req, res) => {
 
       console.log("retrived offers", offer);
       res.json(offer);
-      //Test_cond
+
       // await Promise.all([CallCpalead(), CallKiwi()]);
-      // await CallCpalead();
-      // await CallKiwi();
+      await CallCpalead();
+      await CallKiwi();
     } catch (error) {
       console.log(error);
     }
