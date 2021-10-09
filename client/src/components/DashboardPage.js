@@ -54,52 +54,19 @@ class DashboardPage extends Component {
   };
 
   componentDidMount() {
-    const { isAuthenticated, user } = this.props;
-    console.log(
-      "DashboardPage -> componentDidMount -> isAuthenticated",
-      isAuthenticated
-    );
+    const user = JSON.parse(localStorage.getItem("user"));
+    const clientOS = getOS();
+    axios.get("https://freegeoip.app/json/").then(res => {
+      const country = res.data.country_code.toLowerCase();
 
-    console.log("DashboardPage -> componentDidMount -> user", user);
-
-    if (this.props.isAuthenticated) {
-      const { user } = this.props;
-      const clientOS = getOS();
-      axios.get("https://freegeoip.app/json/").then(res => {
-        const country = res.data.country_code.toLowerCase();
-
-        this.props.getOffers(user.id, country, clientOS);
-        //this.props.getOffers(user.id, "us", "android");
-      });
-    }
-
-    //this.props.getOffers();
+      this.props.getOffers(user.id, country, clientOS);
+      //this.props.getOffers(user.id, "us", "android");
+    });
   }
 
   componentWillMount() {}
 
-  componentWillReceiveProps(prevProps) {
-    const { isAuthenticated, user } = this.props;
-    console.log(
-      "DashboardPage -> componentWillReceiveProps -> isAuthenticated",
-      isAuthenticated
-    );
-    console.log(
-      "DashboardPage -> componentWillReceiveProps -> isAuthenticated",
-      prevProps.isAuthenticated
-    );
-    console.log("DashboardPage -> componentWillReceiveProps -> user", user);
-
-    if (prevProps.isAuthenticated != isAuthenticated) {
-      const clientOS = getOS();
-      axios.get("https://freegeoip.app/json/").then(res => {
-        const country = res.data.country_code.toLowerCase();
-
-        this.props.getOffers(user.id, country, clientOS);
-        //this.props.getOffers(user.id, "us", "android");
-      });
-    }
-  }
+  componentWillReceiveProps(prevProps) {}
   componentDidUpdate(prevProps, prevState) {}
 
   getlink = (l, id) => {
