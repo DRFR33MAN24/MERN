@@ -207,7 +207,7 @@ class AppNavbar extends Component {
     );
     return (
       <Router basename="/app">
-        <div>
+        <div ref={this.menu}>
           <Navbar color="light" light className="mb-5 fixed-top  shadow ">
             <Col xs="4" className="align-self-start mr-auto">
               <NavbarBrand href="/">
@@ -226,7 +226,7 @@ class AppNavbar extends Component {
             />
 
             <Col xs="12">
-              <Collapse isOpen={this.state.isOpen} navbar>
+              <Collapse isOpen={this.state.isOpen} navbar >
                 {/* <Nav>{isAuthenticated ? authLinks : guestLinks}</Nav> */}
                 {isAuthenticated ? authLinks : guestLinks}
               </Collapse>
