@@ -42,6 +42,10 @@ import { toDollars } from "../util";
 import ResetPassword from "./auth/ResetPassword";
 import NotFound from "./NotFound";
 class AppNavbar extends Component {
+  constructor(props) {
+    super(props);
+    this.menu = React.createRef();
+  }
   state = {
     isOpen: false
   };
@@ -52,6 +56,20 @@ class AppNavbar extends Component {
     loadUser: PropTypes.func,
     isLoading: PropTypes.bool,
     logout: PropTypes.func.isRequired
+  };
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.mouseDownHandler);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.mouseDownHandler);
+  }
+
+  mouseDownHandler = (event) => {
+    if (!this.menu.current.contains(event.target)) {
+      this.toggle()
+    }
   };
 
   toggle = () => {
