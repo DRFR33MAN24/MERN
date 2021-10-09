@@ -183,8 +183,8 @@ class CashoutPage extends Component {
         <Card className="shadow mt-5 p-1">
           <Label>Payments</Label>
           <Container fluid={true}>
-            <table class="table table-striped">
-              <thead className="thead-dark">
+            <table class="table table-striped shadow table-sm">
+              <thead className="bg-light">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Payout</th>
@@ -226,8 +226,8 @@ class CashoutPage extends Component {
         <Card className="shadow mt-5 p-1">
           <Label>Activity:</Label>
           <Container fluid={true}>
-            <table class="table table-striped">
-              <thead className="thead-dark">
+            <table class="table table-striped shadow table-sm">
+              <thead className="bg-light">
                 <tr>
                   <th scope="col">#</th>
 
