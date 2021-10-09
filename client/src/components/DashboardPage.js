@@ -238,7 +238,7 @@ class DashboardPage extends Component {
           </Container>
 
           <Container className="py-5">
-            <table class="table table-striped">
+            <table class="table table-striped shadow">
               <thead className="bg-light">
                 <tr>
                   <th scope="col">#</th>
