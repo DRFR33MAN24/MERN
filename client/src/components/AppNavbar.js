@@ -26,7 +26,13 @@ import Logout from "./auth/Logout";
 import { stat } from "fs";
 import { DEFAULT_MIN_VERSION } from "tls";
 import { logout, loadUser } from "../actions/authAction";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  NavLink as NV
+} from "react-router-dom";
 import LoginPage from "./auth/LoginPage";
 import RegisterPage from "./auth/RegisterPage";
 import DashboardPage from "./DashboardPage";
@@ -109,10 +115,10 @@ class AppNavbar extends Component {
         <Container>
           <Col xs="12" className="d-flex justify-content-center  ">
             <Container className="d-flex flex-column ">
-              <Row className=" p-1 ">
+              <Row className=" p-1  ">
                 <Link
                   onClick={this.toggle}
-                  className="text-dark  d-inline"
+                  className="text-dark  d-inline  "
                   exact
                   to="/Account"
                 >
