@@ -238,7 +238,7 @@ class DashboardPage extends Component {
           </Container>
 
           <Container className="py-5 ">
-            <table class="table table-striped  custom-card-shadow table-sm ">
+            <table class="table table-striped  custom-shadow table-sm ">
               <thead className="bg-light">
                 <tr>
                   <th scope="col">#</th>
@@ -317,7 +317,7 @@ class DashboardPage extends Component {
         ) : (
           <NoContent />
         )} */}
-        <Row className="d-flex justify-content-center mb-3 mt-3  custom-card-shadow bg-light">
+        <Row className="d-flex justify-content-center mb-3 mt-3  custom-shadow bg-light">
           <Nav>
             <Container className="d-flex flex-row flex-wrap justify-content-center">
               <NavItem>
@@ -411,7 +411,7 @@ class DashboardPage extends Component {
             )}
         </Row>
 
-        <Row className="d-flex justify-content-center bg-light custom-card-shadow mb-3 mt-3">
+        <Row className="d-flex justify-content-center bg-light custom-shadow mb-3 mt-3">
           <Pagination className="mt-3" aria-label="Page navigation example">
             <PaginationItem>
               <PaginationLink

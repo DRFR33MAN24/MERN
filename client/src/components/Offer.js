@@ -37,7 +37,7 @@ export default class Offer extends Component {
             />
           </div>
         ) : null}
-        <Card className="m-2 custom-card-shadow p-3">
+        <Card className="m-2 custom-shadow p-3">
           <Container
             fluid={true}
             className="d-flex flex-row justify-content-between "

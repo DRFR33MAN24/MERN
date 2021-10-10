@@ -70,7 +70,7 @@ class CashoutPage extends Component {
     // this.props.getActivity(13);
   }
 
-  componentWillReceiveProps(prevProps) { }
+  componentWillReceiveProps(prevProps) {}
 
   componentDidUpdate(prevProps, prevState) {
     const error = this.props.error;
@@ -107,7 +107,7 @@ class CashoutPage extends Component {
       const startDate = new Date(endDate - 7 * 24 * 60 * 60 * 1000);
 
       // console.log(startDate, endDate, labelDays);
-      var resultProductData = postback.filter(function (a) {
+      var resultProductData = postback.filter(function(a) {
         var hitDates = a.createdAt;
 
         hitDates = new Date(hitDates);
@@ -143,7 +143,7 @@ class CashoutPage extends Component {
     return (
       <Container className=" mx-auto justify-content-center py-5">
         <LoadingModal open={isLoading} />
-        <Card className="custom-card-shadow mt-5">
+        <Card className="custom-shadow mt-5">
           {this.state.msg ? (
             <Alert color="danger">{this.state.msg}</Alert>
           ) : null}
@@ -180,7 +180,7 @@ class CashoutPage extends Component {
             </Row>
           </Container>
         </Card>
-        <Card className="custom-card-shadow mt-5 p-1">
+        <Card className="custom-shadow mt-5 p-1">
           <Label>Payments</Label>
           <Container fluid={true}>
             <table class="table table-striped  table-sm">
@@ -195,35 +195,35 @@ class CashoutPage extends Component {
               <tbody>
                 {payment
                   ? payment.map(
-                    ({ payout, subid, status, submitDate }, index) => (
-                      <tr
-                        className={(() => {
-                          switch (status) {
-                            case "pending":
-                              return "table-warning";
+                      ({ payout, subid, status, submitDate }, index) => (
+                        <tr
+                          className={(() => {
+                            switch (status) {
+                              case "pending":
+                                return "table-warning";
 
-                            case "paid":
-                              return "table-success";
-                            case "rejected":
-                              return "table-danger";
-                            default:
-                              return "table-warning";
-                          }
-                        })()}
-                      >
-                        <th scope="row">{index}</th>
-                        <td>{payout}</td>
-                        <td>{status}</td>
-                        <td>{getFormattedDate(new Date(submitDate))}</td>
-                      </tr>
+                              case "paid":
+                                return "table-success";
+                              case "rejected":
+                                return "table-danger";
+                              default:
+                                return "table-warning";
+                            }
+                          })()}
+                        >
+                          <th scope="row">{index}</th>
+                          <td>{payout}</td>
+                          <td>{status}</td>
+                          <td>{getFormattedDate(new Date(submitDate))}</td>
+                        </tr>
+                      )
                     )
-                  )
                   : null}
               </tbody>
             </table>
           </Container>
         </Card>
-        <Card className="custom-card-shadow mt-5 p-1">
+        <Card className="custom-shadow mt-5 p-1">
           <Label>Activity:</Label>
           <Container fluid={true}>
             <table class="table table-striped  table-sm">
@@ -240,35 +240,34 @@ class CashoutPage extends Component {
               <tbody>
                 {postback
                   ? postback.map(
-                    (
-                      { payout, id, offer_name, status, createdAt },
-                      index
-                    ) => (
-                      <tr
-                        className={(() => {
-                          switch (status) {
-                            case "pending":
-                              return "table-warning";
+                      (
+                        { payout, id, offer_name, status, createdAt },
+                        index
+                      ) => (
+                        <tr
+                          className={(() => {
+                            switch (status) {
+                              case "pending":
+                                return "table-warning";
 
-                            case "paid":
-                              return "table-success";
-                            case "rejected":
-                              return "table-danger";
-                            default:
-                              return "table-warning";
-                          }
-                        })()}
-                      >
-                        <th scope="row">{index}</th>
+                              case "paid":
+                                return "table-success";
+                              case "rejected":
+                                return "table-danger";
+                              default:
+                                return "table-warning";
+                            }
+                          })()}
+                        >
+                          <th scope="row">{index}</th>
 
-                        <td>{offer_name}</td>
-                        <td>{payout}</td>
-                        <td>{status}</td>
-                        <td>{getFormattedDate(new Date(createdAt))}</td>
-                      </tr>
+                          <td>{offer_name}</td>
+                          <td>{payout}</td>
+                          <td>{status}</td>
+                          <td>{getFormattedDate(new Date(createdAt))}</td>
+                        </tr>
+                      )
                     )
-                  )
-
                   : null}
               </tbody>
             </table>

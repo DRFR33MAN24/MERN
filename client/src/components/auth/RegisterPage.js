@@ -152,7 +152,7 @@ class RegisterPage extends Component {
         </Container>
         <Row className="d-flex justify-content-center ">
           <Col lg="6" xs="12">
-            <Card className="custom-card-shadow p-4 bg-light">
+            <Card className="custom-shadow p-4 bg-light">
               {this.props.emailSent ? confirmModal : null}
               {this.props.emailSent ? <Alert color="success"></Alert> : null}
               {this.state.msg ? (
