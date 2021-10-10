@@ -119,7 +119,7 @@ class RegisterPage extends Component {
                 block
                 className="btn btn-warning custom-btn"
                 onClick={e => {
-                  window.location.href = "/Login";
+                  window.location.href = "app/Login";
                 }}
               >
                 Login

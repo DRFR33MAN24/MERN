@@ -81,26 +81,23 @@ export const register = ({
     });
 };
 
-export const updateDetails = ({
-  name,
-  email,
-  password,
-  id,
-  wallet
-}) => dispatch => {
+export const updateDetails = ({ name, email, password, id, wallet }) => (
+  dispatch,
+  getState
+) => {
   dispatch({ type: USER_LOADING });
   // Headers
   console.log("updateDetails Called");
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
+  // const config = {
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   }
+  // };
 
   // Request body
   const body = JSON.stringify({ name, email, password, id, wallet });
   axios
-    .post("/api/users/update", body, config)
+    .post("/api/users/update", body, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: UPDATE_SUCCESS
@@ -119,20 +116,23 @@ export const updateDetails = ({
     });
 };
 
-export const resetPassword = ({ email, password, token }) => dispatch => {
+export const resetPassword = ({ email, password, token }) => (
+  dispatch,
+  getState
+) => {
   dispatch({ type: USER_LOADING });
   // Headers
   console.log("resetPassword Called");
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
+  // const config = {
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   }
+  // };
 
   // Request body
   const body = JSON.stringify({ email, password, token });
   axios
-    .post("/api/users/reset", body, config)
+    .post("/api/users/reset", body, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: RESET_SUCCESS

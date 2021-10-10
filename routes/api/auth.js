@@ -58,7 +58,8 @@ router.post("/", async (req, res) => {
             name: user.name,
             email: user.email,
             balance: user.balance,
-            password: user.password
+            password: user.password,
+            wallet: user.wallet
           }
         });
       }

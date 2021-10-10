@@ -5,6 +5,7 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
 const { stringify } = require("query-string");
+const auth = require("../../middleware/auth");
 // User Model
 const User = require("../../models/User");
 
@@ -85,7 +86,7 @@ router.post("/", async (req, res) => {
 });
 
 // pass the old user info
-router.post("/update", (req, res) => {
+router.post("/update", auth, (req, res) => {
   console.log("update route called");
   const { name, email, password, id, wallet } = req.body;
 
@@ -152,7 +153,8 @@ router.post("/update", (req, res) => {
                     id: user.id,
                     name: user.name,
                     email: user.email,
-                    active: user.active
+                    active: user.active,
+                    wallet: user.wallet
                   }
                 });
               }
@@ -164,7 +166,7 @@ router.post("/update", (req, res) => {
   });
 });
 // pass the old user info
-router.post("/reset", async (req, res) => {
+router.post("/reset", auth, async (req, res) => {
   console.log("reset route called");
   const { email, password, token } = req.body;
 

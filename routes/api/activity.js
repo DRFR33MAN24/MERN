@@ -6,6 +6,7 @@ const Postback = require("../../models/Postback");
 const Payment = require("../../models/Payment");
 const User = require("../../models/User");
 const ObjectsToCsv = require("objects-to-csv");
+const auth = require("../../middleware/auth");
 
 const getActivity = async subid => {
   let total = 0;
@@ -101,7 +102,7 @@ router.get("/downloadCSV", async (req, res) => {
   // .then sendFile to browser
 });
 
-router.post("/payment", async (req, res) => {
+router.post("/payment", auth, async (req, res) => {
   console.log("Get Activity Payment Route Called");
   const { subid } = req.body;
   let balance = 0;

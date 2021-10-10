@@ -25,18 +25,18 @@ export const getActivity = subid => dispatch => {
       dispatch(returnErrors(err.response.data, err.response.status))
     );
 };
-export const submitPayment = subid => dispatch => {
+export const submitPayment = subid => (dispatch, getState) => {
   dispatch(setActivityLoading());
 
   console.log("activity payment action called");
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
+  // const config = {
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   }
+  // };
   const body = JSON.stringify({ subid });
   axios
-    .post("/api/activity/payment", body, config)
+    .post("/api/activity/payment", body, tokenConfig(getState))
     .then(res => {
       console.log(res.data);
       dispatch({
@@ -47,10 +47,11 @@ export const submitPayment = subid => dispatch => {
     .then(() => dispatch(loadUser()))
 
     .catch(err => {
-      dispatch(returnErrors(err.response.data, err.response.status, 'SUB_FAIL'));
-      dispatch({ type: SUB_FAIL })
-    }
-    );
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "SUB_FAIL")
+      );
+      dispatch({ type: SUB_FAIL });
+    });
 };
 
 export const setActivityLoading = () => {
