@@ -26,7 +26,7 @@ const initialState = {
   resetted: false
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case USER_LOADING:
       return {
@@ -86,6 +86,7 @@ export default function(state = initialState, action) {
     case REGISTER_SUCCESS:
       //console.log(REGISTER_SUCCESS);
       localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
 
       return {
         ...state,
