@@ -42,7 +42,7 @@ import NoContent from "./NoContent";
 class DashboardPage extends Component {
   constructor(props) {
     super(props);
-
+    this.searchInput = React.createRef();
     //Timer
     this.typingTimeout = null;
     //this.searchEnabled = false;
@@ -116,6 +116,11 @@ class DashboardPage extends Component {
       [evt.target.name]: evt.target.value,
       searchValue: evt.target.value
     });
+  };
+
+  clearSearch = () => {
+    this.setState({ searchValue: "" });
+    this.searchInput.current.value = "";
   };
 
   previous_page = () => {
@@ -437,12 +442,13 @@ class DashboardPage extends Component {
                   <i className="fa fa-search  "></i>
                 </InputGroupText>
               </InputGroupAddon>
-              <Input
+              <input
                 placeholder="Search offers"
+                ref={this.searchInput}
                 onChange={evt => this.doSearch(evt)}
               />
               {this.state.searchValue != "" ? (
-                <InputGroupAddon addonType="append">
+                <InputGroupAddon addonType="append" onClick={this.clearSearch}>
                   <InputGroupText>
                     <i className="fa fa-times  "></i>
                   </InputGroupText>
