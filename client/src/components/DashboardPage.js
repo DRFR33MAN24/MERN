@@ -20,7 +20,10 @@ import {
   ButtonDropdown,
   DropdownMenu,
   DropdownItem,
-  DropdownToggle
+  DropdownToggle,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText
 } from "reactstrap";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -43,7 +46,8 @@ class DashboardPage extends Component {
     show_items: 16,
     dropdownOpen: false,
     sortType: 1,
-    offerType: 1
+    offerType: 1,
+    searchTimeout: 0
   };
 
   static propTypes = {
@@ -85,6 +89,14 @@ class DashboardPage extends Component {
       console.log("next page", offers.length);
       this.setState({ offer_page: this.state.offer_page + 1 });
     }
+  };
+
+  doSearch = evt => {
+    var searchText = evt.target.value; // this is the search text
+    if (this.state.searchTimeout) clearTimeout(this.state.searchTimeout);
+    this.state.searchTimeout = setTimeout(() => {
+      //search function
+    }, 300);
   };
 
   previous_page = () => {
@@ -319,7 +331,10 @@ class DashboardPage extends Component {
         )} */}
         <Row className="d-flex justify-content-center mb-3 mt-3  custom-shadow bg-light">
           <Nav>
-            <Container className="d-flex flex-row flex-wrap justify-content-center">
+            <Container
+              fluid={true}
+              className="d-flex flex-row flex-wrap justify-content-center"
+            >
               <NavItem>
                 <NavLink
                   href="#"
@@ -378,6 +393,21 @@ class DashboardPage extends Component {
               </NavItem>
             </Container>
           </Nav>
+        </Row>
+        <Row className="custom-shadow bg-light justify-content-center p-2">
+          <Col xs="12" sm="6" className="d-flex flex-row">
+            <InputGroup>
+              <InputGroupAddon addonType="prepend">
+                <InputGroupText>
+                  <i className="fa fa-search  "></i>
+                </InputGroupText>
+              </InputGroupAddon>
+              <Input
+                placeholder="Search offers"
+                onChange={evt => this.doSearch(evt)}
+              />
+            </InputGroup>
+          </Col>
         </Row>
         <Row className="d-flex justify-content-center" id="offers">
           {offers_final
