@@ -40,6 +40,13 @@ import axios from "axios";
 import NoContent from "./NoContent";
 
 class DashboardPage extends Component {
+  constructor(props) {
+    super(props);
+
+    //Timer
+    this.typingTimeout = null;
+  }
+
   state = {
     isAuth: false,
     offer_page: 0,
@@ -47,7 +54,8 @@ class DashboardPage extends Component {
     dropdownOpen: false,
     sortType: 1,
     offerType: 1,
-    searchTimeout: 0
+
+    searchValue: ""
   };
 
   static propTypes = {
@@ -92,11 +100,14 @@ class DashboardPage extends Component {
   };
 
   doSearch = evt => {
-    var searchText = evt.target.value; // this is the search text
-    if (this.state.searchTimeout) clearTimeout(this.state.searchTimeout);
-    this.state.searchTimeout = setTimeout(() => {
-      //search function
-    }, 300);
+    // Clears the previously set timer.
+    clearTimeout(this.typingTimeout);
+
+    // Reset the timer, to make the http call after 475MS (this.callSearch is a method which will call the search API. Don't forget to bind it in constructor.)
+    this.typingTimeout = setTimeout(this.searchOffers, 475);
+
+    // Setting value of the search box to a state.
+    this.setState({ [evt.target.name]: evt.target.value });
   };
 
   previous_page = () => {
