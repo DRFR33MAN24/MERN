@@ -54,7 +54,7 @@ class DashboardPage extends Component {
     dropdownOpen: false,
     sortType: 1,
     offerType: 1,
-
+    searchEnabled: false,
     searchValue: ""
   };
 
@@ -169,6 +169,11 @@ class DashboardPage extends Component {
           return item.category === "Pop";
         });
         break;
+    }
+    if (this.state.searchEnabled) {
+      // do search
+      offers_semi.filter(item => item.name.includes(this.state.searchValue));
+      // set search enabled to false
     }
 
     switch (this.state.sortType) {
