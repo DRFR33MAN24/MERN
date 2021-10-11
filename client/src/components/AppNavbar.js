@@ -135,7 +135,7 @@ class AppNavbar extends Component {
     const authLinks = (
       <Fragment>
         <Container className="d-flex justify-content-center  ">
-          <Col xs="4" sm="3" lg="2" className="d-flex flex-column py-3 ">
+          <Col xs="5" sm="4" lg="2" className="d-flex flex-column py-3 ">
             <Link
               onClick={this.toggle}
               className="text-start text-dark  "
