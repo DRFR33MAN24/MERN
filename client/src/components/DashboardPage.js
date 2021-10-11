@@ -45,7 +45,7 @@ class DashboardPage extends Component {
 
     //Timer
     this.typingTimeout = null;
-    this.searchEnabled = false;
+    //this.searchEnabled = false;
   }
 
   state = {
@@ -55,7 +55,8 @@ class DashboardPage extends Component {
     dropdownOpen: false,
     sortType: 1,
     offerType: 1,
-    searchValue: ""
+    searchValue: "",
+    searchEnabled: false
   };
 
   static propTypes = {
@@ -101,13 +102,20 @@ class DashboardPage extends Component {
 
   doSearch = evt => {
     // Clears the previously set timer.
+    console.log("doSearch");
     clearTimeout(this.typingTimeout);
+    this.setState({ searchEnabled: false });
 
     // Reset the timer, to make the http call after 475MS (this.callSearch is a method which will call the search API. Don't forget to bind it in constructor.)
-    this.typingTimeout = setTimeout(this.searchOffers, 475);
+    this.typingTimeout = setTimeout(() => {
+      this.setState({ searchEnabled: true });
+    }, 475);
 
     // Setting value of the search box to a state.
-    this.setState({ [evt.target.name]: evt.target.value });
+    this.setState({
+      [evt.target.name]: evt.target.value,
+      searchValue: evt.target.value
+    });
   };
 
   previous_page = () => {
@@ -170,12 +178,16 @@ class DashboardPage extends Component {
         });
         break;
     }
-    if (this.searchEnabled) {
+    if (this.state.searchEnabled) {
       // do search
-      offers_semi = offers_semi.filter(item =>
-        item.title.includes(this.state.searchValue)
-      );
-      this.searchEnabled === false;
+      offers_semi = offers_semi.filter(item => {
+        item.title.includes(this.state.searchValue);
+        console.log(
+          "DashboardPage -> getFinalOffers -> this.state.searchValue",
+          this.state.searchValue
+        );
+      });
+      // this.setState({ searchEnabled: false });
       // set search enabled to false
     }
 
@@ -209,6 +221,10 @@ class DashboardPage extends Component {
     const { offers } = this.props.offers;
     const offers_final = this.getFinalOffers();
 
+    console.log(
+      "DashboardPage -> render -> this.state.searchEnabled",
+      this.state.searchEnabled
+    );
     const { user } = this.props;
     const featuredOffers = offers.filter(item => item.featured === 1);
     const surveys = offers.filter(item => {
