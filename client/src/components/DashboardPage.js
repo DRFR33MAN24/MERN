@@ -45,6 +45,7 @@ class DashboardPage extends Component {
 
     //Timer
     this.typingTimeout = null;
+    this.searchEnabled = false;
   }
 
   state = {
@@ -54,7 +55,6 @@ class DashboardPage extends Component {
     dropdownOpen: false,
     sortType: 1,
     offerType: 1,
-    searchEnabled: false,
     searchValue: ""
   };
 
@@ -170,9 +170,12 @@ class DashboardPage extends Component {
         });
         break;
     }
-    if (this.state.searchEnabled) {
+    if (this.searchEnabled) {
       // do search
-      offers_semi.filter(item => item.name.includes(this.state.searchValue));
+      offers_semi = offers_semi.filter(item =>
+        item.name.includes(this.state.searchValue)
+      );
+      this.searchEnabled === false;
       // set search enabled to false
     }
 
