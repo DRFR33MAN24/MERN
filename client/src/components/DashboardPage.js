@@ -180,12 +180,12 @@ class DashboardPage extends Component {
     }
     if (this.state.searchEnabled) {
       // do search
+      console.log(
+        "DashboardPage -> getFinalOffers -> this.state.searchValue",
+        this.state.searchValue
+      );
       offers_semi = offers_semi.filter(item => {
-        item.title.includes(this.state.searchValue);
-        console.log(
-          "DashboardPage -> getFinalOffers -> this.state.searchValue",
-          this.state.searchValue
-        );
+        return item.title.includes(this.state.searchValue);
       });
       // this.setState({ searchEnabled: false });
       // set search enabled to false
