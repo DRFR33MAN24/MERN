@@ -221,10 +221,10 @@ class DashboardPage extends Component {
     const { offers } = this.props.offers;
     const offers_final = this.getFinalOffers();
 
-    console.log(
-      "DashboardPage -> render -> this.state.searchEnabled",
-      this.state.searchEnabled
-    );
+    // console.log(
+    //   "DashboardPage -> render -> this.state.searchEnabled",
+    //   this.state.searchEnabled
+    // );
     const { user } = this.props;
     const featuredOffers = offers.filter(item => item.featured === 1);
     const surveys = offers.filter(item => {
@@ -234,7 +234,7 @@ class DashboardPage extends Component {
         item.category === "Complete Survey"
       );
     });
-    console.log(surveys);
+    // console.log(surveys);
     const range_min = this.state.show_items * this.state.offer_page;
     const range_max = range_min + this.state.show_items;
 
@@ -441,6 +441,13 @@ class DashboardPage extends Component {
                 placeholder="Search offers"
                 onChange={evt => this.doSearch(evt)}
               />
+              {this.state.searchValue != "" ? (
+                <InputGroupAddon addonType="append">
+                  <InputGroupText>
+                    <i className="fa fa-times  "></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+              ) : null}
             </InputGroup>
           </Col>
         </Row>
