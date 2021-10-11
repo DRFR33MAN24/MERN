@@ -173,7 +173,7 @@ class DashboardPage extends Component {
     if (this.searchEnabled) {
       // do search
       offers_semi = offers_semi.filter(item =>
-        item.name.includes(this.state.searchValue)
+        item.title.includes(this.state.searchValue)
       );
       this.searchEnabled === false;
       // set search enabled to false
