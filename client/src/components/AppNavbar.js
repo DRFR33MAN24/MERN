@@ -14,7 +14,9 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
-  Spinner
+  Spinner,
+  ListGroupItem,
+  ListGroup
 } from "reactstrap";
 import siteLogo from "../../src/coinguru2.png";
 import * as Icon from "react-bootstrap-icons";
@@ -105,30 +107,26 @@ class AppNavbar extends Component {
     );
     const guestLinks = (
       <Fragment>
-        <Container>
-          <Col sm="12" className="d-flex justify-content-center p-2">
+        <Container className="d-flex justify-content-center  ">
+          <Col xs="4" sm="3" lg="2" className="d-flex flex-column p-2 ">
             {/* <RegisterModal /> */}
             <Link
               onClick={this.toggle}
               exact
               to="/Register"
-              className="text-start text-dark"
+              className=" text-start text-dark"
             >
-              <i className="fa fa-lg fa-user-plus   mr-3 align-middle"></i>
-              Register
+              <i className="fa fa-lg fa-user-plus fa-fw   align-middle"></i>
+              <span class="ml-3">Register</span>
             </Link>
-          </Col>
-
-          <Col sm="12" className="d-flex justify-content-center p-2">
-            {/* <LoginModal /> */}
             <Link
               onClick={this.toggle}
               exact
               to="/Login"
-              className="text-start text-dark "
+              className="text-start text-dark"
             >
-              <i className="fas fa-lg fa-sign-in-alt   mr-3 align-middle"></i>
-              Login
+              <i className="fas fa-lg fa-sign-in-alt fa-fw   align-middle"></i>
+              <span className="ml-3">Login</span>
             </Link>
           </Col>
         </Container>
@@ -136,77 +134,58 @@ class AppNavbar extends Component {
     );
     const authLinks = (
       <Fragment>
-        <Container>
-          <Col xs="12" className="d-flex justify-content-center align-middle ">
-            <Container className="d-flex flex-column ">
-              <Row className=" p-1  ">
-                <Link
-                  onClick={this.toggle}
-                  className="text-dark  d-inline  "
-                  exact
-                  to="/Account"
-                >
-                  <i className="fa fa-lg fa-user   mr-3 align-middle"></i>
-                  Account
-                </Link>
-              </Row>
+        <Container className="d-flex justify-content-center  ">
+          <Col xs="4" sm="3" lg="2" className="d-flex flex-column py-3 ">
+            <Link
+              onClick={this.toggle}
+              className="text-start text-dark  "
+              exact
+              to="/Account"
+            >
+              <i className="fa fa-lg fa-user  fa-fw align-middle"></i>
+              <span className="ml-3">Account</span>
+            </Link>
 
-              <DropdownItem divider />
+            <Link
+              onClick={this.toggle}
+              className="text-start text-dark"
+              exact
+              to="/Dashboard"
+            >
+              <i className="fa fa-lg fa-home   fa-fw align-middle"></i>
+              <span className="ml-3">Dashboard</span>
+            </Link>
 
-              <Row className=" p-1 ">
-                <Link
-                  onClick={this.toggle}
-                  className="text-dark  d-inline"
-                  exact
-                  to="/Dashboard"
-                >
-                  <i className="fa fa-lg fa-home   mr-3 align-middle"></i>
-                  Dashboard
-                </Link>
-              </Row>
+            <Link
+              onClick={this.toggle}
+              className="text-start text-dark"
+              exact
+              to="/Cashout"
+            >
+              <i className="fas fa-lg fa-money-bill-alt   fa-fw align-middle"></i>
+              <span className="ml-3">Cashout</span>
+            </Link>
 
-              <DropdownItem divider />
+            <Link
+              onClick={this.toggle}
+              className="text-start text-dark"
+              exact
+              to="/Help"
+            >
+              <i className="fas fa-lg fa-question-circle   fa-fw align-middle"></i>
+              <span className="ml-3">Help</span>
+            </Link>
 
-              <Row className="p-1">
-                <Link
-                  onClick={this.toggle}
-                  className="text-dark  d-inline"
-                  exact
-                  to="/Cashout"
-                >
-                  <i className="fas fa-lg fa-money-bill-alt   mr-3 align-middle"></i>
-                  Cashout
-                </Link>
-              </Row>
-              <DropdownItem divider />
-
-              <Row className="p-1">
-                <Link
-                  onClick={this.toggle}
-                  className="text-dark  d-inline"
-                  exact
-                  to="/Help"
-                >
-                  <i className="fas fa-lg fa-question-circle   mr-3 align-middle"></i>
-                  Help
-                </Link>
-              </Row>
-
-              <DropdownItem divider />
-
-              <Row className=" p-1">
-                <Link
-                  className="text-dark d-inline"
-                  onClick={e => {
-                    this.props.logout();
-                    this.toggle();
-                  }}
-                >
-                  <i className="fas fa-lg fa-sign-out-alt   mr-3 align-middle"></i>
-                  Logout
-                </Link>
-              </Row>
-            </Container>
+            <Link
+              className="text-start text-dark"
+              onClick={e => {
+                this.props.logout();
+                this.toggle();
+              }}
+            >
+              <i className="fas fa-lg fa-sign-out-alt   fa-fw align-middle"></i>
+              <span className="ml-3">Logout</span>
+            </Link>
           </Col>
         </Container>
       </Fragment>
@@ -231,12 +210,10 @@ class AppNavbar extends Component {
               className=" align-self-end mt-auto mb-auto mr-auto "
             />
 
-            <Col xs="12">
-              <Collapse isOpen={this.state.isOpen} navbar>
-                {/* <Nav>{isAuthenticated ? authLinks : guestLinks}</Nav> */}
-                {isAuthenticated ? authLinks : guestLinks}
-              </Collapse>
-            </Col>
+            <Collapse isOpen={this.state.isOpen} navbar>
+              {/* <Nav>{isAuthenticated ? authLinks : guestLinks}</Nav> */}
+              {isAuthenticated ? authLinks : guestLinks}
+            </Collapse>
           </Navbar>
         </div>
 
