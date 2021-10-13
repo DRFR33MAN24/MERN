@@ -202,9 +202,13 @@ class CashoutPage extends Component {
                               case "pending":
                                 return "table-warning";
 
-                              case "paid":
+                              case "credited":
                                 return "table-success";
+                              case "credited":
+                                return "table-info";
                               case "rejected":
+                                return "table-danger";
+                              case "failed":
                                 return "table-danger";
                               default:
                                 return "table-warning";
@@ -250,9 +254,9 @@ class CashoutPage extends Component {
                               case "pending":
                                 return "table-warning";
 
-                              case "paid":
+                              case "credited":
                                 return "table-success";
-                              case "rejected":
+                              case "reversed":
                                 return "table-danger";
                               default:
                                 return "table-warning";
