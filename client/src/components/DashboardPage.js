@@ -82,13 +82,21 @@ class DashboardPage extends Component {
   componentWillReceiveProps(prevProps) {}
   componentDidUpdate(prevProps, prevState) {}
 
-  getlink = (l, id) => {
+  getlink = (l, id, disabled) => {
     const u = new URL(l);
     const domain = u.hostname;
-    if (domain === "www.kiwiwall.com") {
-      u.searchParams.set("s", id);
+    if (disabled) {
+      if (domain === "www.kiwiwall.com") {
+        u.searchParams.set("s", 36);
+      } else {
+        u.searchParams.set("subid", 36); // Test_cond
+      }
     } else {
-      u.searchParams.set("subid", id);
+      if (domain === "www.kiwiwall.com") {
+        u.searchParams.set("s", id);
+      } else {
+        u.searchParams.set("subid", id);
+      }
     }
     return u;
   };
@@ -303,7 +311,10 @@ class DashboardPage extends Component {
               <tbody>
                 {surveys
                   ? surveys.map(
-                      ({ title, description, link, amount }, index) => (
+                      (
+                        { title, description, link, amount, disabled },
+                        index
+                      ) => (
                         <tr>
                           <th scope="row">{index}</th>
                           <td>{title}</td>
@@ -312,7 +323,7 @@ class DashboardPage extends Component {
                           <td>
                             <a
                               className="btn btn-warning custom-btn"
-                              href={this.getlink(link, user.id)}
+                              href={this.getlink(link, user.id, disabled)}
                             >
                               Go
                             </a>
@@ -470,14 +481,15 @@ class DashboardPage extends Component {
                 amount,
                 conversion,
                 device,
-                category
+                category,
+                disabled
               }) => (
                 <div className="">
                   {isAuthenticated ? (
                     <Offer
                       title={title}
                       description={description}
-                      link={this.getlink(link, user.id)}
+                      link={this.getlink(link, user.id, disabled)}
                       amount={toDollars(amount)}
                       img={img}
                       conversion={conversion}
