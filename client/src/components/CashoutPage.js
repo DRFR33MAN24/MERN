@@ -160,6 +160,7 @@ class CashoutPage extends Component {
                     className="block btn-success mt-1"
                     onClick={this.onWithdraw}
                   >
+                    <i class="fa fa-usd fa-fw mr-1"></i>
                     Withdraw
                   </Button>
                 </div>

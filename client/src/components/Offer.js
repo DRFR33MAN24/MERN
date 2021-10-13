@@ -12,14 +12,20 @@ import {
 } from "reactstrap";
 import OfferModal from "./OfferModal";
 import siteLogo from "./site_logo2.png";
+import ReportOfferModal from "./ReportOfferModal";
 
 export default class Offer extends Component {
   state = {
-    openModal: false
+    openModal: false,
+    reportModal: false
   };
   click = () => {
     this.setState({ openModal: !this.state.openModal });
     //window.location.href = `${this.props.link}`;
+  };
+
+  reportOffer = () => {
+    this.setState({ reportModal: !this.state.reportModal });
   };
   render() {
     return (
@@ -34,6 +40,15 @@ export default class Offer extends Component {
               amount={this.props.amount}
               conversion={this.props.conversion}
               device={this.props.device}
+            />
+          </div>
+        ) : null}
+
+        {this.state.reportModal ? (
+          <div>
+            <ReportOfferModal
+              modal={this.reportOffer}
+              title={this.props.title}
             />
           </div>
         ) : null}
@@ -64,15 +79,19 @@ export default class Offer extends Component {
             src={this.props.img}
             alt="Card image cap"
           />
-          <Container className="d-flex justify-content-end align-items-center mt-2">
+          <Container className="d-flex justify-content-start align-items-center mt-2 ">
+            <a onClick={this.reportOffer}>
+              <i class="fas fa-info-circle px-2 py-1   align-self-start text-muted "></i>
+            </a>
+
             {this.props.category === "Mobile" ? (
-              <i className="fa fa-download px-2 py-1"></i>
+              <i className="fa fa-download px-2 py-1 align-self-end ml-auto"></i>
             ) : null}
             {this.props.device === "android" ? (
-              <i className="fab fa-android px-2 py-1"></i>
+              <i className="fab fa-android px-2 py-1 align-self-end"></i>
             ) : null}
             {this.props.device === "ios" ? (
-              <i className="fab fa-apple px-2 py-1"></i>
+              <i className="fab fa-apple px-2 py-1 align-self-end"></i>
             ) : null}
           </Container>
           <CardBody>

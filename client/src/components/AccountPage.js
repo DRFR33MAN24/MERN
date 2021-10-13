@@ -208,10 +208,18 @@ class AccountPage extends Component {
             </Form>
           </Container>
           <Container className="mt-3 mb-3 p-1 d-flex justify-content-center">
-            <Button className="mx-3" onClick={this.onEdit}>
+            <Button
+              className="mx-3 btn btn-warning custom-btn"
+              onClick={this.onEdit}
+            >
+              <i class="fa fa-pencil fa-fw mr-1"></i>
               Edit
             </Button>
-            <Button className="mx-3" onClick={this.onSave}>
+            <Button
+              className="mx-3 btn btn-warning custom-btn"
+              onClick={this.onSave}
+            >
+              <i class="fa fa-save fa-fw mr-1"></i>
               Save
             </Button>
           </Container>
