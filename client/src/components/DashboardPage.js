@@ -436,25 +436,25 @@ class DashboardPage extends Component {
         </Row>
         <Row className="custom-shadow bg-light justify-content-center p-2">
           <Col xs="12" sm="6" className="d-flex flex-row">
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <div className="input-group-text">
                   <i className="fa fa-search  "></i>
-                </InputGroupText>
-              </InputGroupAddon>
+                </div>
+              </div>
               <input
                 placeholder="Search offers"
                 ref={this.searchInput}
                 onChange={evt => this.doSearch(evt)}
               />
               {this.state.searchValue != "" ? (
-                <InputGroupAddon addonType="append" onClick={this.clearSearch}>
-                  <InputGroupText>
+                <div className="input-group-append" onClick={this.clearSearch}>
+                  <div className="input-group-text">
                     <i className="fa fa-times  "></i>
-                  </InputGroupText>
-                </InputGroupAddon>
+                  </div>
+                </div>
               ) : null}
-            </InputGroup>
+            </div>
           </Col>
         </Row>
         <Row className="d-flex justify-content-center" id="offers">
