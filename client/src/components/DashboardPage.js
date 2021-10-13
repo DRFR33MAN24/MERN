@@ -114,7 +114,7 @@ class DashboardPage extends Component {
     // Setting value of the search box to a state.
     this.setState({
       [evt.target.name]: evt.target.value,
-      searchValue: evt.target.value
+      searchValue: evt.target.value.toLowerCase()
     });
   };
 
@@ -190,7 +190,7 @@ class DashboardPage extends Component {
         this.state.searchValue
       );
       offers_semi = offers_semi.filter(item => {
-        return item.title.includes(this.state.searchValue);
+        return item.title.toLowerCase().includes(this.state.searchValue);
       });
       // this.setState({ searchEnabled: false });
       // set search enabled to false
@@ -443,6 +443,7 @@ class DashboardPage extends Component {
                 </div>
               </div>
               <input
+                className="form-control"
                 placeholder="Search offers"
                 ref={this.searchInput}
                 onChange={evt => this.doSearch(evt)}
