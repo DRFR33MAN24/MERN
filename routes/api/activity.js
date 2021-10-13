@@ -78,13 +78,17 @@ router.get("/downloadCSV", async (req, res) => {
   const users = await User.findAll({
     include: [{ model: Payment, as: "payments" }]
   });
-  console.log(users);
+  //console.log(users);
 
   users.map(({ wallet, payments }) => {
     let totalPayout = 0;
 
-    payments.map(({ payout }) => {
-      totalPayout += payout;
+    payments.map(({ payout,status,id }) => {
+      if (status === "pending") {
+        
+        totalPayout += payout;
+       await Payment.update({status:"processing"},{where:{id:id}});
+      }
     });
 
     data.push({ address: wallet, amount: totalPayout });
