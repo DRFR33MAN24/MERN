@@ -5,7 +5,7 @@ const axios = require("axios");
 const { stringify } = require("query-string");
 const { SendMail } = require("../../sendEmail");
 
-const mail = "support@coinguru.biz";
+const mail = "coinguru@coinguru.biz";
 
 router.post("/", async (req, res) => {
   const { message, email, subject, name, token } = req.body;

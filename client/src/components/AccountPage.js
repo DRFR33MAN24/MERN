@@ -168,7 +168,7 @@ class AccountPage extends Component {
     return (
       <Container className=" mx-auto justify-content-center py-5 ">
         <LoadingModal open={isLoading} />
-        <Card className="custom-card-shadow p-2 mb-3 mt-5">
+        <Card className="custom-shadow p-2 mb-3 mt-5">
           {this.props.updated ? <Alert>Updated</Alert> : null}
           {this.props.updated ? confirmModal : null}
           <Label className="mb-3">User Details:</Label>

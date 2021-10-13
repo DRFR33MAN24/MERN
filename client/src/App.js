@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 import AppNavbar from "./components/AppNavbar";
+import Footer from "./components/Footer"
 import { Container } from "reactstrap";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -17,7 +18,7 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <AppNavbar />
-          <Container></Container>
+          <Footer />
         </div>
       </Provider>
     );
