@@ -312,13 +312,18 @@ class DashboardPage extends Component {
                 {surveys
                   ? surveys.map(
                       (
-                        { title, description, link, amount, disabled },
+                        { title, description, link, amount, disabled, img },
                         index
                       ) => (
                         <tr>
                           <th scope="row">{index}</th>
                           <td>{title}</td>
-                          <td>{description}</td>
+                          <td>
+                            <span>
+                              <img src={img} width="64" height="64" />
+                            </span>
+                            {description}
+                          </td>
                           <td>{toDollars(amount)}</td>
                           <td>
                             <a
