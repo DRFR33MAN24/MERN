@@ -15,6 +15,7 @@ import {
   ModalFooter
 } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
+import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -29,7 +30,8 @@ class AccountPage extends Component {
     email: this.props.user.email,
     password: this.props.user.password,
     wallet: "",
-    formEnabled: false
+    formEnabled: false,
+    country: '', region: ''
   };
 
   static propTypes = {
@@ -118,11 +120,20 @@ class AccountPage extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  selectCountry(val) {
+    this.setState({ country: val });
+  }
+
+  selectRegion(val) {
+    this.setState({ region: val });
+  }
+
   render() {
     const isAuthenticated = this.props.isAuthenticated;
     const isLoading = this.props.isLoading;
     const user = this.props.user;
     const formEnabled = this.state.formEnabled;
+    const { country, region } = this.state;
     //console.log(offers);
     //console.log("dashboard render is Auth", this.props.isAuthenticated);
     const login = <Redirect exact to="/Login" />;
@@ -186,6 +197,31 @@ class AccountPage extends Component {
                 name="email"
                 disabled={!formEnabled}
                 defaultValue={user.email}
+                onChange={value => this.onChange(value)}
+              ></Input>
+              <Label className="mt-2" >Location Info:</Label>
+              <div>
+                <CountryDropdown
+                  disabled={!formEnabled}
+                  value={country}
+                  onChange={(val) => this.selectCountry(val)} />
+                <RegionDropdown disabled={!formEnabled}
+                  country={country}
+                  value={region}
+                  onChange={(val) => this.selectRegion(val)} />
+              </div>
+              <Label className="mt-2" >Address:</Label>
+              <Input
+                name="address"
+                disabled={!formEnabled}
+                defaultValue="address"
+                onChange={value => this.onChange(value)}
+              ></Input>
+              <Label className="mt-2" >Zip Code:</Label>
+              <Input
+                name="zip"
+                disabled={!formEnabled}
+                defaultValue="address"
                 onChange={value => this.onChange(value)}
               ></Input>
               <Label className="mt-2">Password:</Label>
