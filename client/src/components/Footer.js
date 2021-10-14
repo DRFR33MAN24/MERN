@@ -4,7 +4,8 @@ export default class Footer extends Component {
   render() {
     return (
       <div>
-        <footer className="bg-dark text-white">
+
+        <div class="container-fluid bg-dark text-white">
           <div class="row justify-content-center mb-0 pt-5 pb-0 row-2 px-3">
             <div class="col-12">
               <div class="row row-2">
@@ -15,22 +16,30 @@ export default class Footer extends Component {
                 </div>
                 <div class="col-sm-4 my-sm-0 mt-5">
                   <ul class="list-unstyled">
-                    <li class="mt-0">FAQ</li>
-                    <li>Help Center</li>
-                    <li>Privacy Policy</li>
+                    <li class="mt-0">
+                      <a href="https://support.coinguru.biz/hesk/faq.html">FAQ</a>
+                    </li>
+                    <li>
+                      <a href="https://support.coinguru.biz/hesk">Help Center</a>
+                    </li>
+                    <li><a href="https://coinguru.biz/privacy_policy.html">Privacy Policy</a></li>
                   </ul>
                 </div>
                 <div class="col-sm-4 my-sm-0 mt-5">
                   <ul class="list-unstyled">
                     <li class="mt-0">Social Media</li>
                     <li>
-                      <i className="fab fa-facebook fa-2x mr-1"></i>
-                      Facebook
+                      <a href="https://www.facebook.com/CoinGuru-101259485672243">
+                        <i class="fab fa-facebook fa-2x mr-1"></i>
+                        Facebook</a
+                      >
                     </li>
 
                     <li>
-                      <i className="fab fa-twitter fa-2x mr-1"></i>
-                      Twitter
+                      <a href="https://twitter.com/CoinGuru_biz">
+                        <i class="fab fa-twitter fa-2x mr-1"></i>
+                        Twitter</a
+                      >
                     </li>
                   </ul>
                 </div>
@@ -46,7 +55,7 @@ export default class Footer extends Component {
               </div>
             </div>
           </div>
-        </footer>
+        </div>
       </div>
     );
   }

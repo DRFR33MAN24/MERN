@@ -55,7 +55,10 @@
   font-weight: 600;
   display: block;
 }
-
+li a {
+  text-decoration: none;
+  color: white;
+}
 .custom-btn {
   display: block;
 

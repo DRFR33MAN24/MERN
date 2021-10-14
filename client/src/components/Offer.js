@@ -8,7 +8,8 @@ import {
   CardText,
   CardSubtitle,
   CardTitle,
-  Row
+  Row,
+  Col
 } from "reactstrap";
 import OfferModal from "./OfferModal";
 import siteLogo from "./site_logo2.png";
@@ -53,7 +54,7 @@ export default class Offer extends Component {
           </div>
         ) : null}
         <Card className="m-2 custom-shadow p-3">
-          <Container
+          {/* <Container
             fluid={true}
             className="d-flex flex-row justify-content-between "
           >
@@ -71,6 +72,21 @@ export default class Offer extends Component {
                 </div>
               </Row>
             </Container>
+          </Container> */}
+          <Container fluid={true} className="d-flex
+                        flex-row mb-2
+                        ">
+            <Col xs="6" className="d-flex align-items-start">
+              <img src={siteLogo} width="80" height="16" />
+            </Col>
+            <Col xs="6" className=" d-flex  justify-content-end">
+
+              <i className="fab fa-facebook mr-1   social-btn"></i>
+
+
+              <i className="fab fa-twitter  social-btn"></i>
+
+            </Col>
           </Container>
           <CardImg
             top
