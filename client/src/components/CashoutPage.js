@@ -29,6 +29,7 @@ import { freemem } from "os";
 import { toDollars, getFormattedDate, Last7Days } from "../util";
 import LoadingModal from "./LoadingModal";
 import PerformanceChart from "./PerformanceChart";
+import GiftPicker from "./GiftPicker";
 
 class CashoutPage extends Component {
   state = {
@@ -181,6 +182,7 @@ class CashoutPage extends Component {
             </Row>
           </Container>
         </Card>
+        {/* <GiftPicker /> */}
         <Card className="custom-shadow mt-5 p-1">
           <Label>Payments</Label>
           <Container fluid={true}>
