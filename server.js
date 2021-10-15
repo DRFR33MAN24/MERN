@@ -26,6 +26,7 @@ app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/offers", require("./routes/api/offers"));
 app.use("/api/activity", require("./routes/api/activity"));
+app.use("/api/notifications", require("./routes/api/notifications"));
 app.use("/api/postback", require("./routes/api/postback"));
 app.use("/api/email", require("./routes/api/email"));
 app.use("/api/stats", require("./routes/api/stats"));
