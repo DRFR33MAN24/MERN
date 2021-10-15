@@ -40,7 +40,7 @@ class NotificationMenu extends Component {
         {this.state.showNotificationsMenu
           ? notifications.map(({ message }) => (
               <Toast>
-                <ToastHeader>Reactstrap</ToastHeader>
+                <ToastHeader>Notification</ToastHeader>
                 <ToastBody>{message}</ToastBody>
               </Toast>
             ))
