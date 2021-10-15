@@ -115,7 +115,12 @@ router.post("/update", auth, (req, res) => {
                 name: user.name,
                 email: user.email,
                 active: user.active,
-                password: user.password
+                password: user.password,
+                country: user.country,
+                region: user.region,
+                address: user.address,
+                zip: user.zip,
+                wallet: user.wallet
               }
             });
             console.log("user updated");
@@ -154,6 +159,10 @@ router.post("/update", auth, (req, res) => {
                     name: user.name,
                     email: user.email,
                     active: user.active,
+                    country: user.country,
+                    region: user.region,
+                    address: user.address,
+                    zip: user.zip,
                     wallet: user.wallet
                   }
                 });

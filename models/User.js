@@ -42,6 +42,22 @@ const User = db.define(
       type: DataTypes.STRING,
       allowNull: true
     },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    region: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    zip: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
 
     register_date: {
       type: DataTypes.DATE,

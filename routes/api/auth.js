@@ -59,6 +59,10 @@ router.post("/", async (req, res) => {
             email: user.email,
             balance: user.balance,
             password: user.password,
+            country: user.country,
+            region: user.region,
+            address: user.address,
+            zip: user.zip,
             wallet: user.wallet
           }
         });

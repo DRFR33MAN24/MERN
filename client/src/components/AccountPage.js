@@ -15,7 +15,11 @@ import {
   ModalFooter
 } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import {
+  CountryDropdown,
+  RegionDropdown,
+  CountryRegionData
+} from "react-country-region-selector";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -29,9 +33,12 @@ class AccountPage extends Component {
     name: this.props.user.name,
     email: this.props.user.email,
     password: this.props.user.password,
-    wallet: "",
+    wallet: this.props.user.wallet,
     formEnabled: false,
-    country: '', region: ''
+    country: this.props.user.country,
+    region: this.props.user.region,
+    address: this.props.user.address,
+    zip: this.props.user.zip
   };
 
   static propTypes = {
@@ -98,17 +105,26 @@ class AccountPage extends Component {
       email: this.state.email,
       password: this.state.password,
       id: user.id,
-      wallet: this.state.wallet
+      wallet: this.state.wallet,
+      country: this.state.country,
+      region: this.state.region,
+      address: this.state.address,
+      zip: this.state.zip
     };
+    console.log(user, newUser);
+    this.setState({ formEnabled: false });
 
     if (
       user.name != newUser.name ||
       user.email != newUser.email ||
       user.password != newUser.password ||
+      user.country != newUser.country ||
+      user.region != newUser.region ||
+      user.address != newUser.address ||
+      user.zip != newUser.zip ||
       user.wallet != newUser.wallet
     ) {
       this.props.updateDetails(newUser);
-      this.setState({ formEnabled: false });
 
       //update details will issue an action to change database
       // and send an email to user set mail address
@@ -118,6 +134,7 @@ class AccountPage extends Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+    //console.log(e.target.name);
   }
 
   selectCountry(val) {
@@ -199,29 +216,38 @@ class AccountPage extends Component {
                 defaultValue={user.email}
                 onChange={value => this.onChange(value)}
               ></Input>
-              <Label className="mt-2" >Location Info:</Label>
+              <Label className="mt-2">Location Info:</Label>
               <div>
                 <CountryDropdown
+                  style={{
+                    fontSize: 16
+                  }}
                   disabled={!formEnabled}
                   value={country}
-                  onChange={(val) => this.selectCountry(val)} />
-                <RegionDropdown disabled={!formEnabled}
+                  onChange={val => this.selectCountry(val)}
+                />
+                <RegionDropdown
+                  style={{
+                    fontSize: 16
+                  }}
+                  disabled={!formEnabled}
                   country={country}
                   value={region}
-                  onChange={(val) => this.selectRegion(val)} />
+                  onChange={val => this.selectRegion(val)}
+                />
               </div>
-              <Label className="mt-2" >Address:</Label>
+              <Label className="mt-2">Address:</Label>
               <Input
                 name="address"
                 disabled={!formEnabled}
-                defaultValue="address"
+                defaultValue={user.address}
                 onChange={value => this.onChange(value)}
               ></Input>
-              <Label className="mt-2" >Zip Code:</Label>
+              <Label className="mt-2">Zip Code:</Label>
               <Input
                 name="zip"
                 disabled={!formEnabled}
-                defaultValue="address"
+                defaultValue={user.zip}
                 onChange={value => this.onChange(value)}
               ></Input>
               <Label className="mt-2">Password:</Label>
