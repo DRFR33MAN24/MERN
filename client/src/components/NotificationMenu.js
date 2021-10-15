@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Button } from "reactstrap";
+import { Button, Toast, ToastBody, ToastHeader } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getNotifications } from "../actions/notificationAction";
@@ -8,6 +8,7 @@ import { getNotifications } from "../actions/notificationAction";
 // import { faBell } from "@fortawesome/free-solid-svg-icons";
 
 class NotificationMenu extends Component {
+  state = { showNotificationsMenu: false };
   static propTypes = {
     isAuthenticated: PropTypes.bool,
 
@@ -23,21 +24,38 @@ class NotificationMenu extends Component {
     this.props.getNotifications(user.id);
   }
 
+  showNotifications = () => {
+    this.setState({ showNotificationsMenu: !this.state.showNotificationsMenu });
+  };
+
   render() {
-    const isAuthenticated = this.props.isAuthenticated;
+    const { isAuthenticated, notifications } = this.props;
     const guest = <Fragment></Fragment>;
 
     if (!isAuthenticated) {
       return guest;
     }
     return (
-      <div className="notification-menu">
-        <Button className="notification-btn">
-          <span className="fa-layers fa-fw">
-            <i class="fa fa-bell"></i>
-            <span class="fa-layers-counter fa-2x">1,419</span>
-          </span>
-        </Button>
+      <div>
+        {this.state.showNotificationsMenu
+          ? notifications.map(({ message }) => (
+              <Toast>
+                <ToastHeader>Reactstrap</ToastHeader>
+                <ToastBody>{message}</ToastBody>
+              </Toast>
+            ))
+          : null}
+
+        <div className="notification-menu">
+          <Button className="notification-btn" onClick={this.showNotifications}>
+            <span className="fa-layers fa-fw">
+              <i class="fa fa-bell"></i>
+              <span class="fa-layers-counter fa-2x">
+                {notifications.length}
+              </span>
+            </span>
+          </Button>
+        </div>
       </div>
     );
   }
