@@ -105,6 +105,12 @@ li a {
   border-radius: 50%;
   float: right;
 }
+.custom-toast {
+  bottom: 100px;
+  right: 10px;
+
+  position: fixed;
+}
 
 @media (max-width: 767px) {
   .custom-dropDown-toggle {

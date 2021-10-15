@@ -1,11 +1,24 @@
 import React, { Component, Fragment } from "react";
-import { Button, Toast, ToastBody, ToastHeader } from "reactstrap";
+import {
+  Button,
+  Toast,
+  ToastBody,
+  ToastHeader,
+  Collapse,
+  ListGroup,
+  ListGroupItem,
+  Container,
+  Col
+} from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getNotifications } from "../actions/notificationAction";
+import {
+  getNotifications,
+  clearNotifications
+} from "../actions/notificationAction";
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 
 class NotificationMenu extends Component {
   state = { showNotificationsMenu: false };
@@ -14,7 +27,7 @@ class NotificationMenu extends Component {
 
     notifications: PropTypes.object,
     getNotifications: PropTypes.func.isRequired,
-
+    clearNotifications: PropTypes.func.isRequired,
     user: PropTypes.object
   };
 
@@ -25,7 +38,10 @@ class NotificationMenu extends Component {
   }
 
   showNotifications = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
     this.setState({ showNotificationsMenu: !this.state.showNotificationsMenu });
+
+    this.props.clearNotifications(user.id);
   };
 
   render() {
@@ -37,19 +53,23 @@ class NotificationMenu extends Component {
     }
     return (
       <div>
-        {this.state.showNotificationsMenu
-          ? notifications.map(({ message }) => (
-              <Toast>
-                <ToastHeader>Notification</ToastHeader>
-                <ToastBody>{message}</ToastBody>
-              </Toast>
-            ))
-          : null}
+        {this.state.showNotificationsMenu ? (
+          <Col sm="12" className="d-flex flex-column py-3 ">
+            <ListGroup>
+              {notifications.map(({ message }) => (
+                <ListGroupItem className="text-start">
+                  <small>{message}</small>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </Col>
+        ) : null}
 
         <div className="notification-menu">
           <Button className="notification-btn" onClick={this.showNotifications}>
             <span className="fa-layers fa-fw">
-              <i class="fa fa-bell"></i>
+              {/* <i class="fa fa-bell"></i> */}
+              <FontAwesomeIcon icon={faBell} />
               <span class="fa-layers-counter fa-2x">
                 {notifications.length}
               </span>
@@ -70,5 +90,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  getNotifications
+  getNotifications,
+  clearNotifications
 })(NotificationMenu);

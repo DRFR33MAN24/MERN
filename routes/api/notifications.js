@@ -16,4 +16,16 @@ router.post("/", async (req, res) => {
 
   res.json(notifications);
 });
+
+router.post("/clear", async (req, res) => {
+  console.log("Clear Notifications Route Called");
+  const { subid } = req.body;
+
+  await Notification.update(
+    { viewed: true },
+    {
+      where: { subid: subid }
+    }
+  );
+});
 module.exports = router;

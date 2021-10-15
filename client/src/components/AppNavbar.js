@@ -43,6 +43,7 @@ import CashoutPage from "./CashoutPage";
 import { toDollars } from "../util";
 import ResetPassword from "./auth/ResetPassword";
 import NotFound from "./NotFound";
+import NotificationMenu from "./NotificationMenu";
 class AppNavbar extends Component {
   constructor(props) {
     super(props);
@@ -170,12 +171,10 @@ class AppNavbar extends Component {
               onClick={e => {
                 this.toggle();
                 window.location.href = "https://support.coinguru.biz/hesk";
-
               }}
               className="text-start text-dark"
               exact
               to=""
-
             >
               <i className="fas fa-lg fa-question-circle   fa-fw align-middle"></i>
               <span className="ml-3">Help</span>
@@ -198,7 +197,11 @@ class AppNavbar extends Component {
     return (
       <Router basename="/app">
         <div ref={this.menu}>
-          <Navbar color="light" light className="mb-5 fixed-top  custom-shadow ">
+          <Navbar
+            color="light"
+            light
+            className="mb-5 fixed-top  custom-shadow "
+          >
             <Col xs="4" className="align-self-start mr-auto">
               <NavbarBrand href="/">
                 <a href="" className="navbar-brand">
@@ -218,6 +221,9 @@ class AppNavbar extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               {/* <Nav>{isAuthenticated ? authLinks : guestLinks}</Nav> */}
               {isAuthenticated ? authLinks : guestLinks}
+            </Collapse>
+            <Collapse isOpen={true} navbar>
+              <NotificationMenu />
             </Collapse>
           </Navbar>
         </div>
