@@ -93,6 +93,19 @@ li a {
   height: 32px;
 }
 
+.notification-menu {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+}
+.notification-btn {
+  text-align: center;
+  /* width: 40px;
+  height: 40px; */
+  border-radius: 50%;
+  float: right;
+}
+
 @media (max-width: 767px) {
   .custom-dropDown-toggle {
     visibility: none;

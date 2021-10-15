@@ -21,3 +21,4 @@ export const SUB_PAYMENT = "SUB_PAYMENT";
 export const SUB_FAIL = "SUB_FAIL";
 export const RESET_SUCCESS = "RESET_SUCCESS";
 export const RESET_FAIL = "RESET_FAIL";
+export const GET_NOTIFICATIONS = "GET_NOTIFICATIONS";
