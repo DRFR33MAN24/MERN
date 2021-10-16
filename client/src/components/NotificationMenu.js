@@ -8,7 +8,8 @@ import {
   ListGroup,
   ListGroupItem,
   Container,
-  Col
+  Col,
+  Badge
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -57,8 +58,11 @@ class NotificationMenu extends Component {
           <Col sm="12" className="d-flex flex-column py-3 ">
             <ListGroup>
               {notifications.map(({ message }) => (
-                <ListGroupItem className="text-start">
+                <ListGroupItem className="text-start justify-content-between">
                   <small>{message}</small>
+                  <Badge pill>
+                    <i className="fa fa-circle"></i>
+                  </Badge>
                 </ListGroupItem>
               ))}
             </ListGroup>
