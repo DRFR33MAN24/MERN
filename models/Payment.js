@@ -20,6 +20,10 @@ const Payment = db.define(
       type: DataTypes.STRING
       // allowNull defaults to true
     },
+    type: {
+      type: DataTypes.STRING
+      // allowNull defaults to true
+    },
     submitDate: {
       type: DataTypes.DATE
     }

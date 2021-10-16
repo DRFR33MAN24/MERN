@@ -85,7 +85,6 @@ router.get("/downloadCSV", async (req, res) => {
 
     payments.map(({ payout, status }) => {
       if (status === "pending") {
-
         totalPayout += payout;
         // await Payment.update({status:"processing"},{where:{id:id}});
       }
@@ -94,7 +93,10 @@ router.get("/downloadCSV", async (req, res) => {
     data.push({ address: wallet, amount: totalPayout });
   });
 
-  await Payment.update({ status: "processing" }, { where: { status: "pending" } });
+  await Payment.update(
+    { status: "processing" },
+    { where: { status: "pending" } }
+  );
 
   const csv = new ObjectsToCsv(data);
   await csv.toDisk("./payments.csv");
@@ -110,7 +112,7 @@ router.get("/downloadCSV", async (req, res) => {
 
 router.post("/payment", auth, async (req, res) => {
   console.log("Get Activity Payment Route Called");
-  const { subid } = req.body;
+  const { subid, type, amount } = req.body;
   let balance = 0;
   try {
     user = await User.findOne({ where: { id: subid }, plain: true });
@@ -121,16 +123,17 @@ router.post("/payment", auth, async (req, res) => {
         .status(400)
         .json({ msg: "Please enter a valid wallet address" });
     }
-    balance = user.balance;
-    if (balance <= 0) {
+    balance = user.balance - amount;
+    if (balance < 0) {
       return res.status(400).json({ msg: "Not enough balance" });
     }
-  } catch (error) { }
+  } catch (error) {}
   try {
     const date = new Date();
     await Payment.create({
       subid: subid,
-      payout: balance,
+      payout: balance - amount,
+      type: type,
       status: "pending",
       submitDate: date
     });
@@ -141,7 +144,7 @@ router.post("/payment", auth, async (req, res) => {
 
   try {
     await User.update(
-      { balance: 0 },
+      { balance: balance - amount },
       {
         where: {
           id: subid

@@ -207,13 +207,14 @@ class CashoutPage extends Component {
                   <th scope="col">#</th>
                   <th scope="col">Payout</th>
                   <th scope="col">Status</th>
+                  <th scope="col">Type</th>
                   <th scope="col">Submit Date</th>
                 </tr>
               </thead>
               <tbody>
                 {payment
                   ? payment.map(
-                      ({ payout, subid, status, submitDate }, index) => (
+                      ({ payout, subid, status, submitDate, type }, index) => (
                         <tr
                           className={(() => {
                             switch (status) {
@@ -236,6 +237,7 @@ class CashoutPage extends Component {
                           <th scope="row">{index}</th>
                           <td>{payout}</td>
                           <td>{status}</td>
+                          <td>{type}</td>
                           <td>{getFormattedDate(new Date(submitDate))}</td>
                         </tr>
                       )
