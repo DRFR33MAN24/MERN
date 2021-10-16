@@ -12,15 +12,17 @@ import {
   NavLink,
   Alert,
   InputGroup,
-  InputGroupAddon
+  InputGroupAddon,
+  ListGroup,
+  ListGroupItem
 } from "reactstrap";
 import { toDollars } from "../../util";
-export default class BTCModal extends Component {
+export default class GoogleModal extends Component {
   render() {
     return (
       <div>
         <Modal isOpen={true} className="modal-dialog-centered">
-          <ModalHeader>Withdraw BTC</ModalHeader>
+          <ModalHeader>Google Play Card</ModalHeader>
           <ModalBody>
             <div>
               <h3>Balance</h3>
@@ -29,18 +31,21 @@ export default class BTCModal extends Component {
                 {"   "}
               </h3>
             </div>
-            <Label for="value">Withdraw Balance </Label>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">$</InputGroupAddon>
-              <Input
-                placeholder="Amount"
-                min={0}
-                max={100}
-                type="number"
-                step="1"
-              />
-              <InputGroupAddon addonType="append">.00</InputGroupAddon>
-            </InputGroup>
+            <Label for="value">Choose Card </Label>
+            <ListGroup>
+              <ListGroupItem tag="button" action>
+                Google Play USA 5$
+              </ListGroupItem>
+              <ListGroupItem tag="button" action>
+                Google Play USA 15$
+              </ListGroupItem>
+              <ListGroupItem tag="button" action>
+                Google Play Canada 5$
+              </ListGroupItem>
+              <ListGroupItem disabled tag="button" action>
+                Google Play India 5$
+              </ListGroupItem>
+            </ListGroup>
 
             <ModalFooter className="d-flex justify-content-start">
               <Button

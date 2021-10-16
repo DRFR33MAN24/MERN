@@ -21,13 +21,26 @@ import {
   CardImg,
   CardTitle
 } from "reactstrap";
+
 import razerCard from "../gift_img/razer-gold.png";
 import googleCard from "../gift_img/google.png";
 import freefireCard from "../gift_img/freefire.png";
 import PUBGCard from "../gift_img/pubg-mobile.png";
 import BTC from "../gift_img/btc.png";
+import BTCModal from "./WithdrawModals/BTCModal";
+import GoogleModal from "./WithdrawModals/GoogleModal";
 export default class GiftPicker extends Component {
-  BTCWithdraw = () => {};
+  state = {
+    showBTC: false,
+    showGoogle: false
+  };
+
+  BTCToggle = () => {
+    this.setState({ showBTC: !this.state.showBTC });
+  };
+  GoogleToggle = () => {
+    this.setState({ showGoogle: !this.state.showGoogle });
+  };
   RazerWithdraw = () => {};
   GoogleWithdraw = () => {};
   FreeFireWithdraw = () => {};
@@ -35,10 +48,22 @@ export default class GiftPicker extends Component {
   render() {
     return (
       <div>
+        {this.state.showBTC ? (
+          <BTCModal
+            toggle={this.BTCToggle}
+            withdraw={() => console.log("clicked")}
+          />
+        ) : null}
+        {this.state.showGoogle ? (
+          <GoogleModal
+            toggle={this.GoogleToggle}
+            withdraw={() => console.log("clicked")}
+          />
+        ) : null}
         <Card className="custom-shadow  mt-5 mb-5">
           <Container className="d-flex justify-content-start p-3">
             {/* <a href="" className="m-2"> */}
-            <Card className="custom-shadow btn m-2" onClick={this.BTCWithdraw}>
+            <Card className="custom-shadow btn m-2" onClick={this.BTCToggle}>
               <CardImg
                 top
                 width="100%"
@@ -68,7 +93,7 @@ export default class GiftPicker extends Component {
             </Card>
             {/* </a> */}
             {/* <a href="" className="m-2"> */}
-            <Card className="custom-shadow btn m-2">
+            <Card className="custom-shadow btn m-2" onClick={this.GoogleToggle}>
               <CardImg
                 top
                 width="100%"
