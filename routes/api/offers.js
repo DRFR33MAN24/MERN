@@ -171,9 +171,7 @@ router.post("/", (req, res) => {
     try {
       console.log(country, device);
       const offer = await Offer.findAll({
-        where: {
-          [Op.or]: [{ country: country }, { country: "" }]
-        },
+        where: { country: country },
         raw: true,
         nest: true
       });
