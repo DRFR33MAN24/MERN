@@ -57,12 +57,11 @@ class NotificationMenu extends Component {
         {this.state.showNotificationsMenu ? (
           <Col sm="12" className="d-flex flex-column py-3 ">
             <ListGroup>
-              {notifications.map(({ message }) => (
+              {notifications.map(({ message, viewed }) => (
                 <ListGroupItem className="text-start justify-content-between">
                   <small>{message}</small>
-                  <Badge pill>
-                    <i className="fa fa-circle"></i>
-                  </Badge>
+
+                  {!viewed ? <i className="fa fa-circle ml-2"></i> : null}
                 </ListGroupItem>
               ))}
             </ListGroup>
