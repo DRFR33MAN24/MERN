@@ -41,7 +41,7 @@ export default class PerformanceChart extends Component {
         }}
       >
         <div className="header">
-          <h1 className="title">Performance</h1>
+          <h2 className="title">Performance</h2>
         </div>
         <Line width={800} height={300} data={data} options={options} />
       </div>

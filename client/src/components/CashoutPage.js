@@ -157,22 +157,37 @@ class CashoutPage extends Component {
                     {toDollars(user.balance)}
                     {"   "}
                   </h3>
-                  <Button
-                    className="block btn-success mt-1"
-                    onClick={this.onWithdraw}
-                  >
-                    <i class="fa fa-usd fa-fw mr-1"></i>
-                    Withdraw
-                  </Button>
                 </div>
-                <div class="mt-4">
+                <div className="mt-4">
                   <div>
                     <h4>Pending</h4>
                     <h4>{toDollars(0)}</h4>
                   </div>
-                  <div>
+                  <div className="mt-4">
                     <h4>Total</h4>
                     <h4>{toDollars(total)}</h4>
+                  </div>
+                </div>
+                {/* <Button
+                  className="block btn-success mt-1"
+                  onClick={this.onWithdraw}
+                >
+                  <span>
+                    <i class="fa fa-usd fa-fw mr-1"></i>
+                  </span>
+                  Withdraw BTC
+                </Button> */}
+              </Col>
+
+              <Col>
+                <div>
+                  <div>
+                    <h4>Total Clicks</h4>
+                    <h4>211</h4>
+                  </div>
+                  <div className="mt-4">
+                    <h4>Converted Offers</h4>
+                    <h4>100</h4>
                   </div>
                 </div>
               </Col>
@@ -182,7 +197,7 @@ class CashoutPage extends Component {
             </Row>
           </Container>
         </Card>
-        {/* <GiftPicker /> */}
+        <GiftPicker />
         <Card className="custom-shadow mt-5 p-1">
           <Label>Payments</Label>
           <Container fluid={true}>
