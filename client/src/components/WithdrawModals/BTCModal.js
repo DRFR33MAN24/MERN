@@ -17,6 +17,7 @@ import {
 import { toDollars } from "../../util";
 export default class BTCModal extends Component {
   render() {
+    const user = localStorage;
     return (
       <div>
         <Modal isOpen={true} className="modal-dialog-centered">
@@ -25,21 +26,16 @@ export default class BTCModal extends Component {
             <div>
               <h3>Balance</h3>
               <h3>
-                {toDollars(1000)}
+                {toDollars(this.props.user.balance)}
                 {"   "}
               </h3>
             </div>
             <Label for="value">Withdraw Balance </Label>
             <InputGroup>
-              <InputGroupAddon addonType="prepend">$</InputGroupAddon>
-              <Input
-                placeholder="Amount"
-                min={0}
-                max={100}
-                type="number"
-                step="1"
-              />
-              <InputGroupAddon addonType="append">.00</InputGroupAddon>
+              <InputGroupAddon addonType="prepend">
+                <i className="fa fa-btc"></i>
+              </InputGroupAddon>
+              <Input placeholder="Amount" min={0} type="number" step="10" />
             </InputGroup>
 
             <ModalFooter className="d-flex justify-content-start">

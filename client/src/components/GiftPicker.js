@@ -50,12 +50,14 @@ export default class GiftPicker extends Component {
       <div>
         {this.state.showBTC ? (
           <BTCModal
+            user={this.props.user}
             toggle={this.BTCToggle}
             withdraw={() => console.log("clicked")}
           />
         ) : null}
         {this.state.showGoogle ? (
           <GoogleModal
+            user={this.props.user}
             toggle={this.GoogleToggle}
             withdraw={() => console.log("clicked")}
           />

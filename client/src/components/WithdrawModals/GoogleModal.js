@@ -27,7 +27,7 @@ export default class GoogleModal extends Component {
             <div>
               <h3>Balance</h3>
               <h3>
-                {toDollars(1000)}
+                {toDollars(this.props.user.balance)}
                 {"   "}
               </h3>
             </div>
