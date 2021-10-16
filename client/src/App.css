@@ -112,6 +112,10 @@ li a {
   position: fixed;
 }
 
+.custom-list-group {
+  overflow-y: scroll;
+  height: 100vh;
+}
 @media (max-width: 767px) {
   .custom-dropDown-toggle {
     visibility: none;

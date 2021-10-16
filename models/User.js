@@ -38,6 +38,10 @@ const User = db.define(
       type: DataTypes.BIGINT,
       defaultValue: 0
     },
+    clicks: {
+      type: DataTypes.BIGINT,
+      defaultValue: 0
+    },
     wallet: {
       type: DataTypes.STRING,
       allowNull: true

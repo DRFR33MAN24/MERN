@@ -86,9 +86,9 @@ class CashoutPage extends Component {
     // If authenticated close modal
     // If authenicated go to dashboard
   }
-  onWithdraw = () => {
+  onWithdraw = (type, amount) => {
     const user = this.props.user;
-    this.props.submitPayment(user.id);
+    this.props.submitPayment(user.id, type, amount);
     this.props.returnErrors();
     //this.props.getActivity(user.id);
   };
@@ -183,11 +183,11 @@ class CashoutPage extends Component {
                 <div>
                   <div>
                     <h4>Total Clicks</h4>
-                    <h4>211</h4>
+                    <h4>{user.clicks}</h4>
                   </div>
                   <div className="mt-4">
                     <h4>Converted Offers</h4>
-                    <h4>100</h4>
+                    <h4>{postback.length}</h4>
                   </div>
                 </div>
               </Col>
@@ -197,7 +197,7 @@ class CashoutPage extends Component {
             </Row>
           </Container>
         </Card>
-        <GiftPicker />
+        <GiftPicker onWithdraw={this.onWithdraw} />
         <Card className="custom-shadow mt-5 p-1">
           <Label>Payments</Label>
           <Container fluid={true}>

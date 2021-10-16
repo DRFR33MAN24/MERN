@@ -32,7 +32,7 @@ export default class GoogleModal extends Component {
               </h3>
             </div>
             <Label for="value">Choose Card </Label>
-            <ListGroup>
+            <ListGroup className="custom-list-group">
               <ListGroupItem tag="button" action>
                 Google Play USA 5$
               </ListGroupItem>
@@ -45,6 +45,36 @@ export default class GoogleModal extends Component {
               <ListGroupItem disabled tag="button" action>
                 Google Play India 5$
               </ListGroupItem>
+              <ListGroupItem disabled tag="button" action>
+                Google Play India 5$
+              </ListGroupItem>
+              <ListGroupItem disabled tag="button" action>
+                Google Play India 5$
+              </ListGroupItem>
+              <ListGroupItem disabled tag="button" action>
+                Google Play India 5$
+              </ListGroupItem>
+              <ListGroupItem disabled tag="button" action>
+                Google Play India 5$
+              </ListGroupItem>
+              <ListGroupItem disabled tag="button" action>
+                Google Play India 5$
+              </ListGroupItem>
+              <ListGroupItem disabled tag="button" action>
+                Google Play India 5$
+              </ListGroupItem>
+              <ListGroupItem disabled tag="button" action>
+                Google Play India 5$
+              </ListGroupItem>
+              <ListGroupItem disabled tag="button" action>
+                Google Play India 5$
+              </ListGroupItem>
+              <ListGroupItem disabled tag="button" action>
+                Google Play India 5$
+              </ListGroupItem>
+              <ListGroupItem disabled tag="button" action>
+                Google Play India 5$
+              </ListGroupItem>
             </ListGroup>
 
             <ModalFooter className="d-flex justify-content-start">
@@ -53,7 +83,7 @@ export default class GoogleModal extends Component {
                 className="btn btn-warning custom-btn"
                 onClick={this.props.withdraw}
               >
-                Withdraw
+                Redeem Gift Card
               </Button>
               <Button
                 block
