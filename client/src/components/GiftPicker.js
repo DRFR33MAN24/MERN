@@ -42,8 +42,8 @@ export default class GiftPicker extends Component {
   BTCToggle = () => {
     this.setState({ showBTC: !this.state.showBTC });
   };
-  CardToggle = type => {
-    this.setState({ showCard: !this.state.showCard, cardType: type });
+  CardToggle = card => {
+    this.setState({ showCard: !this.state.showCard });
   };
 
   render() {
@@ -59,7 +59,8 @@ export default class GiftPicker extends Component {
         {this.state.showCard ? (
           <CardModal
             user={this.props.user}
-            toggle={this.GoogleToggle}
+            toggle={this.CardToggle}
+            card={this.state.cardType}
             withdraw={this.props.withdraw}
           />
         ) : null}
@@ -81,22 +82,25 @@ export default class GiftPicker extends Component {
               </CardBody>
             </Card>
             {cards.length != 0
-              ? cards.map(({ name, img, varients }) => (
+              ? cards.map(card => (
                   <Card
                     className="custom-shadow btn m-2"
-                    onClick={this.CardToggle(name)}
+                    onClick={e => {
+                      this.CardToggle();
+                      this.setState({ cardType: card });
+                    }}
                   >
                     <CardImg
                       top
                       width="100%"
-                      src={img}
+                      src={card.img}
                       width="150"
                       height="96"
                       alt="Card image cap"
                       className="mt-1"
                     />
                     <CardBody>
-                      <CardTitle>{name}</CardTitle>
+                      <CardTitle>{card.name}</CardTitle>
                     </CardBody>
                   </Card>
                 ))
