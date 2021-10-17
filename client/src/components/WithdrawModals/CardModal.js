@@ -17,12 +17,23 @@ import {
   ListGroupItem
 } from "reactstrap";
 import { toDollars } from "../../util";
-export default class CardModal extends Component {
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { clearErrors, returnErrors } from "../../actions/errorAction";
+import { submitPayment } from "../../actions/activityAction";
+
+export class CardModal extends Component {
   state = {
     type: "Card",
     amount: 0
   };
+
+  static propTypes = {
+    submitPayment: PropTypes.func.isRequired
+  };
+
   onSelectVarient = () => {};
+
   render() {
     const card = this.props.cardType;
     return (
@@ -56,7 +67,7 @@ export default class CardModal extends Component {
               <Button
                 block
                 className="btn btn-warning custom-btn"
-                onClick={this.props.withdraw(
+                onClick={this.props.submitPayment(
                   this.state.type,
                   this.state.amount
                 )}
@@ -80,3 +91,13 @@ export default class CardModal extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  error: state.error
+});
+
+export default connect(mapStateToProps, {
+  submitPayment,
+  clearErrors,
+  returnErrors
+})(CardModal);

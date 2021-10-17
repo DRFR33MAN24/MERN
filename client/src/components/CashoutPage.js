@@ -197,7 +197,7 @@ class CashoutPage extends Component {
             </Row>
           </Container>
         </Card>
-        <GiftPicker onWithdraw={this.onWithdraw} user={user} />
+        <GiftPicker user={user} />
         <Card className="custom-shadow mt-5 p-1">
           <Label>Payments</Label>
           <Container fluid={true}>

@@ -34,12 +34,14 @@ class NotificationMenu extends Component {
 
   componentDidMount(prevProps) {
     const user = JSON.parse(localStorage.getItem("user"));
-
-    this.props.getNotifications(user.id);
   }
 
   showNotifications = () => {
     const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      this.props.getNotifications(user.id);
+    }
+
     this.setState({ showNotificationsMenu: !this.state.showNotificationsMenu });
 
     this.props.clearNotifications(user.id);
@@ -57,13 +59,15 @@ class NotificationMenu extends Component {
         {this.state.showNotificationsMenu ? (
           <Col sm="12" className="d-flex flex-column py-3 ">
             <ListGroup>
-              {notifications.map(({ message, viewed }) => (
-                <ListGroupItem className="text-start justify-content-between">
-                  <small>{message}</small>
+              {notifications.length != 0
+                ? notifications.map(({ message, viewed }) => (
+                    <ListGroupItem className="text-start justify-content-between">
+                      <small>{message}</small>
 
-                  {!viewed ? <i className="fa fa-circle ml-2"></i> : null}
-                </ListGroupItem>
-              ))}
+                      {!viewed ? <i className="fa fa-circle ml-2"></i> : null}
+                    </ListGroupItem>
+                  ))
+                : null}
             </ListGroup>
           </Col>
         ) : null}

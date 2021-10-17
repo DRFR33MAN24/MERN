@@ -46,18 +46,13 @@ export default class GiftPicker extends Component {
     return (
       <div>
         {this.state.showBTC ? (
-          <BTCModal
-            user={this.props.user}
-            toggle={this.BTCToggle}
-            withdraw={this.props.withdraw}
-          />
+          <BTCModal user={this.props.user} toggle={this.BTCToggle} />
         ) : null}
         {this.state.showCard ? (
           <CardModal
             user={this.props.user}
             toggle={this.CardToggle}
             card={this.state.cardType}
-            withdraw={this.props.onWithdraw}
           />
         ) : null}
         <Card className="custom-shadow  mt-5 mb-5">
