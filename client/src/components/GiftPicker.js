@@ -19,32 +19,33 @@ import {
   Col,
   CardBody,
   CardImg,
-  CardTitle
+  CardTitle,
+  CardSubtitle
 } from "reactstrap";
 
-import razerCard from "../gift_img/razer-gold.png";
-import googleCard from "../gift_img/google.png";
-import freefireCard from "../gift_img/freefire.png";
-import PUBGCard from "../gift_img/pubg-mobile.png";
+import razerImg from "../gift_img/razer-gold.png";
+import googleImg from "../gift_img/google.png";
+import freefireImg from "../gift_img/freefire.png";
+import PUBGImg from "../gift_img/pubg-mobile.png";
 import BTC from "../gift_img/btc.png";
 import BTCModal from "./WithdrawModals/BTCModal";
-import GoogleModal from "./WithdrawModals/GoogleModal";
+import { googleCard, cards } from "./WithdrawModals/CardTypes";
+import CardModal from "./WithdrawModals/CardModal";
+import { mapFinderOptions } from "sequelize/types/lib/utils";
 export default class GiftPicker extends Component {
   state = {
     showBTC: false,
-    showGoogle: false
+    showCard: false,
+    cardType: {}
   };
 
   BTCToggle = () => {
     this.setState({ showBTC: !this.state.showBTC });
   };
-  GoogleToggle = () => {
-    this.setState({ showGoogle: !this.state.showGoogle });
+  CardToggle = type => {
+    this.setState({ showCard: !this.state.showCard, cardType: type });
   };
-  RazerWithdraw = () => {};
-  GoogleWithdraw = () => {};
-  FreeFireWithdraw = () => {};
-  PUBGWithdraw = () => {};
+
   render() {
     return (
       <div>
@@ -52,14 +53,14 @@ export default class GiftPicker extends Component {
           <BTCModal
             user={this.props.user}
             toggle={this.BTCToggle}
-            withdraw={() => console.log("clicked")}
+            withdraw={this.props.withdraw}
           />
         ) : null}
-        {this.state.showGoogle ? (
-          <GoogleModal
+        {this.state.showCard ? (
+          <CardModal
             user={this.props.user}
             toggle={this.GoogleToggle}
-            withdraw={() => console.log("clicked")}
+            withdraw={this.props.withdraw}
           />
         ) : null}
         <Card className="custom-shadow  mt-5 mb-5">
@@ -79,69 +80,27 @@ export default class GiftPicker extends Component {
                 <CardTitle>Withdraw BTC</CardTitle>
               </CardBody>
             </Card>
-            <Card className="custom-shadow btn m-2">
-              <CardImg
-                top
-                width="100%"
-                src={razerCard}
-                width="150"
-                height="96"
-                alt="Card image cap"
-                className="mt-1"
-              />
-              <CardBody>
-                <CardTitle>Razer Gold</CardTitle>
-              </CardBody>
-            </Card>
-            {/* </a> */}
-            {/* <a href="" className="m-2"> */}
-            <Card className="custom-shadow btn m-2" onClick={this.GoogleToggle}>
-              <CardImg
-                top
-                width="100%"
-                src={googleCard}
-                width="150"
-                height="96"
-                alt="Card image cap"
-                className="mt-1"
-              />
-              <CardBody>
-                <CardTitle>Google Play</CardTitle>
-              </CardBody>
-            </Card>
-            {/* </a> */}
-            {/* <a href="" className="m-2"> */}
-            <Card className="custom-shadow btn m-2">
-              <CardImg
-                top
-                width="100%"
-                src={freefireCard}
-                width="150"
-                height="96"
-                alt="Card image cap"
-                className="mt-1"
-              />
-              <CardBody>
-                <CardTitle>FreeFire</CardTitle>
-              </CardBody>
-            </Card>
-            {/* </a> */}
-            {/* <a href="" className="m-2"> */}
-            <Card className="custom-shadow btn m-2">
-              <CardImg
-                top
-                width="100%"
-                src={PUBGCard}
-                width="150"
-                height="96"
-                alt="Card image cap"
-                className="mt-1"
-              />
-              <CardBody>
-                <CardTitle>PUBG</CardTitle>
-              </CardBody>
-            </Card>
-            {/* </a> */}
+            {cards.length != 0
+              ? cards.map(({ name, img, varients }) => (
+                  <Card
+                    className="custom-shadow btn m-2"
+                    onClick={this.CardToggle(name)}
+                  >
+                    <CardImg
+                      top
+                      width="100%"
+                      src={img}
+                      width="150"
+                      height="96"
+                      alt="Card image cap"
+                      className="mt-1"
+                    />
+                    <CardBody>
+                      <CardTitle>{name}</CardTitle>
+                    </CardBody>
+                  </Card>
+                ))
+              : null}
           </Container>
         </Card>
       </div>
