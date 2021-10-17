@@ -28,7 +28,7 @@ export default class CardModal extends Component {
     return (
       <div>
         <Modal isOpen={true} className="modal-dialog-centered">
-          <ModalHeader>{card.name}</ModalHeader>
+          <ModalHeader>{card != undefined ? card.name : ""}</ModalHeader>
           <ModalBody>
             <div>
               <h3>Balance</h3>
@@ -39,7 +39,7 @@ export default class CardModal extends Component {
             </div>
             <Label for="value">Choose Card </Label>
             <ListGroup className="custom-list-group">
-              {card.varients.length
+              {card != undefined
                 ? card.varients.map(v => (
                     <ListGroupItem
                       tag="button"

@@ -33,7 +33,7 @@ export default class BTCModal extends Component {
             <Label for="value">Withdraw Balance </Label>
             <InputGroup>
               <InputGroupAddon addonType="prepend">
-                <i className="fa fa-btc"></i>
+                <i className="fab fa-btc fa-fw "></i>
               </InputGroupAddon>
               <Input placeholder="Amount" min={0} type="number" step="10" />
             </InputGroup>

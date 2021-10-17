@@ -38,7 +38,7 @@ export default class GiftPicker extends Component {
   BTCToggle = () => {
     this.setState({ showBTC: !this.state.showBTC });
   };
-  CardToggle = card => {
+  CardToggle = () => {
     this.setState({ showCard: !this.state.showCard });
   };
 
@@ -57,7 +57,7 @@ export default class GiftPicker extends Component {
             user={this.props.user}
             toggle={this.CardToggle}
             card={this.state.cardType}
-            withdraw={this.props.withdraw}
+            withdraw={this.props.onWithdraw}
           />
         ) : null}
         <Card className="custom-shadow  mt-5 mb-5">
@@ -82,8 +82,8 @@ export default class GiftPicker extends Component {
                   <Card
                     className="custom-shadow btn m-2"
                     onClick={e => {
-                      this.CardToggle();
                       this.setState({ cardType: card });
+                      this.CardToggle();
                     }}
                   >
                     <CardImg
