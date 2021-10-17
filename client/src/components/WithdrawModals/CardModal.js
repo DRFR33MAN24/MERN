@@ -14,7 +14,8 @@ import {
   InputGroup,
   InputGroupAddon,
   ListGroup,
-  ListGroupItem
+  ListGroupItem,
+  Container
 } from "reactstrap";
 import { toDollars } from "../../util";
 import { connect } from "react-redux";
@@ -24,6 +25,7 @@ import { submitPayment } from "../../actions/activityAction";
 
 export class CardModal extends Component {
   state = {
+    msg: "",
     type: "Card",
     amount: 0
   };
@@ -31,6 +33,20 @@ export class CardModal extends Component {
   static propTypes = {
     submitPayment: PropTypes.func.isRequired
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    const error = this.props.error;
+    if (error !== prevProps.error) {
+      // Check for register error
+      if (error.id === "SUB_FAIL") {
+        this.setState({ msg: error.msg.msg });
+      } else {
+        this.setState({ msg: null });
+      }
+    }
+    // If authenticated close modal
+    // If authenicated go to dashboard
+  }
 
   onSelectVarient = () => {};
 
@@ -41,7 +57,15 @@ export class CardModal extends Component {
       <div>
         <Modal isOpen={true} className="modal-dialog-centered">
           <ModalHeader>{card != undefined ? card.name : ""}</ModalHeader>
+          {this.state.msg ? (
+            <Alert color="danger" className="mb-1">
+              {this.state.msg}
+            </Alert>
+          ) : null}
           <ModalBody>
+            <Container className="d-flex justify-content-center ">
+              <img src={this.props.img} width="150" height="96" />
+            </Container>
             <div>
               <h3>Balance</h3>
               <h3>

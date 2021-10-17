@@ -62,6 +62,7 @@ export default class GiftPicker extends Component {
             user={this.props.user}
             toggle={this.CardToggle}
             card={this.state.cardType}
+            img={require(`${this.state.cardType.img}`).default}
           />
         ) : null}
         <Card className="custom-shadow  mt-5 mb-5">

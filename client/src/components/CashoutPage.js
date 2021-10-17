@@ -145,9 +145,9 @@ class CashoutPage extends Component {
       <Container className=" mx-auto justify-content-center py-5">
         <LoadingModal open={isLoading} />
         <Card className="custom-shadow mt-5">
-          {this.state.msg ? (
+          {/* {this.state.msg ? (
             <Alert color="danger">{this.state.msg}</Alert>
-          ) : null}
+          ) : null} */}
           <Container fluid={true} className="  p-4">
             <Row>
               <Col>
