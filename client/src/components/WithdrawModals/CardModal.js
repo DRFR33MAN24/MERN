@@ -35,7 +35,8 @@ export class CardModal extends Component {
   onSelectVarient = () => {};
 
   render() {
-    const card = this.props.cardType;
+    const card = this.props.card;
+    console.log("ON CardModal Render", card);
     return (
       <div>
         <Modal isOpen={true} className="modal-dialog-centered">
@@ -55,9 +56,11 @@ export class CardModal extends Component {
                     <ListGroupItem
                       tag="button"
                       action
-                      onClick={this.onSelectVarient(v.type, v.amount)}
+                      onClick={e => {
+                        this.onSelectVarient(v.type, v.amount);
+                      }}
                     >
-                      {v}
+                      {v.type}
                     </ListGroupItem>
                   ))
                 : null}
@@ -67,10 +70,13 @@ export class CardModal extends Component {
               <Button
                 block
                 className="btn btn-warning custom-btn"
-                onClick={this.props.submitPayment(
-                  this.state.type,
-                  this.state.amount
-                )}
+                onClick={e => {
+                  this.props.submitPayment(
+                    this.props.user.id,
+                    this.state.type,
+                    this.state.amount
+                  );
+                }}
               >
                 Redeem Gift Card
               </Button>

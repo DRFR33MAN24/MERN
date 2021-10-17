@@ -1,7 +1,7 @@
 import { GET_NOTIFICATIONS, CLEAR_NOTIFICATIONS } from "../actions/types";
 
 const initialState = {
-  notifications: {}
+  notifications: []
 };
 
 export default function(state = initialState, action) {

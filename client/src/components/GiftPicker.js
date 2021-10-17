@@ -27,8 +27,13 @@ import BTC from "./gift_img/btc.png";
 import BTCModal from "./WithdrawModals/BTCModal";
 import { cards } from "./WithdrawModals/CardTypes";
 import CardModal from "./WithdrawModals/CardModal";
+import { object } from "prop-types";
 
 export default class GiftPicker extends Component {
+  constructor(props) {
+    super(props);
+    // this.cardType = {};
+  }
   state = {
     showBTC: false,
     showCard: false,
@@ -38,11 +43,15 @@ export default class GiftPicker extends Component {
   BTCToggle = () => {
     this.setState({ showBTC: !this.state.showBTC });
   };
-  CardToggle = () => {
-    this.setState({ showCard: !this.state.showCard });
+  CardToggle = card => {
+    this.setState({
+      showCard: !this.state.showCard,
+      cardType: card
+    });
   };
 
   render() {
+    console.log("ON GiftPicker Render", this.state.cardType);
     return (
       <div>
         {this.state.showBTC ? (
@@ -77,8 +86,7 @@ export default class GiftPicker extends Component {
                   <Card
                     className="custom-shadow btn m-2"
                     onClick={e => {
-                      this.setState({ cardType: card });
-                      this.CardToggle();
+                      this.CardToggle(card);
                     }}
                   >
                     <CardImg
