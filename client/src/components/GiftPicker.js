@@ -23,15 +23,11 @@ import {
   CardSubtitle
 } from "reactstrap";
 
-import razerImg from "../gift_img/razer-gold.png";
-import googleImg from "../gift_img/google.png";
-import freefireImg from "../gift_img/freefire.png";
-import PUBGImg from "../gift_img/pubg-mobile.png";
-import BTC from "../gift_img/btc.png";
+import BTC from "./gift_img/btc.png";
 import BTCModal from "./WithdrawModals/BTCModal";
-import { googleCard, cards } from "./WithdrawModals/CardTypes";
+import { cards } from "./WithdrawModals/CardTypes";
 import CardModal from "./WithdrawModals/CardModal";
-import { mapFinderOptions } from "sequelize/types/lib/utils";
+
 export default class GiftPicker extends Component {
   state = {
     showBTC: false,
@@ -93,7 +89,7 @@ export default class GiftPicker extends Component {
                     <CardImg
                       top
                       width="100%"
-                      src={card.img}
+                      src={require(`${card.img}`).default}
                       width="150"
                       height="96"
                       alt="Card image cap"

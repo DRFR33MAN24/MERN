@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/src/gift_img
+/src/components/gift_img
 /.pnp
 .pnp.js
 

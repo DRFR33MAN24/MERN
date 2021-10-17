@@ -187,7 +187,7 @@ class CashoutPage extends Component {
                   </div>
                   <div className="mt-4">
                     <h4>Converted Offers</h4>
-                    <h4>{postback.length}</h4>
+                    <h4>{postback ? postback.length : 0}</h4>
                   </div>
                 </div>
               </Col>
