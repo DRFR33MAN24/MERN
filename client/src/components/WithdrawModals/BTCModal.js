@@ -45,10 +45,17 @@ export class BTCModal extends Component {
   }
 
   onChange = e => {
-    console.log(this.state.dollars, this.state.cents);
-    this.setState({
-      [e.target.name]: parseInt(e.target.value, 10)
-    });
+    let value = parseInt(e.target.value, 10);
+    console.log(value);
+    if (value != NaN) {
+      this.setState({
+        [e.target.name]: value
+      });
+    } else {
+      this.setState({
+        [e.target.name]: parseInt(0, 10)
+      });
+    }
   };
   render() {
     return (
@@ -81,6 +88,7 @@ export class BTCModal extends Component {
                 type="number"
                 step="1"
                 onChange={this.onChange}
+                onBlur={e => (e.target.value = parseInt(e.target.value))}
               />
               <span>.</span>
               <Input
@@ -91,6 +99,7 @@ export class BTCModal extends Component {
                 type="number"
                 step="10"
                 onChange={this.onChange}
+                onBlur={e => (e.target.value = parseInt(e.target.value))}
               />
             </InputGroup>
             <div className="mt-2">
