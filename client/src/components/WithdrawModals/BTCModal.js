@@ -83,6 +83,12 @@ export class BTCModal extends Component {
                 onChange={this.onChange}
               />
             </InputGroup>
+            <Label>To</Label>
+            <Input
+              disabled={true}
+              name="wallet"
+              placeholder={this.props.user.wallet}
+            />
 
             <ModalFooter className="d-flex justify-content-start">
               <Button

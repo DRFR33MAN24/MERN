@@ -235,7 +235,7 @@ class CashoutPage extends Component {
                           })()}
                         >
                           <th scope="row">{index}</th>
-                          <td>{payout}</td>
+                          <td>{toDollars(payout)}</td>
                           <td>{status}</td>
                           <td>{type}</td>
                           <td>{getFormattedDate(new Date(submitDate))}</td>
@@ -286,7 +286,7 @@ class CashoutPage extends Component {
                           <th scope="row">{index}</th>
 
                           <td>{offer_name}</td>
-                          <td>{payout}</td>
+                          <td>{toDollars(payout)}</td>
                           <td>{status}</td>
                           <td>{getFormattedDate(new Date(createdAt))}</td>
                         </tr>
