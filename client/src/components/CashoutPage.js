@@ -30,6 +30,7 @@ import { toDollars, getFormattedDate, Last7Days } from "../util";
 import LoadingModal from "./LoadingModal";
 import PerformanceChart from "./PerformanceChart";
 import GiftPicker from "./GiftPicker";
+import NoContent from "./NoContent";
 
 class CashoutPage extends Component {
   state = {
@@ -221,10 +222,12 @@ class CashoutPage extends Component {
                               case "pending":
                                 return "table-warning";
 
+                              case "processing":
+                                return "table-info";
+                              case "submitted":
+                                return "table-info";
                               case "credited":
                                 return "table-success";
-                              case "credited":
-                                return "table-info";
                               case "rejected":
                                 return "table-danger";
                               case "failed":
@@ -245,6 +248,9 @@ class CashoutPage extends Component {
                   : null}
               </tbody>
             </table>
+            {payment === undefined || payment.length === 0 ? (
+              <NoContent text="You don't have any payments" />
+            ) : null}
           </Container>
         </Card>
         <Card className="custom-shadow mt-5 p-1">
@@ -295,6 +301,9 @@ class CashoutPage extends Component {
                   : null}
               </tbody>
             </table>
+            {postback === undefined || postback.length === 0 ? (
+              <NoContent text="You don't have any activity commited yet" />
+            ) : null}
           </Container>
         </Card>
       </Container>

@@ -46,7 +46,7 @@ export class BTCModal extends Component {
 
   onChange = e => {
     let value = parseInt(e.target.value, 10);
-    console.log(value);
+    console.log(e.target.value);
     if (value != NaN) {
       this.setState({
         [e.target.name]: value
@@ -80,8 +80,9 @@ export class BTCModal extends Component {
               {/* <InputGroupAddon addonType="prepend">
                 <i className="fab fa-btc fa-fw "></i>
               </InputGroupAddon> */}
-
+              <InputGroupAddon addonType="prepend">$</InputGroupAddon>
               <Input
+                className="text-right"
                 name="dollars"
                 placeholder="0"
                 min={0}
@@ -90,10 +91,12 @@ export class BTCModal extends Component {
                 onChange={this.onChange}
                 onBlur={e => (e.target.value = parseInt(e.target.value))}
               />
-              <span>.</span>
+              <span className="align-bottom">
+                <h4>.</h4>
+              </span>
               <Input
                 name="cents"
-                placeholder=".00"
+                placeholder="00"
                 min={0}
                 max={99}
                 type="number"
@@ -112,11 +115,17 @@ export class BTCModal extends Component {
               </h4>
             </div>
             <Label>To:</Label>
-            <Input
-              disabled={true}
-              name="wallet"
-              placeholder={this.props.user.wallet}
-            />
+            {this.props.user.wallet != null || this.props.user.wallet != "" ? (
+              <Input
+                disabled={true}
+                name="wallet"
+                placeholder={this.props.user.wallet}
+              />
+            ) : (
+              <small className="text-danger">
+                Please add a valid wallet address in the cashout page!!
+              </small>
+            )}
 
             <ModalFooter className="d-flex justify-content-start">
               <Button
