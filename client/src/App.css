@@ -114,7 +114,7 @@ li a {
 
 .custom-list-group {
   overflow-y: scroll;
-  height: 100vh;
+  height: 30vh;
 }
 @media (max-width: 767px) {
   .custom-dropDown-toggle {
