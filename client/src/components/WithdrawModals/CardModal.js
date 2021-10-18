@@ -48,11 +48,13 @@ export class CardModal extends Component {
     // If authenicated go to dashboard
   }
 
-  onSelectVarient = () => {};
+  onSelectVarient = (type, amount) => {
+    this.setState({ type: type, amount: amount });
+  };
 
   render() {
     const card = this.props.card;
-    console.log("ON CardModal Render", card);
+    //console.log("ON CardModal Render", card);
     return (
       <div>
         <Modal isOpen={true} className="modal-dialog-centered">

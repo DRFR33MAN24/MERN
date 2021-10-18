@@ -117,12 +117,15 @@ router.post("/payment", auth, async (req, res) => {
   try {
     user = await User.findOne({ where: { id: subid }, plain: true });
 
-    console.log(user);
+    //console.log(user);
     if (user.wallet === undefined || user.wallet === "") {
-      return res
-        .status(400)
-        .json({ msg: "Please enter a valid wallet address" });
+      if (type === "BTC") {
+        return res
+          .status(400)
+          .json({ msg: "Please enter a valid wallet address" });
+      }
     }
+    // console.log(user.balance, amount, user.balance - amount);
     balance = user.balance - amount;
     if (balance < 0) {
       return res.status(400).json({ msg: "Not enough balance" });
@@ -132,7 +135,7 @@ router.post("/payment", auth, async (req, res) => {
     const date = new Date();
     await Payment.create({
       subid: subid,
-      payout: balance - amount,
+      payout: amount,
       type: type,
       status: "pending",
       submitDate: date
@@ -144,7 +147,7 @@ router.post("/payment", auth, async (req, res) => {
 
   try {
     await User.update(
-      { balance: balance - amount },
+      { balance: balance },
       {
         where: {
           id: subid

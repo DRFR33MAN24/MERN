@@ -25,7 +25,7 @@ export const getActivity = subid => dispatch => {
       dispatch(returnErrors(err.response.data, err.response.status))
     );
 };
-export const submitPayment = subid => (dispatch, getState) => {
+export const submitPayment = (subid, type, amount) => (dispatch, getState) => {
   dispatch(setActivityLoading());
 
   console.log("activity payment action called");
@@ -34,7 +34,7 @@ export const submitPayment = subid => (dispatch, getState) => {
   //     "Content-Type": "application/json"
   //   }
   // };
-  const body = JSON.stringify({ subid });
+  const body = JSON.stringify({ subid, type, amount });
   axios
     .post("/api/activity/payment", body, tokenConfig(getState))
     .then(res => {

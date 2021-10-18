@@ -51,7 +51,7 @@ export default class GiftPicker extends Component {
   };
 
   render() {
-    console.log("ON GiftPicker Render", this.state.cardType);
+    // console.log("ON GiftPicker Render", this.state.cardType);
     return (
       <div>
         {this.state.showBTC ? (
