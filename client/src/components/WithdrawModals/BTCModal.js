@@ -81,6 +81,7 @@ export class BTCModal extends Component {
                 type="number"
                 step=".10"
                 onChange={this.onChange}
+                value={this.state.inputAmount}
               />
             </InputGroup>
             <Label>To</Label>
