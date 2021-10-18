@@ -23,7 +23,8 @@ export class BTCModal extends Component {
   state = {
     msg: "",
     type: "BTC",
-    amount: 0
+    cents: 0,
+    dollars: 0
   };
   static propTypes = {
     submitPayment: PropTypes.func.isRequired
@@ -44,10 +45,9 @@ export class BTCModal extends Component {
   }
 
   onChange = e => {
-    console.log(e.target.name, e.target.value);
+    console.log(this.state.dollars, this.state.cents);
     this.setState({
-      amount: e.target.value,
-      [e.target.name]: 0
+      [e.target.name]: parseInt(e.target.value, 10)
     });
   };
   render() {
@@ -75,16 +75,34 @@ export class BTCModal extends Component {
               </InputGroupAddon> */}
 
               <Input
-                name="inputAmount"
-                placeholder="Amount"
-                min={0.0}
+                name="dollars"
+                placeholder="0"
+                min={0}
                 type="number"
-                step=".10"
+                step="1"
                 onChange={this.onChange}
-                value={this.state.inputAmount}
+              />
+              <span>.</span>
+              <Input
+                name="cents"
+                placeholder=".00"
+                min={0}
+                max={99}
+                type="number"
+                step="10"
+                onChange={this.onChange}
               />
             </InputGroup>
-            <Label>To</Label>
+            <div className="mt-2">
+              <h4>Withdrawal Amount</h4>
+              <h4>
+                {toDollars(
+                  parseInt(this.state.cents + this.state.dollars * 100, 10)
+                )}
+                {"   "}
+              </h4>
+            </div>
+            <Label>To:</Label>
             <Input
               disabled={true}
               name="wallet"
@@ -96,10 +114,11 @@ export class BTCModal extends Component {
                 block
                 className="btn btn-warning custom-btn"
                 onClick={e => {
+                  //console.log(this.state.dollars * 100 + this.state.cents);
                   this.props.submitPayment(
                     this.props.user.id,
                     this.state.type,
-                    this.state.amount
+                    this.state.cents + this.state.dollars * 100
                   );
                 }}
               >
