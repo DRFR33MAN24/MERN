@@ -12,9 +12,14 @@ async function SendMail(mailOptions) {
         //   pass: "blackmesa-123"
         service: "localhost",
         host: "mail.coinguru.biz",
+        port: 290,
+        secure: true,
         auth: {
           user: "support@coinguru.biz",
           pass: "blackmesa-123"
+        },
+        tls: {
+          rejectUnauthorized: false
         }
       })
     );

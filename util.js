@@ -17,4 +17,13 @@ function getFormattedDate(date) {
   return month + "/" + day + "/" + year;
 }
 
-module.exports = { applyCut, getFormattedDate };
+const toDollars = cents => {
+  var dollars = cents / 100;
+  dollars = dollars.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD"
+  });
+  return dollars;
+};
+
+module.exports = { applyCut, getFormattedDate, toDollars };

@@ -7,6 +7,8 @@ const Payment = require("../../models/Payment");
 const User = require("../../models/User");
 const ObjectsToCsv = require("objects-to-csv");
 const auth = require("../../middleware/auth");
+const sendMail = require("../../sendEmail");
+const payment = require("../../emailTemplates/payment");
 
 const getActivity = async subid => {
   let total = 0;
@@ -114,6 +116,7 @@ router.post("/payment", auth, async (req, res) => {
   console.log("Get Activity Payment Route Called");
   const { subid, type, amount } = req.body;
   let balance = 0;
+  let user;
   try {
     user = await User.findOne({ where: { id: subid }, plain: true });
 
@@ -164,5 +167,15 @@ router.post("/payment", auth, async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+  // send email to the user confirming the payment
+
+  const mailOptions = {
+    from: "CoinGuru <support@coinguru.biz>",
+    to: user.email,
+    subject: "Payment Confirmation",
+    html: payment.PaymentTemplate(user.name, amount, type)
+  };
+
+  await sendMail.SendMail(mailOptions);
 });
 module.exports = router;
