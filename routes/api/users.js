@@ -88,7 +88,17 @@ router.post("/", async (req, res) => {
 // pass the old user info
 router.post("/update", auth, (req, res) => {
   console.log("update route called");
-  const { name, email, password, id, wallet } = req.body;
+  const {
+    name,
+    email,
+    password,
+    id,
+    wallet,
+    zip,
+    country,
+    region,
+    address
+  } = req.body;
 
   if (!name || !email || !password) {
     console.log(name, email, password);
@@ -102,7 +112,10 @@ router.post("/update", auth, (req, res) => {
           {
             name: `${name}`,
             email: `${email}`,
-
+            country: `${country}`,
+            region: `${region}`,
+            address: `${address}`,
+            zip: `${zip}`,
             wallet: `${wallet}`,
             active: false
           },
@@ -139,6 +152,10 @@ router.post("/update", auth, (req, res) => {
               name: `${name}`,
               email: `${email}`,
               password: `${hash}`,
+              country: `${country}`,
+              region: `${region}`,
+              address: `${address}`,
+              zip: `${zip}`,
               wallet: `${wallet}`,
               active: false
             },

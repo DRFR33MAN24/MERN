@@ -24,7 +24,7 @@ import {
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { updateDetails } from "../actions/authAction";
-import { clearErrors } from "../actions/errorAction";
+import { clearErrors, returnErrors } from "../actions/errorAction";
 import { freemem } from "os";
 import LoadingModal from "./LoadingModal";
 class AccountPage extends Component {
@@ -68,7 +68,7 @@ class AccountPage extends Component {
     console.log("login did update prev", prevState.isAuth);
     if (error !== prevProps.error) {
       // Check for register error
-      if (error.id === "LOGIN_FAIL") {
+      if (error.id === "UPDATE_FAIL") {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
@@ -199,6 +199,9 @@ class AccountPage extends Component {
         <Card className="custom-shadow p-2 mb-3 mt-5">
           {this.props.updated ? <Alert>Updated</Alert> : null}
           {this.props.updated ? confirmModal : null}
+          {this.state.msg ? (
+            <Alert color="danger">{this.state.msg}</Alert>
+          ) : null}
           <Label className="mb-3">User Details:</Label>
           <Container>
             <Form>
@@ -222,6 +225,8 @@ class AccountPage extends Component {
                   style={{
                     fontSize: 16
                   }}
+                  // showDefaultOption={true}
+                  // defaultOptionLabel={user.country}
                   disabled={!formEnabled}
                   value={country}
                   onChange={val => this.selectCountry(val)}
@@ -230,6 +235,8 @@ class AccountPage extends Component {
                   style={{
                     fontSize: 16
                   }}
+                  // showDefaultOption={true}
+                  // defaultOptionLabel={user.region}
                   disabled={!formEnabled}
                   country={country}
                   value={region}
@@ -299,6 +306,8 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, { updateDetails, clearErrors })(
-  AccountPage
-);
+export default connect(mapStateToProps, {
+  updateDetails,
+  returnErrors,
+  clearErrors
+})(AccountPage);

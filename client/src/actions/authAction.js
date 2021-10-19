@@ -81,10 +81,17 @@ export const register = ({
     });
 };
 
-export const updateDetails = ({ name, email, password, id, wallet }) => (
-  dispatch,
-  getState
-) => {
+export const updateDetails = ({
+  name,
+  email,
+  password,
+  id,
+  wallet,
+  country,
+  region,
+  address,
+  zip
+}) => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
   // Headers
   console.log("updateDetails Called");
@@ -95,7 +102,17 @@ export const updateDetails = ({ name, email, password, id, wallet }) => (
   // };
 
   // Request body
-  const body = JSON.stringify({ name, email, password, id, wallet });
+  const body = JSON.stringify({
+    name,
+    email,
+    password,
+    id,
+    wallet,
+    country,
+    region,
+    address,
+    zip
+  });
   axios
     .post("/api/users/update", body, tokenConfig(getState))
     .then(res =>
