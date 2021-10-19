@@ -28,6 +28,18 @@ export default class Offer extends Component {
   reportOffer = () => {
     this.setState({ reportModal: !this.state.reportModal });
   };
+
+  shareFB = offerID => {
+    window.FB.ui(
+      {
+        display: "popup",
+        method: "share",
+
+        href: `https://coinguru.biz/app/Offer/${offerID}`
+      },
+      function(response) {}
+    );
+  };
   render() {
     return (
       <div>
@@ -73,19 +85,22 @@ export default class Offer extends Component {
               </Row>
             </Container>
           </Container> */}
-          <Container fluid={true} className="d-flex
+          <Container
+            fluid={true}
+            className="d-flex
                         flex-row mb-2
-                        ">
+                        "
+          >
             <Col xs="6" className="d-flex align-items-start">
               <img src={siteLogo} width="80" height="16" />
             </Col>
             <Col xs="6" className=" d-flex  justify-content-end">
-
-              <i className="fab fa-facebook mr-1   social-btn"></i>
-
+              <i
+                className="fab fa-facebook mr-1   social-btn"
+                onClick={this.shareFB}
+              ></i>
 
               <i className="fab fa-twitter  social-btn"></i>
-
             </Col>
           </Container>
           <CardImg
