@@ -58,7 +58,7 @@ class NotificationMenu extends Component {
       <div>
         {this.state.showNotificationsMenu ? (
           <Col sm="12" className="d-flex flex-column py-3 ">
-            <ListGroup>
+            <ListGroup flush>
               {notifications.length != 0
                 ? notifications.map(({ message, viewed }) => (
                     <ListGroupItem className="text-start justify-content-between">
