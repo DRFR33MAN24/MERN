@@ -187,4 +187,29 @@ router.post("/", (req, res) => {
     }
   })();
 });
+
+router.post("/id", (req, res) => {
+  console.log("Get Offer Route Called");
+  const { id } = req.body;
+
+  (async function() {
+    try {
+      //console.log(country, device);
+      const offer = await Offer.findAll({
+        where: { offer_id: id },
+        raw: true,
+        nest: true
+      });
+
+      //console.log("retrived offers", offer);
+      res.json(offer);
+      // Test_cond
+      // await Promise.all([CallCpalead(), CallKiwi()]);
+      // await CallCpalead();
+      // await CallKiwi();
+    } catch (error) {
+      console.log(error);
+    }
+  })();
+});
 module.exports = router;

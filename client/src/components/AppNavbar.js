@@ -43,6 +43,7 @@ import CashoutPage from "./CashoutPage";
 import { toDollars } from "../util";
 import ResetPassword from "./auth/ResetPassword";
 import NotFound from "./NotFound";
+import OfferPage from "./OfferPage";
 import NotificationMenu from "./NotificationMenu";
 class AppNavbar extends Component {
   constructor(props) {
@@ -250,6 +251,8 @@ class AppNavbar extends Component {
           <Route exact path="/Cashout">
             <CashoutPage />
           </Route>
+          <Route path="/Offer/:id" component={OfferPage} />
+
           {/* <Route
             exact
             path="/Help"
