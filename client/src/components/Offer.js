@@ -106,7 +106,7 @@ export default class Offer extends Component {
           <CardImg
             top
             width="100%"
-            className="offer-img"
+            className="offer-img align-self-center"
             src={this.props.img}
             alt="Card image cap"
           />
@@ -115,15 +115,17 @@ export default class Offer extends Component {
               <i class="fas fa-info-circle px-2 py-1   align-self-start text-muted "></i>
             </a>
 
-            {this.props.category === "Mobile" ? (
-              <i className="fa fa-download px-2 py-1 align-self-end ml-auto"></i>
-            ) : null}
-            {this.props.device === "android" ? (
-              <i className="fab fa-android px-2 py-1 align-self-end"></i>
-            ) : null}
-            {this.props.device === "ios" ? (
-              <i className="fab fa-apple px-2 py-1 align-self-end"></i>
-            ) : null}
+            <div className="ml-auto">
+              {this.props.category === "Mobile" ? (
+                <i className="fa fa-download px-2 py-1 align-self-end "></i>
+              ) : null}
+              {this.props.device === "android" ? (
+                <i className="fab fa-android px-2 py-1 align-self-end "></i>
+              ) : null}
+              {this.props.device === "ios" ? (
+                <i className="fab fa-apple px-2 py-1 align-self-end "></i>
+              ) : null}
+            </div>
           </Container>
           <CardBody>
             <CardTitle tag="h5" className="truncate">
