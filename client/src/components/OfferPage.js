@@ -10,7 +10,8 @@ import {
   Card,
   Alert,
   Row,
-  Col
+  Col,
+  Util
 } from "reactstrap";
 
 import * as Icon from "react-bootstrap-icons";
@@ -21,7 +22,7 @@ import PropTypes from "prop-types";
 import { login } from "../actions/authAction";
 import { getOfferByID } from "../actions/offerAction";
 import { clearErrors, returnErrors } from "../actions/errorAction";
-import { toDollars } from "../util";
+import { toDollars, getlink } from "../util";
 import LoadingModal from "./LoadingModal";
 import Offer from "./Offer";
 
@@ -67,7 +68,8 @@ class OfferPage extends Component {
 
   render() {
     const { offer } = this.props.offer;
-
+    const user = JSON.parse(localStorage.getItem("user"));
+    const guestLink = "https://coinguru.biz/app/Login";
     const isAuthenticated = this.props.isAuthenticated;
     const isLoading = this.props.isLoading;
     console.log("login render", isAuthenticated);
@@ -98,7 +100,11 @@ class OfferPage extends Component {
                   <Offer
                     title={title}
                     description={description}
-                    //link={this.getlink(link, user.id, disabled)}
+                    link={
+                      isAuthenticated
+                        ? getlink(link, user.id, disabled)
+                        : guestLink
+                    }
                     amount={toDollars(amount)}
                     img={img}
                     conversion={conversion}

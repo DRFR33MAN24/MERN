@@ -6,6 +6,24 @@ const toDollars = cents => {
   });
   return dollars;
 };
+const getlink = (l, id, disabled) => {
+  const u = new URL(l);
+  const domain = u.hostname;
+  if (disabled) {
+    if (domain === "www.kiwiwall.com") {
+      u.searchParams.set("s", 36);
+    } else {
+      u.searchParams.set("subid", 36); // Test_cond
+    }
+  } else {
+    if (domain === "www.kiwiwall.com") {
+      u.searchParams.set("s", id);
+    } else {
+      u.searchParams.set("subid", id);
+    }
+  }
+  return u;
+};
 
 function getOS() {
   var userAgent = window.navigator.userAgent,
@@ -53,4 +71,4 @@ function Last7Days() {
   return result;
 }
 
-module.exports = { toDollars, getOS, getFormattedDate, Last7Days };
+module.exports = { toDollars, getOS, getFormattedDate, Last7Days, getlink };

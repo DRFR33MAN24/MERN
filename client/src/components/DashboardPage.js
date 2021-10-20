@@ -35,7 +35,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../actions/authAction";
 import { Timestamp } from "bson";
-import { toDollars, getOS } from "../util";
+import { toDollars, getOS, getlink } from "../util";
 import axios from "axios";
 import NoContent from "./NoContent";
 
@@ -82,24 +82,6 @@ class DashboardPage extends Component {
   componentWillReceiveProps(prevProps) {}
   componentDidUpdate(prevProps, prevState) {}
 
-  getlink = (l, id, disabled) => {
-    const u = new URL(l);
-    const domain = u.hostname;
-    if (disabled) {
-      if (domain === "www.kiwiwall.com") {
-        u.searchParams.set("s", 36);
-      } else {
-        u.searchParams.set("subid", 36); // Test_cond
-      }
-    } else {
-      if (domain === "www.kiwiwall.com") {
-        u.searchParams.set("s", id);
-      } else {
-        u.searchParams.set("subid", id);
-      }
-    }
-    return u;
-  };
   next_page = () => {
     const { offers } = this.props.offers;
     if (this.state.offer_page * this.state.show_items < offers.length) {
@@ -328,7 +310,7 @@ class DashboardPage extends Component {
                           <td>
                             <a
                               className="btn btn-warning custom-btn"
-                              href={this.getlink(link, user.id, disabled)}
+                              href={getlink(link, user.id, disabled)}
                             >
                               Go
                             </a>
@@ -370,7 +352,7 @@ class DashboardPage extends Component {
                         <Offer
                           title={title}
                           description={description}
-                          link={this.getlink(link, user.id)}
+                          link={getlink(link, user.id)}
                           amount={toDollars(amount)}
                           img={img}
                           conversion={conversion}
@@ -494,7 +476,7 @@ class DashboardPage extends Component {
                     <Offer
                       title={title}
                       description={description}
-                      link={this.getlink(link, user.id, disabled)}
+                      link={getlink(link, user.id, disabled)}
                       amount={toDollars(amount)}
                       img={img}
                       conversion={conversion}
