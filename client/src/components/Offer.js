@@ -111,7 +111,7 @@ export default class Offer extends Component {
                 data-show-count="false"
               > */}
               <a
-                href={`https://twitter.com/intent/tweet?url=https://coinguru.biz/app/Offer/${this.props.id}&text=${this.props.title}`}
+                href={`https://twitter.com/intent/tweet?url=https://coinguru.biz/app/Offer/${this.props.id}&text=${this.props.title} \nComplete this offer now and get ${this.props.amount}`}
               >
                 <i className="fab fa-twitter  social-btn"></i>
               </a>
