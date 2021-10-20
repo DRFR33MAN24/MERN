@@ -59,6 +59,9 @@ li a {
   text-decoration: none;
   color: white;
 }
+a {
+  color: #292b2c;
+}
 .custom-btn {
   display: block;
 

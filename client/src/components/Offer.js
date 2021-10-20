@@ -95,12 +95,27 @@ export default class Offer extends Component {
               <img src={siteLogo} width="80" height="16" />
             </Col>
             <Col xs="6" className=" d-flex  justify-content-end">
-              <i
-                className="fab fa-facebook mr-1   social-btn"
-                onClick={this.shareFB}
-              ></i>
-
-              <i className="fab fa-twitter  social-btn"></i>
+              <a href="#">
+                {" "}
+                <i
+                  className="fab fa-facebook mr-1   social-btn"
+                  onClick={this.shareFB}
+                ></i>
+              </a>
+              {/* <a
+                href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                class="twitter-share-button"
+                data-text={this.props.title}
+                data-url={`https://coinguru.biz/app/Offer/${this.props.id}`}
+                data-via="coinguru"
+                data-show-count="false"
+              > */}
+              <a
+                href={`https://twitter.com/intent/tweet?url=https://coinguru.biz/app/Offer/${this.props.id}&text=${this.props.title}`}
+              >
+                <i className="fab fa-twitter  social-btn"></i>
+              </a>
+              {/* </a> */}
             </Col>
           </Container>
           <CardImg

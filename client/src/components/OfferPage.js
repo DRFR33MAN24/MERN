@@ -94,10 +94,12 @@ class OfferPage extends Component {
                 conversion,
                 device,
                 category,
-                disabled
+                disabled,
+                offer_id
               }) => (
                 <div className="mt-5">
                   <Offer
+                    id={offer_id}
                     title={title}
                     description={description}
                     link={
