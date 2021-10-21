@@ -27,7 +27,8 @@ export class CardModal extends Component {
   state = {
     msg: "",
     type: "Card",
-    amount: 0
+    amount: 0,
+    index: 0
   };
 
   static propTypes = {
@@ -48,8 +49,26 @@ export class CardModal extends Component {
     // If authenicated go to dashboard
   }
 
-  onSelectVarient = (type, amount) => {
-    this.setState({ type: type, amount: amount });
+  // onSelectVarient = (type, amount) => {
+  //   this.setState({ type: type, amount: amount });
+  // };
+  onSelectType = (type, index) => {
+    this.setState({ type: type, index: index });
+  };
+  onSelectAmount = amount => {
+    this.setState({ amount: amount });
+  };
+
+  ActivateSelection = e => {
+    let parent = e.target.parentNode;
+    let classes = e.target.classList;
+    let arr = Array.from(parent.children);
+    arr.map(c => {
+      c.classList.remove("active");
+    });
+
+    classes.add("active");
+    //console.log(parent, classes, arr, parent.children);
   };
 
   render() {
@@ -78,12 +97,15 @@ export class CardModal extends Component {
             <Label for="value">Choose Card </Label>
             <ListGroup className="custom-list-group">
               {card != undefined
-                ? card.varients.map(v => (
+                ? card.varients.map((v, index) => (
                     <ListGroupItem
                       tag="button"
                       action
                       onClick={e => {
-                        this.onSelectVarient(v.type, v.amount);
+                        console.log(e);
+
+                        this.ActivateSelection(e);
+                        this.onSelectType(v.type, index);
                       }}
                     >
                       {v.type}
@@ -91,17 +113,41 @@ export class CardModal extends Component {
                   ))
                 : null}
             </ListGroup>
+            <Label for="value">Choose Amount </Label>
+            <ListGroup className="custom-list-group">
+              {card != undefined
+                ? card.varients[this.state.index].amounts.map(a => (
+                    <ListGroupItem
+                      tag="button"
+                      action
+                      onClick={e => {
+                        this.ActivateSelection(e);
+                        this.onSelectAmount(a);
+                      }}
+                    >
+                      {toDollars(a)}
+                    </ListGroupItem>
+                  ))
+                : null}
+            </ListGroup>
+            {this.state.type != "Card" && this.state.amount != 0 ? (
+              <Label for="value" className="mt-2">
+                You Chossed: {this.state.type} {toDollars(this.state.amount)}{" "}
+              </Label>
+            ) : null}
 
             <ModalFooter className="d-flex justify-content-start">
               <Button
                 block
                 className="btn btn-warning custom-btn"
                 onClick={e => {
-                  this.props.submitPayment(
-                    this.props.user.id,
-                    this.state.type,
-                    this.state.amount
-                  );
+                  if (this.state.type != "Card" && this.state.amount != 0) {
+                    this.props.submitPayment(
+                      this.props.user.id,
+                      this.state.type,
+                      this.state.amount
+                    );
+                  }
                 }}
               >
                 Redeem Gift Card
@@ -114,7 +160,7 @@ export class CardModal extends Component {
                 Close
               </Button>
               <p className="text-dark">
-                <span className="font-weight-bold">NOTE:</span> note
+                <span className="font-weight-bold">NOTE:</span>
               </p>
             </ModalFooter>
           </ModalBody>

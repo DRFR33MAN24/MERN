@@ -14,21 +14,25 @@ import {
 } from "reactstrap";
 
 export default class ReportOfferModal extends Component {
-  btnClick = () => {};
+  btnClick = () => {
+    this.props.modal();
+  };
   render() {
     return (
       <div>
         <Modal isOpen={true} className="modal-dialog-centered">
-          <ModalHeader>Report Bad Offer</ModalHeader>
+          <ModalHeader>Report non converting offer </ModalHeader>
           <ModalBody>
-            {this.props.description === this.props.conversion ? (
-              <p>{this.props.description}</p>
-            ) : (
-              <div>
-                <p>{this.props.conversion}</p>
-                <p>{this.props.description}</p>
-              </div>
-            )}
+            <p>
+              Click the report button below if think that{" "}
+              <div className="text-info">{this.props.title}</div>
+              didn't convert even though you completed all the required steps
+            </p>
+
+            <p>
+              We track and remove all bad offers to ensure great user
+              experience.
+            </p>
 
             <ModalFooter className="d-flex justify-content-start">
               <Button
