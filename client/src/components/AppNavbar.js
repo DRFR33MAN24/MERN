@@ -194,7 +194,7 @@ class AppNavbar extends Component {
               }}
               className="text-start text-dark"
               exact
-              to=""
+              to="#"
             >
               <i className="fas fa-lg fa-question-circle   fa-fw align-middle"></i>
               <span className="ml-3">Help</span>
@@ -206,6 +206,7 @@ class AppNavbar extends Component {
                 this.props.logout();
                 this.toggle();
               }}
+              to="#"
             >
               <i className="fas fa-lg fa-sign-out-alt   fa-fw align-middle"></i>
               <span className="ml-3">Logout</span>

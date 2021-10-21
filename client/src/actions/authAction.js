@@ -1,6 +1,7 @@
 import axios from "axios";
 import { returnErrors } from "./errorAction";
 import { sendEmail } from "./sendEmailAction";
+import { getNotifications } from "./notificationAction";
 import {
   USER_LOADED,
   USER_LOADING,
@@ -182,12 +183,15 @@ export const login = ({ email, password, token }) => dispatch => {
   const body = JSON.stringify({ email, password, token });
   axios
     .post("/api/auth", body, config)
-    .then(res =>
-      dispatch({
+    .then(res => {
+      // console.log(res.data.user.id);
+      // getNotifications(res.data.user.id);
+      return dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+    })
+
     .catch(err => {
       dispatch(
         returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")

@@ -25,6 +25,28 @@ export const getActivity = subid => dispatch => {
       dispatch(returnErrors(err.response.data, err.response.status))
     );
 };
+export const linkClicked = subid => dispatch => {
+  //dispatch(setActivityLoading());
+  console.log("link clicked");
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  const body = JSON.stringify({ subid });
+  axios
+    .post("/api/activity/linkClicked", body, config)
+    .then(res => {
+      // console.log(res.data);
+      // dispatch({
+      //   type: GET_ACTIVITY,
+      //   payload: res.data
+      // });
+    })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
 export const submitPayment = (subid, type, amount) => (dispatch, getState) => {
   dispatch(setActivityLoading());
 

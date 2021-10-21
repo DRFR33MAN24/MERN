@@ -12,10 +12,12 @@ import {
   NavLink,
   Alert
 } from "reactstrap";
+import { linkClicked } from "../util";
 
 export default class OfferModal extends Component {
   btnClick = () => {
     window.location.href = `${this.props.link}`;
+    linkClicked();
     //this.props.modal();
   };
   render() {

@@ -99,6 +99,7 @@ class OfferPage extends Component {
               }) => (
                 <div className="mt-5">
                   <Offer
+                    subid={user.id}
                     id={offer_id}
                     title={title}
                     description={description}

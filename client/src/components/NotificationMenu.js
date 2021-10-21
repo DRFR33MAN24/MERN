@@ -32,8 +32,15 @@ class NotificationMenu extends Component {
     user: PropTypes.object
   };
 
-  componentDidMount(prevProps) {
-    const user = JSON.parse(localStorage.getItem("user"));
+  componentWillUpdate(prevProps) {
+    const isAuthenticated = this.props.isAuthenticated;
+    if (prevProps.isAuthenticated != isAuthenticated) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        console.log("Get Notificatons");
+        this.props.getNotifications(user.id);
+      }
+    }
   }
 
   showNotifications = () => {

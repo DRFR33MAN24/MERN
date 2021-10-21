@@ -31,6 +31,7 @@ import * as Icon from "react-bootstrap-icons";
 import Offer from "./Offer";
 import { Redirect } from "react-router-dom";
 import { getOffers } from "../actions/offerAction";
+import { linkClicked } from "../actions/activityAction";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../actions/authAction";
@@ -309,6 +310,7 @@ class DashboardPage extends Component {
                           <td>{toDollars(amount)}</td>
                           <td>
                             <a
+                              onClick={linkClicked(user.id)}
                               className="btn btn-warning custom-btn"
                               href={getlink(link, user.id, disabled)}
                             >
@@ -474,6 +476,7 @@ class DashboardPage extends Component {
                 <div className="">
                   {isAuthenticated ? (
                     <Offer
+                      subid={user.id}
                       title={title}
                       description={description}
                       link={getlink(link, user.id, disabled)}

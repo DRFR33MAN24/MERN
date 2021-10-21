@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const db = require("../../database");
 const util = require("../../util");
 const Postback = require("../../models/Postback");
 const Payment = require("../../models/Payment");
@@ -71,6 +71,20 @@ router.post("/", async (req, res) => {
   res.json(activity);
   // get total and pending valuss
   // return all in a big object
+});
+
+router.post("/linkClicked", async (req, res) => {
+  console.log("Link Clicked Route Called");
+  const { subid } = req.body;
+
+  await User.update(
+    { clicks: db.literal(`clicks + ${1}`) },
+    {
+      where: {
+        id: subid
+      }
+    }
+  );
 });
 
 router.get("/downloadCSV", async (req, res) => {

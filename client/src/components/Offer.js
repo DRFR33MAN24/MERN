@@ -46,6 +46,7 @@ export default class Offer extends Component {
         {this.state.openModal ? (
           <div>
             <OfferModal
+              subid={this.props.subid}
               modal={this.click}
               title={this.props.title}
               description={this.props.description}
