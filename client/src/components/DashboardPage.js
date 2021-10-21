@@ -156,7 +156,7 @@ class DashboardPage extends Component {
 
       case 2:
         offers_semi = offers.filter(item => {
-          return item.category === "Pop";
+          return item.featured === true;
         });
 
         break;
@@ -170,7 +170,7 @@ class DashboardPage extends Component {
 
       default:
         offers_semi = offers.filter(item => {
-          return item.category === "Pop";
+          return item.category === "Mobile";
         });
         break;
     }
@@ -471,11 +471,13 @@ class DashboardPage extends Component {
                 conversion,
                 device,
                 category,
-                disabled
+                disabled,
+                offer_id
               }) => (
                 <div className="">
                   {isAuthenticated ? (
                     <Offer
+                      id={offer_id}
                       subid={user.id}
                       title={title}
                       description={description}
