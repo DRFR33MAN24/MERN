@@ -10,10 +10,11 @@ export default class PerformanceChart extends Component {
       labels: this.props.labels,
       datasets: [
         {
+          lineTension: 0.2,
           label: "# Offers Completed",
           data: this.props.data,
-          fill: false,
-          backgroundColor: "rgb(255, 255, 255)",
+          fill: true,
+          backgroundColor: "rgba(240, 173, 78,0)",
           borderColor: "rgba(240, 173, 78, 1)"
         }
       ]
@@ -21,6 +22,7 @@ export default class PerformanceChart extends Component {
 
     const options = {
       maintainAspectRatio: true,
+
       scales: {
         yAxes: [
           {
