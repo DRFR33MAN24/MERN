@@ -22,7 +22,7 @@ const getActivity = async subid => {
       nest: true
     });
 
-    console.log("retrived activity", postback);
+    //console.log("retrived activity", postback);
     postback_final = postback.map(post => {
       var temp = Object.assign({}, post);
       temp.payout = util.applyCut(temp.payout);
@@ -43,7 +43,7 @@ const getActivity = async subid => {
       nest: true
     });
 
-    console.log("retrived payment", payment);
+    //console.log("retrived payment", payment);
 
     // res.json(payment);
   } catch (error) {
@@ -55,7 +55,7 @@ const getActivity = async subid => {
     postback: postback_final,
     total: total
   };
-  console.log(activity);
+  //console.log(activity);
   return activity;
 };
 
@@ -73,20 +73,6 @@ router.post("/", async (req, res) => {
   // return all in a big object
 });
 
-router.post("/linkClicked", async (req, res) => {
-  console.log("Link Clicked Route Called");
-  const { subid } = req.body;
-
-  await User.update(
-    { clicks: db.literal(`clicks + ${1}`) },
-    {
-      where: {
-        id: subid
-      }
-    }
-  );
-});
-
 router.get("/downloadCSV", async (req, res) => {
   console.log("Get CSV Route Called");
 
@@ -98,9 +84,10 @@ router.get("/downloadCSV", async (req, res) => {
 
   users.map(({ wallet, payments }) => {
     let totalPayout = 0;
-
-    payments.map(({ payout, status }) => {
-      if (status === "pending") {
+    //console.log("Payments", payments);
+    payments.map(({ payout, status, type }) => {
+      if (status === "pending" && type === "BTC") {
+        //console.log(payout, totalPayout);
         totalPayout += payout;
         // await Payment.update({status:"processing"},{where:{id:id}});
       }
@@ -111,7 +98,7 @@ router.get("/downloadCSV", async (req, res) => {
 
   await Payment.update(
     { status: "processing" },
-    { where: { status: "pending" } }
+    { where: { status: "pending", type: "BTC" } }
   );
 
   const csv = new ObjectsToCsv(data);
@@ -124,6 +111,20 @@ router.get("/downloadCSV", async (req, res) => {
   // get payout and wallet adderess
   // create csv file save to desk
   // .then sendFile to browser
+});
+
+router.post("/linkClicked", async (req, res) => {
+  console.log("Link Clicked Route Called");
+  const { subid } = req.body;
+
+  await User.update(
+    { clicks: db.literal(`clicks + ${1}`) },
+    {
+      where: {
+        id: subid
+      }
+    }
+  );
 });
 
 router.post("/payment", auth, async (req, res) => {

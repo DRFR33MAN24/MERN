@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 
-User.hasMany(Payment, { as: "payments" });
+User.hasMany(Payment, { as: "payments", foreignKey: "subid" });
 Payment.belongsTo(User, { foreignKey: "subid" });
 
 db.authenticate()
