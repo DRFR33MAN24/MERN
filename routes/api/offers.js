@@ -178,10 +178,9 @@ router.post("/", (req, res) => {
 
       console.log("retrived offers", offer);
       res.json(offer);
-      // Test_cond
       // await Promise.all([CallCpalead(), CallKiwi()]);
       // await CallCpalead();
-      // await CallKiwi();
+      await CallKiwi();
     } catch (error) {
       console.log(error);
     }
@@ -203,10 +202,6 @@ router.post("/id", (req, res) => {
 
       //console.log("retrived offers", offer);
       res.json(offer);
-      // Test_cond
-      // await Promise.all([CallCpalead(), CallKiwi()]);
-      // await CallCpalead();
-      // await CallKiwi();
     } catch (error) {
       console.log(error);
     }
