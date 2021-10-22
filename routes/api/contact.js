@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const config = require("config");
 const axios = require("axios");
 const { stringify } = require("query-string");
 const { SendMail } = require("../../sendEmail");
