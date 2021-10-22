@@ -131,6 +131,7 @@ router.post("/payment", auth, async (req, res) => {
   console.log("Get Activity Payment Route Called");
   const { subid, type, amount } = req.body;
   let balance = 0;
+  let paymentOrder;
   let user;
   try {
     user = await User.findOne({ where: { id: subid }, plain: true });
@@ -151,7 +152,7 @@ router.post("/payment", auth, async (req, res) => {
   } catch (error) {}
   try {
     const date = new Date();
-    await Payment.create({
+    paymentOrder = await Payment.create({
       subid: subid,
       payout: amount,
       type: type,
@@ -188,7 +189,7 @@ router.post("/payment", auth, async (req, res) => {
     from: "CoinGuru <support@coinguru.biz>",
     to: user.email,
     subject: "Payment Confirmation",
-    html: payment.PaymentTemplate(user.name, amount, type)
+    html: payment.PaymentTemplate(user.name, amount, type, paymentOrder.id)
   };
 
   await sendMail.SendMail(mailOptions);
