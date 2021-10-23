@@ -81,6 +81,11 @@ a {
   min-height: 240px;
   max-width: 300px;
 }
+.gift-card-img {
+  max-height: 96px;
+  min-height: 96px;
+  max-width: 150px;
+}
 
 .social-btn {
   display: inline-block;

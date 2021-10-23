@@ -420,11 +420,15 @@ class DashboardPage extends Component {
                   </DropdownToggle>
                   <DropdownMenu>
                     <DropdownItem>
-                      <NavLink onClick={this.getMin}>min{"->"}max</NavLink>
+                      <NavLink className="text-dark" onClick={this.getMin}>
+                        min{"->"}max
+                      </NavLink>
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem>
-                      <NavLink onClick={this.getMax}>max{"->"}min</NavLink>
+                      <NavLink className="text-dark" onClick={this.getMax}>
+                        max{"->"}min
+                      </NavLink>
                     </DropdownItem>
                     <DropdownItem divider />
                   </DropdownMenu>
