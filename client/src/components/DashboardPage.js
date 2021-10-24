@@ -154,9 +154,20 @@ class DashboardPage extends Component {
         break;
 
       case 2:
-        offers_semi = offers.filter(item => {
+        let featured = offers.filter(item => {
           return item.featured === true;
         });
+
+        offers_semi = offers.filter(item => {
+          return (
+            item.category != "CC" ||
+            item.category != "Mobile" ||
+            item.category != "Survey" ||
+            item.category != "Daily" ||
+            item.category != "Complete Survey"
+          );
+        });
+        offers_semi.push(featured);
 
         break;
 
