@@ -72,8 +72,8 @@ class DashboardPage extends Component {
     const clientOS = getOS();
     axios.get("https://freegeoip.app/json/").then(res => {
       const country = res.data.country_code.toLowerCase();
-      this.props.getOffers(user.id, country, clientOS);
-      //this.props.getOffers(user.id, "us", "android");
+      //this.props.getOffers(user.id, country, clientOS); //Test_cond
+      this.props.getOffers(user.id, "us", "android");
     });
   }
 
@@ -348,6 +348,9 @@ class DashboardPage extends Component {
                   : null}
               </tbody>
             </table>
+            {surveys === undefined || surveys.length === 0 ? (
+              <NoContent text="No Surveys Available at the moment" />
+            ) : null}
           </Container>
         </Row>
         {/* {featuredOffers.length != 0 ? (
@@ -521,6 +524,9 @@ class DashboardPage extends Component {
                 </div>
               )
             )}
+          {offers_final === undefined || offers_final.length === 0 ? (
+            <NoContent text="No Offers Available at the moment" />
+          ) : null}
         </Row>
 
         <Row className="d-flex justify-content-center bg-light custom-shadow mb-3 mt-3">

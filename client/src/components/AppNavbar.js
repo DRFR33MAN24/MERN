@@ -66,7 +66,7 @@ class AppNavbar extends Component {
     document.addEventListener("mousedown", this.mouseDownHandler);
     window.fbAsyncInit = () => {
       window.FB.init({
-        appId: "your-app-id",
+        appId: "552541005850359",
         autoLogAppEvents: true,
         xfbml: true,
         version: "v11.0"
