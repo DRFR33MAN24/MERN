@@ -180,7 +180,7 @@ router.post("/", (req, res) => {
       res.json(offer);
       // await Promise.all([CallCpalead(), CallKiwi()]);
       // await CallCpalead();
-      //await CallKiwi(); // Test_cond
+      await CallKiwi();
     } catch (error) {
       console.log(error);
     }

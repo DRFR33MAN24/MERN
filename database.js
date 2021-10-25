@@ -6,6 +6,7 @@ module.exports = new Sequelize(
   "CoinGuru-123",
   {
     host: "sv99.ifastnet.com",
-    dialect: "mysql"
+    dialect: "mysql",
+    logging: false
   }
 );
