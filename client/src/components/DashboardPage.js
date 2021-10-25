@@ -154,10 +154,6 @@ class DashboardPage extends Component {
         break;
 
       case 2:
-        let featured = offers.filter(item => {
-          return item.featured === true;
-        });
-
         offers_semi = offers.filter(item => {
           return (
             item.category != "CC" ||
@@ -167,7 +163,6 @@ class DashboardPage extends Component {
             item.category != "Complete Survey"
           );
         });
-        offers_semi.push(featured);
 
         break;
 
@@ -197,14 +192,33 @@ class DashboardPage extends Component {
       // set search enabled to false
     }
 
+    let featured = offers.filter(item => {
+      return item.featured === 1;
+    });
+
     switch (this.state.sortType) {
       case 1:
+        if (this.state.offerType === 2) {
+          return featured.concat(
+            offers_semi.sort((a, b) => a.amount - b.amount)
+          );
+        }
         return offers_semi.sort((a, b) => a.amount - b.amount);
 
       case 2:
+        if (this.state.offerType === 2) {
+          return featured.concat(
+            offers_semi.sort((a, b) => b.amount - a.amount)
+          );
+        }
         return offers_semi.sort((a, b) => b.amount - a.amount);
 
       default:
+        if (this.state.offerType === 2) {
+          return featured.concat(
+            offers_semi.sort((a, b) => b.amount - a.amount)
+          );
+        }
         return offers_semi.sort((a, b) => b.amount - a.amount);
     }
   };
@@ -323,6 +337,7 @@ class DashboardPage extends Component {
                               onClick={linkClicked(user.id)}
                               className="btn btn-warning custom-btn"
                               href={getlink(link, user.id, disabled)}
+                              target="_blank"
                             >
                               Go
                             </a>
