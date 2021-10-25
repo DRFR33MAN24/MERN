@@ -53,7 +53,7 @@ router.get("/kiwi", async (req, res) => {
       payout: `${amount}`,
       subid: `${sub_id}`,
       campaign_name: "kiwi",
-      status: `${status === 1 ? "credited" : "reversed"}`, // Test this
+      status: `${status === "1" ? "credited" : "reversed"}`, // Test this
       offer_name: `${offer_name}`,
       trans_id: `${trans_id}`,
       offer_id: `${offer_id}`

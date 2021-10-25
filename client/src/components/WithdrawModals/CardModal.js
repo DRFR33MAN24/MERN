@@ -161,6 +161,7 @@ export class CardModal extends Component {
               </Button>
               <p className="text-dark">
                 <span className="font-weight-bold">NOTE:</span>
+                you will receive an email when your gift arrives.
               </p>
             </ModalFooter>
           </ModalBody>

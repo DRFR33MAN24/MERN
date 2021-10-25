@@ -150,7 +150,8 @@ export class BTCModal extends Component {
                 Close
               </Button>
               <p className="text-dark">
-                <span className="font-weight-bold">NOTE:</span> note
+                <span className="font-weight-bold">NOTE:</span> it may take
+                longer to process small transactions
               </p>
             </ModalFooter>
           </ModalBody>
