@@ -177,7 +177,7 @@ router.post("/", (req, res) => {
         nest: true
       });
 
-      console.log("retrived offers", offer);
+      // console.log("retrived offers", offer);
       res.json(offer);
       // await Promise.all([CallCpalead(), CallKiwi()]);
       // await CallCpalead();
