@@ -51,7 +51,7 @@ app.use(express.static("app"));
 /* GET React App */
 app.get(["/app", "/app/*"], function(req, res, next) {
   res.sendFile(path.join(__dirname, "app", "index.html"));
-  console.log("check");
+  //console.log("check");
 });
 
 const port = process.env.PORT || 5000;
