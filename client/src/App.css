@@ -85,6 +85,7 @@ a {
   max-height: 96px;
   min-height: 96px;
   max-width: 150px;
+  min-width: 150px;
 }
 
 .social-btn {

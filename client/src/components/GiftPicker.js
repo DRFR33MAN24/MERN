@@ -66,7 +66,7 @@ export default class GiftPicker extends Component {
           />
         ) : null}
         <Card className="custom-shadow  mt-5 mb-5">
-          <Container className="d-flex justify-content-start p-3 flex-wrap">
+          <Container className="d-flex justify-content-center p-3 flex-wrap">
             {/* <a href="" className="m-2"> */}
             <Card className="custom-shadow btn m-2" onClick={this.BTCToggle}>
               <CardImg

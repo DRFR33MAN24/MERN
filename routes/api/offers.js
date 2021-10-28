@@ -5,6 +5,7 @@ const axios = require("axios");
 //Item Model
 const Offer = require("../../models/Offer");
 const OfferProvider = require("../../models/OfferProvider");
+const util = require("../../util");
 
 // @route GET api/items
 // @desc Get All Items
@@ -54,7 +55,7 @@ const CallCpalead = async () => {
           description: description,
           link: link,
           img: previews[0].url,
-          amount: amount * 100,
+          amount: util.applyCut(amount * 100),
           conversion: conversion,
           country: country,
           device: mobile_app_type,
@@ -125,7 +126,7 @@ const CallKiwi = async () => {
             description: instructions,
             link: link,
             img: logo,
-            amount: amount,
+            amount: util.applyCut(amount),
             conversion: category,
             country: c,
             device: os,
