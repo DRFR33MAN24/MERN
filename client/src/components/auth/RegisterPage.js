@@ -119,7 +119,7 @@ class RegisterPage extends Component {
                 block
                 className="btn btn-warning custom-btn"
                 onClick={e => {
-                  window.location.href = "app/Login";
+                  window.location.href = "https://coinguru.biz/app/Login";
                 }}
               >
                 Login
